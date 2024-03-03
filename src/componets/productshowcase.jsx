@@ -35,13 +35,16 @@ const ProductShowcase = () => {
   const onTap = ()=>{
     window.open('https://flutterpilot.web.app');
   }
-  const appIcon = (
-      <img width={30} src="flutterpilot_logo_dark.png" />
+
+  const onWinTap = ()=>{
+ }
+  const appIcon = (a,e)=>(
+      <img width={a} src={e} />
   );
 
   return (
     <Container className={classes.container}>
-      <Grid container spacing={4} alignItems="center">
+      <Grid container spacing={8} alignItems="center">
         <Grid item xs={12} sm={6}>
           <img
             src="flutterpilot_ss.png"
@@ -63,22 +66,47 @@ const ProductShowcase = () => {
           </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
+            <a download="flutter_builder.exe" target="_blank" href="https://s3.ap-south-1.amazonaws.com/flutterpilot.com/windows_build/flutter_builder.exe">
+
+  <Button
+                variant="contained"
+                color="#2c44ab"
+              
+                style={{
+                  backgroundColor: 'blue',
+            fontSize: '18px',
+            color:'white',
+            width:"100%"
+                }}
+                className={classes.signUpButton}
+                onClick={onWinTap}
+                startIcon={appIcon(18,'downloads.png')}
+              >
+               For Windows
+              </Button>
+            </a>
+  
+            
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="contained"
                 color="#2c44ab"
               
                 style={{
                   backgroundColor: 'white',
-            fontSize: '16px',
-            fontWeight: 'bold'
+            fontSize: '18px',
+            fontWeight: 'bold',
+            width:"100%"
                 }}
                 className={classes.signUpButton}
                 onClick={onTap}
-                startIcon={appIcon}
+                startIcon={appIcon(24,'browser.png')}
               >
-                Get Started!
+                Online Editor
               </Button>
             </Grid>
+            
           </Grid>
         </Grid>
       </Grid>
