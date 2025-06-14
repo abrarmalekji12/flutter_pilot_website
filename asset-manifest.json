@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/flutter_pilot_website/static/css/main.f855e6bc.css",
-    "main.js": "/flutter_pilot_website/static/js/main.5d30939f.js",
-    "static/js/453.47536db6.chunk.js": "/flutter_pilot_website/static/js/453.47536db6.chunk.js",
-    "index.html": "/flutter_pilot_website/index.html",
-    "main.f855e6bc.css.map": "/flutter_pilot_website/static/css/main.f855e6bc.css.map",
-    "main.5d30939f.js.map": "/flutter_pilot_website/static/js/main.5d30939f.js.map",
-    "453.47536db6.chunk.js.map": "/flutter_pilot_website/static/js/453.47536db6.chunk.js.map"
+    "main.css": "/static/css/main.f855e6bc.css",
+    "main.js": "/static/js/main.4afdb194.js",
+    "static/js/453.47536db6.chunk.js": "/static/js/453.47536db6.chunk.js",
+    "index.html": "/index.html",
+    "main.f855e6bc.css.map": "/static/css/main.f855e6bc.css.map",
+    "main.4afdb194.js.map": "/static/js/main.4afdb194.js.map",
+    "453.47536db6.chunk.js.map": "/static/js/453.47536db6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.5d30939f.js"
+    "static/js/main.4afdb194.js"
   ]
 }
