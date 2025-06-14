@@ -7,8 +7,6 @@
 
 # testing
 /coverage
-/public
-/src
 
 # misc
 .DS_Store
