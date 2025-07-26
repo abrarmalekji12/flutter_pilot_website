@@ -137,11 +137,20 @@ function CustomAppBar(props) {
           >
             <div onClick={handleDrawerToggle}>
               <List>
-                <ListItem button>
-                  <ListItemText primary="Home" />
+                <ListItem button className={`${classes.button} ${type=="home"?"active":""}` }>
+                  <ListItemText primary="Home" onClick={onHomeTap} />
                 </ListItem>
-                <ListItem button onClick={onBlogsTap}>
+                <ListItem button className={`${classes.button} ${type=="blogs"?"active":""}`} onClick={onBlogsTap}>
                   <ListItemText primary="Blogs" />
+                </ListItem>
+                 <ListItem button className={`${classes.button} ${type=="privacyPolicy"?"active":""}`} onClick={onPrivacyPolicytap}>
+                  <ListItemText primary="Privacy Policy" />
+                </ListItem>
+                 <ListItem button className={`${classes.button} ${type=="contactUs"?"active":""}`} onClick={onContactUstap}>
+                  <ListItemText primary="Contact Us" />
+                </ListItem>
+                 <ListItem button className={`${classes.button} ${type=="aboutUs"?"active":""}`} onClick={onAboutUstap}>
+                  <ListItemText primary="About Us" />
                 </ListItem>
                 {/* <ListItem button>
                   <ListItemText primary="Product" />
