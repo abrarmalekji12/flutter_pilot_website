@@ -20,8 +20,10 @@ export default function ContactUs() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    let formId="xjkowjaq"
+
     try {
-      const res = await fetch(`https://formspree.io/f/${getUID()}`, {
+      const res = await fetch(`https://formspree.io/f/${formId}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
