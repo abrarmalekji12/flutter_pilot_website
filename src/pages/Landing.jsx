@@ -39,8 +39,8 @@ const featurelist = [
 
 export default function Landing() {
   return (
-    <>
-      <CustomAppBar />
+      <CustomAppBar type="home">
+        <React.Fragment>
       <ProductShowcase />
       {featurelist.map((e) => {
         return (
@@ -53,6 +53,8 @@ export default function Landing() {
         );
       })}
       <NewsletterSubscription />
-    </>
+      </React.Fragment>
+      </CustomAppBar>
+    
   );
 }
