@@ -12,8 +12,12 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
+  root:{
+
+  },
   title: {
     flexGrow: 1,
     fontWeight: "bold",
@@ -26,13 +30,17 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginLeft: theme.spacing(2),
-    fontSize: '14px',
+    fontSize: '14px', 
     color: "#243064",
     fontWeight: '600',
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
     transition: "transform 0.2s", // Add a transition effect to the transform property
+    "&.active":{
+      backgroundColor: "#243064",
+      color:"white"
+    },
     "&:hover": {
       transform: "scale(1.1)",
       backgroundColor: "#243064",
@@ -55,9 +63,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CustomAppBar() {
+function CustomAppBar(props) {
+
+  const {children,type} =props
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
+    const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -65,7 +76,24 @@ function CustomAppBar() {
   const onBlogsTap = ()=>{
     window.open('https://flutterpilot.medium.com');
   }
+
+  const onPrivacyPolicytap = ()=>{
+   navigate("/privacyPolicy");
+  }
+  const onContactUstap=()=>{
+   navigate("/contactUs");
+  }
+  const onHomeTap=()=>{
+    navigate("/");
+  }
+  const onAboutUstap=()=>{
+    navigate("/aboutUs");
+
+  }
+
   return (
+    <React.Fragment>
+      {console.log("type==>",type)}
     <AppBar position="sticky" color="primary" className={classes.appBar}>
       <Toolbar>
         <img src="flutter_pilot_logo.png" className={classes.logo} />
@@ -73,19 +101,25 @@ function CustomAppBar() {
           FlutterPilot
         </Typography>
         <div>
-          <Button color="inherit" className={classes.button}>
+          <Button color="inherit" className={`${classes.button} ${type=="home"?"active":""}` } onClick={onHomeTap}>
             Home
           </Button>
           
           {/* <Button color="inherit" className={classes.button}>
             Templates
           </Button> */}
-          <Button color="inherit" className={classes.button}  onClick={onBlogsTap}>
+          <Button color="inherit" className={`${classes.button} ${type=="blogs"?"active":""}`}  onClick={onBlogsTap}>
             Blogs
           </Button>
-          {/* <Button color="inherit" variant="outlined" className={classes.button}>
+             <Button color="inherit" className={`${classes.button} ${type=="privacyPolicy"?"active":""}`}  onClick={onPrivacyPolicytap}>
+            Privacy Policy
+          </Button>
+          <Button color="inherit" className={`${classes.button} ${type=="contactUs"?"active":""}`} onClick={onContactUstap}>
+            Contact Us
+          </Button>
+          <Button color="inherit" className={`${classes.button} ${type=="aboutUs"?"active":""}`} onClick={onAboutUstap}>
             About Us
-          </Button> */}
+          </Button>
           <IconButton
             edge="end"
             color="inherit"
@@ -118,6 +152,8 @@ function CustomAppBar() {
         </div>
       </Toolbar>
     </AppBar>
+    {children}
+    </React.Fragment>
   );
 }
 

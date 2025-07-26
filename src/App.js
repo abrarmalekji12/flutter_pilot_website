@@ -1,9 +1,9 @@
 
 import "./App.css";
-import LandingPage from "./pages/Landing";
+import AppNav from "./pages/AppNav";
 
 function App() {
-  return <LandingPage></LandingPage>;
+  return <AppNav/>;
 }
 
 export default App;
