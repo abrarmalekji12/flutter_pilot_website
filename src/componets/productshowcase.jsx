@@ -68,19 +68,18 @@ const ProductShowcase = () => {
             <Grid item xs={12} sm={6}>
             <a download="flutter_builder.exe" target="_blank" href="https://s3.ap-south-1.amazonaws.com/flutterpilot.com/windows_build/flutter_builder.exe">
 
-  <Button
+            <Button
                 variant="contained"
                 color="#2c44ab"
-              
                 style={{
-                  backgroundColor: 'blue',
-            fontSize: '18px',
-            color:'white',
-            width:"100%"
+                  backgroundColor: 'white',
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                  width:"100%"
                 }}
                 className={classes.signUpButton}
                 onClick={onWinTap}
-                startIcon={appIcon(18,'downloads.png')}
+                startIcon={appIcon(32,'download-image.png')}
               >
                For Windows
               </Button>
@@ -92,12 +91,11 @@ const ProductShowcase = () => {
               <Button
                 variant="contained"
                 color="#2c44ab"
-              
                 style={{
                   backgroundColor: 'white',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            width:"100%"
+                  fontSize: '18px',
+                  fontWeight: 'bold',
+                  width:"100%"
                 }}
                 className={classes.signUpButton}
                 onClick={onTap}
