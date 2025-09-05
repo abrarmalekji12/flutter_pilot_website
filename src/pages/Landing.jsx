@@ -10,7 +10,7 @@ import NewsletterSubscription from "../componets/newslattersubscription";
 
 const useStyles = makeStyles((theme) => ({
   section: {
-    padding: theme.spacing(8, 2),
+    // padding: theme.spacing(8, 2),
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(4, 2),
     },
@@ -133,7 +133,7 @@ export default function Landing() {
         </motion.div>
 
         {/* Features */}
-        <Container maxWidth="lg">
+        <Container maxWidth="maxWidthXl">
           {featurelist.map((e, index) => (
             <motion.div
               key={index}

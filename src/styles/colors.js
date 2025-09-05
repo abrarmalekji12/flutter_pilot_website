@@ -1,0 +1,15 @@
+export const pageBackgroudColor = "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)";
+export const cardBackgroudColor = "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)";
+export const titleColor = "linear-gradient(90deg, #1e40af 0%, #3730a3 100%)";
+export const titleHoverShadow = "0 4px 20px rgba(30, 64, 175, 0.25)";
+export const bodyTextColor = "#475569";
+export const bodyTextBolderColor = "#1e293b";
+export const codeBackgroundColor = "rgba(30, 64, 175, 0.08)";
+export const textShadowColor = "0 2px 8px rgba(30, 64, 175, 0.15)";
+export const bulletPointColor = "#1e40af";
+export const floatingShapeBackgroundColor = "2px solid rgba(30, 64, 175, 0.15)";
+export const productShowCaseBoxShadow = "0 8px 24px rgba(30, 64, 175, 0.12)";
+export const codeTextColor = "#1e40af";
+export const buttonColor = "#1e40af";
+export const activeButtonColor = "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)";
+export const activeButtonBoxShadow = "0 4px 15px rgba(30, 64, 175, 0.4)";

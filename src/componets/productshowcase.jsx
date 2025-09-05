@@ -1,115 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Typography, Button } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    marginBottom: theme.spacing(8),
-    background: "linear-gradient(45deg, #4A154B 30%, #1B486D 90%)", // Customize the background color or image here
-    maxWidth: "100%",
-    paddingRight: theme.spacing(4),
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    color: theme.palette.common.white,
-  },
-  image: {
-    width: "100%",
-    height: "auto",
-    marginBottom: theme.spacing(4),
-  },
-  title: {
-    fontWeight: "bold",
-    marginBottom: theme.spacing(2),
-  },
-  description: {
-    fontSize: "20px",
-    marginBottom: theme.spacing(4),
-  },
-  signUpButton: {
-    marginRight: theme.spacing(2),
-  },
-}));
+import { Container, Grid, Typography, Button ,Box,Hidden} from "@material-ui/core";
+import { cardBackgroudColor, titleColor, titleHoverShadow } from "../styles/colors";
+import { commonStyles } from "../styles/commonStyles";
 
 const ProductShowcase = () => {
-  const classes = useStyles();
-  const onTap = ()=>{
-    window.open('https://flutterpilot.web.app');
-  }
-
-  const onWinTap = ()=>{
- }
-  const appIcon = (a,e)=>(
-      <img width={a} src={e} />
+  const classes = commonStyles();
+  
+  // Helper function for app icon
+  const appIcon = (size, src) => (
+    <img 
+      width={size} 
+      src={src} 
+      alt="" 
+      className={classes.icon}
+    />
   );
-
+  
+  // Links and handlers
+  const openOnlineEditor = () => {
+    window.open("https://flutterpilot.web.app");
+  };
+  
   return (
-    <Container className={classes.container}>
-      <Grid container spacing={8} alignItems="center">
-        <Grid item xs={12} sm={6}>
-          <img
-            src="flutterpilot_ss.png"
-          
-            style={{
-          display: 'block',
-          width: "100%"
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Typography variant="h4" className={classes.title}>
+    <Container className={classes.productShowCaseContainer} maxWidth="xl">
+      {/* Background Elements */}
+      <div className={classes.bgGlow}></div>
+      <div className={`${classes.floatingShape} ${classes.shapePhone}`}></div>
+      <div className={`${classes.floatingShape} ${classes.shapeTablet}`}></div>
+      <div className={`${classes.floatingShape} ${classes.shapeLaptop}`}></div>
+      
+      <Box className={classes.contentWrapper}>
+        {/* Central Product Image */}
+        <Box className={classes.centerImage}>
+          <div className={classes.imageBackground} style={{ position: 'relative' }}>
+            <img 
+              src="flutterpilot_ss.png" 
+              alt="FlutterPilot App Interface"
+              style={{ width: '100%', height: 'auto', borderRadius: '12px'}}
+            />
+            <div className={classes.imageOverlay}>
+              <div className={`${classes.dot} ${classes.dot1}`}></div>
+              <div className={`${classes.dot} ${classes.dot2}`}></div>
+              <div className={`${classes.dot} ${classes.dot3}`}></div>
+            </div>
+          </div>
+        </Box>
+      
+        {/* Text Content (Left Side) */}
+        <div className={classes.textContainer}>
+          <Typography 
+            variant="h2" 
+            className={`${classes.title}`}
+          >
             Build your ideas Faster
           </Typography>
-          <Typography variant="body1" className={classes.description}>
-            FlutterPilot is Low Code platform built on top of Flutter, by just
-            drag & drop you can create beautiful reactive app for all
-            platform
+          
+          <Typography variant="body1" className={classes.subtitle}>
+            FlutterPilot is a Low-Code platform built on top of Flutter. With
+            simple drag & drop, you can create beautiful reactive apps for every
+            platform in minutes.
           </Typography>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-            <a download="flutter_builder.exe" target="_blank" href="https://s3.ap-south-1.amazonaws.com/flutterpilot.com/windows_build/flutter_builder.exe">
-
+          
+          <div className={classes.buttonsContainer}>
             <Button
-                variant="contained"
-                color="#2c44ab"
-                style={{
-                  backgroundColor: 'white',
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  width:"100%"
-                }}
-                className={classes.signUpButton}
-                onClick={onWinTap}
-                startIcon={appIcon(32,'download-image.png')}
-              >
-               For Windows
-              </Button>
-            </a>
-  
+              component="a"
+              href="https://s3.ap-south-1.amazonaws.com/flutterpilot.com/windows_build/flutter_builder.exe"
+              download="flutter_builder.exe"
+              target="_blank"
+              rel="noreferrer"
+              className={`${classes.button} ${classes.windowsBtn}`}
+              startIcon={appIcon(24, "download-image.png")}
+            >
+              FOR WINDOWS
+            </Button>
             
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Button
-                variant="contained"
-                color="#2c44ab"
-                style={{
-                  backgroundColor: 'white',
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  width:"100%"
-                }}
-                className={classes.signUpButton}
-                onClick={onTap}
-                startIcon={appIcon(24,'browser.png')}
-              >
-                Online Editor
-              </Button>
-            </Grid>
-            
-          </Grid>
-        </Grid>
-      </Grid>
+            <Button
+              onClick={openOnlineEditor}
+              className={`${classes.button} ${classes.editorBtn}`}
+              startIcon={appIcon(24, "browser.png")}
+            >
+              ONLINE EDITOR
+            </Button>
+          </div>
+        </div>
+        
+        {/* Background Image (Medium and above screens) */}
+        <Hidden smDown>
+        <Box  className={classes.imageBackground}>
+          <img 
+            src="flutterpilot_ss.png" 
+            alt="FlutterPilot App Interface"
+            style={{ width: '100%', height: 'auto', borderRadius: '12px' }}
+          />
+          <div className={classes.imageOverlay}>
+            <div className={`${classes.dot} ${classes.dot1}`}></div>
+            <div className={`${classes.dot} ${classes.dot2}`}></div>
+            <div className={`${classes.dot} ${classes.dot3}`}></div>
+          </div>
+        </Box>
+        </Hidden>
+      </Box>
     </Container>
   );
 };
-
 export default ProductShowcase;
