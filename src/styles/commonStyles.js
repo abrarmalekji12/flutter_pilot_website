@@ -9,7 +9,10 @@ export const commonStyles = makeStyles((theme) => ({
     fontFamily: "'Inter', sans-serif",
     position: "relative",
     padding: 0,
-    background: "transparent",       // ✅ no solid white above
+    background: "transparent",      // ✅ no solid white above
+   "&:hover": {
+      transform: "translateY(-2%) scale(1.01)",
+    }
   },
   mainContainer:{
       background:pageBackgroudColor
@@ -18,7 +21,7 @@ productShowCaseContainer: {
     position: "relative",
     overflow: "hidden",
     // borderRadius: "24px",
-    padding: theme.spacing(2,4,5,4),
+    padding: theme.spacing(2,4,8,4),
     background: "linear-gradient(135deg, #1a1f36 0%, #121528 100%)",
     boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
     color: theme.palette.common.white,
@@ -41,42 +44,66 @@ productShowCaseContainer: {
   
  // Content wrapper
   contentWrapper: {
-    position: "relative",
+    // position: "relative",
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
     zIndex: 2,
     minHeight: "400px", // Ensure enough height for the background image
+    // display:"flex",
+    // flexDirection:"column",
+    // alignItems:"flex-end"
+  },
+   // Text container
+  textContainer: {
+    display:"flex",
+    position: "relative",
+    flexDirection:"column",
+    alignItems:"center",
+    textAlign: "center",
+    margin:"40px 0px",
+    maxWidth:"55%",
+    fontFamily: "'Inter', sans-serif",/* clean, modern font */
+    // [theme.breakpoints.down("sm")]: {
+    //   maxWidth: "100%",
+    //   textAlign: "center",
+    // },
   },
   
   // Image as central background
 
   centerImage:{
-    [theme.breakpoints.down("sm")]: {
-        opacity:1
-    },
-    opacity:0.6
+    display:"flex",
+    justifyContent:"center"
+    // [theme.breakpoints.down("sm")]: {
+    //     opacity:1
+    // },
+    // opacity:0.1,
+    // maxHeight:"500px"
     //  [theme.breakpoints.down("md")]: {
     //   opacity:0.6
     // }
   }
   ,
   imageBackground: {
-    position: "absolute",
-    right: "0%", // Position slightly to the right
-    top: "35%",
-    transform: "translateY(-50%)",
-    width: "65%", // Make image large enough
-    height: "auto",
-    maxHeight: "90%",
+    // position: "absolute",
+    // right: "0%", // Position slightly to the right
+    // top: "35%",
+    // transform: "translateY(-50%)",
+    width: "80%", // Make image large enough
+    height: "50%",
+    // maxHeight: "50%",
     zIndex: 1,
     borderRadius: "12px",
     boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
     transition: "all 0.7s ease",
     "&:hover": {
-      transform: "translateY(-52%) scale(1.02)",
+      transform: "translateY(-2%) scale(1.02)",
     },
-    [theme.breakpoints.down("md")]: {
-      width: "70%",
-      right: "-5%",
-    },
+    // [theme.breakpoints.down("md")]: {
+    //   width: "70%",
+    //   right: "-5%",
+    // },
     [theme.breakpoints.down("sm")]: {
       position: "relative",
       width: "90%",
@@ -115,16 +142,7 @@ productShowCaseContainer: {
     backgroundColor: "#28c840",
   },
   
-  // Text container
-  textContainer: {
-    position: "relative",
-    zIndex: 3, // Keep text above the image
-    maxWidth: "55%", // Limit width to prevent overlap with image
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "100%",
-      textAlign: "center",
-    },
-  },
+ 
   signUpButton: {
     marginRight: theme.spacing(2),
     fontWeight: "bold",

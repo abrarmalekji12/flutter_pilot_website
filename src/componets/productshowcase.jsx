@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid, Typography, Button ,Box,Hidden} from "@material-ui/core";
 import { cardBackgroudColor, titleColor, titleHoverShadow } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
+import { video } from "framer-motion/client";
 
 const ProductShowcase = () => {
   const classes = commonStyles();
+
+  useEffect(()=>{
+    playVideo()
+  },[])
   
+
+  const playVideo= ()=>{
+    const video =document.getElementById("video");
+    video.playbackRate = 1.5;
+
+  }
   // Helper function for app icon
   const appIcon = (size, src) => (
     <img 
@@ -32,20 +43,7 @@ const ProductShowcase = () => {
       
       <Box className={classes.contentWrapper}>
         {/* Central Product Image */}
-        <Box className={classes.centerImage}>
-          <div className={classes.imageBackground} style={{ position: 'relative' }}>
-            <img 
-              src="flutterpilot_ss.png" 
-              alt="FlutterPilot App Interface"
-              style={{ width: '100%', height: 'auto', borderRadius: '12px'}}
-            />
-            <div className={classes.imageOverlay}>
-              <div className={`${classes.dot} ${classes.dot1}`}></div>
-              <div className={`${classes.dot} ${classes.dot2}`}></div>
-              <div className={`${classes.dot} ${classes.dot3}`}></div>
-            </div>
-          </div>
-        </Box>
+       
       
         {/* Text Content (Left Side) */}
         <div className={classes.textContainer}>
@@ -57,9 +55,8 @@ const ProductShowcase = () => {
           </Typography>
           
           <Typography variant="body1" className={classes.subtitle}>
-            FlutterPilot is a Low-Code platform built on top of Flutter. With
-            simple drag & drop, you can create beautiful reactive apps for every
-            platform in minutes.
+            FlutterPilot is a low-code platform powered by Flutter.
+            With simple drag-and-drop, you can create beautiful, reactive apps for any platform in minutes.
           </Typography>
           
           <div className={classes.buttonsContainer}>
@@ -84,9 +81,24 @@ const ProductShowcase = () => {
             </Button>
           </div>
         </div>
+         <Box className={classes.centerImage}>
+          <div className={classes.imageBackground} style={{ position: 'relative' }}>
+            <video id ="video" style={{ width: '100%', height: 'auto', borderRadius: '12px'}} loop autoPlay playsinline >
+            <source
+              src="productShowCase.mov" 
+              alt="FlutterPilot App Interface"
+            />
+            </video>
+            <div className={classes.imageOverlay}>
+              <div className={`${classes.dot} ${classes.dot1}`}></div>
+              <div className={`${classes.dot} ${classes.dot2}`}></div>
+              <div className={`${classes.dot} ${classes.dot3}`}></div>
+            </div>
+          </div>
+        </Box>
         
         {/* Background Image (Medium and above screens) */}
-        <Hidden smDown>
+        {/* <Hidden smDown>
         <Box  className={classes.imageBackground}>
           <img 
             src="flutterpilot_ss.png" 
@@ -99,7 +111,7 @@ const ProductShowcase = () => {
             <div className={`${classes.dot} ${classes.dot3}`}></div>
           </div>
         </Box>
-        </Hidden>
+        </Hidden> */}
       </Box>
     </Container>
   );
