@@ -1,5 +1,5 @@
 // src/components/featurediscription.js
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Typography, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { motion } from "framer-motion";
@@ -206,6 +206,45 @@ const FeatureShowcase = (props) => {
   const classes = commonStyles();
   const MotionPaper = motion(Paper);
 
+  useEffect(()=>{
+    if(props.isVideo) {playVideo()}
+    },[])
+    
+  
+    const playVideo= ()=>{
+      document.getElementById("video"+props.index).playbackRate = 1.5;
+      document.getElementById("video"+props.index).play = true;
+  
+    }
+
+  const imageShow = (props) => {
+    console.log("props",props)
+    if (props.isVideo) {
+    return(  <motion.video
+        id={"video" + props.index}
+        className={classes.featureGif}
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+        loop autoPlay muted playsinline
+      >
+        <source
+          src={props.url}
+          alt="Feature GIF"
+        />
+      </motion.video>)
+    } else {
+      return(
+      <motion.img
+        src={props.url}
+        alt="Feature GIF"
+        className={classes.featureGif}
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+      />)
+    }
+    
+    }
+
   return (
     <div className={classes.root}>
       <MotionPaper
@@ -224,13 +263,7 @@ const FeatureShowcase = (props) => {
           {props.alignleft ? (
             <>
               <Grid item xs={12} md={6} className={classes.featureGifContainer}>
-                <motion.img
-                  src={props.url}
-                  alt="Feature GIF"
-                  className={classes.featureGif}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
+                {imageShow(props)}
               </Grid>
               <Grid item xs={12} md={6} className={classes.featureDescription}>
                 <motion.div
@@ -280,13 +313,7 @@ const FeatureShowcase = (props) => {
                 </motion.div>
               </Grid>
               <Grid item xs={12} md={6} className={classes.featureGifContainer}>
-                <motion.img
-                  src={props.url}
-                  alt="Feature GIF"
-                  className={classes.featureGif}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
+                {imageShow(props)}
               </Grid>
             </>
           )}

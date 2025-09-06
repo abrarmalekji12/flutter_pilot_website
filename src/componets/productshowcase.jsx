@@ -14,8 +14,8 @@ const ProductShowcase = () => {
   
 
   const playVideo= ()=>{
-    const video =document.getElementById("video");
-    video.playbackRate = 1.5;
+    document.getElementById("productvideo").playbackRate = 1.5;
+      document.getElementById("productvideo").play = true;
 
   }
   // Helper function for app icon
@@ -83,7 +83,7 @@ const ProductShowcase = () => {
         </div>
          <Box className={classes.centerImage}>
           <div className={classes.imageBackground} style={{ position: 'relative' }}>
-            <video id ="video" style={{ width: '100%', height: 'auto', borderRadius: '12px'}} loop autoPlay playsinline >
+            <video id ={"productvideo"} style={{ width: '100%', height: 'auto', borderRadius: '12px'}} loop autoPlay muted playsinline >
             <source
               src="productShowCase.mov" 
               alt="FlutterPilot App Interface"

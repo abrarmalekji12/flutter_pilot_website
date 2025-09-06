@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const featurelist = [
   {
     title: "Design",
-    url: "GIF_1.gif",
+    url: "dragAndDrop.mov",
     discription:(
       <React.Fragment>
         <li>
@@ -58,6 +58,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: true,
+    isVideo:true
   },
   {
     title: "Functions",
@@ -79,6 +80,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: false,
+    isVideo:false
   },
   {
     title: "Make it Responsive!",
@@ -97,6 +99,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: true,
+    isVideo:false
   },
 ];
 
@@ -147,6 +150,8 @@ export default function Landing() {
                 url={e.url}
                 discription={e.discription}
                 alignleft={e.alignleft}
+                index={index}
+                isVideo={e.isVideo}
               />
             </motion.div>
           ))}
