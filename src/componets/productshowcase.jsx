@@ -85,7 +85,7 @@ const ProductShowcase = () => {
           <div className={classes.imageBackground} style={{ position: 'relative' }}>
             <video id ={"productvideo"} style={{ width: '100%', height: 'auto', borderRadius: '12px'}} loop autoPlay muted playsinline >
             <source
-              src="productShowCase.mov" 
+              src="productShowCase2.mov" 
               alt="FlutterPilot App Interface"
             />
             </video>
