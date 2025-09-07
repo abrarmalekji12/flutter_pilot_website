@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBoxShadow, textShadowColor, titleColor, titleHoverShadow } from "./colors";
+import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBoxShadow, templateTitleColor, textShadowColor, titleColor, titleHoverShadow } from "./colors";
 
 
 export const commonStyles = makeStyles((theme) => ({
@@ -253,7 +253,7 @@ productShowCaseContainer: {
       boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
     },
   },
-  editorBtn: {
+  glowBtn: {
     background: "linear-gradient(135deg, #5B86E5 0%, #36D1DC 100%)",
     color: theme.palette.common.white,
     "&:hover": {
@@ -428,6 +428,14 @@ productShowCaseContainer: {
       },
     },
   },
+  code: {
+        background: codeBackgroundColor,
+        padding: "2px 6px",
+        borderRadius: "6px",
+        fontFamily: "monospace",
+        fontSize: "0.95rem",
+        color: codeTextColor,
+      },
   title: {
     fontWeight: 800,
     fontSize: "3.2rem",
@@ -500,3 +508,95 @@ productShowCaseContainer: {
     },
   }
 }));
+
+export const templateCardStyles = makeStyles((theme) => ({
+  root: {
+    borderRadius: "16px",
+    overflow: "hidden",
+    position: "relative",
+    // transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    // background: "linear-gradient(135deg, #2A2D55 0%, #1B1F3A 100%)",
+    background: "linear-gradient(135deg, rgba(36, 59, 85, 0.9) 0%, rgba(20, 30, 48, 0.9) 100%)",
+    backdropFilter: "blur(10px)",
+    border: "1px solid rgba(255,255,255,0.05)",
+    color: "#fff",
+    "&:hover": {
+      transform: "translateY(-8px) scale(1.02)",
+      boxShadow: "0 12px 40px rgba(0, 198, 255, 0.2)"
+    }
+    // "&:hover": {
+    //   transform: "translateY(-10px)",
+    //   boxShadow: "0px 15px 40px rgba(0,0,0,0.4)",
+    // },
+  },
+  mediaContainer:{
+    display:"flex",
+    flexDirection:"row",
+    marginBottom:"12px",
+    overflowY:"scroll"
+  },
+  media: {
+    height: 280,
+    width:160,
+    padding:10,
+    objectFit: "contain",
+    [theme.breakpoints.down("sm")]: {
+     height: 150,
+     width:100,
+    }
+  },
+  content: {
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+    padding: theme.spacing(3),
+
+  },
+  title: {
+    fontWeight: 700,
+    fontSize: "1.3rem",
+    background: templateTitleColor,
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    marginBottom: theme.spacing(1.5),
+  },
+  description: {
+    fontSize: "0.95rem",
+    opacity: 0.9,
+    marginBottom: theme.spacing(2),
+  },
+  button: {
+    background: "linear-gradient(90deg, #667eea 0%, #764ba2 100%)",
+    color: "#fff",
+    textTransform: "none",
+    fontWeight: 600,
+    borderRadius: "8px",
+    padding: "8px 16px",
+    "&:hover": {
+      background: "linear-gradient(90deg, #764ba2 0%, #667eea 100%)",
+    },
+  },
+}));
+
+export const contactUsStyles = makeStyles({
+      contentWrapper: {
+    // position: "relative",
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+    zIndex: 2,
+    // minHeight: "400px", // Ensure enough height for the background image
+  },
+   // Text container
+  textContainer: {
+    display:"flex",
+    position: "relative",
+    flexDirection:"column",
+    alignItems:"center",
+    textAlign: "center",
+    margin:"10px 0px",
+    // maxWidth:"55%",
+    fontFamily: "'Inter', sans-serif",/* clean, modern font */
+  },
+  });

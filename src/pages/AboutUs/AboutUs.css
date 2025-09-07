@@ -1,6 +1,10 @@
 .about-us-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #1e1e1e;
+  padding: 10px !important;
+  .title-container{
+    padding: 10px !important;
+  }
 }
 
 .about-header {
@@ -23,7 +27,7 @@
 
 .about-content {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 20px auto;
   padding: 20px;
   background: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);

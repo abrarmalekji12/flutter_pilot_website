@@ -4,6 +4,7 @@ import PrivacyPolicy from './PrivacyPolicy/PrivacyPolicy';
 import Landing from './Landing';
 import ContactUs from './ContactUs/ContactUs';
 import AboutUs from './AboutUs/AboutUs';
+import Template from './Template/Template';
 
 export default function AppNav() {
   return (
@@ -13,6 +14,7 @@ export default function AppNav() {
     <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
     <Route path="/contactUs" element={<ContactUs />} />
     <Route path="/aboutUs" element={<AboutUs />} />
+    <Route path="/template" element={<Template/>}/>
   </Routes>
 </HashRouter>
   );

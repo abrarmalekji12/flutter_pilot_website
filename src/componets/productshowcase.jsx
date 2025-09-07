@@ -74,7 +74,7 @@ const ProductShowcase = () => {
             
             <Button
               onClick={openOnlineEditor}
-              className={`${classes.button} ${classes.editorBtn}`}
+              className={`${classes.button} ${classes.glowBtn}`}
               startIcon={appIcon(24, "browser.png")}
             >
               ONLINE EDITOR

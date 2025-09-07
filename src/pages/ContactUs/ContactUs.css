@@ -1,6 +1,20 @@
 .contact-us-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #1e1e1e;
+  padding-bottom: 10px;
+
+  .title-container{
+    padding: 10px !important;
+  }
+
+  /* .phoneShape {}
+  
+    .tabletShape {
+      height: 100px !important;
+    }
+    .laptopShape{
+      height: 70px !important;
+    } */
 }
 
 .contact-header {
@@ -64,3 +78,4 @@ button[type="submit"] {
 button[type="submit"]:hover {
   background-color: #122d5e;
 }
+

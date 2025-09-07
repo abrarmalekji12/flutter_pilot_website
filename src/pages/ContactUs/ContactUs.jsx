@@ -3,8 +3,15 @@ import './ContactUs.css';
 import CustomAppBar from '../../componets/appbar';
 import { getUID } from '../../utils/commonFnc';
 import Swal from 'sweetalert2';
+import { commonStyles, contactUsStyles } from '../../styles/commonStyles';
+import { Box, Container, makeStyles, Typography } from '@material-ui/core';
+
+
 
 export default function ContactUs() {
+  const classes = commonStyles();
+  const contactUsClasses = contactUsStyles();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -58,10 +65,34 @@ export default function ContactUs() {
   return (
     <CustomAppBar type="contactUs">
     <div className="contact-us-container">
-      <header className="contact-header">
+      <Container className={`${classes.productShowCaseContainer} title-container`} maxWidth="xl">
+            {/* Background Elements */}
+            <div className={classes.bgGlow}></div>
+            <div className={`${classes.floatingShape} ${classes.shapePhone} phoneShape`}></div>
+            <div className={`${classes.floatingShape} ${classes.shapeTablet} tabletShape`}></div>
+            <div className={`${classes.floatingShape} ${classes.shapeLaptop} laptopShape`} ></div>
+            
+            <Box className={contactUsClasses.contentWrapper}>
+              <div className={contactUsClasses.textContainer}>
+                <Typography 
+                  variant="h2" 
+                  className={`${classes.title}`}
+                >
+                  Contact Us
+                </Typography>
+                
+                <Typography variant="body1" className={classes.subtitle}>
+                  We’d love to hear from you. Reach out with questions, feedback, or suggestions.
+                </Typography>
+                
+              </div>
+              
+            </Box>
+            </Container>
+      {/* <header className="contact-header">
         <h1>Contact Us</h1>
         <p>We’d love to hear from you. Reach out with questions, feedback, or suggestions.</p>
-      </header>
+      </header> */}
 
       <main className="contact-content">
         <form onSubmit={handleSubmit} action={`https://formspree.io/f/${getUID()}`} method="post">

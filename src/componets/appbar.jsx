@@ -15,6 +15,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { useNavigate } from "react-router-dom";
 import { cardBackgroudColor, pageBackgroudColor } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
+import { label } from "framer-motion/client";
 
 // const useStyles = makeStyles((theme) => ({
 
@@ -123,6 +124,7 @@ function CustomAppBar({ children, type }) {
 
   const menuItems = [
     { label: "Home", action: () => navigate("/"), type: "home" },
+    {label: "Template", action: ()=> navigate("/template"), type:"template"},
     { label: "Blogs", action: () => window.open("https://flutterpilot.medium.com"), type: "blogs" },
     { label: "Privacy Policy", action: () => navigate("/privacyPolicy"), type: "privacyPolicy" },
     { label: "Contact Us", action: () => navigate("/contactUs"), type: "contactUs" },

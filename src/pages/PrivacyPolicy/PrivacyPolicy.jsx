@@ -1,17 +1,38 @@
 import React from 'react';
 import "./PrivacyPolicy.css";
 import CustomAppBar from '../../componets/appbar';
+import { commonStyles, templateCardStyles } from '../../styles/commonStyles';
+import { Box, Container, Typography } from '@material-ui/core';
 
 export default function PrivacyPolicy() {
-  return (
+  const classes = commonStyles();
+  const templateClasses = templateCardStyles();
+;  return (
     <CustomAppBar type="privacyPolicy">
-    <div className="privacy-policy-container">
-      <header className="policy-header">
-        <h1>Privacy Policy</h1>
-        <p>Last updated: July 26, 2025</p>
-      </header>
-
-      <main className="policy-content">
+         <Container className={`${classes.productShowCaseContainer} privacy-policy-container`} maxWidth="xl">
+            {/* Background Elements */}
+            <div className={classes.bgGlow}></div>
+            <div className={`${classes.floatingShape} ${classes.shapePhone}`}></div>
+            <div className={`${classes.floatingShape} ${classes.shapeTablet}`}></div>
+            <div className={`${classes.floatingShape} ${classes.shapeLaptop}`}></div>
+            
+            <Box className={templateClasses.contentWrapper}>
+              <div className={templateClasses.textContainer}>
+                <Typography 
+                  variant="h2" 
+                  className={`${classes.title}`}
+                >
+                  Privacy Policy
+                </Typography>
+                
+                <Typography variant="body1" className={classes.subtitle}>
+                  Last updated: July 26, 2025
+                </Typography>
+                
+              </div>
+              
+            </Box>
+             <main className="policy-content">
         <section>
           <h2>1. Introduction</h2>
           <p>
@@ -45,7 +66,7 @@ export default function PrivacyPolicy() {
           <h2>5. Your Rights</h2>
           <p>
             You can request access, update, or delete your personal data. Just contact our support at
-            <a href="mailto:fromamsoftwares@gmail.com"> fromamsoftwares@gmail.com</a>.
+            <a href="mailto:fromamsoftwares@gmail.com" className={classes.code}> fromamsoftwares@gmail.com</a>.
           </p>
         </section>
 
@@ -56,7 +77,15 @@ export default function PrivacyPolicy() {
           </p>
         </section>
       </main>
-    </div>
+            </Container>
+    {/* <div className="privacy-policy-container">
+      <header className="policy-header">
+        <h1>Privacy Policy</h1>
+        <p>Last updated: July 26, 2025</p>
+      </header> */}
+
+     
+    {/* </div> */}
     </CustomAppBar>
   );
 }
