@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { cardBackgroudColor, pageBackgroudColor } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
 import { label } from "framer-motion/client";
+import Footer from "./Footer";
 
 // const useStyles = makeStyles((theme) => ({
 
@@ -126,7 +127,7 @@ function CustomAppBar({ children, type }) {
     { label: "Home", action: () => navigate("/"), type: "home" },
     {label: "Template", action: ()=> navigate("/template"), type:"template"},
     { label: "Blogs", action: () => window.open("https://flutterpilot.medium.com"), type: "blogs" },
-    { label: "Privacy Policy", action: () => navigate("/privacyPolicy"), type: "privacyPolicy" },
+    // { label: "Privacy Policy", action: () => navigate("/privacyPolicy"), type: "privacyPolicy" },
     { label: "Contact Us", action: () => navigate("/contactUs"), type: "contactUs" },
     { label: "About Us", action: () => navigate("/aboutUs"), type: "aboutUs" },
   ];
@@ -139,12 +140,12 @@ function CustomAppBar({ children, type }) {
             src="flutter_pilot_logo.png"
             className={classes.logo}
             alt="FlutterPilot"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("#/")}
           />
           <Typography
             variant="h5"
             className={classes.appBarTitle}
-            onClick={() => navigate("/")}
+            onClick={() => navigate("#/")}
           >
             FlutterPilot
           </Typography>
@@ -191,8 +192,8 @@ function CustomAppBar({ children, type }) {
           </List>
         </div>
       </Drawer>
-
       {children}
+      <Footer/>
     </div>
   );
 }

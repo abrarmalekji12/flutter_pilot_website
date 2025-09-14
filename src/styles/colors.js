@@ -14,3 +14,4 @@ export const buttonColor = "#1e40af";
 export const activeButtonColor = "linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%)";
 export const activeButtonBoxShadow = "0 4px 15px rgba(30, 64, 175, 0.4)";
 export const templateTitleColor ="linear-gradient(90deg, #00c6ff 0%, #0072ff 100%)";
+export const productShowCaseBackground = "linear-gradient(135deg, #1a1f36 0%, #121528 100%)"

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBoxShadow, templateTitleColor, textShadowColor, titleColor, titleHoverShadow } from "./colors";
+import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBackground, productShowCaseBoxShadow, templateTitleColor, textShadowColor, titleColor, titleHoverShadow } from "./colors";
 
 
 export const commonStyles = makeStyles((theme) => ({
@@ -22,7 +22,7 @@ productShowCaseContainer: {
     overflow: "hidden",
     // borderRadius: "24px",
     padding: theme.spacing(2,4,8,4),
-    background: "linear-gradient(135deg, #1a1f36 0%, #121528 100%)",
+    background: productShowCaseBackground,
     boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
     color: theme.palette.common.white,
     // margin: theme.spacing(4, 0),
@@ -64,10 +64,10 @@ productShowCaseContainer: {
     margin:"40px 0px",
     maxWidth:"55%",
     fontFamily: "'Inter', sans-serif",/* clean, modern font */
-    // [theme.breakpoints.down("sm")]: {
-    //   maxWidth: "100%",
-    //   textAlign: "center",
-    // },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "100%",
+      textAlign: "center",
+    },
   },
   
   // Image as central background
@@ -270,7 +270,7 @@ productShowCaseContainer: {
   drawer: {
     width: 240,
     background: cardBackgroudColor,
-    color: "white",
+    color: buttonColor,
   },
   drawerList: {
     padding: theme.spacing(2),
@@ -278,14 +278,17 @@ productShowCaseContainer: {
       borderRadius: "12px",
       marginBottom: "10px",
       transition: "all 0.3s ease",
-      "&:hover": {
-        background: "rgba(255,255,255,0.1)",
-        transform: "translateX(4px)",
-      },
-      "&.active": {
-        background: "linear-gradient(90deg, #4A154B, #1B486D)",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-      },
+     "&.active": {
+      background: cardBackgroudColor,
+      color: activeButtonColor,
+      boxShadow: activeButtonBoxShadow,
+    },
+    "&:hover": {
+      background: cardBackgroudColor,
+      color: activeButtonColor,
+      transform: "translateY(-2px)",
+      boxShadow: activeButtonBoxShadow,
+    }
     },
   },
   card: {
@@ -451,10 +454,10 @@ productShowCaseContainer: {
     textShadow: "0 2px 15px rgba(54, 209, 220, 0.3)",
     transition: "all 0.3s ease",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "2.8rem",
+      fontSize: "1rem",
     },
     [theme.breakpoints.down("xs")]: {
-      fontSize: "2.4rem",
+      fontSize: "1.5rem",
     },
     "&:hover": {
        transform: "translateY(-4px) scale(1.05)",
@@ -487,19 +490,20 @@ productShowCaseContainer: {
       transition: "width 0.6s ease",
     },
     "$textContainer:hover &:after": {
-      width: "80%",
+      width: "100%",
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "1.1rem",
-      margin: "0 auto",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+      maxWidth:"100%",
+      // margin: "0 auto",
       marginBottom: theme.spacing(5),
       "&:after": {
-        left: "50%",
-        transform: "translateX(-50%)",
+        // left: "100%",
+        // transform: "translateX(-50%)",
       },
       "$textContainer:hover &:after": {
-        width: "50%",
-      },
+      width: "100%",
+    }
     },
   },
   hideOnSmall: {
@@ -534,7 +538,7 @@ export const templateCardStyles = makeStyles((theme) => ({
     display:"flex",
     flexDirection:"row",
     marginBottom:"12px",
-    overflowY:"scroll"
+    overflowY:"scroll",
   },
   media: {
     height: 280,
@@ -579,7 +583,7 @@ export const templateCardStyles = makeStyles((theme) => ({
   },
 }));
 
-export const contactUsStyles = makeStyles({
+export const contactUsStyles = makeStyles((theme)=>({
       contentWrapper: {
     // position: "relative",
     display:"flex",
@@ -598,5 +602,10 @@ export const contactUsStyles = makeStyles({
     margin:"10px 0px",
     // maxWidth:"55%",
     fontFamily: "'Inter', sans-serif",/* clean, modern font */
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "100%",
+      textAlign: "center",
+    },
   },
-  });
+  
+  }));

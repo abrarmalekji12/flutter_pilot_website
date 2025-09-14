@@ -31,10 +31,10 @@ const templateStyles = makeStyles((theme) => ({
     margin:"40px 0px 0px 0px",
     maxWidth:"55%",
     fontFamily: "'Inter', sans-serif",/* clean, modern font */
-    // [theme.breakpoints.down("sm")]: {
-    //   maxWidth: "100%",
-    //   textAlign: "center",
-    // },
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "100%",
+      textAlign: "center",
+    },
   },
 }));
 
