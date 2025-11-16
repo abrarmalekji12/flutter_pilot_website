@@ -32,6 +32,9 @@ const ProductShowcase = () => {
   const openOnlineEditor = () => {
     window.open("https://flutterpilot.web.app");
   };
+  const openDownloadPage = () => {
+    window.open("https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk");
+  }
   
   return (
     <Container className={classes.productShowCaseContainer} maxWidth="xl">
@@ -61,11 +64,12 @@ const ProductShowcase = () => {
           
           <div className={classes.buttonsContainer}>
             <Button
-              component="a"
-              href="https://s3.ap-south-1.amazonaws.com/flutterpilot.com/windows_build/flutter_builder.exe"
-              download="flutter_builder.exe"
-              target="_blank"
-              rel="noreferrer"
+              // component="a"
+              // href="https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk"
+              // download="flutter_builder.exe"
+              // target="_blank"
+              // rel="noreferrer"
+              onClick={openDownloadPage}
               className={`${classes.button} ${classes.windowsBtn}`}
               startIcon={appIcon(24, "download-image.png")}
             >
