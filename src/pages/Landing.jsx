@@ -39,9 +39,28 @@ const useStyles = makeStyles((theme) => ({
 
 const featurelist = [
   {
+    title: "Generate with AI",
+    url: "ai_generation_feature.png",
+    discription: (
+      <React.Fragment>
+        <li>
+          <strong>Prompt to UI:</strong> Describe your app idea in plain text, and watch it come to life instantly.
+        </li>
+        <li>
+          <strong>AI-Powered Templates:</strong> Generate custom, high-quality Flutter code tailored to your needs.
+        </li>
+        <li>
+          <strong>Speed & Efficiency:</strong> Skip the boilerplate and start building your dream app in seconds.
+        </li>
+      </React.Fragment>
+    ),
+    alignleft: false,
+    isVideo: false
+  },
+  {
     title: "Design",
     url: "dragAndDrop.mov",
-    discription:(
+    discription: (
       <React.Fragment>
         <li>
           <strong>Clean Interface:</strong> Main canvas in the center, with a widget tree on the left and properties on the right.
@@ -58,7 +77,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: true,
-    isVideo:true
+    isVideo: true
   },
   {
     title: "Functions",
@@ -80,7 +99,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: false,
-    isVideo:false
+    isVideo: false
   },
   {
     title: "Make it Responsive!",
@@ -99,7 +118,7 @@ const featurelist = [
       </React.Fragment>
     ),
     alignleft: true,
-    isVideo:false
+    isVideo: false
   },
 ];
 

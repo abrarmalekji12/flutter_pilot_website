@@ -10,24 +10,24 @@ export const commonStyles = makeStyles((theme) => ({
     position: "relative",
     padding: 0,
     background: "transparent",      // ✅ no solid white above
-   "&:hover": {
+    "&:hover": {
       transform: "translateY(-2%) scale(1.01)",
     }
   },
-  mainContainer:{
-      background:pageBackgroudColor
-    },
-productShowCaseContainer: {
+  mainContainer: {
+    background: pageBackgroudColor
+  },
+  productShowCaseContainer: {
     position: "relative",
     overflow: "hidden",
     // borderRadius: "24px",
-    padding: theme.spacing(2,4,8,4),
+    padding: theme.spacing(2, 4, 8, 4),
     background: productShowCaseBackground,
     boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
     color: theme.palette.common.white,
     // margin: theme.spacing(4, 0),
   },
-  
+
   // Glowing radial background
   bgGlow: {
     content: '""',
@@ -41,40 +41,40 @@ productShowCaseContainer: {
     zIndex: 0,
   },
 
-  
- // Content wrapper
+
+  // Content wrapper
   contentWrapper: {
     // position: "relative",
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     zIndex: 2,
     minHeight: "400px", // Ensure enough height for the background image
     // display:"flex",
     // flexDirection:"column",
     // alignItems:"flex-end"
   },
-   // Text container
+  // Text container
   textContainer: {
-    display:"flex",
+    display: "flex",
     position: "relative",
-    flexDirection:"column",
-    alignItems:"center",
+    flexDirection: "column",
+    alignItems: "center",
     textAlign: "center",
-    margin:"40px 0px",
-    maxWidth:"55%",
+    margin: "40px 0px",
+    maxWidth: "55%",
     fontFamily: "'Inter', sans-serif",/* clean, modern font */
     [theme.breakpoints.down("xs")]: {
       maxWidth: "100%",
       textAlign: "center",
     },
   },
-  
+
   // Image as central background
 
-  centerImage:{
-    display:"flex",
-    justifyContent:"center"
+  centerImage: {
+    display: "flex",
+    justifyContent: "center"
     // [theme.breakpoints.down("sm")]: {
     //     opacity:1
     // },
@@ -117,7 +117,7 @@ productShowCaseContainer: {
       },
     },
   },
-  
+
   // Image overlay with dots
   imageOverlay: {
     position: "absolute",
@@ -141,8 +141,8 @@ productShowCaseContainer: {
   dot3: {
     backgroundColor: "#28c840",
   },
-  
- 
+
+
   signUpButton: {
     marginRight: theme.spacing(2),
     fontWeight: "bold",
@@ -158,7 +158,7 @@ productShowCaseContainer: {
     transition: "all 0.3s ease-in-out",
   },
   appBarTitle: {
-    background:titleColor,
+    background: titleColor,
     flexGrow: 1,
     fontWeight: 800,
     marginLeft: theme.spacing(2),
@@ -226,7 +226,7 @@ productShowCaseContainer: {
       flexDirection: "column",
     },
   },
-  
+
   // Button styles
   button: {
     padding: theme.spacing(1.75, 3),
@@ -262,7 +262,16 @@ productShowCaseContainer: {
       boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
     },
   },
-  
+  playStoreBtn: {
+    background: "linear-gradient(135deg, #0ba360 0%, #3cba92 100%)",
+    color: theme.palette.common.white,
+    "&:hover": {
+      background: "linear-gradient(135deg, #098b52 0%, #31a07d 100%)",
+      transform: "translateY(-4px)",
+      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
+    },
+  },
+
   // Icon styles
   icon: {
     marginRight: theme.spacing(1),
@@ -278,17 +287,17 @@ productShowCaseContainer: {
       borderRadius: "12px",
       marginBottom: "10px",
       transition: "all 0.3s ease",
-     "&.active": {
-      background: cardBackgroudColor,
-      color: activeButtonColor,
-      boxShadow: activeButtonBoxShadow,
-    },
-    "&:hover": {
-      background: cardBackgroudColor,
-      color: activeButtonColor,
-      transform: "translateY(-2px)",
-      boxShadow: activeButtonBoxShadow,
-    }
+      "&.active": {
+        background: cardBackgroudColor,
+        color: activeButtonColor,
+        boxShadow: activeButtonBoxShadow,
+      },
+      "&:hover": {
+        background: cardBackgroudColor,
+        color: activeButtonColor,
+        transform: "translateY(-2px)",
+        boxShadow: activeButtonBoxShadow,
+      }
     },
   },
   card: {
@@ -319,7 +328,7 @@ productShowCaseContainer: {
     },
   },
 
-//   Floating shapes
+  //   Floating shapes
   floatingShape: {
     position: "absolute",
     border: "2px solid rgba(91, 134, 229, 0.1)",
@@ -350,7 +359,7 @@ productShowCaseContainer: {
     borderRadius: "8px",
     animationDelay: "4s",
   },
-  
+
   // Animations
   "@keyframes float": {
     "0%": { transform: "translateY(0px) rotate(0deg)" },
@@ -432,13 +441,13 @@ productShowCaseContainer: {
     },
   },
   code: {
-        background: codeBackgroundColor,
-        padding: "2px 6px",
-        borderRadius: "6px",
-        fontFamily: "monospace",
-        fontSize: "0.95rem",
-        color: codeTextColor,
-      },
+    background: codeBackgroundColor,
+    padding: "2px 6px",
+    borderRadius: "6px",
+    fontFamily: "monospace",
+    fontSize: "0.95rem",
+    color: codeTextColor,
+  },
   title: {
     fontWeight: 800,
     fontSize: "3.2rem",
@@ -460,15 +469,15 @@ productShowCaseContainer: {
       fontSize: "1.5rem",
     },
     "&:hover": {
-       transform: "translateY(-4px) scale(1.05)",
-    textShadow: "0 0 10px rgba(54, 209, 220, 0.8), 0 0 30px rgba(91, 134, 229, 0.6)",
+      transform: "translateY(-4px) scale(1.05)",
+      textShadow: "0 0 10px rgba(54, 209, 220, 0.8), 0 0 30px rgba(91, 134, 229, 0.6)",
     }
   },
   titleHover: {
     transform: "translateY(-4px) scale(1.05)",
     textShadow: "0 0 10px rgba(54, 209, 220, 0.8), 0 0 30px rgba(91, 134, 229, 0.6)",
   },
-  
+
   // Subtitle
   subtitle: {
     fontSize: "1.2rem",
@@ -494,7 +503,7 @@ productShowCaseContainer: {
     },
     [theme.breakpoints.down("xs")]: {
       fontSize: "1rem",
-      maxWidth:"100%",
+      maxWidth: "100%",
       // margin: "0 auto",
       marginBottom: theme.spacing(5),
       "&:after": {
@@ -502,8 +511,8 @@ productShowCaseContainer: {
         // transform: "translateX(-50%)",
       },
       "$textContainer:hover &:after": {
-      width: "100%",
-    }
+        width: "100%",
+      }
     },
   },
   hideOnSmall: {
@@ -534,26 +543,26 @@ export const templateCardStyles = makeStyles((theme) => ({
     //   boxShadow: "0px 15px 40px rgba(0,0,0,0.4)",
     // },
   },
-  mediaContainer:{
-    display:"flex",
-    flexDirection:"row",
-    marginBottom:"12px",
-    overflowY:"scroll",
+  mediaContainer: {
+    display: "flex",
+    flexDirection: "row",
+    marginBottom: "12px",
+    overflowY: "scroll",
   },
   media: {
     height: 280,
-    width:160,
-    padding:10,
+    width: 160,
+    padding: 10,
     objectFit: "contain",
     [theme.breakpoints.down("sm")]: {
-     height: 150,
-     width:100,
+      height: 150,
+      width: 100,
     }
   },
   content: {
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     padding: theme.spacing(3),
 
   },
@@ -583,23 +592,23 @@ export const templateCardStyles = makeStyles((theme) => ({
   },
 }));
 
-export const contactUsStyles = makeStyles((theme)=>({
-      contentWrapper: {
+export const contactUsStyles = makeStyles((theme) => ({
+  contentWrapper: {
     // position: "relative",
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     zIndex: 2,
     // minHeight: "400px", // Ensure enough height for the background image
   },
-   // Text container
+  // Text container
   textContainer: {
-    display:"flex",
+    display: "flex",
     position: "relative",
-    flexDirection:"column",
-    alignItems:"center",
+    flexDirection: "column",
+    alignItems: "center",
     textAlign: "center",
-    margin:"10px 0px",
+    margin: "10px 0px",
     // maxWidth:"55%",
     fontFamily: "'Inter', sans-serif",/* clean, modern font */
     [theme.breakpoints.down("xs")]: {
@@ -607,5 +616,5 @@ export const contactUsStyles = makeStyles((theme)=>({
       textAlign: "center",
     },
   },
-  
-  }));
+
+}));
