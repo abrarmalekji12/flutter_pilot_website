@@ -65,7 +65,7 @@ export default function Template() {
                console.log("called");
                let fetchedUrls = await Promise.all(
                  template.imageURLs.map(async (path) => {
-                   const url = await getDownloadURL(ref(storage, "templates/" + path));
+                   const url = await getDownloadURL(ref(storage, path));
                    return url;
                  })
                );
