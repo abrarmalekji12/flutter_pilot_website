@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.builder.flutterpilot",
+      "sha256_cert_fingerprints": [
+        "CE:95:B5:9B:26:04:83:F6:A5:52:7E:FD:82:B3:4E:88:C5:3B:8C:3C:62:47:EE:63:D5:CB:6F:6B:C2:F4:0D:06"
+      ]
+    }
+  }
+]
