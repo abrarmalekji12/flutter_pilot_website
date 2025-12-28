@@ -19,7 +19,7 @@ export default function TemplateCard(props) {
     const templateId = props.templateId;
 
     const handleTemplate = ()=>{
-      window.open(`https://flutterpilot.web.app/template/${templateId}`);
+      window.open(`https://flutterpilot-studio.web.app/template/${templateId}`);
     }
 
     try{
