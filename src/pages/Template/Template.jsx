@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CustomAppBar from '../../componets/appbar';
-import { Box, Container, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, Grid, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { commonStyles } from '../../styles/commonStyles';
 import { fetchTemplates } from '../../utils/firebaseconfig';
 import { collection, getDocs } from "firebase/firestore";

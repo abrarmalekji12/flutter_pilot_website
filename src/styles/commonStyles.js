@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBackground, productShowCaseBoxShadow, templateTitleColor, textShadowColor, titleColor, titleHoverShadow } from "./colors";
 
 
@@ -519,6 +519,23 @@ export const commonStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
+  },
+  taglineBanner: {
+    background: "linear-gradient(90deg, #4A154B 0%, #1B486D 100%)",
+    color: "white",
+    textAlign: "center",
+    padding: "8px 16px",
+    fontSize: "14px",
+    fontWeight: 600,
+    letterSpacing: "0.5px",
+    textTransform: "uppercase",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    zIndex: 1200,
+    position: "relative",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+      padding: "6px 12px",
+    }
   }
 }));
 

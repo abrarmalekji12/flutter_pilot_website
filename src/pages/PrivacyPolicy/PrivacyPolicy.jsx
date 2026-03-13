@@ -2,7 +2,7 @@ import React from 'react';
 import "./PrivacyPolicy.css";
 import CustomAppBar from '../../componets/appbar';
 import { commonStyles, templateCardStyles } from '../../styles/commonStyles';
-import { Box, Container, Typography } from '@material-ui/core';
+import { Box, Container, Typography } from '@mui/material';
 
 export default function PrivacyPolicy() {
   const classes = commonStyles();

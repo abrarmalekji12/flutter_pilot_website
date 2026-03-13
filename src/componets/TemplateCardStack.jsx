@@ -1,4 +1,4 @@
-import { useTheme, useMediaQuery, Box } from "@material-ui/core";
+import { useTheme, useMediaQuery, Box } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 export default function TemplateCardStack({ imageUrls }) {

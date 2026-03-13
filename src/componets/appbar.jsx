@@ -9,9 +9,9 @@ import {
   List,
   ListItem,
   ListItemText,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
 import { cardBackgroudColor, pageBackgroudColor } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
@@ -134,10 +134,13 @@ function CustomAppBar({ children, type }) {
 
   return (
     <div className={classes.mainContainer}>
+      <div className={classes.taglineBanner}>
+        🚀 AI Powered Low-Code platform: Instant UI Generation is here!
+      </div>
       <AppBar position="sticky" className={classes.appBar}>
         <Toolbar>
           <img
-            src="flutter_pilot_logo.png"
+            src="flutterpilot_logo.png"
             className={classes.logo}
             alt="FlutterPilot"
             onClick={() => navigate("#/")}

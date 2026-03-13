@@ -1,7 +1,7 @@
 // src/components/featurediscription.js
 import React, { useEffect } from "react";
-import { Grid, Typography, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography, Paper } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import { cardBackgroudColor, titleColor, titleHoverShadow } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";

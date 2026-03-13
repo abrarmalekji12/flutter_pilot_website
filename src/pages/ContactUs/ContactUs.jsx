@@ -4,7 +4,8 @@ import CustomAppBar from '../../componets/appbar';
 import { getUID } from '../../utils/commonFnc';
 import Swal from 'sweetalert2';
 import { commonStyles, contactUsStyles } from '../../styles/commonStyles';
-import { Box, Container, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 
 

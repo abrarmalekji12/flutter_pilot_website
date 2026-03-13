@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid, Typography, Button, Box, Hidden } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
+import { Container, Grid, Typography, Button, Box } from "@mui/material";
 import { cardBackgroudColor, titleColor, titleHoverShadow } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
 import { video } from "framer-motion/client";
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 
 const PlayStoreIcon = () => (
   
@@ -65,12 +65,12 @@ const ProductShowcase = () => {
             variant="h2"
             className={`${classes.title}`}
           >
-            Build your ideas Faster
+            Design Flutter Apps at the Speed of AI
           </Typography>
 
           <Typography variant="body1" className={classes.subtitle}>
-            FlutterPilot is a low-code platform powered by Flutter.
-            With simple drag-and-drop, you can create beautiful, reactive apps for any platform in minutes.
+            FlutterPilot is an AI powered low-code platform. 
+            Kickstart your project by generating UI layouts from prompts and refining them with our intuitive visual editor.
           </Typography>
 
           <div className={classes.buttonsContainer}>

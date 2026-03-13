@@ -1,7 +1,7 @@
 // src/pages/Landing.js
 import React from "react";
-import { Container, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import CustomAppBar from "../componets/appbar";
 import ProductShowcase from "../componets/productshowcase";
@@ -39,18 +39,18 @@ const useStyles = makeStyles((theme) => ({
 
 const featurelist = [
   {
-    title: "Generate with AI",
+    title: "AI UI Scaffolding",
     url: "ai_generation_feature.png",
     discription: (
       <React.Fragment>
         <li>
-          <strong>Prompt to UI:</strong> Describe your app idea in plain text, and watch it come to life instantly.
+          <strong>Prompt to Layout:</strong> Generate beautiful UI layouts and screen structures using simple text prompts.
         </li>
         <li>
-          <strong>AI-Powered Templates:</strong> Generate custom, high-quality Flutter code tailored to your needs.
+          <strong>Automated Screens:</strong> Quickly create screens, dialogs, and bottom sheets to kickstart your project.
         </li>
         <li>
-          <strong>Speed & Efficiency:</strong> Skip the boilerplate and start building your dream app in seconds.
+          <strong>Figma Import:</strong> Bring your Figma designs into the editor and convert them into basic Flutter code.
         </li>
       </React.Fragment>
     ),
@@ -58,21 +58,18 @@ const featurelist = [
     isVideo: false
   },
   {
-    title: "Design",
+    title: "Visual Design & AI Editing",
     url: "dragAndDrop.mov",
     discription: (
       <React.Fragment>
         <li>
-          <strong>Clean Interface:</strong> Main canvas in the center, with a widget tree on the left and properties on the right.
+          <strong>Easy Drag & Drop:</strong> Customize your UI visually with our intuitive drag-and-drop builder.
         </li>
         <li>
-          <strong>Drag & Drop Widgets:</strong> Add and organize components visually.
+          <strong>AI Screen Generation:</strong> Add new screens or custom components using AI prompts or build them from scratch.
         </li>
         <li>
-          <strong>Powerful Controls:</strong> Wrap, replace, or reuse widgets anytime.
-        </li>
-        <li>
-          <strong>Code-Free:</strong> Focus on design — we handle the complexity.
+          <strong>Pre-built Widgets:</strong> Use a library of ready-to-use Flutter components to speed up your design process.
         </li>
       </React.Fragment>
     ),
@@ -80,21 +77,18 @@ const featurelist = [
     isVideo: true
   },
   {
-    title: "Functions",
+    title: "API & Data Integration",
     url: "GIF_2.jpg",
     discription: (
       <React.Fragment>
         <li>
-          <strong>Instant Edits:</strong> Wrap, replace, or remove any widget — anytime you want.
+          <strong>Postman Imports:</strong> Load your API structures easily by importing Postman JSON collections.
         </li>
         <li>
-          <strong>Smart Variables:</strong> Create once and use them everywhere in your project.
+          <strong>Direct Testing:</strong> Test your API endpoints within the platform to verify data responses.
         </li>
         <li>
-          <strong>Favorites:</strong> Save your most-used widgets and drop them into new projects instantly.
-        </li>
-        <li>
-          <strong>Seamless APIs:</strong> Connect APIs with just a few clicks.
+          <strong>Simplified Integration:</strong> Connect APIs to your UI with minimal code using our pre-built methods.
         </li>
       </React.Fragment>
     ),
@@ -102,18 +96,56 @@ const featurelist = [
     isVideo: false
   },
   {
-    title: "Make it Responsive!",
+    title: "Real-time Preview",
     url: "GIF_3.jpg",
     discription: (
       <React.Fragment>
         <li>
-          <strong>One Function, Full Power:</strong> Use <code>res()</code> to make your design responsive — instantly.
+          <strong>Instant Rendering:</strong> See your changes reflected in the preview in real-time as you design.
         </li>
         <li>
-          <strong>Desktop, Tablet, Mobile:</strong> Pass arguments for each screen size, and Flutter Pilot adapts automatically.
+          <strong>High-Fidelity Preview:</strong> Navigate through your screens to check the look and feel of your application.
         </li>
         <li>
-          <strong>Zero Hassle:</strong> Forget writing endless media queries — <code>res()</code> does the heavy lifting.
+          <strong>Device Preview:</strong> Test your design directly inside the platform or on your mobile device.
+        </li>
+      </React.Fragment>
+    ),
+    alignleft: true,
+    isVideo: false
+  },
+  {
+    title: "Code & Expressions",
+    url: "GIF_2.jpg",
+    discription: (
+      <React.Fragment>
+        <li>
+          <strong>Dart Expressions:</strong> Use Dart logic for properties like width, padding, and colors for dynamic layouts.
+        </li>
+        <li>
+          <strong>Live Code Feedback:</strong> Get instant suggestions and error highlights while writing custom Dart code.
+        </li>
+        <li>
+          <strong>Flutter Code Export:</strong> Export the generated Flutter code for your screens, including navigation and API calls.
+        </li>
+      </React.Fragment>
+    ),
+    alignleft: false,
+    isVideo: false
+  },
+  {
+    title: "Collaboration & Tools",
+    url: "GIF_3.jpg",
+    discription: (
+      <React.Fragment>
+        <li>
+          <strong>Team Collaboration:</strong> Work together with other team members on the same project in real-time.
+        </li>
+        <li>
+          <strong>Change Tracking:</strong> Use the built-in commit system to keep track of your project's progress.
+        </li>
+        <li>
+          <strong>Reduced Boilerplate:</strong> Focus on your app's unique logic while we handle the repetitive UI code.
         </li>
       </React.Fragment>
     ),
@@ -155,7 +187,7 @@ export default function Landing() {
         </motion.div>
 
         {/* Features */}
-        <Container maxWidth="maxWidthXl">
+        <Container maxWidth="xl">
           {featurelist.map((e, index) => (
             <motion.div
               key={index}

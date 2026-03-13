@@ -1,7 +1,8 @@
 import React from 'react';
 import './AboutUs.css';
 import CustomAppBar from '../../componets/appbar';
-import { Box, Container, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { commonStyles, contactUsStyles } from '../../styles/commonStyles';
 
 export default function AboutUs() {
@@ -44,18 +45,19 @@ export default function AboutUs() {
           <section>
             <h2>Our Mission</h2>
             <p>
-              FlutterPilot is on a mission to simplify app development by offering a low-code, drag-and-drop interface
-              built on top of Flutter. We aim to make app development accessible, fast, and powerful for developers of all levels.
+              FlutterPilot is on a mission to simplify app development by combining Generative AI with a powerful visual editor. We empower developers to bridge the gap between idea and code, enabling rapid UI scaffolding and screen generation for Flutter apps.
             </p>
           </section>
 
           <section>
             <h2>What We Offer</h2>
             <ul>
-              <li>🚀 Drag-and-drop UI builder for Flutter</li>
-              <li>🧩 Custom widget import support</li>
-              <li>🖥️ Desktop & web editor compatibility</li>
-              <li>📦 Code export & real-time preview</li>
+              <li>🤖 <strong>AI UI Generation:</strong> Generate basic screens, layouts, and structures with text prompts.</li>
+              <li>🎨 <strong>Visual Designer:</strong> Refine and customize your generated UI with a drag-and-drop editor.</li>
+              <li>🚀 <strong>Figma Integration:</strong> Convert Figma designs into functional Flutter UI code.</li>
+              <li>🌐 <strong>API Tools:</strong> Import Postman collections and test endpoints directly.</li>
+              <li>🤝 <strong>Real-time Editing:</strong> Collaborate with your team and track changes with built-in commits.</li>
+              <li>📦 <strong>Code Export:</strong> Export clean Flutter code and integrate it into your project.</li>
             </ul>
           </section>
 

@@ -15,19 +15,24 @@ import {
   Instagram,
   WhatsApp,
 } from "@mui/icons-material";
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { productShowCaseBackground } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
 import { useNavigate } from "react-router-dom";
 
-const footerStyles = makeStyles(()=>({
+const footerStyles = makeStyles((theme)=>({
   container:{
-    height: "250px",
+    minHeight: "250px",
+    height: "auto",
     background: productShowCaseBackground,
-        color: "#ccc",
-        mt: 6,
-        pt: 6,
-        pb: 3,
+    color: "#ccc",
+    marginTop: theme.spacing(6),
+    paddingTop: theme.spacing(6),
+    paddingBottom: theme.spacing(3),
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: theme.spacing(4),
+      paddingBottom: theme.spacing(4),
+    }
   },
   gridContainer:{
     justifyContent:"center"
@@ -71,12 +76,12 @@ const Footer = () => {
   return (
     <Box
       component="footer"
-      className={`${footerClasses.container} ${commonClasses.hideOnSmall}`}
+      className={`${footerClasses.container}`}
     >
       {/* Top Section */}
       <div className={footerClasses.titleContainer}>
          <img
-            src="flutterpilot_logo_dark.png"
+            src="flutterpilot_logo.png"
             className={footerClasses.logo}
             alt="FlutterPilot"
             onClick={() => navigate("/")}
@@ -162,8 +167,8 @@ const Footer = () => {
         {/* Column 4 - Description */}
         <Grid item xs={12} sm={12} md={4}>
           <Typography variant="body2" sx={{ mb: 2 }}>
-            FlutterPilot is a platform to speed up your app development with
-            modern templates, drag-and-drop UI tools, and powerful integrations.
+            FlutterPilot is the ultimate AI low-code platform for Flutter developers. 
+            Generate full projects from prompts, import Figma designs, and build high-performance apps with zero boilerplate.
           </Typography>
 
           {/* Social Icons */}
