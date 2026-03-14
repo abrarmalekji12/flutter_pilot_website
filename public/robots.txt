@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://flutterpilot.web.app/sitemap.xml
+Sitemap: https://flutterpilot.com/sitemap.xml
