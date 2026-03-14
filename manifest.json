@@ -1,7 +1,7 @@
 {
   "short_name": "FlutterPilot",
   "name": "FlutterPilot – AI Flutter App Builder",
-  "description": "AI-powered low-code Flutter app builder. The best FlutterFlow alternative. Build apps from prompts, drag-and-drop UI, real-time preview, and export production-ready Flutter code.",
+  "description": "AI-powered low-code Flutter app builder. Build apps from prompts, drag-and-drop UI, real-time preview, and export production-ready Flutter code.",
   "lang": "en",
   "dir": "ltr",
   "categories": ["developer tools", "productivity", "utilities"],
