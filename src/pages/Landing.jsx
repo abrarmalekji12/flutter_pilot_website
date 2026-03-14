@@ -6,74 +6,77 @@ import CustomAppBar from "../componets/appbar";
 import PromptGeneratorHero from "../componets/promptgeneratorhero";
 import ProductShowcase from "../componets/productshowcase";
 import FeatureShowcase from "../componets/featurediscription";
+import { commonStyles } from "../styles/commonStyles";
+import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
+import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
+import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
+import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
 
 const useStyles = makeStyles((theme) => ({
   section: {
-    width: "90%",
-    maxWidth: "1500px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: theme.spacing(4),
-    [theme.breakpoints.down("sm")]: {
-      width: "94%",
-      marginTop: theme.spacing(3),
-    },
+    // Standardized via commonStyles.responsiveContainer
   },
 }));
 
 const featurelist = [
   {
     title: "Visual Design & AI Editing",
-    url: "dragAndDrop.mov",
-    discription: (
-      <React.Fragment>
-        <li>
-          <strong>Easy Drag & Drop:</strong> Customize your UI visually with our intuitive drag-and-drop builder.
-        </li>
-        <li>
-          <strong>AI Screen Generation:</strong> Add new screens or custom components using AI prompts or build them from scratch.
-        </li>
-        <li>
-          <strong>Pre-built Widgets:</strong> Use a library of ready-to-use Flutter components to speed up your design process.
-        </li>
-      </React.Fragment>
-    ),
-    alignleft: true,
-    isVideo: true
+    url: "visual_edit_preview.mp4",
+    subtitle: "Drag, drop, and prompt your way to a polished UI — no code required.",
+    heroMedia: true,
+    isVideo: true,
   },
   {
     title: "Comprehensive Tooling",
-    noMedia: true,
-    discription: (
-      <React.Fragment>
-        <li>
-          <strong>Conversational Editing:</strong> Instruct the AI to tweak styles, add components, or redesign screens by just typing.
-        </li>
-        <li>
-          <strong>Figma Conversion:</strong> Bring your Figma designs directly into the editor without complex setup to generate code.
-        </li>
-        <li>
-          <strong>Ready-to-Ship Code:</strong> Export clean, production-ready Flutter code with organized file structures.
-        </li>
-        <li>
-          <strong>One-Click APK:</strong> Generate an installable Android APK natively from your workspace.
-        </li>
-      </React.Fragment>
-    ),
-    alignleft: false,
-    isVideo: false
-  }
+    subtitle: "Everything you need to design, connect, and ship — in one workspace.",
+    featureGrid: true,
+    items: [
+      {
+        icon: <ChatRoundedIcon fontSize="small" />,
+        title: "Conversational Editing",
+        description: "Tweak styles, add screens, or redesign layouts by just typing to the AI.",
+      },
+      {
+        icon: <DashboardCustomizeRoundedIcon fontSize="small" />,
+        title: "Figma Conversion",
+        description: "Import Figma designs and instantly generate clean, editable Flutter code.",
+      },
+      {
+        icon: <CodeRoundedIcon fontSize="small" />,
+        title: "Export Flutter Code",
+        description: "Download production-ready code anytime — no lock-in, fully yours.",
+      },
+      {
+        icon: <ApiRoundedIcon fontSize="small" />,
+        title: "Integrate Endpoints",
+        description: "Connect REST APIs and wire data to your UI components with ease.",
+      },
+      {
+        icon: <LanguageRoundedIcon fontSize="small" />,
+        title: "Share as Web App",
+        description: "Instantly share your web-app link with everyone — live updates in real-time.",
+      },
+      {
+        icon: <AndroidRoundedIcon fontSize="small" />,
+        title: "One-Click APK",
+        description: "Generate an installable Android APK natively from your workspace.",
+      },
+    ],
+    isVideo: false,
+  },
 ];
 
 export default function Landing() {
-  const classes = useStyles();
+  const common = commonStyles();
 
   return (
     <CustomAppBar type="home">
       <main>
         {/* AI Prompt Section */}
         <motion.section
-          className={classes.section}
+          className={common.responsiveContainer}
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -84,7 +87,7 @@ export default function Landing() {
 
         {/* Hero Section */}
         <motion.section
-          className={classes.section}
+          className={common.responsiveContainer}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -92,18 +95,21 @@ export default function Landing() {
         >
           <ProductShowcase />
         </motion.section>
-
         {/* Features Section - Each feature is a consistent section */}
         {featurelist.map((e, index) => (
-          <section className={classes.section} key={index}>
+          <section className={common.responsiveContainer} key={index}>
             <FeatureShowcase
               title={e.title}
               url={e.url}
+              subtitle={e.subtitle}
               discription={e.discription}
               alignleft={e.alignleft}
               index={index}
               isVideo={e.isVideo}
               noMedia={e.noMedia}
+              heroMedia={e.heroMedia}
+              featureGrid={e.featureGrid}
+              items={e.items}
             />
           </section>
         ))}

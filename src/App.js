@@ -1,11 +1,14 @@
-
+import React, { lazy, Suspense } from "react";
 import AppNav from "./pages/AppNav";
-import BackgroundNetAnimation from "./componets/BackgroundNetAnimation";
+
+const BackgroundNetAnimation = lazy(() => import("./componets/BackgroundNetAnimation"));
 
 function App() {
   return (
     <>
-      <BackgroundNetAnimation />
+      <Suspense fallback={null}>
+        <BackgroundNetAnimation />
+      </Suspense>
       <AppNav />
     </>
   );

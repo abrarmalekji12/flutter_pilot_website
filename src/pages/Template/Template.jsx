@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Chip, Container, Grid } from "@mui/material";
+import { Chip, Grid, useTheme, useMediaQuery } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { collection, getDocs } from "firebase/firestore";
 import { signInAnonymously, onAuthStateChanged } from "firebase/auth";
@@ -8,29 +8,22 @@ import CustomAppBar from "../../componets/appbar";
 import TemplateCard from "../../componets/templatecard";
 import TemplateCardSkeleton from "../../componets/templatecardskeleton";
 import { auth, db, storage } from "../../utils/firebaseconfig";
+import { commonStyles } from "../../styles/commonStyles";
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    width: "90%",
-    maxWidth: "1500px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: theme.spacing(4),
-    marginBottom: 0,
-    [theme.breakpoints.down("sm")]: {
-      width: "94%",
-      marginTop: theme.spacing(3),
-      marginBottom: 0,
-    },
+    // Standardized via commonStyles.responsiveContainer
   },
   headerCard: {
-    borderRadius: "18px",
+    borderRadius: "24px",
     border: "1px solid rgba(148, 163, 184, 0.28)",
     background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
     boxShadow: "0 12px 30px rgba(15, 23, 42, 0.06)",
-    padding: theme.spacing(3, 3.2),
+    padding: theme.spacing(4, 3.5),
     [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(2.3, 2),
+      padding: theme.spacing(3, 2.5),
+      textAlign: "center",
+      borderRadius: "20px",
     },
   },
   eyebrow: {
@@ -50,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.16,
     letterSpacing: "-0.38px",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1.62rem",
+      fontSize: "1.45rem",
+      marginBottom: theme.spacing(0.5),
     },
   },
   subtitle: {
@@ -58,12 +52,20 @@ const useStyles = makeStyles((theme) => ({
     color: "#475569",
     lineHeight: 1.75,
     maxWidth: "780px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.94rem",
+      margin: "0 auto",
+    },
   },
   metaRow: {
-    marginTop: theme.spacing(1.7),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexWrap: "wrap",
     gap: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+      marginTop: theme.spacing(2.5),
+    },
   },
   chip: {
     fontWeight: 600,
@@ -72,11 +74,7 @@ const useStyles = makeStyles((theme) => ({
     background: "rgba(30, 64, 175, 0.06)",
   },
   gridWrap: {
-    marginTop: theme.spacing(2),
     alignItems: "stretch",
-    [theme.breakpoints.down("sm")]: {
-      marginTop: theme.spacing(1.5),
-    },
   },
   cardItem: {
     display: "flex",
@@ -93,6 +91,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Template() {
   const classes = useStyles();
+  const common = commonStyles();
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -145,8 +146,8 @@ export default function Template() {
 
   return (
     <CustomAppBar type="template">
-      <Container maxWidth={false} disableGutters className={classes.page}>
-        <header className={classes.headerCard}>
+      <div className={classes.page}>
+        <header className={`${classes.headerCard} ${common.responsiveContainer}`}>
           <p className={classes.eyebrow}>Templates</p>
           <h1 className={classes.title}>Template Library</h1>
           <p className={classes.subtitle}>
@@ -165,36 +166,40 @@ export default function Template() {
         </header>
 
         {loading ? (
-          <Grid container spacing={2.4} className={classes.gridWrap}>
-            {[0, 1, 2, 3].map((i) => (
-              <Grid key={i} item xs={12} md={6} className={classes.cardItem}>
-                <TemplateCardSkeleton />
-              </Grid>
-            ))}
-          </Grid>
+          <div className={common.responsiveContainer}>
+            <Grid container spacing={isSmall ? 1.5 : 2.4} className={classes.gridWrap}>
+              {[0, 1, 2, 3].map((i) => (
+                <Grid key={i} item xs={12} md={6} className={classes.cardItem}>
+                  <TemplateCardSkeleton />
+                </Grid>
+              ))}
+            </Grid>
+          </div>
         ) : (
-          <Grid container spacing={2.4} className={classes.gridWrap}>
-            {templates.map((template) => (
-              <Grid key={template.id} item xs={12} md={6} className={classes.cardItem}>
-                <TemplateCard
-                  templateId={template.id}
-                  name={template.name}
-                  description={template.description}
-                  imageURLs={template.imageURLs}
-                />
-              </Grid>
-            ))}
+          <div className={common.responsiveContainer}>
+            <Grid container spacing={isSmall ? 1.5 : 2.4} className={classes.gridWrap}>
+              {templates.map((template) => (
+                <Grid key={template.id} item xs={12} md={6} className={classes.cardItem}>
+                  <TemplateCard
+                    templateId={template.id}
+                    name={template.name}
+                    description={template.description}
+                    imageURLs={template.imageURLs}
+                  />
+                </Grid>
+              ))}
 
-            {templates.length === 0 && (
-              <Grid item xs={12}>
-                <div className={classes.statusCard}>
-                  No templates available right now. Please check back soon.
-                </div>
-              </Grid>
-            )}
-          </Grid>
+              {templates.length === 0 && (
+                <Grid item xs={12}>
+                  <div className={classes.statusCard}>
+                    No templates available right now. Please check back soon.
+                  </div>
+                </Grid>
+              )}
+            </Grid>
+          </div>
         )}
-      </Container>
+      </div>
     </CustomAppBar>
   );
 }

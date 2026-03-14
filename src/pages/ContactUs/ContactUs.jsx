@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import Swal from "sweetalert2";
 import { Box, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
+import { commonStyles } from "../../styles/commonStyles";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
-    width: "90%",
-    maxWidth: "1500px",
-    margin: "0 auto",
-    paddingTop: theme.spacing(4),
-    [theme.breakpoints.down("sm")]: {
-      width: "94%",
-      paddingTop: theme.spacing(3),
-    },
+    // Standardized via commonStyles.responsiveContainer
   },
   headerCard: {
     borderRadius: "18px",
@@ -116,7 +109,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ContactUs() {
-  const classes = useStyles();
+  const localClasses = useStyles();
+  const classes = commonStyles();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -148,6 +142,7 @@ export default function ContactUs() {
       });
 
       if (res.ok) {
+        const Swal = (await import("sweetalert2")).default;
         Swal.fire({
           icon: "success",
           title: "Message Sent!",
@@ -159,6 +154,7 @@ export default function ContactUs() {
         throw new Error("Form submission failed");
       }
     } catch (err) {
+      const Swal = (await import("sweetalert2")).default;
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -172,20 +168,20 @@ export default function ContactUs() {
 
   return (
     <CustomAppBar type="contactUs">
-      <div className={classes.pageWrap}>
-        <Container className={classes.headerCard} maxWidth={false} disableGutters>
-          <p className={classes.eyebrow}>Contact</p>
-          <h1 className={classes.title}>Contact Us</h1>
-          <p className={classes.subtitle}>
+      <div className={classes.responsiveContainer}>
+        <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
+          <p className={localClasses.eyebrow}>Contact</p>
+          <h1 className={localClasses.title}>Contact Us</h1>
+          <p className={localClasses.subtitle}>
             We’d love to hear from you. Reach out with questions, feedback, or suggestions.
           </p>
         </Container>
 
-        <main className={classes.sectionGap}>
-          <div className={classes.formCard}>
+        <main className={localClasses.sectionGap}>
+          <div className={localClasses.formCard}>
             <Box component="form" onSubmit={handleSubmit}>
-              <div className={classes.formGroup}>
-                <label htmlFor="name" className={classes.label}>Your Name</label>
+              <div className={localClasses.formGroup}>
+                <label htmlFor="name" className={localClasses.label}>Your Name</label>
                 <input
                   id="name"
                   type="text"
@@ -193,12 +189,12 @@ export default function ContactUs() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className={classes.input}
+                  className={localClasses.input}
                 />
               </div>
 
-              <div className={classes.formGroup}>
-                <label htmlFor="email" className={classes.label}>Email Address</label>
+              <div className={localClasses.formGroup}>
+                <label htmlFor="email" className={localClasses.label}>Email Address</label>
                 <input
                   id="email"
                   type="email"
@@ -206,12 +202,12 @@ export default function ContactUs() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className={classes.input}
+                  className={localClasses.input}
                 />
               </div>
 
-              <div className={classes.formGroup}>
-                <label htmlFor="message" className={classes.label}>Your Message</label>
+              <div className={localClasses.formGroup}>
+                <label htmlFor="message" className={localClasses.label}>Your Message</label>
                 <textarea
                   id="message"
                   name="message"
@@ -219,11 +215,11 @@ export default function ContactUs() {
                   onChange={handleChange}
                   rows="6"
                   required
-                  className={classes.input}
+                  className={localClasses.input}
                 />
               </div>
 
-              <button type="submit" disabled={isSubmitting} className={classes.submitBtn}>
+              <button type="submit" disabled={isSubmitting} className={localClasses.submitBtn}>
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </Box>

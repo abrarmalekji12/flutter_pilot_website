@@ -6,14 +6,7 @@ import { commonStyles } from "../../styles/commonStyles";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
-    width: "90%",
-    maxWidth: "1500px",
-    margin: "0 auto",
-    paddingTop: theme.spacing(4),
-    [theme.breakpoints.down("sm")]: {
-      width: "94%",
-      paddingTop: theme.spacing(3),
-    },
+    // Standardized via commonStyles.responsiveContainer
   },
   sectionGap: {
     marginTop: theme.spacing(4),
@@ -76,7 +69,7 @@ export default function PrivacyPolicy() {
 
   return (
     <CustomAppBar type="privacyPolicy">
-      <div className={localClasses.pageWrap}>
+      <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
           <p className={localClasses.eyebrow}>Legal</p>
           <h1 className={localClasses.title}>Privacy Policy</h1>

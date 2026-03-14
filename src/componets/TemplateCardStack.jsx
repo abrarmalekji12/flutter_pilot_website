@@ -7,11 +7,11 @@ export default function TemplateCardStack({ imageUrls }) {
   const scrollRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const safeImageUrls = Array.isArray(imageUrls) ? imageUrls : [];
-  const baseImageWidth = 108;
-  const baseOverlap = 44;
+  const baseImageWidth = isSmall ? 100 : 125;
+  const baseOverlap = isSmall ? 40 : 48;
 
   // Fixed uniform height across all templates
-  const stackHeight = isSmall ? 200 : 260;
+  const stackHeight = isSmall ? 230 : 300;
 
   const { imageWidth, overlap, gap, totalWidth, isSpreadMode } = useMemo(() => {
     const imageCount = safeImageUrls.length;
@@ -20,11 +20,24 @@ export default function TemplateCardStack({ imageUrls }) {
     }
 
     if (isSmall || containerWidth === 0) {
+      const availableWidth = containerWidth > 0 ? containerWidth - 20 : 300;
+      const imageCount = safeImageUrls.length;
+      
+      // If we have many images, reduce overlap to fit most or all of them
+      // Minimum overlap to keep things readable
+      const minOverlap = 24; 
+      let dynamicOverlap = baseOverlap;
+      
+      if (imageCount > 1) {
+        const requiredOverlap = (availableWidth - baseImageWidth) / (imageCount - 1);
+        dynamicOverlap = Math.max(minOverlap, Math.min(baseOverlap, requiredOverlap));
+      }
+
       return {
         imageWidth: baseImageWidth,
-        overlap: baseOverlap,
+        overlap: Math.round(dynamicOverlap),
         gap: 0,
-        totalWidth: baseImageWidth + (imageCount - 1) * baseOverlap,
+        totalWidth: baseImageWidth + (imageCount - 1) * dynamicOverlap,
         isSpreadMode: false,
       };
     }
@@ -106,7 +119,7 @@ export default function TemplateCardStack({ imageUrls }) {
         overflowY: "hidden",
         borderRadius: 14,
         background: "rgba(241, 245, 249, 0.6)",
-        padding: isSmall ? "12px 10px" : "16px 12px",
+        padding: isSmall ? "10px 8px" : "16px 12px",
         marginBottom: 0, // removed to let parent gap handle spacing
         scrollbarWidth: "none",
         "&::-webkit-scrollbar": { display: "none" }, // Hide scrollbar for Chrome/Safari
@@ -131,9 +144,8 @@ export default function TemplateCardStack({ imageUrls }) {
               borderRadius: "8px",
               width: `${imageWidth}px`,
               height: "94%", 
-              background: "#fff",
-              border: "none",
-              boxShadow: "0 6px 16px rgba(15, 23, 42, 0.12)",
+              border: "1px solid rgba(15, 23, 42, 0.06)",
+              boxShadow: "0 2px 8px rgba(15, 23, 42, 0.07), 0 6px 18px rgba(15, 23, 42, 0.09)",
               overflow: "hidden",
               zIndex: i + 1,
               display: "flex",

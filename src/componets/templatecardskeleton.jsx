@@ -1,7 +1,9 @@
-import React from "react";
-import { Skeleton, Box } from "@mui/material";
+import { Skeleton, Box, useTheme, useMediaQuery } from "@mui/material";
 
 const TemplateCardSkeleton = () => {
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Box
       sx={{
@@ -23,7 +25,7 @@ const TemplateCardSkeleton = () => {
       <Skeleton
         variant="rectangular"
         width="100%"
-        height={260}
+        height={isSmall ? 230 : 300}
         sx={{ borderRadius: "12px" }}
       />
 

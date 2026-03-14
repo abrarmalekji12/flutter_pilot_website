@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Box,
   Button,
@@ -195,12 +197,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   charCount: {
-    fontSize: "0.85rem",
-    color: "rgba(15, 23, 42, 0.8)",
-    background: "rgba(226, 232, 240, 0.65)",
-    borderRadius: "999px",
-    border: "1px solid rgba(148, 163, 184, 0.25)",
-    padding: theme.spacing(0.35, 0.9),
+    fontSize: "0.8rem",
+    color: "#64748b",
+    background: "rgba(241, 245, 249, 0.7)",
+    backdropFilter: "blur(8px)",
+    WebkitBackdropFilter: "blur(8px)",
+    borderRadius: "10px",
+    border: "1px solid rgba(148, 163, 184, 0.2)",
+    padding: theme.spacing(0.6, 1.2),
+    minWidth: "85px",
+    display: "inline-flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontWeight: 700,
+    fontVariantNumeric: "tabular-nums",
+    letterSpacing: "0.02em",
+    boxShadow: "0 2px 10px rgba(15, 23, 42, 0.03)",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      background: "rgba(241, 245, 249, 0.9)",
+      borderColor: "rgba(37, 99, 235, 0.2)",
+    },
   },
   generateBtn: {
     borderRadius: "14px",
@@ -261,6 +278,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PromptGeneratorHero() {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [prompt, setPrompt] = React.useState("");
   const [isTyping, setIsTyping] = React.useState(false);
   const [hasInteracted, setHasInteracted] = React.useState(false);
@@ -374,7 +393,7 @@ export default function PromptGeneratorHero() {
             Try these
           </Typography>
           <Box className={classes.chipRow}>
-            {examplePrompts.map((samplePrompt) => (
+            {(isMobile ? examplePrompts.slice(0, 2) : examplePrompts).map((samplePrompt) => (
               <Chip
                 key={samplePrompt}
                 label={toChipPreview(samplePrompt)}

@@ -2,20 +2,11 @@ import React from "react";
 import { Container, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
+import { commonStyles } from "../../styles/commonStyles";
 
 const useStyles = makeStyles((theme) => ({
   page: {
-    width: "90%",
-    maxWidth: "1500px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.down("sm")]: {
-      width: "94%",
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(4),
-    },
+    // Standardized via commonStyles.responsiveContainer
   },
   intro: {
     borderRadius: "18px",
@@ -168,7 +159,7 @@ const docsSections = [
   {
     id: "ai-ui-scaffolding",
     title: "AI UI Scaffolding",
-    image: "ai_generation_feature.png",
+    image: "ai_generation_feature.webp",
     imageAlt: "AI UI scaffolding interface preview",
     summary:
       "Generate starter screens and widget structure from simple prompts, then refine everything visually.",
@@ -194,8 +185,8 @@ const docsSections = [
   {
     id: "api-data-integration",
     title: "API & Data Integration",
-    image: "GIF_2.jpg",
-    imageAlt: "API and data integration workflow preview",
+    image: "endpoint_preview.webp",
+    imageAlt: "API Endpoint Connectors interface preview",
     summary:
       "Connect backend data without heavy boilerplate and validate endpoints directly in the workflow.",
     points: [
@@ -207,8 +198,8 @@ const docsSections = [
   {
     id: "real-time-preview",
     title: "Real-time Preview",
-    image: "GIF_3.jpg",
-    imageAlt: "Real-time preview screen example",
+    image: "realtime_preview.webp",
+    imageAlt: "Real-time preview and editing interface",
     summary:
       "Validate UI changes instantly while editing so spacing, behavior, and flow stay consistent.",
     points: [
@@ -220,7 +211,7 @@ const docsSections = [
   {
     id: "code-expressions",
     title: "Code & Expressions",
-    image: "example_image.jpg",
+    image: "example_image.webp",
     imageAlt: "Code and expression editing preview",
     summary:
       "Use Dart expressions for dynamic properties and export maintainable Flutter code ready for teams.",
@@ -246,20 +237,21 @@ const docsSections = [
 ];
 
 export default function Docs() {
-  const classes = useStyles();
+  const localClasses = useStyles();
+  const classes = commonStyles();
 
   return (
     <CustomAppBar type="docs">
-      <Container maxWidth={false} disableGutters className={classes.page}>
-        <header className={classes.intro}>
-          <p className={classes.eyebrow}>Documentation</p>
-          <h1 className={classes.heading}>FlutterPilot Docs</h1>
-          <p className={classes.lead}>
+      <Container maxWidth={false} disableGutters className={classes.responsiveContainer}>
+        <header className={localClasses.intro}>
+          <p className={localClasses.eyebrow}>Documentation</p>
+          <h1 className={localClasses.heading}>FlutterPilot Docs</h1>
+          <p className={localClasses.lead}>
             Read concise, implementation-focused guidance for FlutterPilot features and workflows.
           </p>
-          <div className={classes.quickLinks}>
+          <div className={localClasses.quickLinks}>
             {docsSections.map((section) => (
-              <span key={section.id} className={classes.quickLink}>
+              <span key={section.id} className={localClasses.quickLink}>
                 {section.title}
               </span>
             ))}
@@ -268,10 +260,10 @@ export default function Docs() {
 
         <Grid container spacing={2.4}>
           <Grid item xs={12} md={3}>
-            <nav className={classes.sidebar} aria-label="Docs sections">
-              <p className={classes.sidebarTitle}>On This Page</p>
+            <nav className={localClasses.sidebar} aria-label="Docs sections">
+              <p className={localClasses.sidebarTitle}>On This Page</p>
               {docsSections.map((section) => (
-                <span key={section.id} className={classes.sidebarLink}>
+                <span key={section.id} className={localClasses.sidebarLink}>
                   {section.title}
                 </span>
               ))}
@@ -280,23 +272,23 @@ export default function Docs() {
 
           <Grid item xs={12} md={9}>
             {docsSections.map((section) => (
-              <article key={section.id} id={section.id} className={classes.section}>
+              <article key={section.id} id={section.id} className={localClasses.section}>
                 <Grid container>
                   <Grid item xs={12} md={5}>
-                    <div className={classes.sectionImageWrap}>
+                    <div className={localClasses.sectionImageWrap}>
                       <img
                         src={section.image}
                         alt={section.imageAlt}
-                        className={classes.sectionImage}
+                        className={localClasses.sectionImage}
                         loading="lazy"
                       />
                     </div>
                   </Grid>
                   <Grid item xs={12} md={7}>
-                    <div className={classes.sectionBody}>
-                      <h2 className={classes.sectionTitle}>{section.title}</h2>
-                      <p className={classes.sectionSummary}>{section.summary}</p>
-                      <ul className={classes.points}>
+                    <div className={localClasses.sectionBody}>
+                      <h2 className={localClasses.sectionTitle}>{section.title}</h2>
+                      <p className={localClasses.sectionSummary}>{section.summary}</p>
+                      <ul className={localClasses.points}>
                         {section.points.map((point) => (
                           <li key={point}>{point}</li>
                         ))}

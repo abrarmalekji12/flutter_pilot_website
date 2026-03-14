@@ -3,15 +3,15 @@ import {
   bodyTextBolderColor,
   bodyTextColor,
   bulletPointColor,
-  buttonColor,
   cardBackgroudColor,
   codeBackgroundColor,
   codeTextColor,
-  pageBackgroudColor,
-  productShowCaseBackground,
   productShowCaseBoxShadow,
 } from "./colors";
 
+
+// Shared padding for all feature glass cards — change once, applies everywhere.
+const FEATURE_CARD_PADDING = { base: [5, 5], md: [4, 3], sm: [3, 2.5] };
 
 export const commonStyles = makeStyles((theme) => ({
   root: {
@@ -28,14 +28,32 @@ export const commonStyles = makeStyles((theme) => ({
     position: "relative",
     zIndex: 1,
     paddingTop: "40px",
+    paddingBottom: theme.spacing(8),
     [theme.breakpoints.down("sm")]: {
       paddingTop: "32px",
+      paddingBottom: theme.spacing(4),
+    },
+  },
+  responsiveContainer: {
+    width: "90%",
+    maxWidth: "1500px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: theme.spacing(6),
+    [theme.breakpoints.down("md")]: {
+      width: "94%",
+      marginTop: theme.spacing(4),
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "96%",
+      marginTop: theme.spacing(3),
     },
   },
   productShowCaseContainer: {
     position: "relative",
     overflow: "hidden",
-    padding: theme.spacing(3, 5, 7, 5),
+    // Balanced top/bottom — bottom reduced from 7→5 so it doesn't dwarf the video.
+    padding: theme.spacing(3.5, 5, 5, 5),
     background: "rgba(255, 255, 255, 0.15)",
     backdropFilter: "blur(16px) saturate(180%)",
     WebkitBackdropFilter: "blur(16px) saturate(180%)",
@@ -44,9 +62,14 @@ export const commonStyles = makeStyles((theme) => ({
     borderRadius: "28px",
     border: "1px solid rgba(255, 255, 255, 0.4)",
     marginTop: theme.spacing(3),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(3, 3, 4.5, 3),
+    },
     [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(3, 2.25, 5, 2.25),
+      padding: theme.spacing(2.5, 2.25, 3.5, 2.25),
       borderRadius: "20px",
+      backdropFilter: "blur(8px) saturate(140%)", // Lighter blur for mobile GPUs
+      WebkitBackdropFilter: "blur(8px) saturate(140%)",
     },
   },
 
@@ -66,12 +89,11 @@ export const commonStyles = makeStyles((theme) => ({
 
   // Content wrapper
   contentWrapper: {
-    // position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     zIndex: 2,
-    minHeight: "360px",
+    // No minHeight — let content determine height naturally.
   },
   // Text container
   textContainer: {
@@ -95,11 +117,12 @@ export const commonStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
-    margin: "14px 0 22px",
+    // Tighter bottom gap — less dead air between text block and video.
+    margin: "10px 0 16px",
     maxWidth: "660px",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
-      margin: "10px 0 18px",
+      margin: "8px 0 14px",
       maxWidth: "100%",
     },
   },
@@ -141,31 +164,27 @@ export const commonStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   imageBackground: {
-    // position: "absolute",
-    // right: "0%", // Position slightly to the right
-    // top: "35%",
-    // transform: "translateY(-50%)",
-    width: "92%",
-    maxWidth: "1120px",
-    height: "50%",
+    // Wider frame so the video breathes across the card.
+    width: "96%",
+    maxWidth: "1200px",
     zIndex: 1,
     borderRadius: "16px",
     boxShadow: "0 18px 44px rgba(15, 23, 42, 0.4)",
     border: "1px solid rgba(148, 163, 184, 0.25)",
     transition: "all 0.7s ease",
     "&:hover": {
-      transform: "translateY(-1.5%) scale(1.015)",
+      transform: "translateY(-1.5%) scale(1.012)",
     },
     [theme.breakpoints.down("sm")]: {
       position: "relative",
-      width: "96%",
+      width: "100%",
       right: "auto",
       top: "auto",
       transform: "none",
       margin: "0 auto",
-      marginBottom: theme.spacing(4),
+      marginBottom: theme.spacing(3),
       "&:hover": {
-        transform: "scale(1.02)",
+        transform: "scale(1.015)",
       },
     },
   },
@@ -222,6 +241,8 @@ export const commonStyles = makeStyles((theme) => ({
       margin: "16px auto 0",
       top: "32px",
       borderRadius: "16px",
+      backdropFilter: "blur(4px) saturate(150%)", // Reduced for vertical scroll perf
+      WebkitBackdropFilter: "blur(4px) saturate(150%)",
     },
   },
   appBarSpacer: {
@@ -247,7 +268,7 @@ export const commonStyles = makeStyles((theme) => ({
     height: "42px",
     borderRadius: "11px",
     border: "1px solid rgba(99, 102, 241, 0.24)",
-    background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+    background: "#ffffff",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
@@ -277,8 +298,8 @@ export const commonStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    height: "28px",
-    width: "28px",
+    height: "32px",
+    width: "32px",
     objectFit: "contain",
     borderRadius: "6px",
     transition: "transform 0.3s ease",
@@ -545,12 +566,12 @@ export const commonStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    padding: theme.spacing(6),
+    // No extra padding here — spacing is owned by featureGlassCard via FEATURE_CARD_PADDING.
+    padding: 0,
     margin: 0,
     zIndex: 2,
     [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(4, 2),
-      textAlign: "center", // Keep centered on mobile for better fit
+      textAlign: "center",
     },
     "& ul": {
       padding: 0,
@@ -615,6 +636,54 @@ export const commonStyles = makeStyles((theme) => ({
     letterSpacing: "0.8px",
     marginBottom: theme.spacing(2),
   },
+  // ── Tooling grid card (used inside featureGrid layout) ──
+  toolingCard: {
+    display: "flex",
+    flexDirection: "row",      // horizontal: icon | content
+    alignItems: "flex-start",
+    gap: theme.spacing(2),
+    // Perfectly even padding on all four sides.
+    padding: theme.spacing(2.8),
+    borderRadius: "20px",
+    background: "rgba(255, 255, 255, 0.72)",
+    backdropFilter: "blur(14px)",
+    WebkitBackdropFilter: "blur(14px)",
+    border: "1px solid rgba(255, 255, 255, 0.85)",
+    boxShadow: "0 2px 12px rgba(15, 23, 42, 0.05)",
+    height: "100%",
+    boxSizing: "border-box",
+    transition: "transform 0.22s ease, box-shadow 0.22s ease", // Optimized transition
+    [theme.breakpoints.down("sm")]: {
+      backdropFilter: "none", // Disable on small grid items for scroll speed
+      WebkitBackdropFilter: "none",
+      background: "rgba(255, 255, 255, 0.9)", 
+    },
+    "&:hover": {
+      background: "rgba(255, 255, 255, 0.9)",
+      transform: "translateY(-4px)",
+      boxShadow: "0 12px 32px rgba(37, 99, 235, 0.13)",
+      borderColor: "rgba(37, 99, 235, 0.22)",
+    },
+  },
+  toolingCardIcon: {
+    width: "44px",
+    height: "44px",
+    borderRadius: "13px",
+    background: "linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    color: "#2563eb",
+    boxShadow: "0 2px 8px rgba(37, 99, 235, 0.14)",
+  },
+  toolingCardContent: {
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(0.6),
+    flex: 1,
+    minWidth: 0,
+  },
   featureGlassCard: {
     position: "relative",
     overflow: "hidden",
@@ -624,19 +693,21 @@ export const commonStyles = makeStyles((theme) => ({
     border: "1px solid rgba(255, 255, 255, 0.4)",
     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.08)",
     borderRadius: "30px",
-    padding: theme.spacing(6, 5),
+    padding: theme.spacing(...FEATURE_CARD_PADDING.base),
     [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(5, 3),
+      padding: theme.spacing(...FEATURE_CARD_PADDING.md),
     },
     [theme.breakpoints.down("sm")]: {
       borderRadius: "22px",
-      padding: theme.spacing(4, 2),
+      padding: theme.spacing(...FEATURE_CARD_PADDING.sm),
+      backdropFilter: "blur(10px) saturate(150%)", // Performance-friendly blur
+      WebkitBackdropFilter: "blur(10px) saturate(150%)",
     },
   },
   browserFrame: {
     width: "100%",
     borderRadius: "16px",
-    background: "#fff",
+    background: "transparent",
     border: "1px solid rgba(148, 163, 184, 0.25)",
     boxShadow: "0 28px 60px rgba(15, 23, 42, 0.12)",
     overflow: "hidden",
@@ -854,7 +925,11 @@ export const templateCardStyles = makeStyles((theme) => ({
     alignItems: "stretch",
     height: "100%",
     padding: theme.spacing(2.8),
-    gap: theme.spacing(2.2), // increased gap for even spacing
+    gap: theme.spacing(2.2),
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(1.8),
+      gap: theme.spacing(1.5),
+    },
   },
   title: {
     fontWeight: 700,
@@ -867,17 +942,24 @@ export const templateCardStyles = makeStyles((theme) => ({
     WebkitLineClamp: 2,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+    },
   },
   description: {
     fontSize: "0.88rem",
     color: bodyTextColor,
     textAlign: "left",
-    lineHeight: 1.65,
+    lineHeight: 1.6,
     marginBottom: 0,
     display: "-webkit-box",
-    WebkitLineClamp: 3, // Changed from no line limit to 3 lines
+    WebkitLineClamp: 3,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.82rem",
+      lineHeight: 1.5,
+    },
   },
   ctaButton: {
     marginTop: "auto",
@@ -986,22 +1068,30 @@ export const footerStyles = makeStyles((theme) => ({
     gap: theme.spacing(1.25),
   },
   logo: {
-    height: "38px",
+    height: "40px",
+    width: "40px",
     objectFit: "contain",
     cursor: "pointer",
-    borderRadius: "8px",
   },
   brandText: {
-    color: "#f8fafc",
-    fontWeight: 800,
-    fontSize: "1.4rem",
-    letterSpacing: "-0.2px",
+    display: "flex",
+    alignItems: "center",
     cursor: "pointer",
     margin: 0,
+    fontSize: "1.4rem",
+    letterSpacing: "-0.2px",
+    fontWeight: 800,
+  },
+  brandPrimary: {
+    color: "#f8fafc",
+  },
+  brandAccent: {
+    color: "#3b82f6",
+    marginLeft: "1px",
   },
   subtitle: {
-    margin: theme.spacing(1, 0, 0),
-    color: "#94a3b8",
+    margin: theme.spacing(1.5, 0, 0),
+    color: "#cbd5e1", // Improved contrast from Slate 400 to 300
     fontSize: "0.95rem",
     lineHeight: 1.6,
   },
@@ -1018,18 +1108,18 @@ export const footerStyles = makeStyles((theme) => ({
   },
   footerLink: {
     display: "block",
-    marginBottom: theme.spacing(1),
-    color: "#94a3b8",
+    marginBottom: theme.spacing(1.2),
+    color: "#cbd5e1", // Improved contrast from Slate 400 to 300
     fontSize: "0.93rem",
     textDecoration: "none",
     transition: "all 0.2s ease",
     "&:hover": {
-      color: "#f8fafc",
+      color: "#3b82f6", // Blue on hover for better interaction feedback
       transform: "translateX(4px)",
     },
   },
   description: {
-    color: "#94a3b8",
+    color: "#cbd5e1", // Improved contrast from Slate 400 to 300
     lineHeight: 1.75,
     fontSize: "0.93rem",
   },
@@ -1039,7 +1129,7 @@ export const footerStyles = makeStyles((theme) => ({
   },
   copyright: {
     textAlign: "center",
-    color: "#64748b",
+    color: "#94a3b8", // Improved contrast from Slate 500 to 400
     fontSize: "0.88rem",
     margin: 0,
   },

@@ -6,7 +6,6 @@ import {
   Link,
   Divider,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 
 import { footerStyles } from "../styles/commonStyles";
@@ -25,20 +24,19 @@ const Footer = () => {
       <div className={footerClasses.shell}>
         <div className={footerClasses.topRow}>
           <div>
-            <div className={footerClasses.brandWrap}>
+            <div className={footerClasses.brandWrap} onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
               <img
-                src="flutterpilot_logo_round.png"
+                src="flutterpilot_logo_round.svg"
                 className={footerClasses.logo}
-                alt="FlutterPilot Logo"
+                alt="FlutterPilot"
                 loading="lazy"
-                onClick={() => navigate("/")}
               />
               <Typography
-                variant="h6"
+                component="div"
                 className={footerClasses.brandText}
-                onClick={() => navigate("/")}
               >
-                FlutterPilot
+                <span className={footerClasses.brandPrimary}>Flutter</span>
+                <span className={footerClasses.brandAccent}>Pilot</span>
               </Typography>
             </div>
             <p className={footerClasses.subtitle}>AI-first Flutter builder for modern teams.</p>

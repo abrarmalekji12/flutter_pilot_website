@@ -1,21 +1,15 @@
 {
   "short_name": "FlutterPilot",
   "name": "FlutterPilot – AI Flutter App Builder",
-  "description": "AI-powered low-code Flutter app builder. The best FlutterFlow alternative. Build apps from prompts, drag-and-drop UI, real-time preview, and export production-ready Flutter code.",
+  "description": "AI-powered low-code Flutter app builder. Build apps from prompts, drag-and-drop UI, real-time preview, and export production-ready Flutter code.",
   "lang": "en",
   "dir": "ltr",
   "categories": ["developer tools", "productivity", "utilities"],
   "icons": [
     {
-      "src": "flutterpilot_logo_round.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "flutterpilot_logo_round.png",
-      "sizes": "512x512",
-      "type": "image/png",
+      "src": "flutterpilot_logo_round.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ],
@@ -31,14 +25,17 @@
       "short_name": "Editor",
       "description": "Launch the FlutterPilot online Flutter UI editor",
       "url": "https://flutterpilot-studio.web.app",
-      "icons": [{"src": "flutterpilot_logo_round.png", "sizes": "96x96"}]
+      "icons": [{"src": "flutterpilot_logo_round.svg", "sizes": "any"}]
     },
     {
       "name": "Browse Templates",
       "short_name": "Templates",
       "description": "Browse ready-made Flutter app templates",
       "url": "/#/template",
-      "icons": [{"src": "flutterpilot_logo_round.png", "sizes": "96x96"}]
+      "icons": [{"src": "flutterpilot_logo_round.svg", "sizes": "any"}]
     }
   ]
+
+
+
 }
