@@ -1,53 +1,42 @@
 import React from "react";
-import { Card, CardContent, Box, Skeleton } from "@mui/material";
-import { templateCardStyles } from "../styles/commonStyles";
+import { Skeleton, Box } from "@mui/material";
 
 const TemplateCardSkeleton = () => {
-    const templateClasses = templateCardStyles();
   return (
-    <Card
-        className={templateClasses.root}
+    <Box
       sx={{
-        // width:"50%",
-        // width: 300,
-        // borderRadius: "16px",
-        // background: "linear-gradient(135deg, #1b1f3a 0%, #2a2d55 100%)",
-        // color: "#fff",
-        // boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+        borderRadius: "12px",
+        background: "#fff",
+        padding: "24px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "18px", // match theme.spacing(2.2) roughly
+        height: "100%",
+        width: "100%", // ensure it fills the grid
+        boxSizing: "border-box",
       }}
     >
-      <CardContent className={templateClasses.content}>
-        {/* Title */}
-        <Skeleton
-          variant="text"
-          width="70%"
-          height={30}
-          sx={{ bgcolor: "rgba(255,255,255,0.2)", mb: 2 }}
-        />
+      {/* Title */}
+      <Skeleton variant="text" width="55%" height={26} sx={{ borderRadius: "8px" }} />
 
-        {/* Image placeholder */}
-        <Box display="flex" justifyContent="center" mb={2}>
-          <Skeleton
-            variant="rectangular"
-            width={220}
-            height={140}
-            sx={{ borderRadius: "12px", bgcolor: "rgba(255,255,255,0.15)" }}
-          />
-        </Box>
+      {/* Image stack placeholder */}
+      <Skeleton
+        variant="rectangular"
+        width="100%"
+        height={260}
+        sx={{ borderRadius: "12px" }}
+      />
 
-        {/* Button */}
-        <Skeleton
-          variant="rectangular"
-          width={140}
-          height={40}
-          sx={{
-            mx: "auto",
-            borderRadius: "8px",
-            bgcolor: "rgba(255,255,255,0.25)",
-          }}
-        />
-      </CardContent>
-    </Card>
+      {/* Description lines */}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <Skeleton variant="text" width="100%" height={16} sx={{ borderRadius: "6px" }} />
+        <Skeleton variant="text" width="85%" height={16} sx={{ borderRadius: "6px" }} />
+        <Skeleton variant="text" width="70%" height={16} sx={{ borderRadius: "6px" }} />
+      </Box>
+
+      {/* Button */}
+      <Skeleton variant="rectangular" width={140} height={38} sx={{ borderRadius: "999px", mt: "auto" }} />
+    </Box>
   );
 };
 

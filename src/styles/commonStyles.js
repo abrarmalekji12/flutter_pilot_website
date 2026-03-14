@@ -1,42 +1,64 @@
 import { makeStyles } from "@mui/styles";
-import { activeButtonBoxShadow, activeButtonColor, bodyTextBolderColor, bodyTextColor, bulletPointColor, buttonColor, cardBackgroudColor, codeBackgroundColor, codeTextColor, floatingShapeBackgroundColor, pageBackgroudColor, productShowCaseBackground, productShowCaseBoxShadow, templateTitleColor, textShadowColor, titleColor, titleHoverShadow } from "./colors";
+import {
+  bodyTextBolderColor,
+  bodyTextColor,
+  bulletPointColor,
+  buttonColor,
+  cardBackgroudColor,
+  codeBackgroundColor,
+  codeTextColor,
+  pageBackgroudColor,
+  productShowCaseBackground,
+  productShowCaseBoxShadow,
+} from "./colors";
 
 
 export const commonStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),     // ✅ reduce white gap at top
-    marginBottom: theme.spacing(8),
-    fontFamily: "'Inter', sans-serif",
+    marginTop: 0,
+    marginBottom: 0,
+    fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
     position: "relative",
     padding: 0,
-    background: "transparent",      // ✅ no solid white above
-    "&:hover": {
-      transform: "translateY(-2%) scale(1.01)",
-    }
+    background: "transparent",
   },
   mainContainer: {
-    background: pageBackgroudColor
+    background: "transparent",
+    minHeight: "100vh",
+    position: "relative",
+    zIndex: 1,
+    paddingTop: "40px",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: "32px",
+    },
   },
   productShowCaseContainer: {
     position: "relative",
     overflow: "hidden",
-    // borderRadius: "24px",
-    padding: theme.spacing(2, 4, 8, 4),
-    background: productShowCaseBackground,
-    boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
-    color: theme.palette.common.white,
-    // margin: theme.spacing(4, 0),
+    padding: theme.spacing(3, 5, 7, 5),
+    background: "rgba(255, 255, 255, 0.15)",
+    backdropFilter: "blur(16px) saturate(180%)",
+    WebkitBackdropFilter: "blur(16px) saturate(180%)",
+    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.08)",
+    color: "#0f172a",
+    borderRadius: "28px",
+    border: "1px solid rgba(255, 255, 255, 0.4)",
+    marginTop: theme.spacing(3),
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(3, 2.25, 5, 2.25),
+      borderRadius: "20px",
+    },
   },
 
   // Glowing radial background
   bgGlow: {
     content: '""',
     position: "absolute",
-    top: "-20%",
-    left: "-20%",
-    width: "160%",
-    height: "160%",
-    background: "radial-gradient(circle at center, rgba(91, 134, 229, 0.08) 0%, transparent 70%)",
+    top: "-18%",
+    left: "-18%",
+    width: "150%",
+    height: "150%",
+    background: "radial-gradient(circle at center, rgba(91, 134, 229, 0.14) 0%, transparent 68%)",
     animation: "$pulse 8s ease-in-out infinite",
     zIndex: 0,
   },
@@ -49,10 +71,7 @@ export const commonStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     zIndex: 2,
-    minHeight: "400px", // Ensure enough height for the background image
-    // display:"flex",
-    // flexDirection:"column",
-    // alignItems:"flex-end"
+    minHeight: "360px",
   },
   // Text container
   textContainer: {
@@ -61,12 +80,57 @@ export const commonStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
-    margin: "40px 0px",
-    maxWidth: "55%",
-    fontFamily: "'Inter', sans-serif",/* clean, modern font */
-    [theme.breakpoints.down("xs")]: {
+    margin: "28px 0 36px",
+    maxWidth: "720px",
+    width: "100%",
+    fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+    [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
       textAlign: "center",
+    },
+  },
+  heroTextContainer: {
+    display: "flex",
+    position: "relative",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    margin: "14px 0 22px",
+    maxWidth: "660px",
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      margin: "10px 0 18px",
+      maxWidth: "100%",
+    },
+  },
+  heroTitle: {
+    fontWeight: 800,
+    fontSize: "2.15rem",
+    lineHeight: 1.12,
+    letterSpacing: "-0.35px",
+    marginBottom: theme.spacing(1),
+    background: "linear-gradient(135deg, #0f172a 0%, #2563eb 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "0 2px 14px rgba(37, 99, 235, 0.15)",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.85rem",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+    },
+  },
+  heroSubtitle: {
+    fontSize: "1.05rem",
+    fontWeight: 400,
+    color: "#334155",
+    lineHeight: 1.65,
+    letterSpacing: "0.1px",
+    marginBottom: theme.spacing(2.2),
+    maxWidth: "480px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem",
+      marginBottom: theme.spacing(2),
     },
   },
 
@@ -74,39 +138,27 @@ export const commonStyles = makeStyles((theme) => ({
 
   centerImage: {
     display: "flex",
-    justifyContent: "center"
-    // [theme.breakpoints.down("sm")]: {
-    //     opacity:1
-    // },
-    // opacity:0.1,
-    // maxHeight:"500px"
-    //  [theme.breakpoints.down("md")]: {
-    //   opacity:0.6
-    // }
-  }
-  ,
+    justifyContent: "center",
+  },
   imageBackground: {
     // position: "absolute",
     // right: "0%", // Position slightly to the right
     // top: "35%",
     // transform: "translateY(-50%)",
-    width: "80%", // Make image large enough
+    width: "92%",
+    maxWidth: "1120px",
     height: "50%",
-    // maxHeight: "50%",
     zIndex: 1,
-    borderRadius: "12px",
-    boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
+    borderRadius: "16px",
+    boxShadow: "0 18px 44px rgba(15, 23, 42, 0.4)",
+    border: "1px solid rgba(148, 163, 184, 0.25)",
     transition: "all 0.7s ease",
     "&:hover": {
-      transform: "translateY(-2%) scale(1.02)",
+      transform: "translateY(-1.5%) scale(1.015)",
     },
-    // [theme.breakpoints.down("md")]: {
-    //   width: "70%",
-    //   right: "-5%",
-    // },
     [theme.breakpoints.down("sm")]: {
       position: "relative",
-      width: "90%",
+      width: "96%",
       right: "auto",
       top: "auto",
       transform: "none",
@@ -151,124 +203,223 @@ export const commonStyles = makeStyles((theme) => ({
     position: "relative",
   },
   appBar: {
-    background: "rgba(255, 255, 255, 0.7)",
-    backdropFilter: "blur(12px)", // ✅ Glassmorphism effect
-    boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-    borderBottom: "1px solid rgba(255,255,255,0.3)",
-    transition: "all 0.3s ease-in-out",
+    background: "rgba(255, 255, 255, 0.12)",
+    backdropFilter: "blur(6px) saturate(180%)",
+    WebkitBackdropFilter: "blur(6px) saturate(180%)",
+    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.08)",
+    border: "1px solid rgba(255, 255, 255, 0.4)",
+    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+    borderRadius: "20px",
+    width: "90%",
+    maxWidth: "1500px",
+    margin: "24px auto 0",
+    left: 0,
+    right: 0,
+    top: "40px",
+    zIndex: 1100,
+    [theme.breakpoints.down("sm")]: {
+      width: "94%",
+      margin: "16px auto 0",
+      top: "32px",
+      borderRadius: "16px",
+    },
+  },
+  appBarSpacer: {
+    height: "0px",
+    [theme.breakpoints.down("sm")]: {
+      height: "0px",
+    },
+  },
+  brandLockup: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: theme.spacing(0.85),
+    padding: theme.spacing(0.15, 0),
+    cursor: "pointer",
+    marginRight: "auto",
+    transition: "all 0.22s ease",
+    "&:hover": {
+      opacity: 0.95,
+    },
+  },
+  logoFrame: {
+    width: "42px",
+    height: "42px",
+    borderRadius: "11px",
+    border: "1px solid rgba(99, 102, 241, 0.24)",
+    background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 5px 14px rgba(37, 99, 235, 0.14)",
   },
   appBarTitle: {
-    background: titleColor,
-    flexGrow: 1,
+    display: "inline-flex",
+    alignItems: "baseline",
     fontWeight: 800,
-    marginLeft: theme.spacing(2),
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    letterSpacing: "-0.5px",
-    cursor: "pointer",
-    transition: "transform 0.3s ease",
-    "&:hover": {
-      transform: "translateY(-2px) scale(1.05)",
-      textShadow: "0px 4px 12px rgba(74,21,75,0.4)",
+    fontSize: "1.42rem",
+    margin: 0,
+    letterSpacing: "-0.24px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.2rem",
+    },
+  },
+  brandPrimary: {
+    color: "#0f172a",
+    fontWeight: 800,
+  },
+  brandAccent: {
+    color: "#2563eb",
+    fontWeight: 800,
+    marginLeft: "1px",
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 0,
     },
   },
   logo: {
-    height: "45px",
+    height: "28px",
+    width: "28px",
     objectFit: "contain",
-    cursor: "pointer",
+    borderRadius: "6px",
     transition: "transform 0.3s ease",
-    "&:hover": {
-      transform: "scale(1.1) rotate(-3deg)",
-    },
   },
   appBarButton: {
-    marginLeft: theme.spacing(2),
-    fontSize: "14px",
+    marginLeft: theme.spacing(1),
+    fontSize: "0.95rem",
     fontWeight: 600,
-    color: buttonColor,
-    padding: theme.spacing(1.2, 2.2),
+    color: "#334155",
+    padding: theme.spacing(1, 1.8),
     borderRadius: "12px",
     position: "relative",
-    overflow: "hidden",
     zIndex: 1,
-    transition: "all 0.3s ease",
-    [theme.breakpoints.down("sm")]: {
+    transition: "all 0.2s ease",
+    textTransform: "none",
+    [theme.breakpoints.down("md")]: {
       display: "none",
     },
     "&.active": {
-      background: cardBackgroudColor,
-      color: activeButtonColor,
-      boxShadow: activeButtonBoxShadow,
+      color: "#2563eb",
+      background: "rgba(37, 99, 235, 0.06)",
     },
+    "&.active:hover": {
+      background: "rgba(37, 99, 235, 0.12)",
+    },
+    "&:not(.active):hover": {
+      background: "rgba(241, 245, 249, 0.8)",
+      color: "#0f172a",
+      transform: "translateY(-1px)",
+    },
+  },
+  navActionBtn: {
+    marginLeft: theme.spacing(2),
+    padding: "10px 24px",
+    borderRadius: "14px",
+    fontWeight: 700,
+    fontSize: "0.88rem",
+    textTransform: "none",
+    color: "#fff",
+    background: "linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)",
+    boxShadow: "0 10px 20px rgba(37, 99, 235, 0.2)",
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
     "&:hover": {
-      background: cardBackgroudColor,
-      color: activeButtonColor,
+      background: "linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%)",
       transform: "translateY(-2px)",
-      boxShadow: activeButtonBoxShadow,
+      boxShadow: "0 15px 25px rgba(37, 99, 235, 0.25)",
     },
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  appBarActions: {
+    display: "flex",
+    alignItems: "center",
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: "#4A154B",
+    color: "#1e3a8a",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
-    transition: "transform 0.3s ease",
+    transition: "transform 0.25s ease",
     "&:hover": {
-      transform: "rotate(90deg) scale(1.2)",
+      transform: "scale(1.05)",
     },
   },
   // Button container
   buttonsContainer: {
     display: "flex",
-    gap: theme.spacing(2),
-    [theme.breakpoints.down("xs")]: {
+    gap: theme.spacing(1.1),
+    width: "100%",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
+      width: "100%",
     },
   },
 
   // Button styles
   button: {
-    padding: theme.spacing(1.75, 3),
-    borderRadius: "12px",
-    fontWeight: 600,
-    fontSize: "0.95rem",
-    letterSpacing: "0.5px",
-    transition: "all 0.3s ease",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
+    padding: theme.spacing(1.2, 1.7),
+    borderRadius: "13px",
+    fontWeight: 700,
+    fontSize: "0.84rem",
+    letterSpacing: "0.2px",
+    transition: "all 0.25s ease",
+    boxShadow: "0 10px 22px rgba(2, 6, 23, 0.22)",
     textTransform: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    [theme.breakpoints.down("xs")]: {
+    border: "1px solid transparent",
+    minWidth: "140px",
+    "& .MuiButton-startIcon": {
+      marginRight: "6px",
+      marginLeft: 0,
+    },
+    "& .MuiSvgIcon-root": {
+      fontSize: "1.1rem",
+    },
+    [theme.breakpoints.down("sm")]: {
       width: "100%",
+      minWidth: "auto",
     },
   },
   windowsBtn: {
-    backgroundColor: theme.palette.common.white,
-    color: "#2c44ab",
+    background: "linear-gradient(180deg, #ffffff 0%, #eff6ff 100%)",
+    color: "#1e40af",
+    borderColor: "rgba(59, 130, 246, 0.35)",
     "&:hover": {
-      backgroundColor: "#f2f2f2",
-      transform: "translateY(-4px)",
-      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
+      background: "linear-gradient(180deg, #ffffff 0%, #dbeafe 100%)",
+      transform: "translateY(-2px)",
+      boxShadow: "0 12px 24px rgba(30, 64, 175, 0.22)",
+    },
+  },
+  downloadBtn: {
+    minWidth: "135px",
+    [theme.breakpoints.down("sm")]: {
+      minWidth: "auto",
+      width: "100%",
     },
   },
   glowBtn: {
-    background: "linear-gradient(135deg, #5B86E5 0%, #36D1DC 100%)",
+    background: "linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)",
     color: theme.palette.common.white,
+    borderColor: "rgba(191, 219, 254, 0.3)",
     "&:hover": {
-      background: "linear-gradient(135deg, #4a75d4 0%, #25c0cb 100%)",
-      transform: "translateY(-4px)",
-      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
+      background: "linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%)",
+      transform: "translateY(-2px)",
+      boxShadow: "0 12px 24px rgba(37, 99, 235, 0.34)",
     },
   },
   playStoreBtn: {
-    background: "linear-gradient(135deg, #0ba360 0%, #3cba92 100%)",
+    background: "linear-gradient(135deg, #0f766e 0%, #0ea5a2 100%)",
     color: theme.palette.common.white,
+    borderColor: "rgba(153, 246, 228, 0.28)",
     "&:hover": {
-      background: "linear-gradient(135deg, #098b52 0%, #31a07d 100%)",
-      transform: "translateY(-4px)",
-      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.25)",
+      background: "linear-gradient(135deg, #0f766e 0%, #0d9488 100%)",
+      transform: "translateY(-2px)",
+      boxShadow: "0 12px 24px rgba(13, 148, 136, 0.32)",
     },
   },
 
@@ -277,40 +428,42 @@ export const commonStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   drawer: {
-    width: 240,
+    width: 260,
     background: cardBackgroudColor,
-    color: buttonColor,
+    color: bodyTextBolderColor,
+    borderLeft: "1px solid rgba(30, 64, 175, 0.08)",
   },
   drawerList: {
     padding: theme.spacing(2),
-    "& .MuiListItem-root": {
+    "& .MuiListItemButton-root": {
       borderRadius: "12px",
       marginBottom: "10px",
-      transition: "all 0.3s ease",
+      transition: "all 0.25s ease",
       "&.active": {
         background: cardBackgroudColor,
-        color: activeButtonColor,
-        boxShadow: activeButtonBoxShadow,
+        color: bodyTextBolderColor,
+        boxShadow: "0 8px 18px rgba(30, 64, 175, 0.18)",
       },
       "&:hover": {
         background: cardBackgroudColor,
-        color: activeButtonColor,
-        transform: "translateY(-2px)",
-        boxShadow: activeButtonBoxShadow,
+        color: bodyTextBolderColor,
+        transform: "translateY(-1px)",
+        boxShadow: "0 8px 18px rgba(30, 64, 175, 0.14)",
       }
     },
   },
   card: {
     position: "relative",
-    borderRadius: "20px",
+    borderRadius: "24px",
     overflow: "hidden",
     boxShadow: productShowCaseBoxShadow,
     background: cardBackgroudColor,
     color: "#fff",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    border: "1px solid rgba(148, 163, 184, 0.2)",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease",
     "&:hover": {
-      transform: "translateY(-6px)",
-      boxShadow: productShowCaseBoxShadow,
+      transform: "translateY(-4px)",
+      boxShadow: "0 16px 28px rgba(30, 64, 175, 0.14)",
     },
 
     // Glowing radial background
@@ -375,70 +528,134 @@ export const commonStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: theme.spacing(3),
+    padding: theme.spacing(3.25),
     zIndex: 2,
   },
   featureGif: {
     maxWidth: "100%",
-    maxHeight: "320px",
+    maxHeight: "340px",
     objectFit: "contain",
-    borderRadius: "12px",
+    borderRadius: "16px",
     transition: "transform 0.4s ease",
     "&:hover": {
-      transform: "scale(1.05)",
+      transform: "scale(1.02)",
     },
   },
   featureDescription: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    padding: theme.spacing(5),   // ✅ reduced so title not cut
+    padding: theme.spacing(6),
     margin: 0,
     zIndex: 2,
-    [theme.breakpoints.down("xs")]: {
-      textAlign: "center",
-      padding: theme.spacing(3),
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(4, 2),
+      textAlign: "center", // Keep centered on mobile for better fit
+    },
+    "& ul": {
+      padding: 0,
+      margin: 0,
+      textAlign: "left",
+      display: "inline-block",
+      alignSelf: "center", // This centers the list block while keeping title/badge left
+      [theme.breakpoints.down("sm")]: {
+        alignSelf: "stretch", // Revert to full width on mobile
+      },
     },
     "& li": {
       listStyleType: "none",
-      marginBottom: "1rem",
+      marginBottom: "1.2rem",
       fontSize: "1.05rem",
       fontWeight: 500,
       color: bodyTextColor,
       lineHeight: 1.6,
       position: "relative",
-      paddingLeft: "1.8rem",
-      transition: "all 0.3s ease",
+      paddingLeft: "2.4rem",
+      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
       "&:before": {
-        content: '"✔"',
+        content: '"✔"', 
         position: "absolute",
         left: 0,
-        top: 0,
-        color: bulletPointColor,
+        top: "-1px",
         fontSize: "1.2rem",
+        color: "#2563eb",
         fontWeight: "bold",
-        transition: "transform 0.3s ease",
+        filter: "drop-shadow(0 2px 4px rgba(37, 99, 235, 0.2))",
       },
       "& strong": {
-        color: bodyTextBolderColor,
+        color: "#1e293b",
         fontWeight: 700,
+        display: "block",
+        marginBottom: "2px",
       },
       "& code": {
-        background: codeBackgroundColor,
+        background: "rgba(37, 99, 235, 0.08)",
         padding: "2px 6px",
         borderRadius: "6px",
         fontFamily: "monospace",
-        fontSize: "0.95rem",
-        color: codeTextColor,
+        fontSize: "0.9rem",
+        color: "#2563eb",
       },
       "&:hover": {
-        color: bodyTextBolderColor,
-        transform: "translateX(4px)",
-      },
-      "&:hover:before": {
-        transform: "scale(1.2) rotate(10deg)",
+        transform: "translateX(6px)",
       },
     },
+  },
+  featureBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "6px 14px",
+    borderRadius: "99px",
+    background: "rgba(37, 99, 235, 0.08)",
+    border: "1px solid rgba(37, 99, 235, 0.15)",
+    color: "#1d4ed8",
+    fontSize: "0.85rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.8px",
+    marginBottom: theme.spacing(2),
+  },
+  featureGlassCard: {
+    position: "relative",
+    overflow: "hidden",
+    background: "rgba(255, 255, 255, 0.15)",
+    backdropFilter: "blur(16px) saturate(180%)",
+    WebkitBackdropFilter: "blur(16px) saturate(180%)",
+    border: "1px solid rgba(255, 255, 255, 0.4)",
+    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.08)",
+    borderRadius: "30px",
+    padding: theme.spacing(6, 5),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(5, 3),
+    },
+    [theme.breakpoints.down("sm")]: {
+      borderRadius: "22px",
+      padding: theme.spacing(4, 2),
+    },
+  },
+  browserFrame: {
+    width: "100%",
+    borderRadius: "16px",
+    background: "#fff",
+    border: "1px solid rgba(148, 163, 184, 0.25)",
+    boxShadow: "0 28px 60px rgba(15, 23, 42, 0.12)",
+    overflow: "hidden",
+    position: "relative",
+  },
+  browserToolbar: {
+    height: "36px",
+    background: "#f1f5f9",
+    borderBottom: "1px solid rgba(148, 163, 184, 0.2)",
+    display: "flex",
+    alignItems: "center",
+    padding: "0 14px",
+    gap: "6px",
+  },
+  browserDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "#cbd5e1",
   },
   code: {
     background: codeBackgroundColor,
@@ -450,69 +667,120 @@ export const commonStyles = makeStyles((theme) => ({
   },
   title: {
     fontWeight: 800,
-    fontSize: "3.2rem",
-    lineHeight: 1.1,
-    letterSpacing: "-0.5px",
-    marginBottom: theme.spacing(2),
-    background: "linear-gradient(135deg, #5B86E5 0%, #36D1DC 100%)",
+    fontSize: "2.15rem",
+    lineHeight: 1.12,
+    letterSpacing: "-0.35px",
+    marginBottom: theme.spacing(3),
+    background: "linear-gradient(135deg, #0f172a 0%, #2563eb 100%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    display: "inline-block",
     position: "relative",
     zIndex: 3,
-    textShadow: "0 2px 15px rgba(54, 209, 220, 0.3)",
+    textShadow: "0 2px 14px rgba(37, 99, 235, 0.15)",
     transition: "all 0.3s ease",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.85rem",
+    },
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1rem",
-    },
-    [theme.breakpoints.down("xs")]: {
       fontSize: "1.5rem",
-    },
-    "&:hover": {
-      transform: "translateY(-4px) scale(1.05)",
-      textShadow: "0 0 10px rgba(54, 209, 220, 0.8), 0 0 30px rgba(91, 134, 229, 0.6)",
     }
   },
   titleHover: {
-    transform: "translateY(-4px) scale(1.05)",
-    textShadow: "0 0 10px rgba(54, 209, 220, 0.8), 0 0 30px rgba(91, 134, 229, 0.6)",
+    transform: "translateY(-1px)",
+    textShadow: "0 2px 14px rgba(91, 134, 229, 0.38)",
   },
 
   // Subtitle
   subtitle: {
     fontSize: "1.2rem",
     fontWeight: 400,
-    color: "rgba(255, 255, 255, 0.9)",
-    lineHeight: 1.8,
-    letterSpacing: "0.3px",
-    marginBottom: theme.spacing(5),
-    position: "relative",
-    maxWidth: "90%",
-    "&:after": {
-      content: '""',
-      position: "absolute",
-      width: 0,
-      height: "2px",
-      bottom: "-10px",
-      left: 0,
-      background: "linear-gradient(90deg, #36D1DC 0%, #5B86E5 100%)",
-      transition: "width 0.6s ease",
-    },
-    "$textContainer:hover &:after": {
-      width: "100%",
-    },
-    [theme.breakpoints.down("xs")]: {
+    color: "rgba(248, 250, 252, 0.9)",
+    lineHeight: 1.75,
+    letterSpacing: "0.12px",
+    marginBottom: theme.spacing(4),
+    maxWidth: "880px",
+    [theme.breakpoints.down("sm")]: {
       fontSize: "1rem",
       maxWidth: "100%",
-      // margin: "0 auto",
-      marginBottom: theme.spacing(5),
-      "&:after": {
-        // left: "100%",
-        // transform: "translateX(-50%)",
-      },
-      "$textContainer:hover &:after": {
-        width: "100%",
-      }
+      marginBottom: theme.spacing(4),
+    },
+  },
+  pageBodyContainer: {
+    maxWidth: "920px",
+    margin: theme.spacing(3, "auto", 0),
+    padding: theme.spacing(0, 2, 2),
+    position: "relative",
+    zIndex: 2,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(2),
+      padding: theme.spacing(0, 1, 1),
+    },
+  },
+  contentCard: {
+    background: "rgba(255, 255, 255, 0.96)",
+    borderRadius: "20px",
+    boxShadow: "0 18px 40px rgba(15, 23, 42, 0.08)",
+    padding: theme.spacing(4),
+    color: bodyTextColor,
+    border: "1px solid rgba(148, 163, 184, 0.22)",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2.5),
+      borderRadius: "16px",
+    },
+  },
+  contentSection: {
+    marginBottom: theme.spacing(4),
+    "&:last-child": {
+      marginBottom: 0,
+    },
+  },
+  contentHeading: {
+    margin: 0,
+    marginBottom: theme.spacing(1.5),
+    fontSize: "1.55rem",
+    lineHeight: 1.3,
+    color: "#1e40af",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.25rem",
+    },
+  },
+  contentText: {
+    margin: 0,
+    color: bodyTextColor,
+    lineHeight: 1.75,
+    fontSize: "1rem",
+  },
+  contentList: {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
+  contentListItem: {
+    marginBottom: theme.spacing(1.25),
+    paddingLeft: "1.35rem",
+    position: "relative",
+    lineHeight: 1.65,
+    color: bodyTextColor,
+    "&::before": {
+      content: '"✔"',
+      position: "absolute",
+      left: 0,
+      color: bulletPointColor,
+      fontWeight: 700,
+    },
+  },
+  contentInfoBox: {
+    borderRadius: "12px",
+    background: "rgba(30, 64, 175, 0.07)",
+    border: "1px solid rgba(30, 64, 175, 0.15)",
+    padding: theme.spacing(2),
+  },
+  contentLink: {
+    color: "#1e40af",
+    textDecorationColor: "rgba(30, 64, 175, 0.45)",
+    textUnderlineOffset: "3px",
+    "&:hover": {
+      color: "#1d4ed8",
     },
   },
   hideOnSmall: {
@@ -521,44 +789,48 @@ export const commonStyles = makeStyles((theme) => ({
     },
   },
   taglineBanner: {
-    background: "linear-gradient(90deg, #4A154B 0%, #1B486D 100%)",
-    color: "white",
+    background: "rgba(15, 23, 42, 0.85)",
+    backdropFilter: "blur(4px)",
+    WebkitBackdropFilter: "blur(4px)",
+    color: "rgba(255, 255, 255, 0.95)",
     textAlign: "center",
-    padding: "8px 16px",
-    fontSize: "14px",
-    fontWeight: 600,
-    letterSpacing: "0.5px",
-    textTransform: "uppercase",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-    zIndex: 1200,
-    position: "relative",
+    padding: "10px 16px",
+    fontSize: "13px",
+    fontWeight: 500,
+    letterSpacing: "0.2px",
+    zIndex: 1300,
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
-      padding: "6px 12px",
+      fontSize: "11px",
+      height: "32px",
     }
   }
 }));
 
 export const templateCardStyles = makeStyles((theme) => ({
   root: {
-    borderRadius: "16px",
+    borderRadius: "12px",
     overflow: "hidden",
     position: "relative",
-    // transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    display: "flex",
+    height: "100%",
+    width: "100%",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    // background: "linear-gradient(135deg, #2A2D55 0%, #1B1F3A 100%)",
-    background: "linear-gradient(135deg, rgba(36, 59, 85, 0.9) 0%, rgba(20, 30, 48, 0.9) 100%)",
-    backdropFilter: "blur(10px)",
-    border: "1px solid rgba(255,255,255,0.05)",
-    color: "#fff",
+    background: "#ffffff",
+    border: "none",
+    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+    color: bodyTextBolderColor,
     "&:hover": {
-      transform: "translateY(-8px) scale(1.02)",
-      boxShadow: "0 12px 40px rgba(0, 198, 255, 0.2)"
-    }
-    // "&:hover": {
-    //   transform: "translateY(-10px)",
-    //   boxShadow: "0px 15px 40px rgba(0,0,0,0.4)",
-    // },
+      transform: "translateY(-4px)",
+      boxShadow: "0 20px 48px rgba(15, 23, 42, 0.14)",
+    },
   },
   mediaContainer: {
     display: "flex",
@@ -579,22 +851,66 @@ export const templateCardStyles = makeStyles((theme) => ({
   content: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    padding: theme.spacing(3),
-
+    alignItems: "stretch",
+    height: "100%",
+    padding: theme.spacing(2.8),
+    gap: theme.spacing(2.2), // increased gap for even spacing
   },
   title: {
     fontWeight: 700,
-    fontSize: "1.3rem",
-    background: templateTitleColor,
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    marginBottom: theme.spacing(1.5),
+    fontSize: "1.1rem",
+    lineHeight: 1.35,
+    color: "#0f172a",
+    marginBottom: 0,
+    textAlign: "left",
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
   },
   description: {
-    fontSize: "0.95rem",
-    opacity: 0.9,
-    marginBottom: theme.spacing(2),
+    fontSize: "0.88rem",
+    color: bodyTextColor,
+    textAlign: "left",
+    lineHeight: 1.65,
+    marginBottom: 0,
+    display: "-webkit-box",
+    WebkitLineClamp: 3, // Changed from no line limit to 3 lines
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden",
+  },
+  ctaButton: {
+    marginTop: "auto",
+    alignSelf: "flex-start",
+    minWidth: "150px",
+    padding: "9px 20px",
+    borderRadius: "999px",
+    fontWeight: 700,
+    fontSize: "0.84rem",
+    letterSpacing: "0.2px",
+    textTransform: "none",
+    color: "#fff",
+    border: "none",
+    background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)",
+    boxShadow: "0 8px 18px rgba(37, 99, 235, 0.2)",
+    transition: "all 0.2s ease",
+    "& .MuiButton-endIcon": {
+      marginLeft: "6px",
+      transition: "transform 0.2s ease",
+    },
+    "&:hover": {
+      background: "linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)",
+      boxShadow: "0 12px 24px rgba(30, 64, 175, 0.3)",
+      transform: "translateY(-1px)",
+      "& .MuiButton-endIcon": {
+        transform: "translateX(2px)",
+      },
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      justifyContent: "center",
+      alignSelf: "stretch",
+    },
   },
   button: {
     background: "linear-gradient(90deg, #667eea 0%, #764ba2 100%)",
@@ -611,27 +927,120 @@ export const templateCardStyles = makeStyles((theme) => ({
 
 export const contactUsStyles = makeStyles((theme) => ({
   contentWrapper: {
-    // position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     zIndex: 2,
-    // minHeight: "400px", // Ensure enough height for the background image
   },
-  // Text container
   textContainer: {
     display: "flex",
     position: "relative",
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
-    margin: "10px 0px",
-    // maxWidth:"55%",
-    fontFamily: "'Inter', sans-serif",/* clean, modern font */
-    [theme.breakpoints.down("xs")]: {
+    margin: "10px 0",
+    fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+    [theme.breakpoints.down("sm")]: {
       maxWidth: "100%",
       textAlign: "center",
     },
   },
+}));
 
+export const footerStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: theme.spacing(5),
+    paddingBottom: theme.spacing(4),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(4),
+    },
+  },
+  shell: {
+    width: "90%",
+    maxWidth: "1500px",
+    margin: "0 auto",
+    borderRadius: "28px",
+    border: "1px solid rgba(148, 163, 184, 0.22)",
+    background:
+      "radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.18) 0%, rgba(15, 23, 42, 0) 40%), linear-gradient(160deg, #0f172a 0%, #0b1220 100%)",
+    boxShadow: "0 28px 64px rgba(15, 23, 42, 0.28)",
+    color: "#cbd5e1",
+    padding: theme.spacing(6, 6, 4),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(4, 2.5, 3),
+      width: "94%",
+      borderRadius: "20px",
+    },
+  },
+  topRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: theme.spacing(2),
+    flexWrap: "wrap",
+    marginBottom: theme.spacing(4),
+  },
+  brandWrap: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(1.25),
+  },
+  logo: {
+    height: "38px",
+    objectFit: "contain",
+    cursor: "pointer",
+    borderRadius: "8px",
+  },
+  brandText: {
+    color: "#f8fafc",
+    fontWeight: 800,
+    fontSize: "1.4rem",
+    letterSpacing: "-0.2px",
+    cursor: "pointer",
+    margin: 0,
+  },
+  subtitle: {
+    margin: theme.spacing(1, 0, 0),
+    color: "#94a3b8",
+    fontSize: "0.95rem",
+    lineHeight: 1.6,
+  },
+  gridContainer: {
+    rowGap: theme.spacing(3),
+  },
+  sectionTitle: {
+    color: "#f1f5f9",
+    fontSize: "1rem",
+    fontWeight: 700,
+    letterSpacing: "0.4px",
+    textTransform: "uppercase",
+    marginBottom: theme.spacing(2),
+  },
+  footerLink: {
+    display: "block",
+    marginBottom: theme.spacing(1),
+    color: "#94a3b8",
+    fontSize: "0.93rem",
+    textDecoration: "none",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      color: "#f8fafc",
+      transform: "translateX(4px)",
+    },
+  },
+  description: {
+    color: "#94a3b8",
+    lineHeight: 1.75,
+    fontSize: "0.93rem",
+  },
+  divider: {
+    margin: theme.spacing(4, 0, 2.5),
+    borderColor: "rgba(148, 163, 184, 0.15)",
+  },
+  copyright: {
+    textAlign: "center",
+    color: "#64748b",
+    fontSize: "0.88rem",
+    margin: 0,
+  },
 }));

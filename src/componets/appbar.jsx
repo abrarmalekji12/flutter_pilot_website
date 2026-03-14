@@ -8,111 +8,13 @@ import {
   Drawer,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import { cardBackgroudColor, pageBackgroudColor } from "../styles/colors";
 import { commonStyles } from "../styles/commonStyles";
-import { label } from "framer-motion/client";
 import Footer from "./Footer";
-
-// const useStyles = makeStyles((theme) => ({
-
-//   mainContainer:{
-//     background:pageBackgroudColor
-//   },
-//   appBar: {
-//     background: "rgba(255, 255, 255, 0.7)",
-//     backdropFilter: "blur(12px)", // ✅ Glassmorphism effect
-//     boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-//     borderBottom: "1px solid rgba(255,255,255,0.3)",
-//     transition: "all 0.3s ease-in-out",
-//   },
-//   appBartitle: {
-//     flexGrow: 1,
-//     fontWeight: 800,
-//     marginLeft: theme.spacing(2),
-//     background: pageBackgroudColor,
-//     WebkitBackgroundClip: "text",
-//     WebkitTextFillColor: "transparent",
-//     letterSpacing: "-0.5px",
-//     cursor: "pointer",
-//     transition: "transform 0.3s ease",
-//     "&:hover": {
-//       transform: "translateY(-2px) scale(1.05)",
-//       textShadow: "0px 4px 12px rgba(74,21,75,0.4)",
-//     },
-//   },
-//   logo: {
-//     height: "45px",
-//     objectFit: "contain",
-//     cursor: "pointer",
-//     transition: "transform 0.3s ease",
-//     "&:hover": {
-//       transform: "scale(1.1) rotate(-3deg)",
-//     },
-//   },
-//   button: {
-//     marginLeft: theme.spacing(2),
-//     fontSize: "14px",
-//     fontWeight: 600,
-//     color: "#243064",
-//     padding: theme.spacing(1.2, 2.2),
-//     borderRadius: "12px",
-//     position: "relative",
-//     overflow: "hidden",
-//     zIndex: 1,
-//     transition: "all 0.3s ease",
-//     [theme.breakpoints.down("sm")]: {
-//       display: "none",
-//     },
-//     "&.active": {
-//       background: cardBackgroudColor,
-//       color: "white",
-//       boxShadow: "0 4px 15px rgba(74,21,75,0.4)",
-//     },
-//     "&:hover": {
-//       background: cardBackgroudColor,
-//       color: "white",
-//       transform: "translateY(-2px)",
-//       boxShadow: "0 6px 18px rgba(74,21,75,0.3)",
-//     },
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//     color: "#4A154B",
-//     [theme.breakpoints.up("md")]: {
-//       display: "none",
-//     },
-//     transition: "transform 0.3s ease",
-//     "&:hover": {
-//       transform: "rotate(90deg) scale(1.2)",
-//     },
-//   },
-//   drawer: {
-//     width: 240,
-//     background: cardBackgroudColor,
-//     color: "white",
-//   },
-//   drawerList: {
-//     padding: theme.spacing(2),
-//     "& .MuiListItem-root": {
-//       borderRadius: "12px",
-//       marginBottom: "10px",
-//       transition: "all 0.3s ease",
-//       "&:hover": {
-//         background: "rgba(255,255,255,0.1)",
-//         transform: "translateX(4px)",
-//       },
-//       "&.active": {
-//         background: "linear-gradient(90deg, #4A154B, #1B486D)",
-//         boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-//       },
-//     },
-//   },
-// }));
 
 function CustomAppBar({ children, type }) {
   const classes = commonStyles();
@@ -120,51 +22,77 @@ function CustomAppBar({ children, type }) {
   const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
-    setDrawerOpen(!drawerOpen);
+    setDrawerOpen((value) => !value);
   };
 
   const menuItems = [
     { label: "Home", action: () => navigate("/"), type: "home" },
-    {label: "Template", action: ()=> navigate("/template"), type:"template"},
-    { label: "Blogs", action: () => window.open("https://flutterpilot.medium.com"), type: "blogs" },
-    // { label: "Privacy Policy", action: () => navigate("/privacyPolicy"), type: "privacyPolicy" },
-    { label: "Contact Us", action: () => navigate("/contactUs"), type: "contactUs" },
-    { label: "About Us", action: () => navigate("/aboutUs"), type: "aboutUs" },
+    { label: "Templates", action: () => navigate("/template"), type: "template" },
+    { label: "Docs", action: () => navigate("/docs"), type: "docs" },
+    { label: "Blogs", action: () => window.open("https://flutterpilot.medium.com", "_blank", "noopener,noreferrer"), type: "blogs" },
+    { label: "Contact", action: () => navigate("/contactUs"), type: "contactUs" },
+    { label: "About", action: () => navigate("/aboutUs"), type: "aboutUs" },
   ];
 
   return (
     <div className={classes.mainContainer}>
       <div className={classes.taglineBanner}>
-        🚀 AI Powered Low-Code platform: Instant UI Generation is here!
+        AI-powered low-code Flutter builder for rapid product teams
       </div>
-      <AppBar position="sticky" className={classes.appBar}>
+
+      <AppBar
+        position="sticky"
+        className={classes.appBar}
+        sx={{
+          background: "rgba(255, 255, 255, 0.15) !important",
+          backdropFilter: "blur(6px) saturate(180%)",
+          WebkitBackdropFilter: "blur(6px) saturate(180%)",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+        }}
+      >
         <Toolbar>
-          <img
-            src="flutterpilot_logo.png"
-            className={classes.logo}
-            alt="FlutterPilot"
-            onClick={() => navigate("#/")}
-          />
-          <Typography
-            variant="h5"
-            className={classes.appBarTitle}
-            onClick={() => navigate("#/")}
-          >
-            FlutterPilot
-          </Typography>
-          <div>
-            {menuItems.map((item) => (
-              <Button
-                key={item.label}
-                className={`${classes.appBarButton} ${type === item.type ? "active" : ""}`}
-                onClick={item.action}
-              >
-                {item.label}
-              </Button>
-            ))}
+          <div className={classes.brandLockup} onClick={() => navigate("/")}>
+            <span className={classes.logoFrame}>
+              <img
+                src="flutterpilot_logo.png"
+                className={classes.logo}
+                alt="FlutterPilot"
+              />
+            </span>
+
+            <Typography
+              component="div"
+              className={classes.appBarTitle}
+            >
+              <span className={classes.brandPrimary}>Flutter</span>
+              <span className={classes.brandAccent}>Pilot</span>
+            </Typography>
+          </div>
+
+          <div className={classes.appBarActions}>
+            <nav className={classes.hideOnSmall} style={{ display: 'flex', alignItems: 'center' }}>
+              {menuItems.map((item) => (
+                <Button
+                  key={item.label}
+                  className={`${classes.appBarButton} ${type === item.type ? "active" : ""}`}
+                  onClick={item.action}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </nav>
+
+            <Button
+              variant="contained"
+              className={classes.navActionBtn}
+              onClick={() => window.open("https://flutterpilot-studio.web.app", "_blank")}
+            >
+              Build Now
+            </Button>
+
             <IconButton
               edge="end"
-              aria-label="menu"
+              aria-label="Open navigation menu"
               onClick={handleDrawerToggle}
               className={classes.menuButton}
             >
@@ -180,23 +108,25 @@ function CustomAppBar({ children, type }) {
         onClose={handleDrawerToggle}
         classes={{ paper: classes.drawer }}
       >
-        <div onClick={handleDrawerToggle}>
-          <List className={classes.drawerList}>
-            {menuItems.map((item) => (
-              <ListItem
-                button
-                key={item.label}
-                onClick={item.action}
+        <List className={classes.drawerList}>
+          {menuItems.map((item) => (
+            <ListItem key={item.label} disablePadding>
+              <ListItemButton
+                onClick={() => {
+                  item.action();
+                  setDrawerOpen(false);
+                }}
                 className={type === item.type ? "active" : ""}
               >
                 <ListItemText primary={item.label} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
       </Drawer>
+
       {children}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

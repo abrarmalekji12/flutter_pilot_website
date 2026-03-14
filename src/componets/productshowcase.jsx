@@ -1,54 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles } from "@mui/styles";
-import { Container, Grid, Typography, Button, Box } from "@mui/material";
-import { cardBackgroudColor, titleColor, titleHoverShadow } from "../styles/colors";
+import React, { useEffect, useRef } from "react";
+import { Container, Typography, Button, Box } from "@mui/material";
+import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
+import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
 import { commonStyles } from "../styles/commonStyles";
-import { video } from "framer-motion/client";
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-
-const PlayStoreIcon = () => (
-  
-  <svg fill="#000000" width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><title>ionicons-v5_logos</title>
-  <path d="M48,59.49v393a4.33,4.33,0,0,0,7.37,3.07L260,256,55.37,56.42A4.33,4.33,0,0,0,48,59.49Z" /><path d="M345.8,174,89.22,32.64l-.16-.09c-4.42-2.4-8.62,3.58-5,7.06L285.19,231.93Z" />
-  <path d="M84.08,472.39c-3.64,3.48.56,9.46,5,7.06l.16-.09L345.8,338l-60.61-57.95Z" /><path d="M449.38,231l-71.65-39.46L310.36,256l67.37,64.43L449.38,281C468.87,270.23,468.87,241.77,449.38,231Z" /></svg>
-);
 
 const ProductShowcase = () => {
   const classes = commonStyles();
+  const videoRef = useRef(null);
+  const videoSrc = `${process.env.PUBLIC_URL}/productShowCase2.mov`;
+  const videoPoster = `${process.env.PUBLIC_URL}/flutterpilot_ss.png`;
 
   useEffect(() => {
-    playVideo()
-  }, [])
-
-
-  const playVideo = () => {
-    document.getElementById("productvideo").playbackRate = 1.5;
-    document.getElementById("productvideo").play = true;
-
-  }
-  // Helper function for app icon
-  const appIcon = (size, src) => (
-    <img
-      width={size}
-      src={src}
-      alt=""
-      className={classes.icon}
-    />
-  );
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.35;
+      const playPromise = videoRef.current.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    }
+  }, []);
 
   // Links and handlers
   const openOnlineEditor = () => {
-    window.open("https://flutterpilot-studio.web.app");
+    window.open("https://flutterpilot-studio.web.app", "_blank", "noopener,noreferrer");
   };
   const openDownloadPage = () => {
-    window.open("https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk");
-  }
+    window.open(
+      "https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
   const openPlayStore = () => {
-    window.open("https://play.google.com/store/apps/details?id=com.builder.flutterpilot");
-  }
+    window.open("https://play.google.com/store/apps/details?id=com.builder.flutterpilot", "_blank", "noopener,noreferrer");
+  };
 
   return (
-    <Container className={classes.productShowCaseContainer} maxWidth="xl">
+    <Container className={classes.productShowCaseContainer} maxWidth={false} disableGutters style={{ marginTop: 0 }}>
       {/* Background Elements */}
       <div className={classes.bgGlow}></div>
       <div className={`${classes.floatingShape} ${classes.shapePhone}`}></div>
@@ -60,57 +49,64 @@ const ProductShowcase = () => {
 
 
         {/* Text Content (Left Side) */}
-        <div className={classes.textContainer}>
+        <div className={classes.heroTextContainer}>
           <Typography
             variant="h2"
-            className={`${classes.title}`}
+            component="h2"
+            className={classes.heroTitle}
           >
-            Design Flutter Apps at the Speed of AI
+            Build Flutter Apps Faster with AI
           </Typography>
 
-          <Typography variant="body1" className={classes.subtitle}>
-            FlutterPilot is an AI powered low-code platform. 
-            Kickstart your project by generating UI layouts from prompts and refining them with our intuitive visual editor.
+          <Typography variant="body1" className={classes.heroSubtitle}>
+            Prompt, edit, and ship from one workspace.
           </Typography>
 
           <div className={classes.buttonsContainer}>
             <Button
-              // component="a"
-              // href="https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk"
-              // download="flutter_builder.exe"
-              // target="_blank"
-              // rel="noreferrer"
-              onClick={openDownloadPage}
-              className={`${classes.button} ${classes.windowsBtn}`}
-              startIcon={appIcon(24, "download-image.png")}
+              onClick={openOnlineEditor}
+              className={`${classes.button} ${classes.glowBtn}`}
+              startIcon={<LanguageRoundedIcon fontSize="small" />}
+              aria-label="Open FlutterPilot web app"
             >
-              FOR WINDOWS
+              Web App
             </Button>
 
             <Button
               onClick={openPlayStore}
               className={`${classes.button} ${classes.playStoreBtn}`}
-              startIcon={<PlayStoreIcon />}
+              startIcon={<AndroidRoundedIcon fontSize="small" />}
+              aria-label="Download FlutterPilot on Android"
             >
-              PLAY STORE
+              Android
             </Button>
 
             <Button
-              onClick={openOnlineEditor}
-              className={`${classes.button} ${classes.glowBtn}`}
-              startIcon={appIcon(24, "browser.png")}
+              onClick={openDownloadPage}
+              className={`${classes.button} ${classes.windowsBtn} ${classes.downloadBtn}`}
+              startIcon={<WindowRoundedIcon fontSize="small" />}
+              aria-label="Download FlutterPilot for Windows"
             >
-              ONLINE EDITOR
+              Windows
             </Button>
           </div>
         </div>
         <Box className={classes.centerImage}>
           <div className={classes.imageBackground} style={{ position: 'relative' }}>
-            <video id={"productvideo"} style={{ width: '100%', height: 'auto', borderRadius: '12px' }} loop autoPlay muted playsinline >
-              <source
-                src="productShowCase2.mov"
-                alt="FlutterPilot App Interface"
-              />
+            <video
+              ref={videoRef}
+              style={{ width: "100%", height: "auto", borderRadius: "12px" }}
+              poster={videoPoster}
+              preload="metadata"
+              loop
+              autoPlay
+              muted
+              playsInline
+              aria-label="FlutterPilot AI Flutter app builder demo — create screens from prompts, drag-and-drop editor, real-time preview"
+              title="FlutterPilot Platform Demo"
+            >
+              <source src={videoSrc} />
+              Your browser does not support this video. Visit FlutterPilot to see the AI Flutter app builder in action.
             </video>
             <div className={classes.imageOverlay}>
               <div className={`${classes.dot} ${classes.dot1}`}></div>

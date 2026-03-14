@@ -5,205 +5,97 @@ import {
   Typography,
   Link,
   Divider,
-  IconButton
 } from "@mui/material";
-import {
-  Facebook,
-  Twitter,
-  LinkedIn,
-  GitHub,
-  Instagram,
-  WhatsApp,
-} from "@mui/icons-material";
-import { makeStyles } from '@mui/styles';
-import { productShowCaseBackground } from "../styles/colors";
-import { commonStyles } from "../styles/commonStyles";
+import { makeStyles } from "@mui/styles";
 import { useNavigate } from "react-router-dom";
 
-const footerStyles = makeStyles((theme)=>({
-  container:{
-    minHeight: "250px",
-    height: "auto",
-    background: productShowCaseBackground,
-    color: "#ccc",
-    marginTop: theme.spacing(6),
-    paddingTop: theme.spacing(6),
-    paddingBottom: theme.spacing(3),
-    [theme.breakpoints.down("sm")]: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
-    }
-  },
-  gridContainer:{
-    justifyContent:"center"
-  },
-  gridTypography:{
-    mb: 2, color: "#fff", fontWeight: "bold" 
-  },
-  privacyPolicyTypography:{
-    color: "#999"
-  },
-  divider:{
-    my: 3, borderColor: "rgba(255,255,255,0.2)"
-  },
-  logo:{
-     height: "30px",
-    objectFit: "contain",
-    cursor: "pointer",
-    transition: "transform 0.3s ease",
-    "&:hover": {
-      transform: "scale(1.1) rotate(-3deg)",
-    },
-    marginRight:"10px"
-  },
-  appBarTitle:{
-    color:"#ccc"
-  },
-  titleContainer:{
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    padding:"13px"
-  }
-}))
+import { footerStyles } from "../styles/commonStyles";
 
 const Footer = () => {
-
   const navigate = useNavigate();
   const footerClasses = footerStyles();
-  const commonClasses = commonStyles();
+
+  const navigateTo = (event, path) => {
+    event.preventDefault();
+    navigate(path);
+  };
 
   return (
-    <Box
-      component="footer"
-      className={`${footerClasses.container}`}
-    >
-      {/* Top Section */}
-      <div className={footerClasses.titleContainer}>
-         <img
-            src="flutterpilot_logo.png"
-            className={footerClasses.logo}
-            alt="FlutterPilot"
-            onClick={() => navigate("/")}
-          />
-          <Typography
-            variant="h5"
-            className={`${footerClasses.appBarTitle}`}
-            onClick={() => navigate("/")}
-          >
-            FlutterPilot
-          </Typography>
+    <Box component="footer" className={footerClasses.container}>
+      <div className={footerClasses.shell}>
+        <div className={footerClasses.topRow}>
+          <div>
+            <div className={footerClasses.brandWrap}>
+              <img
+                src="flutterpilot_logo_round.png"
+                className={footerClasses.logo}
+                alt="FlutterPilot Logo"
+                loading="lazy"
+                onClick={() => navigate("/")}
+              />
+              <Typography
+                variant="h6"
+                className={footerClasses.brandText}
+                onClick={() => navigate("/")}
+              >
+                FlutterPilot
+              </Typography>
+            </div>
+            <p className={footerClasses.subtitle}>AI-first Flutter builder for modern teams.</p>
+          </div>
+        </div>
+
+        <Grid container spacing={3} className={footerClasses.gridContainer}>
+          <Grid item xs={12} sm={4} md={3}>
+            <Typography className={footerClasses.sectionTitle}>Product</Typography>
+            <Link className={footerClasses.footerLink} href="#/template" underline="none" onClick={(event) => navigateTo(event, "/template")}>
+              Templates
+            </Link>
+            <Link className={footerClasses.footerLink} href="#/docs" underline="none" onClick={(event) => navigateTo(event, "/docs")}>
+              Docs
+            </Link>
+            <Link className={footerClasses.footerLink} href="https://flutterpilot-studio.web.app" underline="none" target="_blank" rel="noopener noreferrer">
+              Web App
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={4} md={3}>
+            <Typography className={footerClasses.sectionTitle}>Resources</Typography>
+            <Link className={footerClasses.footerLink} href="https://flutterpilot.medium.com" underline="none" target="_blank" rel="noopener noreferrer">
+              Tutorials
+            </Link>
+            <Link className={footerClasses.footerLink} href="https://flutterpilot.medium.com" underline="none" target="_blank" rel="noopener noreferrer">
+              Blog
+            </Link>
+            <Link className={footerClasses.footerLink} href="#/contactUs" underline="none" onClick={(event) => navigateTo(event, "/contactUs")}>
+              Support
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} sm={4} md={3}>
+            <Typography className={footerClasses.sectionTitle}>Company</Typography>
+            <Link className={footerClasses.footerLink} href="#/aboutUs" underline="none" onClick={(event) => navigateTo(event, "/aboutUs")}>
+              About
+            </Link>
+            <Link className={footerClasses.footerLink} href="#/contactUs" underline="none" onClick={(event) => navigateTo(event, "/contactUs")}>
+              Contact
+            </Link>
+            <Link className={footerClasses.footerLink} href="#/privacyPolicy" underline="none" onClick={(event) => navigateTo(event, "/privacyPolicy")}>
+              Privacy Policy
+            </Link>
+          </Grid>
+
+          <Grid item xs={12} md={3}>
+            <Typography className={footerClasses.sectionTitle}>What We Do</Typography>
+            <Typography className={footerClasses.description}>
+              Build Flutter apps with prompt-based generation, visual editing, and export-ready code in one workflow.
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Divider className={footerClasses.divider} />
+        <p className={footerClasses.copyright}>© {new Date().getFullYear()} FlutterPilot. All rights reserved.</p>
       </div>
-      <Grid container spacing={4} className={footerClasses.gridContainer}>
-        {/* Column 1 */}
-        <Grid item xs={12} sm={6} md={2}>
-          <Typography
-            className={footerClasses.gridTypography}
-            variant="h6"
-          >
-            Community
-          </Typography>
-          <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Tutorials
-          </Link>
-          <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Documentation
-          </Link>
-          <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Forum
-          </Link>
-        </Grid>
-
-        {/* Column 2 */}
-        <Grid item xs={12} sm={6} md={2}>
-          <Typography
-            variant="h6"
-            className={footerClasses.gridTypography}
-          >
-            Services
-          </Typography>
-          {/* <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Hosting
-          </Link> */}
-          <Link href="#/template" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Templates
-          </Link>
-          <Link href="#/contactUs" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Support
-          </Link>
-          <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Upgrade
-          </Link>
-          <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Education
-          </Link>
-        </Grid>
-
-        {/* Column 3 */}
-        <Grid item xs={12} sm={6} md={2}>
-          <Typography
-            variant="h6"
-            className={footerClasses.gridTypography}
-          >
-            About Us
-          </Typography>
-          <Link href="#/aboutUs" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Company
-          </Link>
-          <Link href="#/contactUs" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Contact
-          </Link>
-          {/* <Link href="#" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Jobs
-          </Link> */}
-          <Link underline="none" color="inherit" display="block" sx={{ mb: 1 }} onClick={()=>{window.open("https://flutterpilot.medium.com")}}>
-            Blog
-          </Link>
-           <Link href="#/privacyPolicy" underline="none" color="inherit" display="block" sx={{ mb: 1 }}>
-            Privacy Policy
-          </Link>
-        </Grid>
-
-        {/* Column 4 - Description */}
-        <Grid item xs={12} sm={12} md={4}>
-          <Typography variant="body2" sx={{ mb: 2 }}>
-            FlutterPilot is the ultimate AI low-code platform for Flutter developers. 
-            Generate full projects from prompts, import Figma designs, and build high-performance apps with zero boilerplate.
-          </Typography>
-
-          {/* Social Icons */}
-          <Box>
-            <IconButton color="inherit" size="large" href="#">
-              <Facebook />
-            </IconButton>
-            <IconButton color="inherit" size="large" href="#">
-              <Twitter />
-            </IconButton>
-            <IconButton color="inherit" size="large" href="#">
-              <LinkedIn />
-            </IconButton>
-            <IconButton color="inherit" size="large" href="#">
-              <GitHub />
-            </IconButton>
-            <IconButton color="inherit" size="large" href="#">
-              <Instagram />
-            </IconButton>
-            <IconButton color="inherit" size="large" href="#">
-              <WhatsApp />
-            </IconButton>
-          </Box>
-        </Grid>
-      </Grid>
-
-      {/* Divider */}
-      <Divider className={footerClasses.divider}/>
-
-      {/* Bottom Bar */}
-      <Box textAlign="center">
-        <Typography variant="body2" className={footerClasses.privacyPolicyTypography}>
-          © {new Date().getFullYear()} FlutterPilot. All rights reserved.
-        </Typography>
-      </Box>
     </Box>
   );
 };

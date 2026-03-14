@@ -5,16 +5,18 @@ import Landing from './Landing';
 import ContactUs from './ContactUs/ContactUs';
 import AboutUs from './AboutUs/AboutUs';
 import Template from './Template/Template';
+import Docs from './Docs/Docs';
 
 export default function AppNav() {
   return (
     <HashRouter>
-  <Routes>
+      <Routes>
     <Route path="/" element={<Landing />} />
     <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
     <Route path="/contactUs" element={<ContactUs />} />
     <Route path="/aboutUs" element={<AboutUs />} />
     <Route path="/template" element={<Template/>}/>
+    <Route path="/docs" element={<Docs/>}/>
   </Routes>
 </HashRouter>
   );

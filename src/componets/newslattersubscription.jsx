@@ -1,65 +1,90 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { Grid, TextField, Button } from "@mui/material";
+import { Grid, TextField, Button, Typography, Box } from "@mui/material";
+import NorthEastRoundedIcon from "@mui/icons-material/NorthEastRounded";
 
 const useStyles = makeStyles((theme) => ({
   newsletterSection: {
-    background: "linear-gradient(135deg, #1a1f36 0%, #121528 100%)",
-    color: "#fff",
-    padding: theme.spacing(8, 4),
+    background:
+      "radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.12) 0%, rgba(15, 23, 42, 0) 42%), linear-gradient(180deg, #ffffff 0%, #f8fbff 100%)",
+    color: "#0f172a",
+    padding: theme.spacing(6, 4),
     textAlign: "center",
-    borderRadius: "24px",
-    margin: theme.spacing(4, 0),
-    boxShadow: "0 20px 80px rgba(0, 0, 0, 0.3)",
+    borderRadius: "28px",
+    margin: 0,
+    border: "1px solid rgba(148, 163, 184, 0.3)",
+    boxShadow: "0 18px 46px rgba(15, 23, 42, 0.1)",
     position: "relative",
-    overflow: "hidden"
+    overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(4.5, 2),
+      borderRadius: "20px",
+    },
   },
   newsletterTitle: {
-    fontSize: "2.5rem",
+    fontSize: "2.15rem",
     fontWeight: 800,
-    marginBottom: theme.spacing(2),
-    background: "linear-gradient(135deg, #5B86E5 0%, #36D1DC 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
+    marginBottom: theme.spacing(1.1),
+    color: "#0f172a",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.7rem",
+    },
   },
   newsletterSubtitle: {
-    fontSize: "1.1rem",
-    color: "rgba(255,255,255,0.7)",
-    marginBottom: theme.spacing(4),
+    fontSize: "1rem",
+    color: "#475569",
+    marginBottom: theme.spacing(2.3),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "0.94rem",
+    },
   },
   inputField: {
     width: "100%",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    borderRadius: "12px",
+    borderRadius: "14px",
     "& .MuiOutlinedInput-root": {
-      color: "#fff",
+      borderRadius: "14px",
+      backgroundColor: "#ffffff",
       "& fieldset": {
-        borderColor: "rgba(255,255,255,0.2)",
-        borderRadius: "12px",
+        borderColor: "rgba(148, 163, 184, 0.38)",
       },
       "&:hover fieldset": {
-        borderColor: "#36D1DC",
+        borderColor: "rgba(37, 99, 235, 0.55)",
       },
       "&.Mui-focused fieldset": {
-        borderColor: "#5B86E5",
+        borderColor: "#2563eb",
       },
     },
+    "& .MuiOutlinedInput-input": {
+      padding: "14px 14px",
+      color: "#0f172a",
+    },
     "& .MuiInputLabel-root": {
-      color: "rgba(255,255,255,0.5)",
+      color: "rgba(51, 65, 85, 0.72)",
+    },
+  },
+  form: {
+    display: "flex",
+    flexDirection: "row",
+    gap: "12px",
+    alignItems: "stretch",
+    width: "100%",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
     },
   },
   subscribeBtn: {
-    padding: theme.spacing(1.5, 4),
-    borderRadius: "12px",
-    fontWeight: 600,
-    fontSize: "1rem",
-    background: "linear-gradient(135deg, #5B86E5 0%, #36D1DC 100%)",
+    padding: theme.spacing(1.35, 2.35),
+    borderRadius: "14px",
+    fontWeight: 700,
+    fontSize: "0.88rem",
+    minWidth: "162px",
+    background: "linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%)",
     color: "#fff",
     textTransform: "none",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 10px 24px rgba(37, 99, 235, 0.3)",
     "&:hover": {
       transform: "translateY(-2px)",
-      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.3)",
+      boxShadow: "0 14px 30px rgba(37, 99, 235, 0.34)",
     },
   }
 }));
@@ -76,23 +101,29 @@ const NewsletterSubscription = () => {
     <div className={classes.newsletterSection}>
       <Grid container justifyContent="center">
         <Grid item xs={12} sm={8} md={6}>
-          <h2 className={classes.newsletterTitle}>
-            Join the Future of App Development
-          </h2>
-          <p className={classes.newsletterSubtitle}>
-            Get the latest updates on AI features, new templates, and pro-tips for building Flutter apps faster.
-          </p>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+          <Typography component="h2" className={classes.newsletterTitle}>
+            Join our News Letter
+          </Typography>
+          <Typography component="p" className={classes.newsletterSubtitle}>
+            Get product updates and new feature drops.
+          </Typography>
+          <Box component="form" onSubmit={handleSubmit} className={classes.form}>
             <TextField
               type="email"
-              label="Enter your email"
+              label="Work email"
               variant="outlined"
               className={classes.inputField}
+              fullWidth
             />
-            <Button type="submit" variant="contained" className={classes.subscribeBtn}>
-              STAY UPDATED
+            <Button
+              type="submit"
+              variant="contained"
+              className={classes.subscribeBtn}
+              endIcon={<NorthEastRoundedIcon />}
+            >
+              Subscribe
             </Button>
-          </form>
+          </Box>
         </Grid>
       </Grid>
     </div>
