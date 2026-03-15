@@ -24,7 +24,7 @@
       "name": "Open Online Editor",
       "short_name": "Editor",
       "description": "Launch the FlutterPilot online Flutter UI editor",
-      "url": "https://flutterpilot-studio.web.app",
+      "url": "https://studio.flutterpilot.com",
       "icons": [{"src": "flutterpilot_logo_round.svg", "sizes": "any"}]
     },
     {
