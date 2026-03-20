@@ -87,18 +87,18 @@ const FeatureShowcase = (props) => {
     return (
       <article className={classes.root} style={{ marginBottom: 0 }}>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         >
           <div className={classes.featureGlassCard}>
             {/* Compact header */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -129,10 +129,10 @@ const FeatureShowcase = (props) => {
 
             {/* Full-width video */}
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: 0.15 }}
+              viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             >
               <MediaContent borderRadius="12px" />
             </motion.div>
@@ -147,18 +147,18 @@ const FeatureShowcase = (props) => {
     return (
       <article className={classes.root} style={{ marginBottom: 0 }}>
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         >
           <div className={classes.featureGlassCard}>
             {/* Header row */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.05 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               style={{ marginBottom: "32px" }}
             >
               <span className={classes.featureBadge}>Capabilities</span>
@@ -188,10 +188,10 @@ const FeatureShowcase = (props) => {
                 <Grid item xs={12} sm={6} md={4} key={i}>
                   <motion.div
                     className={classes.toolingCard}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.07 }}
-                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.05 + i * 0.05 }}
+                    viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                   >
                     {/* Icon — fixed width left column */}
                     <Box className={classes.toolingCardIcon}>
@@ -232,10 +232,10 @@ const FeatureShowcase = (props) => {
 
             {/* Learn more CTA */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.35 }}
+              viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               style={{ display: "flex", justifyContent: "flex-end", marginTop: "32px" }}
             >
               <Button
@@ -272,10 +272,10 @@ const FeatureShowcase = (props) => {
   return (
     <article className={classes.root} style={{ marginBottom: 0 }}>
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
+        initial={{ y: 16 }}
+        whileInView={{ y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        viewport={{ once: true, margin: "0px 0px -40px 0px" }}
       >
         <div className={classes.featureGlassCard}>
           <Grid container spacing={6} alignItems="center">
@@ -285,7 +285,7 @@ const FeatureShowcase = (props) => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                   style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
                 >
                   <span className={classes.featureBadge}>Capabilities</span>
@@ -307,7 +307,7 @@ const FeatureShowcase = (props) => {
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                   >
                     <span className={classes.featureBadge}>Capabilities</span>
                     <Typography variant="h2" className={classes.title}>
@@ -326,7 +326,7 @@ const FeatureShowcase = (props) => {
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                   >
                     <span className={classes.featureBadge}>Innovation</span>
                     <Typography variant="h2" className={classes.title}>

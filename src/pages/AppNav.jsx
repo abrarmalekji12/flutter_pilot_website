@@ -7,6 +7,10 @@ const ContactUs = lazy(() => import('./ContactUs/ContactUs'));
 const AboutUs = lazy(() => import('./AboutUs/AboutUs'));
 const Template = lazy(() => import('./Template/Template'));
 const Docs = lazy(() => import('./Docs/Docs'));
+const FlutterUIBuilder = lazy(() => import('./FlutterUIBuilder/FlutterUIBuilder'));
+const FlutterFlowAlternative = lazy(() => import('./FlutterFlowAlternative/FlutterFlowAlternative'));
+const AIFlutterUIGenerator = lazy(() => import('./AIFlutterUIGenerator/AIFlutterUIGenerator'));
+const FlutterAppBuilder = lazy(() => import('./FlutterAppBuilder/FlutterAppBuilder'));
 
 const LoadingFallback = () => (
   <div style={{ 
@@ -29,6 +33,10 @@ export default function AppNav() {
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/flutter-ui-builder" element={<FlutterUIBuilder />} />
+          <Route path="/flutterflow-alternative" element={<FlutterFlowAlternative />} />
+          <Route path="/ai-flutter-ui-generator" element={<AIFlutterUIGenerator />} />
+          <Route path="/flutter-app-builder" element={<FlutterAppBuilder />} />
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/aboutUs" element={<AboutUs />} />

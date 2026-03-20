@@ -1,25 +1,4 @@
-# Optimized robots.txt for FlutterPilot
-# https://flutterpilot.com/
-
 User-agent: *
 Allow: /
-# Disallow indexing of internal or static folders if they appear in URL paths
-Disallow: /build/
-Disallow: /static/
 
-# Explicitly allow AI crawlers for better reach in AI-driven search
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-# Standard crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-# Sitemap location
 Sitemap: https://flutterpilot.com/sitemap.xml

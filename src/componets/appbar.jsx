@@ -22,7 +22,7 @@ import Footer from "./Footer";
 
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.builder.flutterpilot";
-const WEB_APP_URL = "https://flutterpilot-studio.web.app";
+const WEB_APP_URL = "https://studio.flutterpilot.com";
 
 function getBuildNowUrl() {
   return /Android/i.test(navigator.userAgent) ? PLAY_STORE_URL : WEB_APP_URL;
@@ -55,6 +55,12 @@ function CustomAppBar({ children, type }) {
     <div className={classes.mainContainer}>
       <div className={classes.taglineBanner}>
         AI-powered low-code Flutter builder for rapid product teams
+        <span 
+          onClick={() => window.location.href = "/flutter-ui-builder"} 
+          style={{ cursor: 'pointer', textDecoration: 'underline', marginLeft: '8px', opacity: 0.8 }}
+        >
+          Flutter UI builder
+        </span>
       </div>
 
       <AppBar

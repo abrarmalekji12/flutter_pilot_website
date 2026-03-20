@@ -323,7 +323,7 @@ export default function PromptGeneratorHero() {
   const openStudio = () => {
     const finalPrompt = (!hasInteracted && targetPrompt) ? targetPrompt : prompt;
     const encodedPrompt = encodeURIComponent(finalPrompt.trim());
-    window.location.href = `https://flutterpilot-studio.web.app?prompt=${encodedPrompt}`;
+    window.location.href = `https://studio.flutterpilot.com?prompt=${encodedPrompt}`;
   };
 
   const handleInputChange = (event) => {

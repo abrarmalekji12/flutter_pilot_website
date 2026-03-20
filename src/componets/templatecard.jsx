@@ -12,7 +12,7 @@ export default function TemplateCard({ name, description, imageURLs, templateId 
       : "Ready-to-use template designed for rapid customization in FlutterPilot.";
 
   const handleTemplate = () => {
-    window.open(`https://flutterpilot-studio.web.app/template/${templateId}`, "_blank", "noopener,noreferrer");
+    window.open(`https://studio.flutterpilot.com/template/${templateId}`, "_blank", "noopener,noreferrer");
   };
 
   return (

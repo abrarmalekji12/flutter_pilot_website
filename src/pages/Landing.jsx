@@ -13,6 +13,7 @@ import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
 import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
+import AppleIcon from "@mui/icons-material/Apple";
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -63,6 +64,11 @@ const featurelist = [
         title: "One-Click APK",
         description: "Generate an installable Android APK natively from your workspace.",
       },
+      // {
+      //   icon: <AppleIcon fontSize="small" />,
+      //   title: "iOS App Builder",
+      //   description: "Build and preview your Flutter projects natively on iOS devices.",
+      // },
     ],
     isVideo: false,
   },
@@ -77,10 +83,10 @@ export default function Landing() {
         {/* AI Prompt Section */}
         <motion.section
           className={common.responsiveContainer}
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         >
           <PromptGeneratorHero />
         </motion.section>
@@ -88,10 +94,10 @@ export default function Landing() {
         {/* Hero Section */}
         <motion.section
           className={common.responsiveContainer}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         >
           <ProductShowcase />
         </motion.section>
