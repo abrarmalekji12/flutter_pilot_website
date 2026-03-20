@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#2563eb" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Flutter App Templates – Build UI Faster | FlutterPilot</title>
+    <meta name="title" content="Flutter App Templates – Build UI Faster | FlutterPilot" />
+    <meta name="description"
+        content="Start your Flutter project faster with our library of ready-to-use Flutter templates. Free, responsive, and easy to customize with the FlutterPilot AI builder." />
+    <meta name="keywords"
+        content="flutter templates, free flutter UI kits, flutter app starters, flutter layout templates, flutter ui builder, flutter code generator, flutter screen designs, ready to use flutter screens" />
+    <meta name="author" content="FlutterPilot" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://flutterpilot.com/template" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://flutterpilot.com/template" />
+    <meta property="og:title" content="Flutter App Templates – Build UI Faster | FlutterPilot" />
+    <meta property="og:description"
+        content="Access a wide range of ready-to-use Flutter templates and screens. Speed up your development with FlutterPilot." />
+    <meta property="og:image" content="https://flutterpilot.com/flutterpilot_logo_round.svg" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Flutter App Templates Library",
+  "description": "A collection of beautiful, functional, and production-ready Flutter app templates.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "FlutterPilot",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://flutterpilot.com/logo.png"
+    }
+  }
+}
+</script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --text-main: #334155;
+            --text-heading: #0f172a;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--white) 0%, #f1f5f9 100%);
+            padding: 80px 20px 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: var(--text-heading);
+            font-size: 3rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            color: var(--text-heading);
+            font-size: 2rem;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            font-weight: 700;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 24px;
+            font-size: 1.15rem;
+        }
+
+        ul {
+            margin-bottom: 32px;
+            padding-left: 24px;
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 12px;
+            font-size: 1.15rem;
+            position: relative;
+            padding-left: 32px;
+        }
+
+        li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom-color: var(--primary);
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 48px 32px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 64px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 24px;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+            border: none;
+        }
+
+        .cta-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4);
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .header {
+                padding: 60px 20px 40px;
+            }
+
+            .container {
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Flutter App Templates Library</h1>
+    </header>
+
+    <div class="container">
+        <p>Start your mobile app development journey faster with our curated library of <strong>Flutter app templates</strong>.</p>
+
+        <p>Whether you’re building a Fintech dashboard, an E-commerce store, or a Social feed, we have the starting blocks ready for you.</p>
+
+        <p>👉 <a href="https://flutterpilot.com/#/template">Browse Interactive Gallery</a></p>
+
+        <hr>
+
+        <h2>Why use FlutterPilot Templates?</h2>
+        <p>Templates on FlutterPilot are not just static designs — they are fully functional Flutter widget structures ready to be integrated into your app.</p>
+        <ul>
+            <li><strong>Production-Ready</strong> — clean code with consistent spacing and styling.</li>
+            <li><strong>Fully Responsive</strong> — built to look great on all screen sizes.</li>
+            <li><strong>Easily Customizable</strong> — tweak properties visually or using AI prompts.</li>
+            <li><strong>One-Click Import</strong> — open any template directly in the FlutterPilot builder.</li>
+        </ul>
+
+        <hr>
+
+        <h2>What's in our library?</h2>
+        <p>Our library is continuously growing. Currently, you can find templates for:</p>
+        <ul>
+            <li>Dashboard & Analytics</li>
+            <li>Authentication (Login, Signup, Forgot Password)</li>
+            <li>Product Lists & Details</li>
+            <li>User Profiles & Settings</li>
+            <li>Chat & Messaging Interfaces</li>
+        </ul>
+
+        <hr>
+
+        <h2>AI-Powered Customization</h2>
+        <p>Found a template that is close to what you want, but not perfect? Use the <strong>FlutterPilot AI Builder</strong> to describe the changes you want.</p>
+        <p>For example: "Change this dashboard to use a dark theme and add a crypto price chart." The AI will handle the rest.</p>
+
+        <hr>
+
+        <div class="cta">
+            <h2>Ready to build?</h2>
+            <p>Don't waste time on repetitive UI layouts. Choose a template and start building your product today.</p>
+            <a href="https://flutterpilot.com/#/template" class="cta-btn">View All Templates</a>
+            <p style="margin-top: 24px; font-size: 0.95rem; opacity: 0.7;">New templates added every week. Stay tuned for more!</p>
+        </div>
+    </div>
+</body>
+
+</html>

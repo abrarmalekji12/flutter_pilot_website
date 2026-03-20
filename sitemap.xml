@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://flutterpilot.com/</loc>
-    <lastmod>2026-03-14</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -17,38 +17,31 @@
   </url>
 
   <url>
-    <loc>https://flutterpilot.com/flutterflow-alternative</loc>
+    <loc>https://flutterpilot.com/template</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://flutterpilot.com/#/template</loc>
-    <lastmod>2026-03-14</lastmod>
+    <loc>https://flutterpilot.com/flutter-templates</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://flutterpilot.com/free-flutter-templates</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://flutterpilot.com/flutterflow-alternative</loc>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://flutterpilot.com/#/aboutUs</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://flutterpilot.com/#/contactUs</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://flutterpilot.com/#/privacyPolicy</loc>
-    <lastmod>2026-03-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
 
 </urlset>
