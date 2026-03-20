@@ -113,7 +113,7 @@ export default function PrivacyPolicy() {
               <h2 className={classes.contentHeading}>5. Your Rights</h2>
               <p className={classes.contentText}>
                 You can request access, update, or delete your personal data. Contact our support at{" "}
-                <a href="mailto:fromamsoftwares@gmail.com" className={classes.contentLink}>fromamsoftwares@gmail.com</a>.
+                <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a>.
               </p>
             </section>
 

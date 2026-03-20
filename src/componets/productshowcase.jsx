@@ -3,7 +3,9 @@ import { Container, Typography, Button, Box } from "@mui/material";
 import { motion } from "framer-motion";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
+import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
+import DesktopMacRoundedIcon from "@mui/icons-material/DesktopMacRounded";
 import { commonStyles } from "../styles/commonStyles";
 
 const ProductShowcase = () => {
@@ -11,7 +13,6 @@ const ProductShowcase = () => {
   const videoRef = useRef(null);
   const videoSrc = `${process.env.PUBLIC_URL}/productShowCase2.mp4`;
   const videoPoster = `${process.env.PUBLIC_URL}/flutterpilot_ss.webp`;
-
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const ProductShowcase = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.play().catch(() => {});
+            video.play().catch(() => { });
           } else {
             video.pause();
           }
@@ -43,18 +44,42 @@ const ProductShowcase = () => {
 
   // Links and handlers
   const openOnlineEditor = () => {
-    window.open("https://flutterpilot-studio.web.app", "_blank", "noopener,noreferrer");
+    window.open("https://studio.flutterpilot.com", "_blank", "noopener,noreferrer");
   };
-  const openDownloadPage = () => {
-    window.open(
-      "https://drive.google.com/file/d/1Z1o9wK4KneaYO33c_iS8BDAqJUs2aPj0/view?usp=drivesdk",
-      "_blank",
-      "noopener,noreferrer"
-    );
+  const openMacDownload = () => {
+    window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/macos/latest/flutterpilot-macos-latest.dmg";
+  };
+  const openWindowsDownload = () => {
+    window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/windows/latest/flutterpilot-windows-latest.exe";
   };
   const openPlayStore = () => {
     window.open("https://play.google.com/store/apps/details?id=com.builder.flutterpilot", "_blank", "noopener,noreferrer");
   };
+  const openAppStore = () => {
+    window.open("https://apps.apple.com/in/app/ai-app-builder-flutterpilot/id6759552936", "_blank", "noopener,noreferrer");
+  };
+
+  // Platform Detection
+  const getPlatform = () => {
+    const userAgent = window.navigator.userAgent;
+    if (/Android/i.test(userAgent)) return "Android";
+    if (/iPhone|iPad|iPod/i.test(userAgent)) return "iOS";
+    if (/Mac/i.test(userAgent)) return "macOS";
+    if (/Win/i.test(userAgent)) return "Windows";
+    return null;
+  };
+
+  const currentPlatform = getPlatform();
+
+  const platforms = [
+    { name: "Android", icon: <AndroidRoundedIcon />, action: openPlayStore },
+    { name: "iOS", icon: <PhoneIphoneRoundedIcon />, action: openAppStore },
+    { name: "macOS", icon: <DesktopMacRoundedIcon />, action: openMacDownload },
+    { name: "Windows", icon: <WindowRoundedIcon />, action: openWindowsDownload },
+  ];
+
+  const detectedPlatformData = platforms.find(p => p.name === currentPlatform);
+  const otherPlatforms = platforms.filter(p => p.name !== currentPlatform);
 
   return (
     <Container className={classes.productShowCaseContainer} maxWidth={false} disableGutters style={{ marginTop: 0 }}>
@@ -67,7 +92,6 @@ const ProductShowcase = () => {
       <Box className={classes.contentWrapper}>
         {/* Central Product Image */}
 
-
         {/* Text Content (Left Side) */}
         <div className={classes.heroTextContainer}>
           <Typography
@@ -75,40 +99,56 @@ const ProductShowcase = () => {
             component="h2"
             className={classes.heroTitle}
           >
-            Prompt, Visualize & Ship Flutter Apps
+            Build Mobile Apps with Prompts
           </Typography>
 
           <Typography variant="body1" className={classes.heroSubtitle}>
-            Prompt-edit, visualize live, export clean code freely — no lock-in, APK-ready.
+            Prompt, edit, and preview in real time. Export clean code freely — no lock-in.
           </Typography>
 
-          <div className={classes.buttonsContainer}>
+          {/* Primary CTA */}
+          <div className={classes.primaryCtaWrapper}>
             <Button
               onClick={openOnlineEditor}
-              className={`${classes.button} ${classes.glowBtn}`}
-              startIcon={<LanguageRoundedIcon fontSize="small" />}
-              aria-label="Open FlutterPilot web app"
+              className={classes.primaryCtaBtn}
+              startIcon={<LanguageRoundedIcon />}
             >
-              Web App
+              Start Building Free
             </Button>
+            <Typography className={classes.ctaSubtext}>
+              Try in Browser • No install required
+            </Typography>
+          </div>
 
-            <Button
-              onClick={openPlayStore}
-              className={`${classes.button} ${classes.playStoreBtn}`}
-              startIcon={<AndroidRoundedIcon fontSize="small" />}
-              aria-label="Download FlutterPilot on Android"
-            >
-              Android
-            </Button>
+          {/* Secondary CTA (Detected Platform) */}
+          {detectedPlatformData && (
+            <div className={classes.secondaryCtaWrapper}>
+              <Button
+                onClick={detectedPlatformData.action}
+                className={classes.secondaryCtaBtn}
+                startIcon={detectedPlatformData.icon}
+              >
+                Download for {detectedPlatformData.name}
+              </Button>
+            </div>
+          )}
 
-            <Button
-              onClick={openDownloadPage}
-              className={`${classes.button} ${classes.windowsBtn} ${classes.downloadBtn}`}
-              startIcon={<WindowRoundedIcon fontSize="small" />}
-              aria-label="Download FlutterPilot for Windows"
-            >
-              Windows
-            </Button>
+          {/* Other Platforms */}
+          <div className={classes.otherPlatformsSection}>
+            {isMobile && <Typography className={classes.availableOnLabel}>Available on</Typography>}
+            <div className={classes.otherPlatformsGrid} style={isMobile ? { flexDirection: "row", gap: "12px" } : {}}>
+              {otherPlatforms.map((p) => (
+                <Button
+                  key={p.name}
+                  onClick={p.action}
+                  className={isMobile ? classes.platformCircleBtn : classes.ghostBtn}
+                  startIcon={p.icon}
+                  aria-label={`Available on ${p.name}`}
+                >
+                  {!isMobile && p.name}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
         <Box className={classes.centerImage}>
@@ -125,10 +165,10 @@ const ProductShowcase = () => {
             </div>
             <video
               ref={videoRef}
-              style={{ 
-                width: "100%", 
-                height: "auto", 
-                display: "block", 
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
                 borderRadius: "0 0 12px 12px",
                 transform: "translateZ(0)", // Force GPU acceleration for sharper rendering
                 backfaceVisibility: "hidden",

@@ -14,7 +14,7 @@ import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
 import RocketLaunchRoundedIcon from "@mui/icons-material/RocketLaunchRounded";
 import { makeStyles } from "@mui/styles";
 
-const MAX_PROMPT_LENGTH = 290;
+const MAX_PROMPT_LENGTH = 2000;
 
 const examplePrompts = [
   "A clean, minimalist sneaker store app featuring high-contrast product cards, a seamless 'swipe-to-buy' interaction, and a monochrome color palette with neon accents.",
@@ -323,7 +323,7 @@ export default function PromptGeneratorHero() {
   const openStudio = () => {
     const finalPrompt = (!hasInteracted && targetPrompt) ? targetPrompt : prompt;
     const encodedPrompt = encodeURIComponent(finalPrompt.trim());
-    window.location.href = `https://flutterpilot-studio.web.app?prompt=${encodedPrompt}`;
+    window.location.href = `https://studio.flutterpilot.com?prompt=${encodedPrompt}`;
   };
 
   const handleInputChange = (event) => {

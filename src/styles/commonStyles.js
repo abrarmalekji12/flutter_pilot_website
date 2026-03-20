@@ -119,7 +119,7 @@ export const commonStyles = makeStyles((theme) => ({
     textAlign: "center",
     // Tighter bottom gap — less dead air between text block and video.
     margin: "10px 0 16px",
-    maxWidth: "660px",
+    maxWidth: "820px",
     width: "100%",
     [theme.breakpoints.down("sm")]: {
       margin: "8px 0 14px",
@@ -441,6 +441,138 @@ export const commonStyles = makeStyles((theme) => ({
       background: "linear-gradient(135deg, #0f766e 0%, #0d9488 100%)",
       transform: "translateY(-2px)",
       boxShadow: "0 12px 24px rgba(13, 148, 136, 0.32)",
+    },
+  },
+  appleBtn: {
+    background: "linear-gradient(135deg, #334155 0%, #0f172a 100%)",
+    color: "#ffffff",
+    borderColor: "rgba(255, 255, 255, 0.15)",
+    "&:hover": {
+      background: "linear-gradient(135deg, #1e293b 0%, #020617 100%)",
+      transform: "translateY(-2px)",
+      boxShadow: "0 12px 24px rgba(15, 23, 42, 0.3)",
+    },
+  },
+
+  // ── Hierarchical CTA Styles ──
+  primaryCtaWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: theme.spacing(2.5),
+    width: "100%",
+  },
+  primaryCtaBtn: {
+    padding: theme.spacing(1.8, 5),
+    borderRadius: "18px",
+    fontSize: "1.1rem",
+    fontWeight: 800,
+    letterSpacing: "0.5px",
+    background: "linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)",
+    color: "#fff",
+    boxShadow: "0 15px 35px rgba(37, 99, 235, 0.35)",
+    textTransform: "none",
+    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+    "&:hover": {
+      transform: "translateY(-3px) scale(1.02)",
+      background: "linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%)",
+      boxShadow: "0 20px 45px rgba(37, 99, 235, 0.45)",
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      padding: theme.spacing(1.6, 3),
+      fontSize: "1.05rem",
+    },
+  },
+  ctaSubtext: {
+    fontSize: "0.9rem",
+    color: "rgba(15, 23, 42, 0.65)",
+    marginTop: theme.spacing(1.2),
+    fontWeight: 500,
+  },
+  
+  secondaryCtaWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginBottom: theme.spacing(3.5),
+    width: "100%",
+  },
+  recommendLabel: {
+    fontSize: "0.78rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    color: "#2563eb",
+    background: "rgba(37, 99, 235, 0.08)",
+    padding: "4px 12px",
+    borderRadius: "20px",
+    marginBottom: theme.spacing(1.2),
+  },
+  secondaryCtaBtn: {
+    padding: theme.spacing(1.4, 3.5),
+    borderRadius: "14px",
+    fontSize: "0.95rem",
+    fontWeight: 700,
+    border: "2px solid #2563eb",
+    color: "#2563eb",
+    background: "transparent",
+    textTransform: "none",
+    transition: "all 0.25s ease",
+    "&:hover": {
+      background: "rgba(37, 99, 235, 0.04)",
+      transform: "translateY(-2px)",
+    },
+    [theme.breakpoints.down("sm")]: {
+       width: "100%",
+    },
+  },
+
+  otherPlatformsSection: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    // borderTop: "1px solid rgba(148, 163, 184, 0.2)",
+    paddingTop: theme.spacing(1),
+  },
+  otherPlatformsLabel: {
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "#64748b",
+    marginBottom: theme.spacing(2.5),
+  },
+  otherPlatformsGrid: {
+    display: "flex",
+    gap: theme.spacing(1.5),
+    flexWrap: "wrap",
+    justifyContent: "center",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+       width: "100%",
+    },
+  },
+  ghostBtn: {
+    padding: theme.spacing(0.85, 2),
+    borderRadius: "10px",
+    fontSize: "0.82rem",
+    fontWeight: 600,
+    color: "#64748b",
+    background: "rgba(241, 245, 249, 0.35)",
+    border: "1px solid rgba(148, 163, 184, 0.2)",
+    textTransform: "none",
+    transition: "all 0.2s ease",
+    "& .MuiSvgIcon-root": {
+      fontSize: "0.95rem",
+      marginRight: "4px",
+    },
+    "&:hover": {
+      background: "rgba(241, 245, 249, 0.7)",
+      borderColor: "rgba(37, 99, 235, 0.25)",
+      color: "#2563eb",
+    },
+    [theme.breakpoints.down("sm")]: {
+       width: "100%",
     },
   },
 
@@ -882,7 +1014,47 @@ export const commonStyles = makeStyles((theme) => ({
       fontSize: "11px",
       height: "32px",
     }
-  }
+  },
+
+  availableOnLabel: {
+    fontSize: "0.78rem",
+    fontWeight: 700,
+    color: "#64748b",
+    marginBottom: theme.spacing(1.5),
+    textTransform: "uppercase",
+    letterSpacing: "0.8px",
+    display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+    },
+  },
+
+  platformCircleBtn: {
+    minWidth: "44px !important",
+    width: "44px",
+    height: "44px",
+    borderRadius: "50% !important",
+    padding: "0 !important",
+    background: "rgba(241, 245, 249, 0.4)",
+    border: "1px solid rgba(148, 163, 184, 0.2)",
+    color: "#64748b",
+    transition: "all 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    "& .MuiButton-startIcon": {
+      margin: 0,
+    },
+    "& .MuiSvgIcon-root": {
+      fontSize: "1.25rem",
+    },
+    "&:hover": {
+      background: "rgba(37, 99, 235, 0.08)",
+      borderColor: "rgba(37, 99, 235, 0.3)",
+      color: "#2563eb",
+      transform: "translateY(-2px)",
+    },
+  },
 }));
 
 export const templateCardStyles = makeStyles((theme) => ({
