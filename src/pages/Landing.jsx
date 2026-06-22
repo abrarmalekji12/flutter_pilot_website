@@ -1,5 +1,6 @@
 // src/pages/Landing.js
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
 import CustomAppBar from "../componets/appbar";
@@ -76,6 +77,26 @@ const featurelist = [
 
 export default function Landing() {
   const common = commonStyles();
+  const location = useLocation();
+
+  // When redirected here from /download (or with a #download hash), scroll to
+  // the download/product showcase section once the page has rendered.
+  useEffect(() => {
+    const wantsDownload =
+      location.state?.scrollTo === "download" || location.hash === "#download";
+    if (!wantsDownload) return;
+
+    const scrollToDownload = () => {
+      const el = document.getElementById("download");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    // Defer to the next frame so the lazily-rendered section is in the DOM.
+    const timer = setTimeout(scrollToDownload, 100);
+    return () => clearTimeout(timer);
+  }, [location]);
 
   return (
     <CustomAppBar type="home">
@@ -91,8 +112,9 @@ export default function Landing() {
           <PromptGeneratorHero />
         </motion.section>
 
-        {/* Hero Section */}
+        {/* Hero Section / Download Section */}
         <motion.section
+          id="download"
           className={common.responsiveContainer}
           initial={{ y: 20 }}
           whileInView={{ y: 0 }}
