@@ -53,9 +53,9 @@ const ProductShowcase = () => {
   const openWindowsDownload = () => {
     window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/windows/latest/flutterpilot-windows-latest.exe";
   };
-  const openLinuxDownload = () => {
-    window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/linux/latest/flutterpilot-linux-latest.tar";
-  };
+  // const openLinuxDownload = () => {
+  //   window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/linux/latest/flutterpilot-linux-latest.tar";
+  // };
   const openPlayStore = () => {
     window.open("https://play.google.com/store/apps/details?id=com.builder.flutterpilot", "_blank", "noopener,noreferrer");
   };
@@ -70,7 +70,7 @@ const ProductShowcase = () => {
     if (/iPhone|iPad|iPod/i.test(userAgent)) return "iOS";
     if (/Mac/i.test(userAgent)) return "macOS";
     if (/Win/i.test(userAgent)) return "Windows";
-    if (/Linux/i.test(userAgent)) return "Linux";
+    // if (/Linux/i.test(userAgent)) return "Linux";
     return null;
   };
 
@@ -81,7 +81,7 @@ const ProductShowcase = () => {
     { name: "iOS", icon: <PhoneIphoneRoundedIcon />, action: openAppStore },
     { name: "macOS", icon: <DesktopMacRoundedIcon />, action: openMacDownload },
     { name: "Windows", icon: <WindowRoundedIcon />, action: openWindowsDownload },
-    { name: "Linux", icon: <ComputerRoundedIcon />, action: openLinuxDownload },
+    // { name: "Linux", icon: <ComputerRoundedIcon />, action: openLinuxDownload },
   ];
 
   const detectedPlatformData = platforms.find(p => p.name === currentPlatform);
