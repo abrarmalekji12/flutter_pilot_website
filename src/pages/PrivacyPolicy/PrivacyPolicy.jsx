@@ -211,13 +211,41 @@ export default function PrivacyPolicy() {
             </section>
 
             <section className={classes.contentSection}>
-              <h2 className={classes.contentHeading}>7. Data Security and Retention</h2>
-              <p className={classes.contentText}>
-                We use industry-standard safeguards (such as encrypted connections and access controls) to protect your data
-                and any Google user data we access. OAuth tokens are stored securely and used only to make authorized calls to
-                Google APIs on your behalf. We retain Google user data only for as long as necessary to provide the Sheets
-                Integration feature, or until you revoke access or delete your account, whichever comes first.
+              <h2 className={classes.contentHeading}>7. Data Security and Protection of Sensitive Data</h2>
+              <p className={`${classes.contentText} ${localClasses.textBlock}`}>
+                We treat the following as sensitive data: Google OAuth credentials and tokens, your account login details, and
+                any spreadsheet content accessed through Sheets Integration (which may include personal or business
+                information you choose to store in your sheet). We apply the following safeguards to protect this data:
               </p>
+              <ul className={classes.contentList}>
+                <li className={classes.contentListItem}>
+                  <strong>Encryption in transit.</strong> All traffic between your browser, our servers, and the Google APIs is
+                  encrypted using TLS/HTTPS — data is never sent in plain text.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Encryption at rest.</strong> OAuth access and refresh tokens, account credentials, and any cached
+                  spreadsheet data are encrypted at rest in our database.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Access controls.</strong> Access to production systems and sensitive data is restricted to authorized
+                  personnel on a least-privilege, need-to-know basis, and is authenticated and logged.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Secure token handling.</strong> OAuth tokens are stored server-side only, are never exposed to the
+                  browser or third parties beyond what's needed to call the Google APIs on your behalf, and can be revoked at
+                  any time (see Section 8).
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Data minimization and retention limits.</strong> We collect and cache only the minimum data needed to
+                  provide the Sheets Integration feature, and delete cached spreadsheet data and tokens once you disconnect the
+                  sheet, delete the associated app, or delete your account.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Monitoring and incident response.</strong> We monitor our systems for unauthorized access, and in the
+                  event of a data breach affecting your personal or Google user data, we will notify affected users and
+                  relevant authorities as required by applicable law.
+                </li>
+              </ul>
             </section>
 
             <section className={classes.contentSection}>
