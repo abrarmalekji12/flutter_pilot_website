@@ -250,7 +250,7 @@ export default function PrivacyPolicy() {
 
             <section className={classes.contentSection}>
               <h2 className={classes.contentHeading}>8. Your Rights</h2>
-              <p className={classes.contentText}>
+              <p className={`${classes.contentText} ${localClasses.textBlock}`}>
                 You can request access, update, or deletion of your personal data, including any Google user data we hold, at
                 any time. You may disconnect Google Sheets and revoke FlutterPilot's access to your Google account whenever
                 you like from your app settings, or directly from your{" "}
@@ -262,8 +262,25 @@ export default function PrivacyPolicy() {
                 >
                   Google Account permissions page
                 </a>
-                . To request deletion of data we hold, contact our support at{" "}
-                <a href="mailto:fromamsoftwares@gmail.com" className={classes.contentLink}>fromamsoftwares@gmail.com</a>.
+                .
+              </p>
+              <p className={`${classes.contentText} ${localClasses.textBlock}`}>
+                You can delete your account and associated data yourself at any time using the <strong>Delete Account</strong>{" "}
+                option in account settings, available in the FlutterPilot web app at{" "}
+                <a
+                  href="https://studio.flutterpilot.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={classes.contentLink}
+                >
+                  studio.flutterpilot.com
+                </a>{" "}
+                and in the Android, iOS, Mac, and Windows apps. Deleting your account removes your stored data, including any
+                cached Sheets Integration data and Google OAuth tokens.
+              </p>
+              <p className={classes.contentText}>
+                To request deletion of data we hold, or for any other privacy request, contact our support at{" "}
+                <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a>.
               </p>
             </section>
 
@@ -279,7 +296,7 @@ export default function PrivacyPolicy() {
               <h2 className={classes.contentHeading}>10. Contact Us</h2>
               <p className={classes.contentText}>
                 If you have questions about this Privacy Policy or how we handle your data, contact us at{" "}
-                <a href="mailto:fromamsoftwares@gmail.com" className={classes.contentLink}>fromamsoftwares@gmail.com</a>.
+                <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a>.
               </p>
             </section>
           </div>
