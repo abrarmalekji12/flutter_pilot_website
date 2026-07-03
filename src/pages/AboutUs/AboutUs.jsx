@@ -112,7 +112,7 @@ export default function AboutUs() {
               <h2 className={classes.contentHeading}>Contact Details</h2>
               <div className={classes.contentInfoBox}>
                 <p className={classes.contentText}><strong>Address:</strong> AM Softwares, Kolikhad Farm, Modasa, Gujarat, India, 383315</p>
-                <p className={classes.contentText}><strong>Email:</strong> <a href="mailto:fromamsoftwares@gmail.com" className={classes.contentLink}>fromamsoftwares@gmail.com</a></p>
+                <p className={classes.contentText}><strong>Email:</strong> <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a></p>
               </div>
             </section>
           </div>
