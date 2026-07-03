@@ -143,8 +143,9 @@ export default function PrivacyPolicy() {
               <p className={classes.contentText}>
                 We do not use Google user data for advertising, and we do not use it to train generalized AI/ML models. Where
                 our AI features (such as generating suggested app screens or sample data) process spreadsheet content you
-                provide, that data is used only to generate output for you within your session, consistent with the Limited
-                Use requirements described in Section 5.
+                provide, that data is sent only to the AI model provider powering the feature you selected — Google (Gemini),
+                OpenAI (ChatGPT), Anthropic (Claude), Mistral AI, or xAI (Grok) — and is used only to generate output for you
+                within your session, consistent with the Limited Use requirements described in Section 5.
               </p>
             </section>
 
@@ -171,8 +172,10 @@ export default function PrivacyPolicy() {
                 </li>
                 <li className={classes.contentListItem}>
                   <strong>AI model providers</strong> we use to power AI-assisted features (such as suggesting app screens or
-                  sample data). Only the minimum spreadsheet content needed to generate the requested output is sent to these
-                  providers, and it is used to service your request, not to train the provider's general-purpose models.
+                  sample data), namely Google (Gemini), OpenAI (ChatGPT), Anthropic (Claude), Mistral AI, and xAI (Grok). Only
+                  the minimum spreadsheet content needed to generate the requested output is sent to whichever provider powers
+                  the feature you use, and it is used to service your request, not to train the provider's general-purpose
+                  models.
                 </li>
                 <li className={classes.contentListItem}>
                   <strong>Legal and safety reasons</strong>, such as complying with a valid legal request, or protecting the
