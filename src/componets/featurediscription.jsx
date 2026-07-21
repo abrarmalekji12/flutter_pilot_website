@@ -106,7 +106,7 @@ const FeatureShowcase = (props) => {
                 marginBottom: "28px",
               }}
             >
-              <span className={classes.featureBadge}>Design</span>
+              <span className={classes.featureBadge}>{props.badge || "Design"}</span>
               <Typography variant="h2" className={classes.title} style={{ marginBottom: "10px" }}>
                 {props.title}
               </Typography>
@@ -161,7 +161,7 @@ const FeatureShowcase = (props) => {
               viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               style={{ marginBottom: "32px" }}
             >
-              <span className={classes.featureBadge}>Capabilities</span>
+              <span className={classes.featureBadge}>{props.badge || "Capabilities"}</span>
               <Typography variant="h2" className={classes.title} style={{ marginBottom: "10px" }}>
                 {props.title}
               </Typography>

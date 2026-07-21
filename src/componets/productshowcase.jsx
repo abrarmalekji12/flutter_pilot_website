@@ -6,7 +6,6 @@ import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
 import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
 import DesktopMacRoundedIcon from "@mui/icons-material/DesktopMacRounded";
-import ComputerRoundedIcon from "@mui/icons-material/ComputerRounded";
 import { commonStyles } from "../styles/commonStyles";
 
 const ProductShowcase = () => {
