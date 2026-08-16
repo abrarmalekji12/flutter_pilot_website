@@ -9,12 +9,18 @@ const FeatureShowcase = (props) => {
   const classes = commonStyles();
   const videoRef = useRef(null);
   const navigate = useNavigate();
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isDark = props.tone === "dark";
 
   useEffect(() => {
     const video = videoRef.current;
     if (!props.isVideo || !video) return;
+
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
     video.playbackRate = 1.25;
 
@@ -45,14 +51,16 @@ const FeatureShowcase = (props) => {
           height: "auto", 
           display: "block", 
           borderRadius: radius,
+          aspectRatio: "3418 / 2084",
+          objectFit: "cover",
           transform: "translateZ(0)", // Hardware acceleration
           WebkitBackfaceVisibility: "hidden",
         }}
         loop
         muted
         playsInline
-        preload={isMobile ? "none" : "metadata"}
-        fetchpriority={isMobile ? "low" : "auto"}
+        preload="none"
+        poster={props.poster}
         crossOrigin="anonymous"
       >
         <source src={props.url} type="video/mp4" />
@@ -62,6 +70,7 @@ const FeatureShowcase = (props) => {
         src={props.url}
         alt={props.title}
         loading="lazy"
+        decoding="async"
         style={{ width: "100%", display: "block", borderRadius: radius }}
       />
     );
@@ -106,7 +115,10 @@ const FeatureShowcase = (props) => {
                 marginBottom: "28px",
               }}
             >
-              <span className={classes.featureBadge}>{props.badge || "Design"}</span>
+              <span className={classes.featureBadge}>
+                {props.badgeIcon}
+                {props.badge || "Design"}
+              </span>
               <Typography variant="h2" className={classes.title} style={{ marginBottom: "10px" }}>
                 {props.title}
               </Typography>
@@ -129,8 +141,8 @@ const FeatureShowcase = (props) => {
 
             {/* Full-width video */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 16 }}
+              whileInView={{ y: 0 }}
               transition={{ duration: 0.45, delay: 0.15 }}
               viewport={{ once: true, margin: "0px 0px -80px 0px" }}
             >
@@ -152,7 +164,7 @@ const FeatureShowcase = (props) => {
           transition={{ duration: 0.4, ease: "easeOut" }}
           viewport={{ once: true, margin: "0px 0px -40px 0px" }}
         >
-          <div className={classes.featureGlassCard}>
+          <div className={`${classes.featureGlassCard} ${isDark ? classes.featureDarkCard : ""}`}>
             {/* Header row */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -161,8 +173,25 @@ const FeatureShowcase = (props) => {
               viewport={{ once: true, margin: "0px 0px -80px 0px" }}
               style={{ marginBottom: "32px" }}
             >
-              <span className={classes.featureBadge}>{props.badge || "Capabilities"}</span>
-              <Typography variant="h2" className={classes.title} style={{ marginBottom: "10px" }}>
+              <span className={`${classes.featureBadge} ${isDark ? classes.featureDarkBadge : ""}`}>
+                {props.badgeIcon}
+                {props.badge || "Capabilities"}
+              </span>
+              <Typography
+                variant="h2"
+                className={`${classes.title} ${isDark ? classes.featureDarkTitle : ""}`}
+                style={{
+                  marginBottom: "10px",
+                  ...(isDark
+                    ? {
+                        background: "linear-gradient(110deg, #f8fafc 0%, #bfdbfe 60%, #c4b5fd 100%)",
+                        WebkitBackgroundClip: "text",
+                        WebkitTextFillColor: "transparent",
+                        textShadow: "none",
+                      }
+                    : {}),
+                }}
+              >
                 {props.title}
               </Typography>
               {props.subtitle && (
@@ -170,7 +199,7 @@ const FeatureShowcase = (props) => {
                   component="p"
                   style={{
                     fontSize: "1.05rem",
-                    color: "#475569",
+                    color: isDark ? "#cbd5e1" : "#475569",
                     lineHeight: 1.65,
                     margin: 0,
                     maxWidth: "620px",
@@ -187,14 +216,14 @@ const FeatureShowcase = (props) => {
               {(props.items || []).map((item, i) => (
                 <Grid item xs={12} sm={6} md={4} key={i}>
                   <motion.div
-                    className={classes.toolingCard}
+                    className={`${classes.toolingCard} ${isDark ? classes.toolingCardDark : ""}`}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.05 + i * 0.05 }}
                     viewport={{ once: true, margin: "0px 0px -80px 0px" }}
                   >
                     {/* Icon — fixed width left column */}
-                    <Box className={classes.toolingCardIcon}>
+                    <Box className={`${classes.toolingCardIcon} ${isDark ? classes.toolingCardIconDark : ""}`}>
                       {item.icon}
                     </Box>
 
@@ -205,7 +234,7 @@ const FeatureShowcase = (props) => {
                         style={{
                           fontWeight: 700,
                           fontSize: "0.95rem",
-                          color: "#0f172a",
+                          color: isDark ? "#f8fafc" : "#0f172a",
                           lineHeight: 1.3,
                           margin: 0,
                         }}
@@ -216,7 +245,7 @@ const FeatureShowcase = (props) => {
                         component="p"
                         style={{
                           fontSize: "0.85rem",
-                          color: "#64748b",
+                          color: isDark ? "#94a3b8" : "#64748b",
                           lineHeight: 1.6,
                           margin: 0,
                           fontWeight: 400,

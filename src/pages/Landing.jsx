@@ -1,7 +1,8 @@
 // src/pages/Landing.js
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Button } from "@mui/material";
 import CustomAppBar from "../componets/appbar";
 import PromptGeneratorHero from "../componets/promptgeneratorhero";
 import ProductShowcase from "../componets/productshowcase";
@@ -19,49 +20,59 @@ import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
 import TouchAppRoundedIcon from "@mui/icons-material/TouchAppRounded";
 import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
+import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
 
 const featurelist = [
   {
     title: "Visual Design & AI Editing",
-    url: "visual_edit_preview.mp4",
-    subtitle: "Drag, drop, and prompt your way to a polished UI — no code required.",
+    url: "/productShowCase2.mp4",
+    poster: "/flutterpilot_ss.webp",
+    subtitle: "Generate the first draft with AI, then refine every widget in the visual Studio.",
+    badge: "Design",
+    badgeIcon: <DesignServicesRoundedIcon fontSize="small" />,
     heroMedia: true,
     isVideo: true,
   },
   {
     title: "Comprehensive Tooling",
     subtitle: "Everything you need to design, connect, and ship — in one workspace.",
+    badge: "Studio stack",
+    badgeIcon: <ConstructionRoundedIcon fontSize="small" />,
+    tone: "dark",
     featureGrid: true,
     items: [
       {
         icon: <ChatRoundedIcon fontSize="small" />,
-        title: "Conversational Editing",
-        description: "Tweak styles, add screens, or redesign layouts by just typing to the AI.",
+        title: "Project-Aware AI Copilot",
+        description: "Create screens, components, variables, and endpoints through a conversation grounded in your project.",
       },
       {
         icon: <DashboardCustomizeRoundedIcon fontSize="small" />,
-        title: "Figma Conversion",
-        description: "Import Figma designs and instantly generate clean, editable Flutter code.",
+        title: "Figma Import",
+        description: "Bring design structure into the Studio, then continue with visual editing and Flutter-aware controls.",
       },
       {
         icon: <CodeRoundedIcon fontSize="small" />,
-        title: "Export Flutter Code",
-        description: "Download production-ready code anytime — no lock-in, fully yours.",
+        title: "Own the Flutter Source",
+        description: "Export the complete Flutter project when you are ready to continue in your own development workflow.",
       },
       {
         icon: <ApiRoundedIcon fontSize="small" />,
-        title: "Integrate Endpoints",
-        description: "Connect REST APIs and wire data to your UI components with ease.",
+        title: "REST & Postman",
+        description: "Create and test REST endpoints, import Postman collections, and bind responses to the UI.",
       },
       {
         icon: <LanguageRoundedIcon fontSize="small" />,
-        title: "Share as Web App",
-        description: "Instantly share your web-app link with everyone — live updates in real-time.",
+        title: "One-Click Web Deploy",
+        description: "Deploy a hosted Flutter web app from the Studio and share the live URL immediately.",
       },
       {
         icon: <AndroidRoundedIcon fontSize="small" />,
-        title: "One-Click APK",
-        description: "Generate an installable Android APK natively from your workspace.",
+        title: "Cloud-Built Android APK",
+        description: "Request an installable Android build without leaving the Studio.",
       },
       // {
       //   icon: <AppleIcon fontSize="small" />,
@@ -72,10 +83,11 @@ const featurelist = [
     isVideo: false,
   },
   {
-    title: "Built for Real Apps",
+    title: "From Prototype to Real App",
     subtitle:
-      "From data management to team workflows — everything you need to build production-ready Flutter apps.",
+      "Add the data, behavior, state, testing, and version history a real Flutter project needs.",
     badge: "Platform",
+    badgeIcon: <DevicesRoundedIcon fontSize="small" />,
     featureGrid: true,
     items: [
       {
@@ -86,21 +98,21 @@ const featurelist = [
       },
       {
         icon: <TableChartRoundedIcon fontSize="small" />,
-        title: "Google Sheets",
+        title: "Connected Data",
         description:
-          "Connect any Google Sheet and turn spreadsheet data into a live, interactive Flutter UI.",
+          "Work with Google Sheets, REST APIs, Firebase, Supabase, or local collections from one Studio.",
       },
       {
         icon: <StorageRoundedIcon fontSize="small" />,
-        title: "Local Data",
+        title: "Data Panel",
         description:
-          "Build offline-first apps with on-device storage, AI-assisted schemas, and auto migrations.",
+          "Design schemas, manage rows, generate realistic samples, and build offline-first flows.",
       },
       {
         icon: <TouchAppRoundedIcon fontSize="small" />,
-        title: "Actions Builder",
+        title: "Actions & State",
         description:
-          "Define navigation, dialogs, conditions, and device features with visual logic flows.",
+          "Define navigation, conditions, state updates, dialogs, and device behavior with visual flows.",
       },
       {
         icon: <DevicesRoundedIcon fontSize="small" />,
@@ -110,9 +122,9 @@ const featurelist = [
       },
       {
         icon: <GroupsRoundedIcon fontSize="small" />,
-        title: "Team Collaboration",
+        title: "Versioned Team Workflow",
         description:
-          "Commit-based version control and shared editing for seamless multi-user workflows.",
+          "Use commit-based version control, cloud sync, and project sharing to coordinate changes.",
       },
     ],
     isVideo: false,
@@ -122,6 +134,7 @@ const featurelist = [
 export default function Landing() {
   const common = commonStyles();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // When redirected here from /download (or with a #download hash), scroll to
   // the download/product showcase section once the page has rendered.
@@ -173,6 +186,7 @@ export default function Landing() {
             <FeatureShowcase
               title={e.title}
               url={e.url}
+              poster={e.poster}
               subtitle={e.subtitle}
               discription={e.discription}
               alignleft={e.alignleft}
@@ -183,9 +197,57 @@ export default function Landing() {
               featureGrid={e.featureGrid}
               items={e.items}
               badge={e.badge}
+              badgeIcon={e.badgeIcon}
+              tone={e.tone}
             />
           </section>
         ))}
+
+        <motion.section
+          className={common.responsiveContainer}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+        >
+          <div className={common.studioCta}>
+            <div className={common.studioCtaCopy}>
+              <span className={common.studioCtaEyebrow}>Ready when you are</span>
+              <h2 className={common.studioCtaTitle}>Turn the idea into a working Flutter project</h2>
+              <p className={common.studioCtaText}>
+                This site helps you explore FlutterPilot. The actual building happens in FlutterPilot Studio—where
+                you generate, edit, connect, preview, and export your app.
+              </p>
+              <div className={common.studioCtaMeta} aria-label="FlutterPilot platform availability">
+                <span className={common.studioCtaMetaItem}>
+                  <LanguageRoundedIcon aria-hidden="true" /> Browser-based Studio
+                </span>
+                <span className={common.studioCtaMetaItem}>
+                  <DevicesRoundedIcon aria-hidden="true" /> Desktop and mobile apps
+                </span>
+                <span className={common.studioCtaMetaItem}>
+                  <CodeRoundedIcon aria-hidden="true" /> Exportable Flutter source
+                </span>
+              </div>
+            </div>
+            <div className={common.studioCtaActions}>
+              <Button
+                className={common.studioCtaPrimary}
+                endIcon={<ArrowForwardRoundedIcon />}
+                onClick={() => window.open("https://studio.flutterpilot.com", "_blank", "noopener,noreferrer")}
+              >
+                Open FlutterPilot Studio
+              </Button>
+              <Button
+                className={common.studioCtaSecondary}
+                startIcon={<MenuBookRoundedIcon />}
+                onClick={() => navigate("/docs")}
+              >
+                Explore product guide
+              </Button>
+            </div>
+          </div>
+        </motion.section>
 
       </main>
     </CustomAppBar>

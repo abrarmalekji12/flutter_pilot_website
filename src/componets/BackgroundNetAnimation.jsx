@@ -100,6 +100,8 @@ const BackgroundNetAnimation = () => {
 
     // ── Main draw loop ────────────────────────────────────────────────────
     const draw = () => {
+      if (document.hidden) return;
+
       ctx.clearRect(0, 0, logW, logH);
 
       const points = pointsRef.current;
@@ -194,8 +196,15 @@ const BackgroundNetAnimation = () => {
     const onMouseLeave = () => {
       mouseRef.current = { x: -9999, y: -9999 };
     };
+    const onVisibilityChange = () => {
+      if (!document.hidden) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(draw);
+      }
+    };
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("visibilitychange", onVisibilityChange);
 
     resize();
     animationFrameId = requestAnimationFrame(draw);
@@ -204,6 +213,7 @@ const BackgroundNetAnimation = () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

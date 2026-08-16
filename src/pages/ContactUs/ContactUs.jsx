@@ -3,6 +3,7 @@ import { Box, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   eyebrow: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.7),
     margin: 0,
     marginBottom: theme.spacing(1),
     textTransform: "uppercase",
@@ -170,7 +174,7 @@ export default function ContactUs() {
     <CustomAppBar type="contactUs">
       <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
-          <p className={localClasses.eyebrow}>Contact</p>
+          <p className={localClasses.eyebrow}><MailOutlineRoundedIcon fontSize="small" aria-hidden="true" /> Contact</p>
           <h1 className={localClasses.title}>Contact Us</h1>
           <p className={localClasses.subtitle}>
             We’d love to hear from you. Reach out with questions, feedback, or suggestions.

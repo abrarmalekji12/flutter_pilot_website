@@ -3,6 +3,7 @@ import { Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   eyebrow: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.7),
     margin: 0,
     marginBottom: theme.spacing(1),
     textTransform: "uppercase",
@@ -71,7 +75,7 @@ export default function AboutUs() {
     <CustomAppBar type="aboutUs">
       <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
-          <p className={localClasses.eyebrow}>Company</p>
+          <p className={localClasses.eyebrow}><GroupsRoundedIcon fontSize="small" aria-hidden="true" /> Company</p>
           <h1 className={localClasses.title}>About Us</h1>
           <p className={localClasses.subtitle}>
             FlutterPilot helps teams move from idea to Flutter app faster with AI generation and visual editing.

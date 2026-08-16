@@ -3,3 +3,14 @@
 /flutter-templates/ /template/ 301
 /free-flutter-templates /template/ 301
 /free-flutter-templates/ /template/ 301
+
+# Consolidate legacy mixed-case routes into readable canonical URLs.
+/aboutUs /about-us/ 301
+/aboutUs/ /about-us/ 301
+/contactUs /contact/ 301
+/contactUs/ /contact/ 301
+/privacyPolicy /privacy-policy/ 301
+/privacyPolicy/ /privacy-policy/ 301
+
+# Serve the React application for client-side routes on Cloudflare Pages/Netlify.
+/* /index.html 200

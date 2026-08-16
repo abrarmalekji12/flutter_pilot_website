@@ -56,7 +56,7 @@
       "name": "Browse Templates",
       "short_name": "Templates",
       "description": "Browse ready-made Flutter app templates",
-      "url": "/#/template",
+      "url": "/template",
       "icons": [{"src": "flutterpilot_logo_round.svg", "sizes": "any"}]
     }
   ]

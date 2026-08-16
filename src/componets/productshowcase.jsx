@@ -11,7 +11,7 @@ import { commonStyles } from "../styles/commonStyles";
 const ProductShowcase = () => {
   const classes = commonStyles();
   const videoRef = useRef(null);
-  const videoSrc = `${process.env.PUBLIC_URL}/productShowCase2.mp4`;
+  const videoSrc = `${process.env.PUBLIC_URL}/visual_edit_preview.mp4`;
   const videoPoster = `${process.env.PUBLIC_URL}/flutterpilot_ss.webp`;
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -19,7 +19,14 @@ const ProductShowcase = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    video.playbackRate = 1.35;
+    if (
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    video.playbackRate = 1;
 
     // Use Intersection Observer to only play when in view
     const observer = new IntersectionObserver(
@@ -104,11 +111,11 @@ const ProductShowcase = () => {
             component="h2"
             className={classes.heroTitle}
           >
-            Build Mobile Apps with Prompts
+            Meet the FlutterPilot Studio
           </Typography>
 
           <Typography variant="body1" className={classes.heroSubtitle}>
-            Prompt, edit, and preview in real time. Export clean code freely — no lock-in.
+            The visual workspace behind every demo: generate, edit, connect data, test interactions, and export.
           </Typography>
 
           {/* Primary CTA */}
@@ -118,10 +125,10 @@ const ProductShowcase = () => {
               className={classes.primaryCtaBtn}
               startIcon={<LanguageRoundedIcon />}
             >
-              Start Building Free
+              Open Web Studio
             </Button>
             <Typography className={classes.ctaSubtext}>
-              Try in Browser • No install required
+              Build in your browser • No install required
             </Typography>
           </div>
 
@@ -175,16 +182,17 @@ const ProductShowcase = () => {
                 height: "auto",
                 display: "block",
                 borderRadius: "0 0 12px 12px",
+                aspectRatio: "1920 / 1176",
+                objectFit: "cover",
                 transform: "translateZ(0)", // Force GPU acceleration for sharper rendering
                 backfaceVisibility: "hidden",
                 WebkitBackfaceVisibility: "hidden",
               }}
               poster={videoPoster}
-              preload={isMobile ? "none" : "metadata"}
+              preload="none"
               loop
               muted
               playsInline
-              fetchpriority={isMobile ? "low" : "auto"}
               crossOrigin="anonymous"
               aria-label="FlutterPilot AI Flutter app builder demo — create screens from prompts, drag-and-drop editor, real-time preview"
               title="FlutterPilot Platform Demo"

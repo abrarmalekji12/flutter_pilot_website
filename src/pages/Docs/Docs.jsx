@@ -1,594 +1,854 @@
-import React from "react";
-import { Container, Grid } from "@mui/material";
+import React, { useMemo, useState } from "react";
+import { Button, Chip, Container, TextField } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import ArrowOutwardRoundedIcon from "@mui/icons-material/ArrowOutwardRounded";
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import DataObjectRoundedIcon from "@mui/icons-material/DataObjectRounded";
+import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
+import CloudUploadRoundedIcon from "@mui/icons-material/CloudUploadRounded";
+import RocketLaunchRoundedIcon from "@mui/icons-material/RocketLaunchRounded";
+import MonetizationOnRoundedIcon from "@mui/icons-material/MonetizationOnRounded";
+import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
+import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import BoltRoundedIcon from "@mui/icons-material/BoltRounded";
+import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
+import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
-import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
-import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
-import TouchAppRoundedIcon from "@mui/icons-material/TouchAppRounded";
-import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
-import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
-import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
-import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
-import CloudUploadRoundedIcon from "@mui/icons-material/CloudUploadRounded";
-import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+
+const STUDIO_URL = "https://studio.flutterpilot.com";
+
+const docGroups = [
+  {
+    key: "start",
+    navLabel: "Start here",
+    eyebrow: "Foundation",
+    title: "Know the Studio",
+    description: "Start with the workspace, then use the built-in guide or AI when you need contextual help.",
+    accent: "#6366f1",
+    sections: [
+      {
+        id: "overview",
+        title: "Welcome to FlutterPilot",
+        icon: DashboardCustomizeRoundedIcon,
+        summary:
+          "A rapid visual builder that bridges design and Flutter development with editable UI, live logic, and exportable source code.",
+        features: ["AI generation", "Drag-and-drop editor", "Real-time preview", "Flutter source export"],
+        code: "Prompt → design → logic → preview → export",
+      },
+      {
+        id: "guide",
+        title: "User Guide",
+        icon: MenuBookRoundedIcon,
+        summary:
+          "The Studio includes a searchable, task-based guide with deep links, contextual highlighting, and an Ask AI handoff.",
+        features: ["Search across topics", "Deep-linked sections", "Contextual actions", "Ask AI from docs"],
+        code: "Search once. Jump directly to the right tool.",
+      },
+    ],
+  },
+  {
+    key: "build",
+    navLabel: "Build",
+    eyebrow: "Create",
+    title: "Generate interfaces and behavior",
+    description: "Move from a project idea to editable screens, working actions, and predictable application state.",
+    accent: "#2563eb",
+    sections: [
+      {
+        id: "ai-generation",
+        title: "AI Generation",
+        icon: AutoAwesomeRoundedIcon,
+        summary:
+          "Generate full projects, screens, and component trees, then refine them through revision-aware AI editing.",
+        features: ["AI Project Creator", "UI & component generation", "Revision-based refinement", "Project-aware AI Copilot"],
+        code: '“Profile page with avatar, stats, and recent activity”',
+      },
+      {
+        id: "actions",
+        title: "Actions & Logic",
+        icon: AccountTreeRoundedIcon,
+        summary:
+          "Chain navigation, overlays, state changes, data operations, conditions, device features, and custom Dart code.",
+        features: ["Navigation & stack", "Dialogs and bottom sheets", "Conditions and loops", "Device and custom actions"],
+        code: "onTap → check state → call API → open screen",
+      },
+      {
+        id: "state-management",
+        title: "State Management",
+        icon: DataObjectRoundedIcon,
+        summary:
+          "Use app-wide or page-scoped variables, optional persistence, and explicit rebuild modes without wiring boilerplate.",
+        features: ["App State", "Page State", "Persistent values", "Current / all / no rebuild"],
+        code: "appState.cartCount · pageState.isLoading",
+      },
+    ],
+  },
+  {
+    key: "connect",
+    navLabel: "Connect",
+    eyebrow: "Data",
+    title: "Connect real data",
+    description: "Model, preview, and load data from local collections, spreadsheets, APIs, and cloud backends.",
+    accent: "#059669",
+    sections: [
+      {
+        id: "data-panel",
+        title: "Data Panel",
+        icon: StorageRoundedIcon,
+        summary:
+          "One workspace for collection schemas, live rows, design-time samples, templates, and AI-assisted data modeling.",
+        features: ["Schema Studio", "Live Rows Explorer", "Canvas samples", "AI and ready-made templates"],
+        code: "Schema · Rows · Samples",
+      },
+      {
+        id: "sheet-integration",
+        title: "Sheet Integration",
+        icon: TableChartRoundedIcon,
+        summary:
+          "Connect Google Sheets, infer a typed schema, insert mapped UI templates, and bind forms or lists to live rows.",
+        features: ["Google sign-in and picker", "Schema inference", "Mapped UI templates", "Add / edit / save / delete"],
+        code: "bindWith: products · bind: products.title",
+      },
+      {
+        id: "local-data",
+        title: "Local Data",
+        icon: BoltRoundedIcon,
+        summary:
+          "Build offline-first experiences with on-device collections, safe schema changes, real rows, and generated samples.",
+        features: ["Hive-backed storage", "Automatic migrations", "Live row management", "Offline-first workflows"],
+        code: "products.add · products.save · products.refresh",
+      },
+      {
+        id: "api-endpoints",
+        title: "API Endpoints",
+        icon: ApiRoundedIcon,
+        summary:
+          "Configure and test REST endpoints manually or from Postman, then design success, loading, and error states visually.",
+        features: ["Postman import", "Global variables and headers", "Live request testing", "DataLoaderWidget states"],
+        code: "App.apis.getUser.fetch(id: appState.userId)",
+      },
+    ],
+  },
+  {
+    key: "ship",
+    navLabel: "Ship",
+    eyebrow: "Release",
+    title: "Export, deploy, and monetize",
+    description: "Take the project beyond preview with source exports, platform builds, hosted web releases, and mobile ads.",
+    accent: "#ea580c",
+    sections: [
+      {
+        id: "export",
+        title: "Export & Publish",
+        icon: CloudUploadRoundedIcon,
+        summary:
+          "Open one release workspace for complete Flutter source exports, Android APK generation, and deployment history.",
+        features: ["Flutter project ZIP", "Android APK", "Build history", "Export validation"],
+        code: "Open Export & Publish → choose target → build",
+      },
+      {
+        id: "deploy",
+        title: "Deploy & Host",
+        icon: RocketLaunchRoundedIcon,
+        summary:
+          "Follow platform-specific guidance for hosted web apps, Android builds, iOS/TestFlight, and desktop releases.",
+        features: ["Web hosting", "Android cloud builds", "iOS and TestFlight guide", "Desktop release guide"],
+        code: "Web · Android · iOS · Desktop",
+      },
+      {
+        id: "monetization",
+        title: "Mobile Ads (AdMob)",
+        icon: MonetizationOnRoundedIcon,
+        summary:
+          "Add mobile banner ads with validated AdMob identifiers and export-time configuration handled by FlutterPilot.",
+        features: ["Ad component", "Test ID workflow", "Multiple banner sizes", "Android and iOS builds"],
+        code: "App ID: ~ · Ad unit ID: /",
+      },
+    ],
+  },
+];
+
+const referenceSections = [
+  ["Layout", "Structure screens with Column, Row, Container, Stack, ListView, GridView, Wrap, and SafeArea."],
+  ["UI Elements", "Text, images, cards, chips, charts, web views, ads, progress indicators, and more."],
+  ["Inputs", "Buttons, fields, switches, checkboxes, dropdowns, sliders, pickers, and forms."],
+  ["Navigation", "App bars, tabs, drawers, page views, data loaders, conditions, and loops."],
+  ["Core Classes", "String, number, boolean, DateTime, dynamic values, and expressions."],
+  ["Dart Collections", "List, Map, Set, Iterable, and their supported methods."],
+  ["API & Storage", "ApiResponse, SharedPreferences, Firestore, and storage-facing helpers."],
+  ["Utilities", "App helpers, Timer, Future, TextEditingController, and common expressions."],
+];
+
+const workflow = [
+  ["01", "Generate", "Start with a whole project, a screen, or a single component."],
+  ["02", "Design", "Arrange widgets visually and refine them with AI or direct controls."],
+  ["03", "Connect", "Add state, actions, collections, Sheets, or REST endpoints."],
+  ["04", "Ship", "Preview, export source, build Android, or deploy to the web."],
+];
 
 const useStyles = makeStyles((theme) => ({
-  intro: {
-    borderRadius: "18px",
-    border: "1px solid rgba(148, 163, 184, 0.28)",
-    background: "linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)",
-    boxShadow: "0 12px 32px rgba(15, 23, 42, 0.07)",
-    padding: theme.spacing(3, 3.2),
-    marginBottom: theme.spacing(4),
+  page: {
+    paddingBottom: theme.spacing(3),
+  },
+  hero: {
+    position: "relative",
+    overflow: "hidden",
+    display: "grid",
+    gridTemplateColumns: "minmax(0, 1.08fr) minmax(330px, 0.92fr)",
+    gap: theme.spacing(5),
+    alignItems: "center",
+    minHeight: 510,
+    padding: theme.spacing(6, 6.5),
+    borderRadius: 30,
+    color: "#f8fafc",
+    background:
+      "radial-gradient(circle at 88% 8%, rgba(56,189,248,.23), transparent 34%), radial-gradient(circle at 8% 96%, rgba(99,102,241,.22), transparent 36%), linear-gradient(145deg, #07111f 0%, #0f1f46 54%, #172554 100%)",
+    border: "1px solid rgba(147,197,253,.2)",
+    boxShadow: "0 32px 82px rgba(15,23,42,.28)",
+    isolation: "isolate",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      inset: 0,
+      zIndex: -1,
+      opacity: 0.55,
+      backgroundImage:
+        "linear-gradient(rgba(148,163,184,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,.07) 1px, transparent 1px)",
+      backgroundSize: "42px 42px",
+      maskImage: "linear-gradient(to bottom, black, transparent 82%)",
+      WebkitMaskImage: "linear-gradient(to bottom, black, transparent 82%)",
+    },
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "1fr",
+      minHeight: 0,
+      padding: theme.spacing(5, 4),
+    },
     [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(2.2, 2),
-      marginBottom: theme.spacing(3),
+      padding: theme.spacing(4, 2.3),
+      borderRadius: 22,
+      gap: theme.spacing(3.5),
     },
   },
   eyebrow: {
-    margin: 0,
-    marginBottom: theme.spacing(1),
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    marginBottom: theme.spacing(1.6),
+    color: "#7dd3fc",
+    fontSize: ".78rem",
+    fontWeight: 800,
+    letterSpacing: "1.1px",
     textTransform: "uppercase",
-    fontSize: "0.76rem",
-    letterSpacing: "0.5px",
-    fontWeight: 700,
-    color: "#1d4ed8",
   },
-  heading: {
+  heroTitle: {
+    maxWidth: 760,
     margin: 0,
-    marginBottom: theme.spacing(1),
-    fontSize: "2.1rem",
-    lineHeight: 1.15,
-    letterSpacing: "-0.4px",
-    color: "#0f172a",
+    fontSize: "clamp(2.5rem, 5vw, 4.65rem)",
+    lineHeight: 0.98,
+    letterSpacing: "-2.8px",
+    fontWeight: 850,
     [theme.breakpoints.down("sm")]: {
-      fontSize: "1.7rem",
+      letterSpacing: "-1.5px",
     },
   },
-  lead: {
-    margin: 0,
-    color: "#475569",
-    lineHeight: 1.7,
-    maxWidth: "820px",
+  heroAccent: {
+    color: "#93c5fd",
   },
-  quickLinks: {
-    marginTop: theme.spacing(2),
+  heroLead: {
+    maxWidth: 690,
+    margin: theme.spacing(2.2, 0, 0),
+    color: "#cbd5e1",
+    fontSize: "1.05rem",
+    lineHeight: 1.75,
+  },
+  heroActions: {
     display: "flex",
     flexWrap: "wrap",
-    gap: theme.spacing(1),
+    gap: theme.spacing(1.2),
+    marginTop: theme.spacing(2.8),
   },
-  quickLink: {
-    display: "inline-block",
-    borderRadius: "999px",
-    border: "1px solid rgba(30, 64, 175, 0.24)",
-    background: "rgba(30, 64, 175, 0.06)",
-    color: "#1e40af",
-    padding: theme.spacing(0.45, 1.1),
-    fontSize: "0.82rem",
-    fontWeight: 700,
-    textDecoration: "none",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
+  primaryButton: {
+    borderRadius: "13px !important",
+    padding: "11px 19px !important",
+    color: "#0f172a !important",
+    background: "#f8fafc !important",
+    fontWeight: "800 !important",
+    textTransform: "none !important",
+    boxShadow: "0 12px 26px rgba(2,6,23,.24)",
     "&:hover": {
-      background: "rgba(30, 64, 175, 0.12)",
-      transform: "translateY(-1px)",
+      background: "#dbeafe !important",
+      transform: "translateY(-2px)",
     },
+  },
+  secondaryButton: {
+    borderRadius: "13px !important",
+    padding: "10px 18px !important",
+    color: "#dbeafe !important",
+    border: "1px solid rgba(191,219,254,.28) !important",
+    fontWeight: "750 !important",
+    textTransform: "none !important",
+    "&:hover": {
+      background: "rgba(59,130,246,.14) !important",
+    },
+  },
+  search: {
+    width: "100%",
+    maxWidth: 660,
+    marginTop: theme.spacing(3),
+    "& .MuiOutlinedInput-root": {
+      color: "#0f172a",
+      borderRadius: 15,
+      background: "rgba(255,255,255,.94)",
+      boxShadow: "0 12px 34px rgba(2,6,23,.18)",
+      "& fieldset": { borderColor: "rgba(191,219,254,.3)" },
+      "&:hover fieldset": { borderColor: "rgba(125,211,252,.75)" },
+      "&.Mui-focused fieldset": { borderColor: "#60a5fa", borderWidth: 1 },
+    },
+    "& input": { paddingTop: 14, paddingBottom: 14, fontSize: ".94rem" },
+  },
+  heroVisual: {
+    position: "relative",
+    padding: theme.spacing(1.1),
+    borderRadius: 22,
+    background: "rgba(255,255,255,.1)",
+    border: "1px solid rgba(191,219,254,.2)",
+    boxShadow: "0 26px 58px rgba(2,6,23,.3)",
+    transform: "rotate(1.2deg)",
+    [theme.breakpoints.down("md")]: {
+      maxWidth: 720,
+      transform: "none",
+    },
+  },
+  window: {
+    overflow: "hidden",
+    borderRadius: 15,
+    background: "#f8fafc",
+  },
+  windowBar: {
+    height: 34,
+    display: "flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "0 13px",
+    background: "#e2e8f0",
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: "50%",
+    background: "#94a3b8",
+  },
+  heroImage: {
+    display: "block",
+    width: "100%",
+    aspectRatio: "16 / 10",
+    objectFit: "cover",
+    objectPosition: "center top",
+  },
+  visualBadge: {
+    position: "absolute",
+    padding: "8px 11px",
+    borderRadius: 10,
+    color: "#0f172a",
+    background: "rgba(255,255,255,.93)",
+    border: "1px solid rgba(255,255,255,.86)",
+    boxShadow: "0 12px 28px rgba(2,6,23,.2)",
+    fontSize: ".76rem",
+    fontWeight: 800,
+    backdropFilter: "blur(12px)",
+  },
+  badgeOne: { top: -14, right: 26 },
+  badgeTwo: { bottom: 22, left: -22 },
+  badgeThree: { bottom: -16, right: 34 },
+  workflow: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 1,
+    overflow: "hidden",
+    marginTop: theme.spacing(2.5),
+    borderRadius: 20,
+    background: "rgba(148,163,184,.22)",
+    border: "1px solid rgba(148,163,184,.2)",
+    boxShadow: "0 16px 40px rgba(15,23,42,.08)",
+    [theme.breakpoints.down("md")]: { gridTemplateColumns: "repeat(2, 1fr)" },
+    [theme.breakpoints.down("sm")]: { gridTemplateColumns: "1fr" },
+  },
+  workflowCard: {
+    display: "grid",
+    gridTemplateColumns: "auto 1fr",
+    gap: theme.spacing(1.4),
+    padding: theme.spacing(2.3),
+    background: "rgba(255,255,255,.88)",
+    backdropFilter: "blur(12px)",
+  },
+  workflowNumber: {
+    color: "#2563eb",
+    fontSize: ".75rem",
+    fontWeight: 850,
+    letterSpacing: ".6px",
+  },
+  workflowTitle: { margin: 0, color: "#0f172a", fontSize: ".95rem", fontWeight: 800 },
+  workflowText: { margin: "4px 0 0", color: "#64748b", fontSize: ".78rem", lineHeight: 1.55 },
+  docsLayout: {
+    display: "grid",
+    gridTemplateColumns: "230px minmax(0, 1fr)",
+    gap: theme.spacing(3.2),
+    alignItems: "start",
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr" },
   },
   sidebar: {
     position: "sticky",
-    top: "102px",
-    borderRadius: "14px",
-    border: "1px solid rgba(148, 163, 184, 0.26)",
-    background: "#fff",
-    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.05)",
+    top: 112,
+    overflow: "hidden",
     padding: theme.spacing(1.4),
-    maxHeight: "calc(100vh - 130px)",
-    overflowY: "auto",
-    [theme.breakpoints.down("sm")]: {
+    borderRadius: 18,
+    color: "#cbd5e1",
+    background: "linear-gradient(155deg, #0f172a, #172554)",
+    border: "1px solid rgba(148,163,184,.18)",
+    boxShadow: "0 18px 38px rgba(15,23,42,.16)",
+    [theme.breakpoints.down("md")]: {
       position: "static",
-      top: "auto",
-      maxHeight: "none",
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      overflowX: "auto",
+      padding: theme.spacing(1),
     },
   },
-  sidebarTitle: {
-    margin: theme.spacing(0.4, 0.6, 0.8),
-    fontSize: "0.84rem",
-    fontWeight: 700,
-    letterSpacing: "0.3px",
-    textTransform: "uppercase",
-    color: "#64748b",
+  sidebarHeader: {
+    padding: theme.spacing(1.1, 1.1, 1.5),
+    [theme.breakpoints.down("md")]: { display: "none" },
   },
-  sidebarCategoryLabel: {
-    display: "block",
-    margin: theme.spacing(1.4, 0.6, 0.4),
-    fontSize: "0.66rem",
-    fontWeight: 800,
-    letterSpacing: "1px",
-    textTransform: "uppercase",
-    color: "#94a3b8",
-  },
+  sidebarKicker: { margin: 0, color: "#60a5fa", fontSize: ".7rem", fontWeight: 850, letterSpacing: "1px", textTransform: "uppercase" },
+  sidebarTitle: { margin: "5px 0 0", color: "#f8fafc", fontSize: "1rem", fontWeight: 800 },
   sidebarLink: {
-    display: "block",
-    borderRadius: "10px",
-    color: "#1e293b",
-    fontSize: "0.86rem",
-    fontWeight: 600,
-    padding: theme.spacing(0.65, 1),
-    textDecoration: "none",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    "&:hover": {
-      background: "rgba(30, 64, 175, 0.08)",
-      color: "#1e40af",
-    },
-  },
-  categoryDivider: {
     display: "flex",
     alignItems: "center",
-    gap: theme.spacing(1.5),
-    margin: theme.spacing(3, 0, 2),
-    "&:first-child": {
+    justifyContent: "space-between",
+    gap: 12,
+    marginTop: 3,
+    padding: "10px 11px",
+    borderRadius: 10,
+    color: "#cbd5e1",
+    fontSize: ".84rem",
+    fontWeight: 700,
+    textDecoration: "none",
+    transition: "all .2s ease",
+    "& span": { color: "#64748b", fontSize: ".68rem" },
+    "&:hover": { color: "#fff", background: "rgba(59,130,246,.16)", transform: "translateX(2px)" },
+    [theme.breakpoints.down("md")]: {
+      flexShrink: 0,
       marginTop: 0,
+      "& span": { display: "none" },
     },
   },
-  categoryLabel: {
-    fontSize: "0.72rem",
-    fontWeight: 800,
-    letterSpacing: "1.2px",
-    textTransform: "uppercase",
-    color: "#2563eb",
-    background: "rgba(37, 99, 235, 0.06)",
-    padding: "4px 14px",
-    borderRadius: "99px",
+  sidebarCta: {
+    width: "100%",
+    marginTop: "12px !important",
+    borderRadius: "11px !important",
+    color: "#0f172a !important",
+    background: "#f8fafc !important",
+    fontWeight: "800 !important",
+    fontSize: ".8rem !important",
+    textTransform: "none !important",
+    [theme.breakpoints.down("md")]: { display: "none !important" },
+  },
+  resultsNote: {
+    margin: theme.spacing(0, 0, 2.2),
+    padding: theme.spacing(1.4, 1.7),
+    borderRadius: 13,
+    color: "#1e3a8a",
+    background: "rgba(219,234,254,.7)",
+    border: "1px solid rgba(37,99,235,.16)",
+    fontSize: ".88rem",
+    fontWeight: 700,
+  },
+  group: { marginBottom: theme.spacing(5), scrollMarginTop: 118 },
+  groupHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    gap: theme.spacing(2),
+    alignItems: "flex-end",
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down("md")]: { alignItems: "flex-start", flexDirection: "column" },
+  },
+  groupEyebrow: { margin: 0, fontSize: ".72rem", fontWeight: 850, letterSpacing: "1.1px", textTransform: "uppercase" },
+  groupTitle: { margin: "5px 0 0", color: "#0f172a", fontSize: "clamp(1.55rem, 3vw, 2.15rem)", letterSpacing: "-.6px" },
+  groupDescription: { maxWidth: 570, margin: 0, color: "#64748b", fontSize: ".9rem", lineHeight: 1.65 },
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: theme.spacing(1.7),
+    [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr" },
+  },
+  card: {
+    position: "relative",
+    overflow: "hidden",
+    minHeight: 320,
+    display: "flex",
+    flexDirection: "column",
+    padding: theme.spacing(2.5),
+    borderRadius: 18,
+    background: "linear-gradient(180deg, rgba(255,255,255,.94), rgba(248,250,252,.9))",
+    border: "1px solid rgba(148,163,184,.22)",
+    boxShadow: "0 14px 32px rgba(15,23,42,.07)",
+    transition: "transform .22s ease, box-shadow .22s ease, border-color .22s ease",
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      width: 150,
+      height: 150,
+      top: -90,
+      right: -65,
+      borderRadius: "50%",
+      background: "var(--card-accent-soft)",
+      pointerEvents: "none",
+    },
+    "&:hover": {
+      transform: "translateY(-3px)",
+      borderColor: "var(--card-accent-border)",
+      boxShadow: "0 22px 45px rgba(15,23,42,.11)",
+    },
+  },
+  cardTop: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 },
+  cardIcon: {
+    width: 42,
+    height: 42,
+    display: "grid",
+    placeItems: "center",
+    flexShrink: 0,
+    borderRadius: 12,
+    color: "var(--card-accent)",
+    background: "var(--card-accent-soft)",
+    border: "1px solid var(--card-accent-border)",
+  },
+  cardChip: {
+    height: "25px !important",
+    color: "#64748b !important",
+    background: "rgba(241,245,249,.85) !important",
+    border: "1px solid rgba(148,163,184,.2) !important",
+    fontSize: ".68rem !important",
+    fontWeight: "800 !important",
+  },
+  cardTitle: { margin: theme.spacing(1.6, 0, .8), color: "#0f172a", fontSize: "1.14rem", lineHeight: 1.25, fontWeight: 800 },
+  cardSummary: { margin: 0, color: "#64748b", fontSize: ".86rem", lineHeight: 1.65 },
+  featureList: { display: "grid", gap: 8, margin: theme.spacing(1.7, 0) },
+  feature: { display: "flex", alignItems: "center", gap: 8, color: "#334155", fontSize: ".78rem", fontWeight: 650 },
+  featureIcon: { color: "var(--card-accent)", fontSize: "15px !important" },
+  code: {
+    overflowX: "auto",
+    marginTop: "auto",
+    padding: "10px 11px",
+    borderRadius: 10,
+    color: "#334155",
+    background: "#f1f5f9",
+    border: "1px solid rgba(148,163,184,.2)",
+    fontFamily: '"SFMono-Regular", Consolas, "Liberation Mono", monospace',
+    fontSize: ".72rem",
+    lineHeight: 1.5,
     whiteSpace: "nowrap",
   },
-  categoryLine: {
-    flex: 1,
-    height: "1px",
-    background: "rgba(148, 163, 184, 0.2)",
-  },
-  section: {
-    borderRadius: "16px",
-    border: "1px solid rgba(148, 163, 184, 0.24)",
-    background: "#fff",
-    boxShadow: "0 12px 28px rgba(15, 23, 42, 0.06)",
-    overflow: "hidden",
-    marginBottom: theme.spacing(2.2),
-    scrollMarginTop: "120px",
-    "&:last-child": {
-      marginBottom: 0,
-    },
-  },
-  fullSection: {
-    borderRadius: "16px",
-    border: "1px solid rgba(148, 163, 184, 0.24)",
-    background: "linear-gradient(180deg, #fafbff 0%, #ffffff 100%)",
-    boxShadow: "0 12px 28px rgba(15, 23, 42, 0.06)",
-    overflow: "hidden",
-    marginBottom: theme.spacing(2.2),
-    padding: theme.spacing(2.5, 2.8),
-    scrollMarginTop: "120px",
-    [theme.breakpoints.down("sm")]: {
-      padding: theme.spacing(2, 1.8),
-    },
-  },
-  sectionImageWrap: {
-    height: "100%",
-    background: "#e2e8f0",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    [theme.breakpoints.down("sm")]: {
-      maxHeight: "220px",
-    },
-  },
-  sectionImage: {
-    width: "100%",
-    height: "100%",
-    minHeight: "220px",
-    objectFit: "cover",
-    [theme.breakpoints.down("sm")]: {
-      minHeight: "180px",
-    },
-  },
-  sectionBody: {
-    padding: theme.spacing(2.1, 2.2),
-  },
-  sectionTitleRow: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-    marginBottom: theme.spacing(0.9),
-    "& h2": {
-      marginBottom: 0,
-    },
-  },
-  sectionIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 10,
-    background: "linear-gradient(145deg, #eff6ff, #dbeafe)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#2563eb",
-    flexShrink: 0,
-    boxShadow: "0 2px 8px rgba(37, 99, 235, 0.12)",
-  },
-  sectionTitle: {
-    margin: 0,
-    fontSize: "1.24rem",
-    lineHeight: 1.3,
-    color: "#0f172a",
-    fontWeight: 700,
-  },
-  sectionSummary: {
-    margin: 0,
-    marginBottom: theme.spacing(1.2),
-    color: "#475569",
-    lineHeight: 1.7,
-    fontSize: "0.92rem",
-  },
-  featureSubGrid: {
+  reference: { marginBottom: theme.spacing(1), scrollMarginTop: 118 },
+  referenceGrid: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: theme.spacing(1.2),
-    marginTop: theme.spacing(1),
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "1fr",
-    },
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: theme.spacing(1.3),
+    [theme.breakpoints.down("md")]: { gridTemplateColumns: "repeat(2, minmax(0, 1fr))" },
+    [theme.breakpoints.down("sm")]: { gridTemplateColumns: "1fr" },
   },
-  featureSubGridWide: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: theme.spacing(1.5),
-    marginTop: theme.spacing(1.5),
-    [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: "repeat(2, 1fr)",
-    },
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: "1fr",
-    },
+  referenceCard: {
+    minHeight: 145,
+    padding: theme.spacing(1.8),
+    borderRadius: 15,
+    background: "rgba(255,255,255,.88)",
+    border: "1px solid rgba(148,163,184,.2)",
+    boxShadow: "0 10px 26px rgba(15,23,42,.055)",
+    transition: "all .2s ease",
+    "&:hover": { transform: "translateY(-2px)", borderColor: "rgba(99,102,241,.3)" },
   },
-  featureSubCard: {
-    padding: theme.spacing(1.3, 1.5),
-    borderRadius: "10px",
-    background: "rgba(241, 245, 249, 0.6)",
-    border: "1px solid rgba(148, 163, 184, 0.15)",
-    transition: "all 0.2s ease",
-    "&:hover": {
-      background: "rgba(37, 99, 235, 0.04)",
-      borderColor: "rgba(37, 99, 235, 0.18)",
-      transform: "translateY(-1px)",
-    },
-  },
-  featureSubTitle: {
-    margin: 0,
-    fontSize: "0.8rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    marginBottom: "2px",
-  },
-  featureSubDesc: {
-    margin: 0,
-    fontSize: "0.76rem",
+  referenceIcon: { color: "#6366f1", fontSize: "19px !important" },
+  referenceTitle: { margin: "12px 0 6px", color: "#0f172a", fontSize: ".88rem", fontWeight: 800 },
+  referenceText: { margin: 0, color: "#64748b", fontSize: ".73rem", lineHeight: 1.55 },
+  empty: {
+    padding: theme.spacing(6, 3),
+    borderRadius: 18,
+    textAlign: "center",
     color: "#64748b",
-    lineHeight: 1.5,
+    background: "rgba(255,255,255,.8)",
+    border: "1px dashed rgba(148,163,184,.45)",
   },
+  bottomCta: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: theme.spacing(3),
+    marginTop: theme.spacing(5),
+    padding: theme.spacing(3.5, 4),
+    borderRadius: 22,
+    color: "#f8fafc",
+    background: "linear-gradient(135deg, #1e3a8a, #2563eb)",
+    boxShadow: "0 22px 48px rgba(30,64,175,.22)",
+    [theme.breakpoints.down("md")]: { alignItems: "flex-start", flexDirection: "column", padding: theme.spacing(3, 2.4) },
+  },
+  bottomTitle: { margin: 0, fontSize: "1.45rem", letterSpacing: "-.3px" },
+  bottomText: { maxWidth: 620, margin: "8px 0 0", color: "#dbeafe", fontSize: ".88rem", lineHeight: 1.65 },
 }));
 
-const categories = [
-  { key: "build", label: "Build" },
-  { key: "connect", label: "Connect" },
-  { key: "ship", label: "Ship" },
-];
-
-const docsSections = [
-  {
-    id: "ai-generation",
-    category: "build",
-    title: "AI-Powered Generation",
-    icon: <AutoAwesomeRoundedIcon fontSize="small" />,
-    image: "ai_generation_feature.webp",
-    imageAlt: "AI generation interface for building Flutter screens",
-    summary:
-      "FlutterPilot integrates AI at every stage of development — design, build, refine, and connect databases with natural language prompts.",
-    features: [
-      { title: "AI Project Creator", desc: "Bootstrap a fully functional multi-screen app from a single sentence." },
-      { title: "AI UI Generator", desc: "Create custom widgets and layouts by describing what you need." },
-      { title: "AI Editing & Refinement", desc: "Iterate on generated screens — view, compare, branch, and swap between design revisions." },
-      { title: "AI Copilot Chat", desc: "Persistent sidebar assistant for writing Dart logic, binding APIs, and auto-fixing errors." },
-    ],
-  },
-  {
-    id: "visual-editor",
-    category: "build",
-    title: "Visual Editor & Figma Import",
-    icon: <DashboardCustomizeRoundedIcon fontSize="small" />,
-    image: "use-figma-logo.svg",
-    imageAlt: "Figma to FlutterPilot visual design conversion",
-    summary:
-      "Drag-and-drop UI builder with Figma import support. Assemble, style, and modify your interface visually with real-time feedback.",
-    features: [
-      { title: "Drag & Drop", desc: "Place and nest components on the canvas with intuitive controls." },
-      { title: "Properties Panel", desc: "Edit component-specific attributes and styling in real time." },
-      { title: "Component Tree", desc: "Hierarchical layer list for quick navigation and reordering." },
-      { title: "Figma Workflow", desc: "Import Figma design structure for quicker setup and cleaner handoff." },
-    ],
-  },
-  {
-    id: "actions-logic",
-    category: "build",
-    title: "Actions & Logic",
-    icon: <TouchAppRoundedIcon fontSize="small" />,
-    summary:
-      "Actions define what happens when a user interacts with your app — tapping a button, submitting a form, or triggering a workflow. Build complex logic visually.",
-    features: [
-      { title: "Navigation", desc: "Open screens, go back, or replace the current view with built-in transitions." },
-      { title: "Overlays", desc: "Show dialogs, bottom sheets, and snackbar messages with a single action." },
-      { title: "Logic & Flow", desc: "Add conditionals, loops, and custom Dart code for complex behavior." },
-      { title: "System & Device", desc: "Launch URLs, trigger haptics, copy to clipboard, and biometric verification." },
-    ],
-  },
-  {
-    id: "api-endpoints",
-    category: "connect",
-    title: "API Endpoints",
-    icon: <ApiRoundedIcon fontSize="small" />,
-    image: "endpoint_preview.webp",
-    imageAlt: "API Endpoint connectors interface preview",
-    summary:
-      "Connect your app to external APIs and manage global variables. Add endpoints manually or import directly from Postman collections.",
-    features: [
-      { title: "Postman Import", desc: "Upload a collection JSON to auto-generate all endpoint connectors instantly." },
-      { title: "Live Testing", desc: "Test API calls directly in context before binding responses to your UI." },
-      { title: "Global Variables", desc: "Store base URLs, auth tokens, and config centrally for all endpoints." },
-      { title: "Easy Binding", desc: "Access APIs via App.apis.<NAME>.fetch() with named parameters." },
-    ],
-  },
-  {
-    id: "sheet-integration",
-    category: "connect",
-    title: "Google Sheet Integration",
-    icon: <TableChartRoundedIcon fontSize="small" />,
-    summary:
-      "Connect a Google Sheet and turn your data into a live Flutter UI in minutes — no coding required. Pick a sheet, insert a template, and customize.",
-    features: [
-      { title: "One-Click Connect", desc: "Sign in with Google and pick any sheet to connect to your project." },
-      { title: "Pre-Made Templates", desc: "Insert List, Card, or Form templates with automatic column mapping." },
-      { title: "Live Data Preview", desc: "Preview and interact with real sheet data directly inside the builder." },
-      { title: "Data Actions", desc: "Add, edit, save, delete, search, and refresh with simple bind syntax." },
-    ],
-  },
-  {
-    id: "local-data",
-    category: "connect",
-    title: "Local Data & Offline-First",
-    icon: <StorageRoundedIcon fontSize="small" />,
-    summary:
-      "Manage on-device collections to store data directly in your app. Build fully interactive offline-first apps like todo lists, note takers, and expense trackers.",
-    features: [
-      { title: "AI Schema Design", desc: "Let AI generate column schemas from a natural language description." },
-      { title: "Column Types", desc: "Text, Number, Boolean, and Enums with automatic schema migrations." },
-      { title: "Canvas Samples", desc: "Generate synthetic mock data to preview layouts during design." },
-      { title: "Hive Storage", desc: "Fast, lightweight on-device persistence that works fully offline." },
-    ],
-  },
-  {
-    id: "real-time-preview",
-    category: "ship",
-    title: "Real-Time Preview",
-    icon: <VisibilityRoundedIcon fontSize="small" />,
-    image: "realtime_preview.webp",
-    imageAlt: "Real-time preview and multi-viewport testing interface",
-    summary:
-      "Validate UI changes instantly while editing. Spacing, behavior, and content flow stay consistent across every viewport size.",
-    features: [
-      { title: "Instant Feedback", desc: "See every change render immediately as you design and build." },
-      { title: "Multi-Viewport", desc: "Test on mobile, tablet, and desktop form factors side by side." },
-      { title: "State Preview", desc: "Check screen transitions, loading states, and error states quickly." },
-      { title: "Live Interactions", desc: "Test taps, scrolling, and navigation flows right in the builder." },
-    ],
-  },
-  {
-    id: "code-expressions",
-    category: "ship",
-    title: "Code & Expressions",
-    icon: <CodeRoundedIcon fontSize="small" />,
-    image: "example_image.webp",
-    imageAlt: "Code and expression editing with Dart support",
-    summary:
-      "Every property supports live Dart expressions. Use the built-in executor with intelligent error highlighting for dynamic, data-driven UIs.",
-    features: [
-      { title: "Dynamic Properties", desc: "Expression-driven UI for conditional styling and data binding." },
-      { title: "Built-in Executor", desc: "Runs Dart code locally with real-time error highlighting." },
-      { title: "State Management", desc: "Use refresh() and setState() for reactive UI updates." },
-      { title: "Clean Output", desc: "Structured, maintainable code output ready for production teams." },
-    ],
-  },
-  {
-    id: "export-publish",
-    category: "ship",
-    title: "Export & Publish",
-    icon: <CloudUploadRoundedIcon fontSize="small" />,
-    summary:
-      "Ready to share your app? Preview it, download its complete Flutter source code, or generate an installable Android APK — all from your workspace.",
-    features: [
-      { title: "Source Code Export", desc: "Download a complete, production-ready Flutter project with all assets." },
-      { title: "Android APK", desc: "Generate an installable APK directly from the builder — no CLI required." },
-      { title: "Web App Sharing", desc: "Instantly share a live web-app link with real-time updates." },
-      { title: "Backup & Versioning", desc: "Export source code as backup before any release build." },
-    ],
-  },
-  {
-    id: "collaboration",
-    category: "ship",
-    title: "Team Collaboration",
-    icon: <GroupsRoundedIcon fontSize="small" />,
-    image: "GIF_1.gif",
-    imageAlt: "Team collaboration and version control workflow",
-    summary:
-      "Coordinate work across team members with commit-based version control, shared editing, and automatic cloud backup for multi-user teams.",
-    features: [
-      { title: "Shared Editing", desc: "Multiple team members can work on the same project simultaneously." },
-      { title: "Version History", desc: "Commit-style change tracking with full undo/redo and revert support." },
-      { title: "Cloud Auto-Save", desc: "Automatic background saving to cloud — never lose your work." },
-      { title: "Reusable Components", desc: "Create custom components and share them across projects." },
-    ],
-  },
-];
-
-const scrollToSection = (e, id) => {
-  e.preventDefault();
+function scrollToId(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+}
+
+function DocCard({ section, accent, classes }) {
+  const Icon = section.icon;
+  const style = {
+    "--card-accent": accent,
+    "--card-accent-soft": `${accent}14`,
+    "--card-accent-border": `${accent}36`,
+  };
+
+  return (
+    <motion.article
+      id={section.id}
+      className={classes.card}
+      style={style}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.38, ease: "easeOut" }}
+      viewport={{ once: true, margin: "0px 0px -70px 0px" }}
+    >
+      <div className={classes.cardTop}>
+        <div className={classes.cardIcon}><Icon fontSize="small" /></div>
+        <Chip label="In Studio" size="small" className={classes.cardChip} />
+      </div>
+      <h3 className={classes.cardTitle}>{section.title}</h3>
+      <p className={classes.cardSummary}>{section.summary}</p>
+      <div className={classes.featureList}>
+        {section.features.map((feature) => (
+          <span className={classes.feature} key={feature}>
+            <CheckCircleRoundedIcon className={classes.featureIcon} />
+            {feature}
+          </span>
+        ))}
+      </div>
+      <div className={classes.code}>{section.code}</div>
+    </motion.article>
+  );
+}
 
 export default function Docs() {
-  const localClasses = useStyles();
-  const classes = commonStyles();
+  const local = useStyles();
+  const common = commonStyles();
+  const [query, setQuery] = useState("");
+
+  const filteredGroups = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    if (!normalized) return docGroups;
+    return docGroups
+      .map((group) => ({
+        ...group,
+        sections: group.sections.filter((section) =>
+          [section.title, section.summary, section.code, ...section.features]
+            .join(" ")
+            .toLowerCase()
+            .includes(normalized)
+        ),
+      }))
+      .filter((group) => group.sections.length > 0);
+  }, [query]);
+
+  const resultCount = filteredGroups.reduce((total, group) => total + group.sections.length, 0);
 
   return (
     <CustomAppBar type="docs">
-      <Container maxWidth={false} disableGutters className={classes.responsiveContainer}>
-        <header className={localClasses.intro}>
-          <p className={localClasses.eyebrow}>Documentation</p>
-          <h1 className={localClasses.heading}>FlutterPilot Docs</h1>
-          <p className={localClasses.lead}>
-            Everything you need to build, connect, and ship Flutter apps — from AI-powered
-            generation to real-time preview, API integration, and one-click export.
-          </p>
-          <div className={localClasses.quickLinks}>
-            {docsSections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className={localClasses.quickLink}
-                onClick={(e) => scrollToSection(e, section.id)}
+      <Container maxWidth={false} disableGutters className={`${common.responsiveContainer} ${local.page}`}>
+        <header className={local.hero}>
+          <div>
+            <span className={local.eyebrow}>
+              <MenuBookRoundedIcon style={{ fontSize: 16 }} /> Product documentation
+            </span>
+            <h1 className={local.heroTitle}>
+              Everything in FlutterPilot, <span className={local.heroAccent}>mapped clearly.</span>
+            </h1>
+            <p className={local.heroLead}>
+              Explore the same product areas documented inside FlutterPilot Studio—from AI generation and visual
+              logic to connected data, deployment, and the complete component reference.
+            </p>
+            <div className={local.heroActions}>
+              <Button
+                className={local.primaryButton}
+                endIcon={<ArrowOutwardRoundedIcon />}
+                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
               >
-                {section.title}
-              </a>
-            ))}
+                Open FlutterPilot Studio
+              </Button>
+              <Button className={local.secondaryButton} onClick={() => scrollToId("build")}>
+                Browse the guide
+              </Button>
+            </div>
+            <TextField
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search AI generation, state, Sheets, deployment..."
+              aria-label="Search product documentation"
+              className={local.search}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchRoundedIcon style={{ color: "#64748b" }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </div>
+
+          <motion.div
+            className={local.heroVisual}
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.12 }}
+          >
+            <div className={local.window}>
+              <div className={local.windowBar}>
+                <span className={local.dot} style={{ background: "#fb7185" }} />
+                <span className={local.dot} style={{ background: "#fbbf24" }} />
+                <span className={local.dot} style={{ background: "#34d399" }} />
+              </div>
+              <img
+                src="/ai_generation_feature.webp"
+                alt="FlutterPilot Studio AI generation"
+                className={local.heroImage}
+                width="1024"
+                height="698"
+              />
+            </div>
+            <span className={`${local.visualBadge} ${local.badgeOne}`}>20 Studio sections</span>
+            <span className={`${local.visualBadge} ${local.badgeTwo}`}>Search + deep links</span>
+            <span className={`${local.visualBadge} ${local.badgeThree}`}>Ask AI built in</span>
+          </motion.div>
         </header>
 
-        <Grid container spacing={2.4}>
-          <Grid item xs={12} md={3}>
-            <nav className={localClasses.sidebar} aria-label="Docs sections">
-              <p className={localClasses.sidebarTitle}>On This Page</p>
-              {categories.map((cat, catIdx) => {
-                const catSections = docsSections.filter((s) => s.category === cat.key);
-                return (
-                  <React.Fragment key={cat.key}>
-                    <span
-                      className={localClasses.sidebarCategoryLabel}
-                      style={catIdx === 0 ? { marginTop: 4 } : undefined}
-                    >
-                      {cat.label}
-                    </span>
-                    {catSections.map((section) => (
-                      <a
-                        key={section.id}
-                        href={`#${section.id}`}
-                        className={localClasses.sidebarLink}
-                        onClick={(e) => scrollToSection(e, section.id)}
-                      >
-                        {section.title}
-                      </a>
-                    ))}
-                  </React.Fragment>
-                );
-              })}
-            </nav>
-          </Grid>
+        <section className={local.workflow} aria-label="FlutterPilot workflow">
+          {workflow.map(([number, title, description]) => (
+            <div className={local.workflowCard} key={number}>
+              <span className={local.workflowNumber}>{number}</span>
+              <div>
+                <h2 className={local.workflowTitle}>{title}</h2>
+                <p className={local.workflowText}>{description}</p>
+              </div>
+            </div>
+          ))}
+        </section>
 
-          <Grid item xs={12} md={9}>
-            {categories.map((cat, catIdx) => {
-              const catSections = docsSections.filter((s) => s.category === cat.key);
-              return (
-                <React.Fragment key={cat.key}>
-                  <div
-                    className={localClasses.categoryDivider}
-                    style={catIdx === 0 ? { marginTop: 0 } : undefined}
-                  >
-                    <span className={localClasses.categoryLabel}>{cat.label}</span>
-                    <div className={localClasses.categoryLine} />
+        <div className={local.docsLayout}>
+          <nav className={local.sidebar} aria-label="Documentation categories">
+            <div className={local.sidebarHeader}>
+              <p className={local.sidebarKicker}>On this page</p>
+              <p className={local.sidebarTitle}>Studio guide</p>
+            </div>
+            {docGroups.map((group) => (
+              <a className={local.sidebarLink} href={`#${group.key}`} key={group.key}>
+                {group.navLabel}<span>{String(group.sections.length).padStart(2, "0")}</span>
+              </a>
+            ))}
+            <a className={local.sidebarLink} href="#reference">Reference<span>08</span></a>
+            <Button
+              className={local.sidebarCta}
+              endIcon={<ArrowOutwardRoundedIcon fontSize="small" />}
+              onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+            >
+              Open Studio
+            </Button>
+          </nav>
+
+          <main>
+            {query.trim() && (
+              <div className={local.resultsNote}>
+                {resultCount === 0
+                  ? `No product sections match “${query.trim()}”.`
+                  : `${resultCount} product section${resultCount === 1 ? "" : "s"} match “${query.trim()}”.`}
+              </div>
+            )}
+
+            {filteredGroups.map((group) => (
+              <section className={local.group} id={group.key} key={group.key}>
+                <div className={local.groupHeader}>
+                  <div>
+                    <p className={local.groupEyebrow} style={{ color: group.accent }}>{group.eyebrow}</p>
+                    <h2 className={local.groupTitle}>{group.title}</h2>
                   </div>
+                  <p className={local.groupDescription}>{group.description}</p>
+                </div>
+                <div className={local.cardGrid}>
+                  {group.sections.map((section) => (
+                    <DocCard section={section} accent={group.accent} classes={local} key={section.id} />
+                  ))}
+                </div>
+              </section>
+            ))}
 
-                  {catSections.map((section) =>
-                    section.image ? (
-                      <motion.article
-                        key={section.id}
-                        id={section.id}
-                        className={localClasses.section}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        viewport={{ once: true, margin: "0px 0px -60px 0px" }}
-                      >
-                        <Grid container>
-                          <Grid item xs={12} md={5}>
-                            <div className={localClasses.sectionImageWrap}>
-                              <img
-                                src={section.image}
-                                alt={section.imageAlt}
-                                className={localClasses.sectionImage}
-                                loading="lazy"
-                              />
-                            </div>
-                          </Grid>
-                          <Grid item xs={12} md={7}>
-                            <div className={localClasses.sectionBody}>
-                              <div className={localClasses.sectionTitleRow}>
-                                <div className={localClasses.sectionIcon}>{section.icon}</div>
-                                <h2 className={localClasses.sectionTitle}>{section.title}</h2>
-                              </div>
-                              <p className={localClasses.sectionSummary}>{section.summary}</p>
-                              <div className={localClasses.featureSubGrid}>
-                                {section.features.map((f) => (
-                                  <div key={f.title} className={localClasses.featureSubCard}>
-                                    <p className={localClasses.featureSubTitle}>{f.title}</p>
-                                    <p className={localClasses.featureSubDesc}>{f.desc}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </motion.article>
-                    ) : (
-                      <motion.article
-                        key={section.id}
-                        id={section.id}
-                        className={localClasses.fullSection}
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        viewport={{ once: true, margin: "0px 0px -60px 0px" }}
-                      >
-                        <div className={localClasses.sectionTitleRow}>
-                          <div className={localClasses.sectionIcon}>{section.icon}</div>
-                          <h2 className={localClasses.sectionTitle}>{section.title}</h2>
-                        </div>
-                        <p className={localClasses.sectionSummary}>{section.summary}</p>
-                        <div className={localClasses.featureSubGridWide}>
-                          {section.features.map((f) => (
-                            <div key={f.title} className={localClasses.featureSubCard}>
-                              <p className={localClasses.featureSubTitle}>{f.title}</p>
-                              <p className={localClasses.featureSubDesc}>{f.desc}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </motion.article>
-                    )
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </Grid>
-        </Grid>
+            {!query.trim() && (
+              <section className={local.reference} id="reference">
+                <div className={local.groupHeader}>
+                  <div>
+                    <p className={local.groupEyebrow} style={{ color: "#6366f1" }}>Reference</p>
+                    <h2 className={local.groupTitle}>Components and Dart APIs</h2>
+                  </div>
+                  <p className={local.groupDescription}>
+                    The in-Studio reference stays synchronized with the component catalog and supported Dart runtime.
+                  </p>
+                </div>
+                <div className={local.referenceGrid}>
+                  {referenceSections.map(([title, description], index) => (
+                    <motion.article
+                      className={local.referenceCard}
+                      key={title}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.025 }}
+                      viewport={{ once: true }}
+                    >
+                      {index < 4 ? <DevicesRoundedIcon className={local.referenceIcon} /> : <CodeRoundedIcon className={local.referenceIcon} />}
+                      <h3 className={local.referenceTitle}>{title}</h3>
+                      <p className={local.referenceText}>{description}</p>
+                    </motion.article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {query.trim() && resultCount === 0 && (
+              <div className={local.empty}>
+                Try a broader term such as <strong>AI</strong>, <strong>data</strong>, <strong>state</strong>, or <strong>deploy</strong>.
+              </div>
+            )}
+
+            <section className={local.bottomCta}>
+              <div>
+                <h2 className={local.bottomTitle}>Need the step-by-step version?</h2>
+                <p className={local.bottomText}>
+                  Open Documentation inside FlutterPilot Studio for searchable guides, contextual deep links,
+                  component references, and Ask AI—all connected to the project you are building.
+                </p>
+              </div>
+              <Button
+                className={local.primaryButton}
+                endIcon={<ArrowOutwardRoundedIcon />}
+                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+              >
+                Continue in Studio
+              </Button>
+            </section>
+          </main>
+        </div>
       </Container>
     </CustomAppBar>
   );

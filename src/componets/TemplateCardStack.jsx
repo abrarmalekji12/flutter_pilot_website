@@ -122,8 +122,10 @@ export default function TemplateCardStack({ imageUrls }) {
         padding: isSmall ? "10px 8px" : "16px 12px",
         marginBottom: 0, // removed to let parent gap handle spacing
         scrollbarWidth: "none",
-        "&::-webkit-scrollbar": { display: "none" }, // Hide scrollbar for Chrome/Safari
         transition: "height 0.3s ease",
+      }}
+      sx={{
+        "&::-webkit-scrollbar": { display: "none" },
       }}
     >
       <Box
@@ -171,4 +173,3 @@ export default function TemplateCardStack({ imageUrls }) {
     </Box>
   );
 }
-

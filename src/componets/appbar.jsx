@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   ListItemButton,
+  ListItemIcon,
   ListItemText,
   Divider,
   Box,
@@ -16,7 +17,13 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import RocketLaunchRoundedIcon from "@mui/icons-material/RocketLaunchRounded";
-import { useNavigate } from "react-router-dom";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
+import ContactSupportRoundedIcon from "@mui/icons-material/ContactSupportRounded";
+import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { commonStyles } from "../styles/commonStyles";
 import Footer from "./Footer";
 
@@ -38,48 +45,64 @@ function CustomAppBar({ children, type }) {
   };
 
   const menuItems = [
-    { label: "Home", action: () => navigate("/"), type: "home" },
-    { label: "Templates", action: () => navigate("/template"), type: "template" },
-    { label: "Docs", action: () => navigate("/docs"), type: "docs" },
+    { label: "Home", to: "/", type: "home", icon: <HomeRoundedIcon /> },
+    { label: "Templates", to: "/template/", type: "template", icon: <ViewQuiltRoundedIcon /> },
+    { label: "Docs", to: "/docs/", type: "docs", icon: <MenuBookRoundedIcon /> },
     {
       label: "Blogs",
-      action: () =>
-        window.open("https://flutterpilot.medium.com", "_blank", "noopener,noreferrer"),
+      href: "https://flutterpilot.medium.com",
       type: "blogs",
+      icon: <ArticleRoundedIcon />,
     },
-    { label: "Contact", action: () => navigate("/contactUs"), type: "contactUs" },
-    { label: "About", action: () => navigate("/aboutUs"), type: "aboutUs" },
+    { label: "Contact", to: "/contact/", type: "contactUs", icon: <ContactSupportRoundedIcon /> },
+    { label: "About", to: "/about-us/", type: "aboutUs", icon: <InfoRoundedIcon /> },
   ];
 
   return (
     <div className={classes.mainContainer}>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className={classes.taglineBanner}>
-        AI-powered low-code Flutter builder for rapid product teams
-        <span 
-          onClick={() => window.location.href = "/flutter-ui-builder"} 
-          style={{ cursor: 'pointer', textDecoration: 'underline', marginLeft: '8px', opacity: 0.8 }}
-        >
-          Flutter UI builder
+        <span className={classes.taglineMessage}>
+          <span className={classes.taglineDot} aria-hidden="true" />
+          <span className={classes.taglineDesktopText}>
+            Explore FlutterPilot here. Build your app in FlutterPilot Studio.
+          </span>
+          <span className={classes.taglineMobileText}>
+            Build faster with FlutterPilot AI.
+          </span>
         </span>
+        <button
+          type="button"
+          className={classes.taglineCta}
+          onClick={() => navigate("/flutter-ui-builder")}
+        >
+          <span className={classes.taglineDesktopText}>See the workflow</span>
+          <span className={classes.taglineMobileText}>See how</span>
+          <span aria-hidden="true"> →</span>
+        </button>
       </div>
 
       <AppBar
         position="sticky"
         className={classes.appBar}
         sx={{
-          background: "rgba(255, 255, 255, 0.15) !important",
-          backdropFilter: "blur(6px) saturate(180%)",
-          WebkitBackdropFilter: "blur(6px) saturate(180%)",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+          background:
+            "linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,0.82) 100%) !important",
+          backdropFilter: "blur(18px) saturate(145%) brightness(1.08)",
+          WebkitBackdropFilter: "blur(18px) saturate(145%) brightness(1.08)",
+          boxShadow:
+            "0 12px 34px rgba(15,23,42,0.1), inset 0 1px 0 rgba(255,255,255,0.85)",
         }}
       >
         <Toolbar>
-          <div className={classes.brandLockup} onClick={() => navigate("/")}>
+          <RouterLink className={classes.brandLockup} to="/" aria-label="FlutterPilot home">
             <span className={classes.logoFrame}>
               <img
-                src="flutterpilot_logo_round.svg"
+                src="/flutterpilot_logo_round.svg"
                 className={classes.logo}
                 alt="FlutterPilot"
+                width="32"
+                height="32"
               />
             </span>
 
@@ -87,15 +110,20 @@ function CustomAppBar({ children, type }) {
               <span className={classes.brandPrimary}>Flutter</span>
               <span className={classes.brandAccent}>Pilot</span>
             </Typography>
-          </div>
+          </RouterLink>
 
           <div className={classes.appBarActions}>
             <nav className={classes.hideOnSmall} style={{ display: "flex", alignItems: "center" }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
+                  component={item.href ? "a" : RouterLink}
+                  href={item.href}
+                  to={item.to}
+                  target={item.href ? "_blank" : undefined}
+                  rel={item.href ? "noopener noreferrer" : undefined}
+                  startIcon={React.cloneElement(item.icon, { fontSize: "small", "aria-hidden": true })}
                   className={`${classes.appBarButton} ${type === item.type ? "active" : ""}`}
-                  onClick={item.action}
                 >
                   {item.label}
                 </Button>
@@ -104,6 +132,7 @@ function CustomAppBar({ children, type }) {
 
             <Button
               variant="contained"
+              startIcon={<RocketLaunchRoundedIcon fontSize="small" />}
               className={classes.navActionBtn}
               onClick={() => {
                 const url = getBuildNowUrl();
@@ -114,7 +143,7 @@ function CustomAppBar({ children, type }) {
                 }
               }}
             >
-              Build Now
+              Open Studio
             </Button>
 
             <IconButton
@@ -136,7 +165,7 @@ function CustomAppBar({ children, type }) {
         onClose={handleDrawerToggle}
         PaperProps={{
           sx: {
-            width: 290,
+            width: "min(290px, 88vw)",
             background: "linear-gradient(160deg, #ffffff 0%, #f0f6ff 100%)",
             borderLeft: "1px solid rgba(37, 99, 235, 0.1)",
             boxShadow: "-8px 0 34px rgba(15, 23, 42, 0.14)",
@@ -157,8 +186,11 @@ function CustomAppBar({ children, type }) {
           }}
         >
           <Box
+            component={RouterLink}
+            to="/"
+            aria-label="FlutterPilot home"
             sx={{ display: "flex", alignItems: "center", gap: 1, cursor: "pointer" }}
-            onClick={() => { navigate("/"); setDrawerOpen(false); }}
+            onClick={() => setDrawerOpen(false)}
           >
             <Box
               sx={{
@@ -174,8 +206,10 @@ function CustomAppBar({ children, type }) {
               }}
             >
               <img
-                src="flutterpilot_logo_round.svg"
+                src="/flutterpilot_logo_round.svg"
                 alt="FlutterPilot"
+                width="22"
+                height="22"
                 style={{ width: 22, height: 22, objectFit: "contain" }}
               />
             </Box>
@@ -193,6 +227,7 @@ function CustomAppBar({ children, type }) {
 
           <IconButton
             onClick={handleDrawerToggle}
+            aria-label="Close navigation menu"
             size="small"
             sx={{
               color: "#64748b",
@@ -214,8 +249,12 @@ function CustomAppBar({ children, type }) {
             return (
               <ListItem key={item.label} disablePadding sx={{ mb: 0.5 }}>
                 <ListItemButton
+                  component={item.href ? "a" : RouterLink}
+                  href={item.href}
+                  to={item.to}
+                  target={item.href ? "_blank" : undefined}
+                  rel={item.href ? "noopener noreferrer" : undefined}
                   onClick={() => {
-                    item.action();
                     setDrawerOpen(false);
                   }}
                   sx={{
@@ -238,6 +277,15 @@ function CustomAppBar({ children, type }) {
                     gap: 1.5,
                   }}
                 >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      color: "inherit",
+                      "& svg": { fontSize: "1.2rem" },
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
                   <ListItemText
                     primary={item.label}
                     primaryTypographyProps={{
@@ -263,7 +311,7 @@ function CustomAppBar({ children, type }) {
           })}
         </List>
 
-        {/* Build Now CTA at bottom */}
+        {/* Studio CTA at bottom */}
         <Box sx={{ px: 2.5, pb: 3.5, pt: 1.5 }}>
           <Divider sx={{ mb: 2.5, borderColor: "rgba(148, 163, 184, 0.22)" }} />
           <Button
@@ -295,12 +343,12 @@ function CustomAppBar({ children, type }) {
               transition: "all 0.25s ease",
             }}
           >
-            Build Now
+            Open Studio
           </Button>
         </Box>
       </Drawer>
 
-      {children}
+      <div id="main-content">{children}</div>
       <Footer />
     </div>
   );

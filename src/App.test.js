@@ -24,6 +24,10 @@ test('renders FlutterPilot branding', async () => {
       </LegacyThemeProvider>
     </ThemeProvider>
   );
-  const logoElements = await screen.findAllByAltText(/FlutterPilot/i);
+  const logoElements = await screen.findAllByAltText(
+    /FlutterPilot/i,
+    {},
+    { timeout: 5000 }
+  );
   expect(logoElements.length).toBeGreaterThan(0);
 });

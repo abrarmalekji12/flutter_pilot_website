@@ -9,6 +9,9 @@ import TemplateCard from "../../componets/templatecard";
 import TemplateCardSkeleton from "../../componets/templatecardskeleton";
 import { auth, db, storage } from "../../utils/firebaseconfig";
 import { commonStyles } from "../../styles/commonStyles";
+import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
+import SmartphoneRoundedIcon from "@mui/icons-material/SmartphoneRounded";
+import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -27,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   eyebrow: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.7),
     margin: 0,
     marginBottom: theme.spacing(1),
     textTransform: "uppercase",
@@ -34,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "0.76rem",
     fontWeight: 700,
     color: "#1d4ed8",
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center",
+    },
   },
   title: {
     margin: 0,
@@ -72,6 +81,11 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "rgba(30, 64, 175, 0.22)",
     color: "#1e40af",
     background: "rgba(30, 64, 175, 0.06)",
+    "& .MuiChip-icon": {
+      color: "#2563eb",
+      fontSize: "1rem",
+      marginLeft: theme.spacing(1),
+    },
   },
   gridWrap: {
     alignItems: "stretch",
@@ -148,7 +162,7 @@ export default function Template() {
     <CustomAppBar type="template">
       <div className={classes.page}>
         <header className={`${classes.headerCard} ${common.responsiveContainer}`}>
-          <p className={classes.eyebrow}>Templates</p>
+          <p className={classes.eyebrow}><ViewQuiltRoundedIcon fontSize="small" aria-hidden="true" /> Templates</p>
           <h1 className={classes.title}>Template Library</h1>
           <p className={classes.subtitle}>
             Start faster with ready-to-edit Flutter app templates. Pick a structure,
@@ -156,12 +170,13 @@ export default function Template() {
           </p>
           <div className={classes.metaRow}>
             <Chip
+              icon={<ViewQuiltRoundedIcon />}
               label={loading ? "Loading templates..." : `${templates.length} templates available`}
               variant="outlined"
               className={classes.chip}
             />
-            <Chip label="Mobile-first UI" variant="outlined" className={classes.chip} />
-            <Chip label="Production-ready structure" variant="outlined" className={classes.chip} />
+            <Chip icon={<SmartphoneRoundedIcon />} label="Mobile-first UI" variant="outlined" className={classes.chip} />
+            <Chip icon={<AccountTreeRoundedIcon />} label="Production-ready structure" variant="outlined" className={classes.chip} />
           </div>
         </header>
 

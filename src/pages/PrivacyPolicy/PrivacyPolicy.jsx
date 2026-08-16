@@ -3,6 +3,7 @@ import { Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   eyebrow: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.7),
     margin: 0,
     marginBottom: theme.spacing(1),
     textTransform: "uppercase",
@@ -77,7 +81,7 @@ export default function PrivacyPolicy() {
     <CustomAppBar type="privacyPolicy">
       <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
-          <p className={localClasses.eyebrow}>Legal</p>
+          <p className={localClasses.eyebrow}><ShieldOutlinedIcon fontSize="small" aria-hidden="true" /> Legal</p>
           <h1 className={localClasses.title}>Privacy Policy</h1>
           <p className={localClasses.subtitle}>
             Last updated: July 3, 2026. This page explains what data we collect, why we collect it, and how we protect it,

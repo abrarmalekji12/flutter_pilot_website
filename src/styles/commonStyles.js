@@ -222,11 +222,12 @@ export const commonStyles = makeStyles((theme) => ({
     position: "relative",
   },
   appBar: {
-    background: "rgba(255, 255, 255, 0.12)",
-    backdropFilter: "blur(6px) saturate(180%)",
-    WebkitBackdropFilter: "blur(6px) saturate(180%)",
-    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.08)",
-    border: "1px solid rgba(255, 255, 255, 0.4)",
+    background:
+      "linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.82) 100%)",
+    backdropFilter: "blur(18px) saturate(145%) brightness(1.08)",
+    WebkitBackdropFilter: "blur(18px) saturate(145%) brightness(1.08)",
+    boxShadow: "0 12px 34px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.85)",
+    border: "1px solid rgba(255, 255, 255, 0.72)",
     transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
     borderRadius: "20px",
     width: "90%",
@@ -241,8 +242,8 @@ export const commonStyles = makeStyles((theme) => ({
       margin: "16px auto 0",
       top: "32px",
       borderRadius: "16px",
-      backdropFilter: "blur(4px) saturate(150%)", // Reduced for vertical scroll perf
-      WebkitBackdropFilter: "blur(4px) saturate(150%)",
+      backdropFilter: "blur(14px) saturate(140%) brightness(1.06)",
+      WebkitBackdropFilter: "blur(14px) saturate(140%) brightness(1.06)",
     },
   },
   appBarSpacer: {
@@ -315,7 +316,7 @@ export const commonStyles = makeStyles((theme) => ({
     zIndex: 1,
     transition: "all 0.2s ease",
     textTransform: "none",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("lg")]: {
       display: "none",
     },
     "&.active": {
@@ -358,7 +359,7 @@ export const commonStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
     color: "#1e3a8a",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "none",
     },
     transition: "transform 0.25s ease",
@@ -757,6 +758,7 @@ export const commonStyles = makeStyles((theme) => ({
   featureBadge: {
     display: "inline-flex",
     alignItems: "center",
+    gap: theme.spacing(0.75),
     padding: "6px 14px",
     borderRadius: "99px",
     background: "rgba(37, 99, 235, 0.08)",
@@ -767,6 +769,9 @@ export const commonStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     letterSpacing: "0.8px",
     marginBottom: theme.spacing(2),
+    "& svg": {
+      fontSize: "1rem",
+    },
   },
   // ── Tooling grid card (used inside featureGrid layout) ──
   toolingCard: {
@@ -835,6 +840,55 @@ export const commonStyles = makeStyles((theme) => ({
       backdropFilter: "blur(10px) saturate(150%)", // Performance-friendly blur
       WebkitBackdropFilter: "blur(10px) saturate(150%)",
     },
+  },
+  featureDarkCard: {
+    background: "linear-gradient(145deg, rgba(7, 17, 31, 0.98) 0%, rgba(15, 31, 68, 0.97) 100%)",
+    border: "1px solid rgba(96, 165, 250, 0.22)",
+    boxShadow: "0 28px 70px rgba(15, 23, 42, 0.24)",
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      width: "420px",
+      height: "420px",
+      right: "-190px",
+      top: "-220px",
+      borderRadius: "50%",
+      background: "radial-gradient(circle, rgba(59, 130, 246, 0.24), transparent 68%)",
+      pointerEvents: "none",
+    },
+  },
+  featureDarkBadge: {
+    position: "relative",
+    color: "#bfdbfe",
+    background: "rgba(59, 130, 246, 0.14)",
+    borderColor: "rgba(147, 197, 253, 0.28)",
+  },
+  featureDarkTitle: {
+    background: "linear-gradient(110deg, #f8fafc 0%, #bfdbfe 60%, #c4b5fd 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    textShadow: "none",
+  },
+  toolingCardDark: {
+    background: "rgba(15, 23, 42, 0.62)",
+    border: "1px solid rgba(148, 163, 184, 0.16)",
+    boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.035)",
+    backdropFilter: "none",
+    WebkitBackdropFilter: "none",
+    "&:hover": {
+      background: "rgba(30, 58, 138, 0.28)",
+      borderColor: "rgba(96, 165, 250, 0.34)",
+      boxShadow: "0 16px 36px rgba(2, 6, 23, 0.3)",
+    },
+    [theme.breakpoints.down("sm")]: {
+      background: "rgba(15, 23, 42, 0.74)",
+    },
+  },
+  toolingCardIconDark: {
+    color: "#7dd3fc",
+    background: "linear-gradient(145deg, rgba(37, 99, 235, 0.28), rgba(14, 165, 233, 0.14))",
+    border: "1px solid rgba(125, 211, 252, 0.2)",
+    boxShadow: "0 8px 22px rgba(2, 6, 23, 0.25)",
   },
   browserFrame: {
     width: "100%",
@@ -992,15 +1046,15 @@ export const commonStyles = makeStyles((theme) => ({
     },
   },
   taglineBanner: {
-    background: "rgba(15, 23, 42, 0.85)",
-    backdropFilter: "blur(4px)",
-    WebkitBackdropFilter: "blur(4px)",
-    color: "rgba(255, 255, 255, 0.95)",
-    textAlign: "center",
-    padding: "10px 16px",
-    fontSize: "13px",
-    fontWeight: 500,
-    letterSpacing: "0.2px",
+    background: "linear-gradient(90deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 89, 0.96))",
+    backdropFilter: "blur(10px)",
+    WebkitBackdropFilter: "blur(10px)",
+    borderBottom: "1px solid rgba(147, 197, 253, 0.16)",
+    color: "rgba(255, 255, 255, 0.92)",
+    padding: "0 16px",
+    fontSize: "12.5px",
+    fontWeight: 600,
+    letterSpacing: "0.08px",
     zIndex: 1300,
     position: "fixed",
     top: 0,
@@ -1010,10 +1064,66 @@ export const commonStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    gap: theme.spacing(1.25),
     [theme.breakpoints.down("sm")]: {
       fontSize: "11px",
       height: "32px",
+      gap: theme.spacing(0.75),
+      padding: "0 8px",
     }
+  },
+  taglineMessage: {
+    display: "inline-flex",
+    alignItems: "center",
+    whiteSpace: "nowrap",
+  },
+  taglineDot: {
+    width: "6px",
+    height: "6px",
+    flexShrink: 0,
+    marginRight: theme.spacing(0.8),
+    borderRadius: "50%",
+    background: "#60a5fa",
+    boxShadow: "0 0 0 3px rgba(96, 165, 250, 0.14), 0 0 10px rgba(96, 165, 250, 0.7)",
+  },
+  taglineDesktopText: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
+  taglineMobileText: {
+    display: "none",
+    [theme.breakpoints.down("sm")]: {
+      display: "inline",
+    },
+  },
+  taglineCta: {
+    appearance: "none",
+    border: "1px solid rgba(147, 197, 253, 0.26)",
+    borderRadius: "999px",
+    background: "rgba(59, 130, 246, 0.14)",
+    color: "#dbeafe",
+    padding: "3px 9px",
+    font: "inherit",
+    fontSize: "11.5px",
+    fontWeight: 700,
+    lineHeight: 1.25,
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+    transition: "background 0.2s ease, border-color 0.2s ease, color 0.2s ease",
+    "&:hover": {
+      background: "rgba(59, 130, 246, 0.28)",
+      borderColor: "rgba(147, 197, 253, 0.48)",
+      color: "#ffffff",
+    },
+    "&:focus-visible": {
+      outline: "2px solid #93c5fd",
+      outlineOffset: "2px",
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: "2px 7px",
+      fontSize: "10.5px",
+    },
   },
 
   availableOnLabel: {
@@ -1053,6 +1163,116 @@ export const commonStyles = makeStyles((theme) => ({
       borderColor: "rgba(37, 99, 235, 0.3)",
       color: "#2563eb",
       transform: "translateY(-2px)",
+    },
+  },
+  studioCta: {
+    position: "relative",
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: theme.spacing(4),
+    padding: theme.spacing(5, 5.5),
+    borderRadius: "28px",
+    color: "#f8fafc",
+    background:
+      "radial-gradient(circle at 8% 0%, rgba(56, 189, 248, 0.25), transparent 38%), linear-gradient(135deg, #0f172a 0%, #172554 55%, #1e3a8a 100%)",
+    border: "1px solid rgba(147, 197, 253, 0.22)",
+    boxShadow: "0 28px 70px rgba(15, 23, 42, 0.28)",
+    [theme.breakpoints.down("md")]: {
+      alignItems: "flex-start",
+      flexDirection: "column",
+      padding: theme.spacing(4, 3.5),
+    },
+    [theme.breakpoints.down("sm")]: {
+      borderRadius: "22px",
+      padding: theme.spacing(3.5, 2.25),
+      gap: theme.spacing(3),
+    },
+  },
+  studioCtaCopy: {
+    maxWidth: "760px",
+  },
+  studioCtaEyebrow: {
+    display: "inline-block",
+    marginBottom: theme.spacing(1.2),
+    color: "#7dd3fc",
+    fontSize: "0.78rem",
+    fontWeight: 800,
+    letterSpacing: "1.1px",
+    textTransform: "uppercase",
+  },
+  studioCtaTitle: {
+    margin: 0,
+    color: "#f8fafc",
+    fontSize: "clamp(1.8rem, 3vw, 2.8rem)",
+    lineHeight: 1.08,
+    letterSpacing: "-0.8px",
+  },
+  studioCtaText: {
+    maxWidth: "690px",
+    margin: theme.spacing(1.6, 0, 0),
+    color: "#cbd5e1",
+    fontSize: "1rem",
+    lineHeight: 1.7,
+  },
+  studioCtaMeta: {
+    margin: theme.spacing(1.8, 0, 0),
+    color: "#93c5fd",
+    fontSize: "0.86rem",
+    fontWeight: 700,
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: theme.spacing(1, 2),
+  },
+  studioCtaMetaItem: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: theme.spacing(0.6),
+    "& svg": {
+      fontSize: "1rem",
+      color: "#7dd3fc",
+    },
+  },
+  studioCtaActions: {
+    minWidth: "250px",
+    display: "flex",
+    flexDirection: "column",
+    gap: theme.spacing(1.2),
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      minWidth: 0,
+      flexDirection: "row",
+      flexWrap: "wrap",
+    },
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+    },
+  },
+  studioCtaPrimary: {
+    color: "#0f172a !important",
+    background: "#f8fafc !important",
+    borderRadius: "13px !important",
+    padding: "12px 20px !important",
+    fontWeight: "800 !important",
+    textTransform: "none !important",
+    boxShadow: "0 12px 28px rgba(2, 6, 23, 0.2)",
+    "&:hover": {
+      background: "#e0f2fe !important",
+      transform: "translateY(-2px)",
+    },
+  },
+  studioCtaSecondary: {
+    color: "#dbeafe !important",
+    border: "1px solid rgba(191, 219, 254, 0.32) !important",
+    borderRadius: "13px !important",
+    padding: "11px 20px !important",
+    fontWeight: "700 !important",
+    textTransform: "none !important",
+    "&:hover": {
+      background: "rgba(59, 130, 246, 0.14) !important",
+      borderColor: "rgba(191, 219, 254, 0.55) !important",
     },
   },
 }));
@@ -1271,12 +1491,19 @@ export const footerStyles = makeStyles((theme) => ({
     rowGap: theme.spacing(3),
   },
   sectionTitle: {
+    display: "flex",
+    alignItems: "center",
+    gap: theme.spacing(0.8),
     color: "#f1f5f9",
     fontSize: "1rem",
     fontWeight: 700,
     letterSpacing: "0.4px",
     textTransform: "uppercase",
     marginBottom: theme.spacing(2),
+    "& svg": {
+      color: "#60a5fa",
+      fontSize: "1.1rem",
+    },
   },
   footerLink: {
     display: "block",
