@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 const Landing = lazy(() => import('./Landing'));
 const PrivacyPolicy = lazy(() => import('./PrivacyPolicy/PrivacyPolicy'));
@@ -42,6 +42,8 @@ export default function AppNav() {
           <Route path="/aboutUs" element={<AboutUs />} />
           <Route path="/template" element={<Template/>}/>
           <Route path="/docs" element={<Docs/>}/>
+          <Route path="/download" element={<Navigate to="/" replace state={{ scrollTo: "download" }} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </HashRouter>

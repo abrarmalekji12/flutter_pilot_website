@@ -1,6 +1,6 @@
 // src/pages/Landing.js
-import React from "react";
-import { makeStyles } from "@mui/styles";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import CustomAppBar from "../componets/appbar";
 import PromptGeneratorHero from "../componets/promptgeneratorhero";
@@ -13,13 +13,12 @@ import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
 import ApiRoundedIcon from "@mui/icons-material/ApiRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 import AndroidRoundedIcon from "@mui/icons-material/AndroidRounded";
-import AppleIcon from "@mui/icons-material/Apple";
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    // Standardized via commonStyles.responsiveContainer
-  },
-}));
+import AutoAwesomeRoundedIcon from "@mui/icons-material/AutoAwesomeRounded";
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+import StorageRoundedIcon from "@mui/icons-material/StorageRounded";
+import TouchAppRoundedIcon from "@mui/icons-material/TouchAppRounded";
+import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 
 const featurelist = [
   {
@@ -72,10 +71,76 @@ const featurelist = [
     ],
     isVideo: false,
   },
+  {
+    title: "Built for Real Apps",
+    subtitle:
+      "From data management to team workflows — everything you need to build production-ready Flutter apps.",
+    badge: "Platform",
+    featureGrid: true,
+    items: [
+      {
+        icon: <AutoAwesomeRoundedIcon fontSize="small" />,
+        title: "AI Project Creator",
+        description:
+          "Bootstrap a multi-screen app from a single sentence — AI handles screens, navigation, and structure.",
+      },
+      {
+        icon: <TableChartRoundedIcon fontSize="small" />,
+        title: "Google Sheets",
+        description:
+          "Connect any Google Sheet and turn spreadsheet data into a live, interactive Flutter UI.",
+      },
+      {
+        icon: <StorageRoundedIcon fontSize="small" />,
+        title: "Local Data",
+        description:
+          "Build offline-first apps with on-device storage, AI-assisted schemas, and auto migrations.",
+      },
+      {
+        icon: <TouchAppRoundedIcon fontSize="small" />,
+        title: "Actions Builder",
+        description:
+          "Define navigation, dialogs, conditions, and device features with visual logic flows.",
+      },
+      {
+        icon: <DevicesRoundedIcon fontSize="small" />,
+        title: "Cross-Platform",
+        description:
+          "Preview and test your app on mobile, tablet, and desktop viewports in real time.",
+      },
+      {
+        icon: <GroupsRoundedIcon fontSize="small" />,
+        title: "Team Collaboration",
+        description:
+          "Commit-based version control and shared editing for seamless multi-user workflows.",
+      },
+    ],
+    isVideo: false,
+  },
 ];
 
 export default function Landing() {
   const common = commonStyles();
+  const location = useLocation();
+
+  // When redirected here from /download (or with a #download hash), scroll to
+  // the download/product showcase section once the page has rendered.
+  useEffect(() => {
+    const wantsDownload =
+      location.state?.scrollTo === "download" || location.hash === "#download";
+    if (!wantsDownload) return;
+
+    const scrollToDownload = () => {
+      const el = document.getElementById("download");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    // Defer to the next frame so the lazily-rendered section is in the DOM.
+    const timer = setTimeout(scrollToDownload, 100);
+    return () => clearTimeout(timer);
+  }, [location]);
 
   return (
     <CustomAppBar type="home">
@@ -91,8 +156,9 @@ export default function Landing() {
           <PromptGeneratorHero />
         </motion.section>
 
-        {/* Hero Section */}
+        {/* Hero Section / Download Section */}
         <motion.section
+          id="download"
           className={common.responsiveContainer}
           initial={{ y: 20 }}
           whileInView={{ y: 0 }}
@@ -116,6 +182,7 @@ export default function Landing() {
               heroMedia={e.heroMedia}
               featureGrid={e.featureGrid}
               items={e.items}
+              badge={e.badge}
             />
           </section>
         ))}
