@@ -26,6 +26,31 @@ const routes = {
     description:
       "Explore an AI-first FlutterFlow alternative with visual editing, connected app workflows, and an exportable Flutter source project.",
   },
+  template: {
+    title: "Flutter App Templates and UI Starters | FlutterPilot",
+    description:
+      "Browse ready-to-edit Flutter app templates, open a starter in FlutterPilot Studio, and customize its screens, logic, data, and styling.",
+  },
+  docs: {
+    title: "FlutterPilot Documentation and Product Guide",
+    description:
+      "Learn FlutterPilot's AI generation, visual UI, actions, state, connected data, deployment, source export, and component workflows.",
+  },
+  "about-us": {
+    title: "About FlutterPilot",
+    description:
+      "Learn how FlutterPilot combines AI-assisted generation, visual editing, connected data, and Flutter source export for modern app teams.",
+  },
+  contact: {
+    title: "Contact FlutterPilot Support",
+    description:
+      "Contact the FlutterPilot team for product questions, feedback, support, or suggestions.",
+  },
+  "privacy-policy": {
+    title: "Privacy Policy | FlutterPilot",
+    description:
+      "Read how FlutterPilot collects, uses, stores, and protects account data and authorized Google user data.",
+  },
 };
 
 function replaceMeta(html, attribute, key, content) {
