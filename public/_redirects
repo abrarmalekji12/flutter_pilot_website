@@ -1,0 +1,5 @@
+# Consolidate legacy template URLs into the canonical template page.
+/flutter-templates /template/ 301
+/flutter-templates/ /template/ 301
+/free-flutter-templates /template/ 301
+/free-flutter-templates/ /template/ 301
