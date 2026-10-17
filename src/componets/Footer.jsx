@@ -13,6 +13,7 @@ import BusinessRoundedIcon from "@mui/icons-material/BusinessRounded";
 import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded";
 
 import { footerStyles } from "../styles/commonStyles";
+import { SCREENSHOT_STUDIO_URL } from "./FlutterPilotFamily";
 
 const Footer = () => {
   const footerClasses = footerStyles();
@@ -68,6 +69,9 @@ const Footer = () => {
             </Link>
             <Link className={footerClasses.footerLink} href="https://studio.flutterpilot.com" underline="none" target="_blank" rel="noopener noreferrer">
               Web App
+            </Link>
+            <Link className={footerClasses.footerLink} href={SCREENSHOT_STUDIO_URL} underline="none" target="_blank" rel="noopener noreferrer">
+              Screenshot Studio
             </Link>
           </Grid>
 
