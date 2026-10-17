@@ -8,6 +8,7 @@ import PromptGeneratorHero from "../componets/promptgeneratorhero";
 import ProductShowcase from "../componets/productshowcase";
 import FeatureShowcase from "../componets/featurediscription";
 import PartnerSolutionSpotlight from "../componets/PartnerSolutionSpotlight";
+import FlutterPilotFamily from "../componets/FlutterPilotFamily";
 import { commonStyles } from "../styles/commonStyles";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
@@ -203,6 +204,18 @@ export default function Landing() {
             />
           </section>
         ))}
+
+        {/* FlutterPilot Family — standalone companion products (e.g. Screenshot Studio).
+            Kept out of the Studio feature grids above so they never read as Studio features. */}
+        <motion.div
+          className={common.responsiveContainer}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          viewport={{ once: true, margin: "0px 0px -60px 0px" }}
+        >
+          <FlutterPilotFamily />
+        </motion.div>
 
         {/* Partner Solution — an independent product from our network. Placed after
             FlutterPilot's own capabilities and before the Studio CTA on purpose. */}

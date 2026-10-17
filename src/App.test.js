@@ -31,3 +31,27 @@ test('renders FlutterPilot branding', async () => {
   );
   expect(logoElements.length).toBeGreaterThan(0);
 });
+
+test('homepage shows FlutterPilot Family before the partner spotlight and keeps the Studio CTA', async () => {
+  render(
+    <ThemeProvider theme={theme}>
+      <LegacyThemeProvider theme={theme}>
+        <App />
+      </LegacyThemeProvider>
+    </ThemeProvider>
+  );
+  const familyCta = await screen.findByRole(
+    'link',
+    { name: /open screenshot studio/i },
+    { timeout: 5000 }
+  );
+  expect(familyCta).toHaveAttribute('href', 'https://screenshot-studio.web.app');
+
+  const partnerCta = screen.getByRole('link', { name: /explore healthsysadmin/i });
+  expect(partnerCta).toHaveAttribute('href', 'https://healthsysadmin.com');
+  // eslint-disable-next-line no-bitwise
+  expect(familyCta.compareDocumentPosition(partnerCta) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
+  expect(screen.getByRole('button', { name: /open flutterpilot studio/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Screenshot Studio' })).toHaveAttribute('href', 'https://screenshot-studio.web.app');
+});
