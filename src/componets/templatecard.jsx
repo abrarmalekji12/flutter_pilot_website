@@ -11,19 +11,19 @@ export default function TemplateCard({ name, description, imageURLs, templateId 
       ? description.trim()
       : "Ready-to-use template designed for rapid customization in FlutterPilot.";
 
-  const handleTemplate = () => {
-    window.open(`https://studio.flutterpilot.com/template/${templateId}`, "_blank", "noopener,noreferrer");
-  };
-
   return (
     <Card className={templateClasses.root}>
       <CardContent className={templateClasses.content}>
-        <Typography className={templateClasses.title}>{name}</Typography>
+        <Typography component="h3" className={templateClasses.title}>{name}</Typography>
         <TemplateCardStack imageUrls={imageURLs} />
         <Typography className={templateClasses.description}>{summary}</Typography>
         <Button
+          component="a"
+          href={`https://studio.flutterpilot.com/template/${encodeURIComponent(templateId)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Get started with the ${name} template`}
           className={templateClasses.ctaButton}
-          onClick={handleTemplate}
           endIcon={<ArrowForwardRoundedIcon />}
         >
           Get Started

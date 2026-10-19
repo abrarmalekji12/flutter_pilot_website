@@ -41,6 +41,11 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Check SEO output
+        run: |
+          npm run test:seo
+          npm run test:seo:pages
+
       - name: Verify Cloudflare configuration
         env:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -53,9 +58,16 @@ jobs:
           fi
 
       - name: Deploy to Cloudflare Pages
+        id: deploy
         uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # Checks this deployment's own *.pages.dev URL; run
+      # `npm run test:seo:deployed -- https://flutterpilot.com --production`
+      # by hand to include protocol and www redirects on the custom domain.
+      - name: Check the deployment
+        run: npm run test:seo:deployed -- "${{ steps.deploy.outputs.deployment-url }}"

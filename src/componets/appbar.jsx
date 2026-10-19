@@ -23,7 +23,7 @@ import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import ArticleRoundedIcon from "@mui/icons-material/ArticleRounded";
 import ContactSupportRoundedIcon from "@mui/icons-material/ContactSupportRounded";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { commonStyles } from "../styles/commonStyles";
 import Footer from "./Footer";
 
@@ -38,7 +38,6 @@ function getBuildNowUrl() {
 function CustomAppBar({ children, type }) {
   const classes = commonStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setDrawerOpen((value) => !value);
@@ -71,15 +70,11 @@ function CustomAppBar({ children, type }) {
             Build faster with FlutterPilot AI.
           </span>
         </span>
-        <button
-          type="button"
-          className={classes.taglineCta}
-          onClick={() => navigate("/flutter-ui-builder")}
-        >
+        <RouterLink className={classes.taglineCta} to="/flutter-ui-builder/">
           <span className={classes.taglineDesktopText}>See the workflow</span>
           <span className={classes.taglineMobileText}>See how</span>
           <span aria-hidden="true"> →</span>
-        </button>
+        </RouterLink>
       </div>
 
       <AppBar

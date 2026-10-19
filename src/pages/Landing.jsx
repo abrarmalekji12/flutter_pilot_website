@@ -1,6 +1,6 @@
 // src/pages/Landing.js
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@mui/material";
 import CustomAppBar from "../componets/appbar";
@@ -9,6 +9,7 @@ import ProductShowcase from "../componets/productshowcase";
 import FeatureShowcase from "../componets/featurediscription";
 import PartnerSolutionSpotlight from "../componets/PartnerSolutionSpotlight";
 import FlutterPilotFamily from "../componets/FlutterPilotFamily";
+import ExploreGuides from "../componets/ExploreGuides";
 import { commonStyles } from "../styles/commonStyles";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
@@ -136,7 +137,6 @@ const featurelist = [
 export default function Landing() {
   const common = commonStyles();
   const location = useLocation();
-  const navigate = useNavigate();
 
   // When redirected here from /download (or with a #download hash), scroll to
   // the download/product showcase section once the page has rendered.
@@ -205,6 +205,10 @@ export default function Landing() {
           </section>
         ))}
 
+        <div className={common.responsiveContainer}>
+          <ExploreGuides />
+        </div>
+
         {/* FlutterPilot Family — standalone companion products (e.g. Screenshot Studio).
             Kept out of the Studio feature grids above so they never read as Studio features. */}
         <motion.div
@@ -267,7 +271,8 @@ export default function Landing() {
               <Button
                 className={common.studioCtaSecondary}
                 startIcon={<MenuBookRoundedIcon />}
-                onClick={() => navigate("/docs")}
+                component={Link}
+                to="/docs/"
               >
                 Explore product guide
               </Button>

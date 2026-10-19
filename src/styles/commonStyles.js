@@ -1110,6 +1110,7 @@ export const commonStyles = makeStyles((theme) => ({
     lineHeight: 1.25,
     cursor: "pointer",
     whiteSpace: "nowrap",
+    textDecoration: "none",
     transition: "background 0.2s ease, border-color 0.2s ease, color 0.2s ease",
     "&:hover": {
       background: "rgba(59, 130, 246, 0.28)",

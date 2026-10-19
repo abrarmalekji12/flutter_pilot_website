@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Button, Chip, Container, TextField } from "@mui/material";
+import { Link } from "react-router-dom";
+import { CHANGELOG_PATH } from "../../seo/seo";
 import InputAdornment from "@mui/material/InputAdornment";
 import { makeStyles } from "@mui/styles";
 import { motion } from "framer-motion";
@@ -185,6 +187,15 @@ const referenceSections = [
   ["Dart Collections", "List, Map, Set, Iterable, and their supported methods."],
   ["API & Storage", "ApiResponse, SharedPreferences, Firestore, and storage-facing helpers."],
   ["Utilities", "App helpers, Timer, Future, TextEditingController, and common expressions."],
+];
+
+const relatedGuides = [
+  ["/ai-flutter-ui-generator/", "AI Flutter UI generator", "Example prompts and how to refine generated screens."],
+  ["/flutter-ui-builder/", "Flutter UI builder", "Build screens visually with real Flutter widgets."],
+  ["/flutter-app-builder/", "Flutter app builder", "Six steps from idea to an exported Flutter project."],
+  ["/flutterflow-alternative/", "FlutterFlow alternative", "How FlutterPilot compares, with trade-offs."],
+  ["/template/", "Flutter app templates", "Start from an editable template in the Studio."],
+  [CHANGELOG_PATH, "2.0.0 changelog", "What changed in the latest FlutterPilot release."],
 ];
 
 const workflow = [
@@ -676,7 +687,7 @@ export default function Docs() {
               <MenuBookRoundedIcon style={{ fontSize: 16 }} /> Product documentation
             </span>
             <h1 className={local.heroTitle}>
-              Everything in FlutterPilot, <span className={local.heroAccent}>mapped clearly.</span>
+              FlutterPilot documentation, <span className={local.heroAccent}>mapped clearly.</span>
             </h1>
             <p className={local.heroLead}>
               Explore the same product areas documented inside FlutterPilot Studio—from AI generation and visual
@@ -829,6 +840,37 @@ export default function Docs() {
               <div className={local.empty}>
                 Try a broader term such as <strong>AI</strong>, <strong>data</strong>, <strong>state</strong>, or <strong>deploy</strong>.
               </div>
+            )}
+
+            {!query.trim() && (
+              <section className={local.reference} aria-labelledby="docs-related-title">
+                <div className={local.groupHeader}>
+                  <div>
+                    <p className={local.groupEyebrow} style={{ color: "#2563eb" }}>Guides</p>
+                    <h2 id="docs-related-title" className={local.groupTitle}>Workflow guides and release notes</h2>
+                  </div>
+                  <p className={local.groupDescription}>
+                    Step-by-step overviews that put these Studio features in the order you would use them.
+                  </p>
+                </div>
+                <div className={local.referenceGrid}>
+                  {relatedGuides.map(([href, title, description]) => {
+                    const content = (
+                      <>
+                        <h3 className={local.referenceTitle}>{title}</h3>
+                        <p className={local.referenceText}>{description}</p>
+                      </>
+                    );
+                    const style = { display: "block", textDecoration: "none" };
+                    // The changelog is a static page outside the React router.
+                    return href === CHANGELOG_PATH ? (
+                      <a className={local.referenceCard} style={style} href={href} key={href}>{content}</a>
+                    ) : (
+                      <Link className={local.referenceCard} style={style} to={href} key={href}>{content}</Link>
+                    );
+                  })}
+                </div>
+              </section>
             )}
 
             <section className={local.bottomCta}>

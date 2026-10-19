@@ -21,6 +21,7 @@ import HubRoundedIcon from "@mui/icons-material/HubRounded";
 import CloudUploadRoundedIcon from "@mui/icons-material/CloudUploadRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { makeStyles } from "@mui/styles";
+import { isPrerendering } from "../utils/prerender";
 
 const MAX_PROMPT_LENGTH = 2000;
 const platformTargets = [
@@ -183,6 +184,11 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(100deg, #38bdf8 0%, #93c5fd 50%, #c4b5fd 100%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
+    // The visible word comes from data-label so the rotating copies don't end
+    // up in the heading's text content (crawlers would read "MobileDesktopWeb").
+    "&::after": {
+      content: "attr(data-label)",
+    },
   },
   rotatingTargetIcon: {
     width: "1.1em",
@@ -460,7 +466,8 @@ export default function PromptGeneratorHero() {
   const [targetPrompt, setTargetPrompt] = React.useState("");
 
   React.useEffect(() => {
-    if (hasInteracted) return;
+    // Keep the prerendered HTML deterministic: no random prompt, no typing.
+    if (hasInteracted || isPrerendering()) return;
 
     const randomPrompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)];
     setTargetPrompt(randomPrompt);
@@ -518,27 +525,26 @@ export default function PromptGeneratorHero() {
           FlutterPilot Studio · AI + visual development
         </span>
 
-        <Typography
-          component="h1"
-          className={classes.sectionTitle}
-          aria-label="Build a real Flutter mobile, desktop, or web app from a prompt—then make every detail yours"
-        >
-          Build a real Flutter{" "}
+        <Typography component="h1" className={classes.sectionTitle}>
+          Build a real Flutter <span className="sr-only">mobile, desktop, or web</span>
           <span className={classes.rotatingTarget} aria-hidden="true">
             <span className={classes.rotatingTargetTrack}>
               {[...platformTargets, platformTargets[0]].map((target, index) => (
-                <span className={classes.rotatingTargetWord} key={`${target.label}-${index}`}>
+                <span
+                  className={classes.rotatingTargetWord}
+                  data-label={target.label}
+                  key={`${target.label}-${index}`}
+                >
                   {React.cloneElement(target.icon, {
                     className: classes.rotatingTargetIcon,
                     "aria-hidden": true,
                   })}
-                  {target.label}
                 </span>
               ))}
             </span>
           </span>
           <br />
-          app from a prompt—<span className={classes.titleAccent}>then make every detail yours</span>
+          {" "}app from a prompt—<span className={classes.titleAccent}>then make every detail yours</span>
         </Typography>
         <Typography component="p" className={classes.sectionSubtitle}>
           Generate a multi-screen project, refine every widget visually, add real logic and data,
@@ -568,8 +574,9 @@ export default function PromptGeneratorHero() {
           <Box className={classes.promptInputShell}>
             <TextField
               multiline
-              minRows={5}
-              maxRows={7}
+              // Autosizing measures layout, which the prerenderer (jsdom) doesn't
+              // have; a fixed five rows renders the same height in static HTML.
+              {...(isPrerendering() ? { rows: 5 } : { minRows: 5, maxRows: 7 })}
               fullWidth
               variant="outlined"
               placeholder="Create a finance app with dashboard, transactions list, spending charts, and onboarding flow..."
