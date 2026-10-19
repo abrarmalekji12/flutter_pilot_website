@@ -58,6 +58,8 @@ Lighthouse 12, simulated mobile, local `wrangler pages dev`, **median of 5 runs*
 | `/template/` | before | 75 | 0.82 s | 3.90 s | 435 ms | 0 | 1,290 KB |
 | `/template/` | after | 83 | 0.96 s | 1.88 s | 632 ms | 0 | 1,344 KB |
 
+The "after" rows were measured on the first version of this change, which prerendered with headless Chromium. The final version prerenders with jsdom (see IMPLEMENTATION_PLAN.md) and was re-measured with the same setup: `/` LCP 2.60 s, TBT 217 ms; `/flutterflow-alternative/` LCP 2.60 s, TBT 265 ms; `/flutter-app-builder/` LCP 2.82 s, TBT 316 ms (medians of 5). Those are the same within run-to-run noise, as expected from equivalent HTML.
+
 Reading the table:
 
 - **LCP improved by roughly 1.4–2.0 s** (simulated), because the hero text now arrives in the HTML instead of after the JS bundle, route chunk and React render.

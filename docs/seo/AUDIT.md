@@ -10,7 +10,7 @@ This audit separates **confirmed findings** (reproduced from the repository, a b
 |---|---|---|
 | Repository history and source | Yes | Full git history back to 2024-03. |
 | Production build (`npm run build`) | Yes | Built and inspected locally. |
-| Cloudflare Pages behavior | **Emulated** | `wrangler pages dev` (Cloudflare's own asset server: `_redirects`, `_headers`, `404.html`, trailing slashes). Not a deployed preview. |
+| Cloudflare Pages behavior | **Emulated, then verified** | Baseline: `wrangler pages dev` (Cloudflare's own asset server: `_redirects`, `_headers`, `404.html`, trailing slashes). The new behavior was also verified on a deployed Cloudflare Pages preview by CI (145/145 checks, PR #13). |
 | Live site / deployed preview | **No** | `flutterpilot.com` and `*.pages.dev` were blocked by this environment's network policy. The new CI workflow checks a real preview on the PR. |
 | Search Console performance summary | Partial | Totals, 28-day windows, 7 priority queries and 7 pages, as provided in the task. |
 | Search Console query × page × date data | **No** | No GSC access in this environment. |

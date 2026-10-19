@@ -27,8 +27,8 @@ scripts/seo/*                regression checks (build, Pages emulation, live pre
 
 | Task | Status | Notes / deviation from #12 |
 |---|---|---|
-| Correct HTTP statuses and redirects | ✅ emulated; ⏳ preview | #12 assumed `/* /index.html 200` caused soft 404s. Cloudflare already ignores that rule as an infinite loop, and unknown URLs return 404 with `404.html`. The rule was removed so it can't be "fixed" into a real catch-all. Added 301 `/download` → `/#download`. |
-| Verify on a deployed preview | ⏳ | Not reachable from this environment. `.github/workflows/seo-checks.yml` deploys a preview and runs `check-deployment.js` against it on this PR, if the Cloudflare secrets are available to the workflow. |
+| Correct HTTP statuses and redirects | ✅ emulated and on a deployed preview | #12 assumed `/* /index.html 200` caused soft 404s. Cloudflare already ignores that rule as an infinite loop, and unknown URLs return 404 with `404.html`. The rule was removed so it can't be "fixed" into a real catch-all. Added 301 `/download` → `/#download`. |
+| Verify on a deployed preview | ✅ | `.github/workflows/seo-checks.yml` deploys a Cloudflare Pages preview for each PR and runs `check-deployment.js` against it: 145/145 passed on PR #13. |
 | Content in initial HTML | ✅ | All 10 React routes plus `404.html`. |
 | Centralized metadata | ✅ | `public/index.html` keeps homepage defaults for the app shell only. |
 | Sitemap from the registry | ✅ | 11 URLs including `/docs/changelogs/`; `lastmod` is maintained by hand per route. |
@@ -70,9 +70,13 @@ Measured, not assumed; see [MEASUREMENT.md](./MEASUREMENT.md#lab-performance). C
 
 Not changed: the typing animation and canvas background (users see the same experience); the video `preload="none"` setup is already efficient.
 
+## Deployment setup (owner decision)
+
+Two pipelines publish **production** on every push to `main`: Cloudflare's Git integration (the "Cloudflare Pages" check) and `.github/workflows/deploy-cloudflare.yml` (`wrangler pages deploy`). Whichever finishes last wins. Both now build the same prerendered output, so this is harmless today, but they can diverge (for example if a workflow-only step is added). Recommendation: keep one. Either disable automatic production deployments in the Cloudflare dashboard (Settings → Builds) and keep the workflow, which runs the SEO gate before deploying, or delete the workflow's deploy job and add `npm run test:seo` to Cloudflare's build command.
+
 ## Next steps
 
-1. ⏳ Review the preview deployment checks on this PR.
+1. ✅ Preview deployment checks pass on PR #13.
 2. ⏳ After merge: run `npm run test:seo:deployed -- https://flutterpilot.com --production`.
 3. ⏳ Search Console: resubmit the sitemap; inspect the four guides, `/template/` and `/docs/changelogs/`; collect example URLs for every exclusion bucket and record a disposition for each in #12.
 4. 🔜 Weekly monitoring per [MEASUREMENT.md](./MEASUREMENT.md).
