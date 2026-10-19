@@ -2,7 +2,7 @@
 const path = require("path");
 const registry = require("../../src/seo/routes.json");
 
-const buildDirectory = path.resolve(__dirname, "..", "..", "build");
+const buildDirectory = path.resolve(process.env.SEO_BUILD_DIR || path.join(__dirname, "..", "..", "build"));
 
 const routeFile = (routePath) => path.join(buildDirectory, routePath, "index.html");
 
