@@ -12,7 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
 
-  <!-- Primary SEO Meta Tags -->
+  <!-- Primary SEO Meta Tags. These are homepage defaults for the app shell only:
+       every public route is prerendered at build time (scripts/prerender.js) with
+       its own tags from src/seo/routes.json, and RouteSeo keeps them in sync at runtime. -->
   <title>FlutterPilot – AI Flutter App Builder</title>
   <meta name="title" content="FlutterPilot – AI Flutter App Builder" />
   <meta name="description"
@@ -45,45 +47,9 @@
   <link rel="manifest" href="/manifest.json" />
 
 
-  <script id="route-structured-data" type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://flutterpilot.com/#organization",
-          "name": "FlutterPilot",
-          "url": "https://flutterpilot.com/",
-          "logo": "https://flutterpilot.com/logo.png",
-          "sameAs": [
-            "https://flutterpilot.medium.com",
-            "https://play.google.com/store/apps/details?id=com.builder.flutterpilot"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://flutterpilot.com/#website",
-          "name": "FlutterPilot",
-          "url": "https://flutterpilot.com/",
-          "publisher": { "@id": "https://flutterpilot.com/#organization" }
-        },
-        {
-          "@type": "SoftwareApplication",
-          "name": "FlutterPilot",
-          "applicationCategory": "DeveloperApplication",
-          "operatingSystem": "Web, Android, iOS, macOS, Windows",
-          "url": "https://flutterpilot.com/",
-          "description": "An AI-assisted visual development environment for building and exporting Flutter applications.",
-          "screenshot": "https://flutterpilot.com/flutterpilot_ss.webp",
-          "author": { "@id": "https://flutterpilot.com/#organization" }
-        }
-      ]
-    }
-  </script>
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
 </body>
 

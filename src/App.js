@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import AppNav from "./pages/AppNav";
+import { isPrerendering } from "./utils/prerender";
 
 const BackgroundNetAnimation = lazy(() => import("./componets/BackgroundNetAnimation"));
 
@@ -8,8 +9,9 @@ function App() {
 
   useEffect(() => {
     if (
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      isPrerendering() ||
+      (typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches)
     ) {
       return undefined;
     }

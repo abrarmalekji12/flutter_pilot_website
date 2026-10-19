@@ -1,0 +1,164 @@
+{
+  "siteUrl": "https://flutterpilot.com",
+  "siteName": "FlutterPilot",
+  "defaultImage": {
+    "url": "/flutterpilot_ss.webp",
+    "width": 1927,
+    "height": 953,
+    "alt": "FlutterPilot visual Flutter app builder workspace"
+  },
+  "organization": {
+    "logo": "/logo.png",
+    "sameAs": [
+      "https://flutterpilot.medium.com",
+      "https://play.google.com/store/apps/details?id=com.builder.flutterpilot"
+    ]
+  },
+  "notFound": {
+    "title": "Page not found | FlutterPilot",
+    "description": "The requested FlutterPilot page could not be found."
+  },
+  "routes": [
+    {
+      "path": "/",
+      "render": "react",
+      "indexable": true,
+      "title": "FlutterPilot – AI Flutter App Builder",
+      "description": "Build Flutter apps with AI generation, a visual editor, connected data, real-time preview, and exportable Flutter source code.",
+      "h1": "Build a real Flutter mobile, desktop, or web app from a prompt—then make every detail yours",
+      "intent": "Brand + AI Flutter app building",
+      "schema": "home",
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/flutter-ui-builder/",
+      "render": "react",
+      "indexable": true,
+      "title": "Flutter UI Builder with AI – Visual Widget Editor | FlutterPilot",
+      "description": "Build Flutter screens on a visual canvas with real widgets, edit layout and styles in a property panel, refine with AI, preview on devices, and export Flutter source.",
+      "h1": "A visual Flutter UI builder that works with real widgets",
+      "breadcrumb": "Flutter UI Builder",
+      "intent": "Visual Flutter UI/widget construction",
+      "image": {
+        "url": "/flutterpilot_ss.webp",
+        "width": 1927,
+        "height": 953,
+        "alt": "FlutterPilot Studio editor with a widget tree, widget palette, phone canvas, and property panel"
+      },
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/ai-flutter-ui-generator/",
+      "render": "react",
+      "indexable": true,
+      "title": "AI Flutter UI Generator – Prompt to Editable Screens | FlutterPilot",
+      "description": "Generate Flutter screens from a text prompt. See example prompts, what the generated widget structure looks like, and how to refine, connect data, and export it.",
+      "h1": "AI Flutter UI generator: from a prompt to editable Flutter screens",
+      "breadcrumb": "AI Flutter UI Generator",
+      "intent": "Prompt-to-Flutter-UI generation",
+      "image": {
+        "url": "/ai_generation_feature.webp",
+        "width": 1024,
+        "height": 698,
+        "alt": "FlutterPilot new project dialog with templates and an AI prompt for generating a Flutter project"
+      },
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/flutter-app-builder/",
+      "render": "react",
+      "indexable": true,
+      "title": "Flutter App Builder with AI: Screens, Logic, Data | FlutterPilot",
+      "description": "A six-step workflow for building a Flutter app in FlutterPilot: describe the idea, generate screens, add navigation and actions, connect APIs, preview, and export.",
+      "h1": "Flutter app builder: from app idea to an exported Flutter project",
+      "breadcrumb": "Flutter App Builder",
+      "intent": "Building a complete Flutter application",
+      "image": {
+        "url": "/realtime_preview.webp",
+        "width": 1149,
+        "height": 748,
+        "alt": "Four screens of a student attendance Flutter app arranged on the FlutterPilot canvas"
+      },
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/flutterflow-alternative/",
+      "render": "react",
+      "indexable": true,
+      "title": "FlutterFlow Alternative – FlutterPilot vs FlutterFlow Compared",
+      "description": "Compare FlutterPilot and FlutterFlow on AI generation, visual editing, code export, data and API integrations, learning curve, and trade-offs before you switch.",
+      "h1": "Looking for a FlutterFlow alternative? See how FlutterPilot compares",
+      "breadcrumb": "FlutterFlow Alternative",
+      "intent": "Evaluating alternatives to FlutterFlow",
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/template/",
+      "render": "react",
+      "indexable": true,
+      "title": "Flutter App Templates – Editable Starters | FlutterPilot",
+      "description": "Start a Flutter app from an editable template in FlutterPilot Studio, then customize screens, styles, actions, and data visually or with AI, and export the source.",
+      "h1": "Flutter app templates you can open and edit in FlutterPilot Studio",
+      "breadcrumb": "Templates",
+      "intent": "Flutter app/UI templates",
+      "schema": "collection",
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/docs/",
+      "render": "react",
+      "indexable": true,
+      "title": "FlutterPilot Documentation and Product Guide",
+      "description": "Learn FlutterPilot's AI generation, visual UI, actions, state, connected data, deployment, source export, and component workflows.",
+      "h1": "FlutterPilot documentation, mapped clearly.",
+      "breadcrumb": "Docs",
+      "intent": "Product documentation",
+      "lastmod": "2026-10-19"
+    },
+    {
+      "path": "/docs/changelogs/",
+      "render": "static",
+      "indexable": true,
+      "title": "FlutterPilot 2.0.0 Changelog",
+      "description": "What's new in FlutterPilot 2.0.0: improved Starter App generation, AI editing, action flows, data queries, export reliability, web publishing, and stability.",
+      "h1": "FlutterPilot 2.0.0",
+      "intent": "Release notes",
+      "lastmod": "2026-10-05"
+    },
+    {
+      "path": "/about-us/",
+      "render": "react",
+      "indexable": true,
+      "title": "About FlutterPilot",
+      "description": "Learn how FlutterPilot combines AI-assisted generation, visual editing, connected data, and Flutter source export for modern app teams.",
+      "h1": "About Us",
+      "breadcrumb": "About",
+      "intent": "Company information",
+      "schema": "about",
+      "lastmod": "2026-03-20"
+    },
+    {
+      "path": "/contact/",
+      "render": "react",
+      "indexable": true,
+      "title": "Contact FlutterPilot Support",
+      "description": "Contact the FlutterPilot team for product questions, feedback, support, or suggestions.",
+      "h1": "Contact Us",
+      "breadcrumb": "Contact",
+      "intent": "Support contact",
+      "schema": "contact",
+      "lastmod": "2026-03-14"
+    },
+    {
+      "path": "/privacy-policy/",
+      "render": "react",
+      "indexable": true,
+      "title": "Privacy Policy | FlutterPilot",
+      "description": "Read how FlutterPilot collects, uses, stores, and protects account data and authorized Google user data.",
+      "h1": "Privacy Policy",
+      "breadcrumb": "Privacy Policy",
+      "intent": "Legal",
+      "lastmod": "2026-07-03"
+    }
+  ]
+}

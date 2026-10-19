@@ -1,3 +1,10 @@
+# Cloudflare Pages serves each prerendered route from <route>/index.html and
+# answers unknown paths with 404.html (HTTP 404). Paths without a trailing slash
+# get a single 308 to the canonical slash URL from Cloudflare itself.
+#
+# Do not add a "/* /index.html 200" SPA fallback: Cloudflare rejects it as an
+# infinite loop, and if it ever applied, missing URLs would return HTTP 200.
+
 # Consolidate legacy template URLs into the canonical template page.
 /flutter-templates /template/ 301
 /flutter-templates/ /template/ 301
@@ -12,5 +19,6 @@
 /privacyPolicy /privacy-policy/ 301
 /privacyPolicy/ /privacy-policy/ 301
 
-# Serve the React application for client-side routes on Cloudflare Pages/Netlify.
-/* /index.html 200
+# The old download page now lives in the homepage download section.
+/download /#download 301
+/download/ /#download 301
