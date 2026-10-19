@@ -1,5 +1,5 @@
 // Small helpers for reading the HTML the build writes. The prerenderer
-// serializes Chromium's DOM, so attributes are always double-quoted.
+// serializes a DOM, so attributes are always double-quoted.
 const decode = (value) =>
   value
     .replace(/&amp;/g, "&")

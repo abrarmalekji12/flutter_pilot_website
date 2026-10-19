@@ -104,7 +104,7 @@ function checkRoutes() {
     check(page.h1s.length === 1, `${route.path}: expected exactly one H1, found ${page.h1s.length}`);
     check(page.h1s[0] === route.h1, `${route.path}: H1 "${page.h1s[0]}" should be "${route.h1}"`);
     check(!html.includes("data-route-loading"), `${route.path}: prerendered HTML contains the route loading fallback`);
-    check(!html.includes("127.0.0.1"), `${route.path}: HTML references the local prerender server`);
+    check(!html.includes("prerender.local"), `${route.path}: HTML references the prerender origin`);
     check(!/You need to enable JavaScript/i.test(html), `${route.path}: HTML still tells crawlers JavaScript is required`);
 
     titles.set(route.title, [...(titles.get(route.title) || []), route.path]);

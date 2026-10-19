@@ -16,7 +16,7 @@
 
   ```sh
   npm test -- --watchAll=false
-  npm run build             # prerenders every route (needs Chromium: npx playwright install chromium)
+  npm run build             # builds, prerenders every route, writes the sitemap
   npm run test:seo          # checks build/ offline
   npm run test:seo:pages    # HTTP checks against Cloudflare's local Pages server
   ```

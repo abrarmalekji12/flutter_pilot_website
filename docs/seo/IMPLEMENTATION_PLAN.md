@@ -9,17 +9,19 @@ src/seo/routes.json          single source of truth: path, title, description, H
                              indexability, image, schema type, lastmod
 src/seo/seo.js               head tags + JSON-LD built from the registry
 src/componets/RouteSeo.jsx   applies them at runtime (client navigation)
-scripts/prerender.js         renders each React route in headless Chromium and writes
+scripts/prerender.js         runs the built app in jsdom for each React route and writes
                              build/<route>/index.html and build/404.html
 scripts/generate-sitemap.js  sitemap.xml from indexable registry routes
 scripts/seo/*                regression checks (build, Pages emulation, live preview)
 ```
 
+**Why jsdom, not a headless browser.** Cloudflare Pages also builds this repository through its Git integration (the "Cloudflare Pages" check), and its build image has no Chromium. A Playwright-based first version of this PR failed that build. jsdom is pure JavaScript, so the same build runs in GitHub Actions, Cloudflare and locally. Fidelity was checked against the Chromium output. Titles, descriptions, canonicals, H1s, body text, links and JSON-LD are identical on all 10 routes. No-JavaScript screenshots at 1280px and 390px are pixel-identical for every page and `404.html`, except the homepage hero prompt box. MUI's auto-sizing textarea needs layout, which jsdom doesn't have, so the prerenderer renders it from `rows={5}`. That matches at 1280px and is 17px shorter at 390px, until React takes over. (Remaining screenshot differences came from the hero's CSS animation frame and lazy-loaded images, i.e. capture timing.)
+
 **Prerendering and hydration.** The prerenderer captures the DOM after React renders, including the `<head>` tags RouteSeo writes, so the static HTML and the runtime tags come from the same code. In the browser, `src/index.js` lets the prerendered HTML paint, preloads the current route's chunk, and then renders React over it in one commit. It deliberately does **not** call `hydrateRoot`: MUI's JSS class names are counter-based, and React 18 does not patch attribute mismatches in production, so hydration could leave pages mis-styled. Rendering over the markup avoids that whole class of bugs. The cost is one client render, which already happened before this change.
 
 **Why not a framework migration?** Incremental prerendering covers every requirement (content, H1, links, metadata in initial HTML; the client app unchanged) without touching routing, styling or deployment. A migration to Next.js or Remix would rewrite the app for no SEO benefit beyond what prerendering already provides for a static marketing site.
 
-**Prerender determinism.** `window.__FLUTTERPILOT_PRERENDER__` makes the app skip Firebase, the random typing animation and the canvas background. The prerenderer blocks every request outside its local server and fails the build on runtime errors or title mismatches.
+**Prerender determinism.** `window.__FLUTTERPILOT_PRERENDER__` makes the app skip Firebase, the random typing animation and the canvas background. The prerenderer only loads files from `build/`, blocks every other request, and fails the build on runtime errors or title mismatches.
 
 ## P0: technical SEO
 

@@ -574,8 +574,9 @@ export default function PromptGeneratorHero() {
           <Box className={classes.promptInputShell}>
             <TextField
               multiline
-              minRows={5}
-              maxRows={7}
+              // Autosizing measures layout, which the prerenderer (jsdom) doesn't
+              // have; a fixed five rows renders the same height in static HTML.
+              {...(isPrerendering() ? { rows: 5 } : { minRows: 5, maxRows: 7 })}
               fullWidth
               variant="outlined"
               placeholder="Create a finance app with dashboard, transactions list, spending charts, and onboarding flow..."
