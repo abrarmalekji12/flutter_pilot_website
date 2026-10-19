@@ -4,6 +4,7 @@
 //
 //   node scripts/seo/check-deployment.js https://<hash>.<project>.pages.dev
 //   node scripts/seo/check-deployment.js https://flutterpilot.com --production
+//   node scripts/seo/check-deployment.js https://flutterpilot.com --sitemap-only
 //
 // Checks status codes and redirect hops as the server sends them, not what
 // React Router displays after JavaScript runs.
@@ -19,6 +20,7 @@ if (!baseArg) {
 }
 const base = baseArg.replace(/\/+$/, "");
 const isProduction = flags.includes("--production");
+const sitemapOnly = flags.includes("--sitemap-only");
 const isPagesPreview = /\.pages\.dev$/.test(new URL(base).hostname);
 
 const failures = [];
@@ -116,9 +118,13 @@ async function checkSiteFiles() {
   check(sitemap.status === 200, `/sitemap.xml: expected 200, got ${sitemap.status}`);
   check(/xml/.test(sitemap.headers.get("content-type") || ""), "/sitemap.xml: content-type is not XML");
   const xml = await sitemap.text();
-  routes
-    .filter((route) => route.indexable)
-    .forEach((route) => check(xml.includes(`<loc>${absoluteUrl(route.path)}</loc>`), `/sitemap.xml: missing ${route.path}`));
+  // An HTML SPA fallback can have HTTP 200; validate the actual response body.
+  check(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>'), "/sitemap.xml: response is not an XML sitemap (possible HTML fallback)");
+  check(!/<!doctype\\s+html|<html\\b/i.test(xml), "/sitemap.xml: HTML returned instead of XML");
+  check(/<urlset\\b[^>]*xmlns="http:\\/\\/www\\.sitemaps\\.org\\/schemas\\/sitemap\\/0\\.9"/.test(xml), "/sitemap.xml: missing sitemap urlset/namespace");
+  const expectedUrls = routes.filter((route) => route.indexable).map((route) => absoluteUrl(route.path)).sort();
+  const foundUrls = [...xml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => match[1]).sort();
+  check(JSON.stringify(foundUrls) === JSON.stringify(expectedUrls), `/sitemap.xml: URLs do not match the canonical route registry (expected ${expectedUrls.length}, found ${foundUrls.length})`);
 
   const robots = await request(`${base}/robots.txt`);
   check(robots.status === 200, `/robots.txt: expected 200, got ${robots.status}`);
@@ -144,11 +150,15 @@ async function checkHostVariants() {
 }
 
 (async () => {
-  await checkRoutes();
-  await checkRedirects();
-  await checkNotFound();
-  await checkSiteFiles();
-  if (isProduction) await checkHostVariants();
+  if (sitemapOnly) {
+    await checkSiteFiles();
+  } else {
+    await checkRoutes();
+    await checkRedirects();
+    await checkNotFound();
+    await checkSiteFiles();
+    if (isProduction) await checkHostVariants();
+  }
 
   if (failures.length) {
     console.error(`Deployment SEO checks for ${base}: ${failures.length} of ${checks} failed\n`);
