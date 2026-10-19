@@ -288,7 +288,7 @@ const FeatureShowcase = (props) => {
                   transition: "all 0.25s ease",
                 }}
               >
-                Learn more
+                Read the product guide
               </Button>
             </motion.div>
           </div>

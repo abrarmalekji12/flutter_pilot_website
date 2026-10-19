@@ -14,7 +14,8 @@ const WRANGLER = "wrangler@3.114.17";
 const PORT = process.env.SEO_PAGES_PORT || "8799";
 const base = `http://127.0.0.1:${PORT}`;
 
-async function waitForServer(timeoutMs = 60000) {
+// Generous: on a fresh CI runner this includes npx downloading wrangler.
+async function waitForServer(timeoutMs = 180000) {
   const started = Date.now();
   while (Date.now() - started < timeoutMs) {
     try {

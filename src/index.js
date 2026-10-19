@@ -40,8 +40,22 @@ function renderApp() {
   );
 }
 
+// Let the browser paint prerendered HTML before React's first render, which is
+// a long task on slow phones. Background tabs don't paint (or run
+// requestAnimationFrame), so they render straight away.
+function afterFirstPaint(callback) {
+  if (document.visibilityState === 'hidden') {
+    callback();
+    return;
+  }
+  requestAnimationFrame(() => setTimeout(callback, 0));
+}
+
+const isPrerendered = document.getElementById('root').hasAttribute('data-prerendered');
+const start = isPrerendered ? () => afterFirstPaint(renderApp) : renderApp;
+
 // Render even if the route chunk fails to preload; Suspense then handles it.
-preloadRoute(window.location.pathname).then(renderApp, renderApp);
+preloadRoute(window.location.pathname).then(start, start);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
