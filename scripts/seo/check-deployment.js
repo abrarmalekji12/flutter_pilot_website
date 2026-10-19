@@ -120,10 +120,10 @@ async function checkSiteFiles() {
   const xml = await sitemap.text();
   // An HTML SPA fallback can have HTTP 200; validate the actual response body.
   check(xml.startsWith('<?xml version="1.0" encoding="UTF-8"?>'), "/sitemap.xml: response is not an XML sitemap (possible HTML fallback)");
-  check(!/<!doctype\\s+html|<html\\b/i.test(xml), "/sitemap.xml: HTML returned instead of XML");
-  check(/<urlset\\b[^>]*xmlns="http:\\/\\/www\\.sitemaps\\.org\\/schemas\\/sitemap\\/0\\.9"/.test(xml), "/sitemap.xml: missing sitemap urlset/namespace");
+  check(!/<!doctype\s+html|<html\b/i.test(xml), "/sitemap.xml: HTML returned instead of XML");
+  check(/<urlset\b[^>]*xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/.test(xml), "/sitemap.xml: missing sitemap urlset/namespace");
   const expectedUrls = routes.filter((route) => route.indexable).map((route) => absoluteUrl(route.path)).sort();
-  const foundUrls = [...xml.matchAll(/<loc>([^<]+)<\\/loc>/g)].map((match) => match[1]).sort();
+  const foundUrls = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]).sort();
   check(JSON.stringify(foundUrls) === JSON.stringify(expectedUrls), `/sitemap.xml: URLs do not match the canonical route registry (expected ${expectedUrls.length}, found ${foundUrls.length})`);
 
   const robots = await request(`${base}/robots.txt`);
