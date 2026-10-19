@@ -10,6 +10,9 @@ export const ROBOTS_NOINDEX = "noindex, follow";
 
 export const routes = registry.routes;
 
+// Static page outside the React router: link to it with <a href>, not <Link>.
+export const CHANGELOG_PATH = "/docs/changelogs/";
+
 export const absoluteUrl = (path) => `${SITE_URL}${path}`;
 
 export function normalizePath(pathname) {

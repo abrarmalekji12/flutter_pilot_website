@@ -14,6 +14,7 @@ import CheckRoundedIcon from "@mui/icons-material/CheckRounded";
 import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "./appbar";
+import pages, { docsLinks, CHANGELOG_PATH } from "./productGuideContent";
 
 const STUDIO_URL = "https://studio.flutterpilot.com";
 
@@ -28,174 +29,11 @@ const iconMap = {
   tune: TuneRoundedIcon,
 };
 
-const pages = {
-  "flutter-ui-builder": {
-    eyebrow: "Visual Flutter development",
-    title: "Design Flutter interfaces without losing the code.",
-    intro:
-      "FlutterPilot gives you a visual canvas for composing real Flutter widgets, an AI copilot for faster first drafts, and an editable project you can take with you.",
-    heroNote: "Start in the browser. Export Flutter source when you are ready.",
-    mediaLabel: "Visual editor",
-    mediaCaption: "Select, style, arrange, and preview widgets in one workspace.",
-    problemTitle: "A UI builder should shorten the loop—not hide Flutter.",
-    problemText:
-      "Hand-writing every container, row, breakpoint, and style is precise but repetitive. Closed visual tools can be fast at first, then become difficult when a screen needs custom behavior. FlutterPilot keeps the visual workflow close to the Flutter project underneath it.",
-    outcomes: [
-      "Move from an empty canvas to a structured screen faster",
-      "Refine spacing, hierarchy, and widget properties visually",
-      "Preview layouts across mobile, tablet, and desktop sizes",
-      "Continue in FlutterPilot Studio or export the source project",
-    ],
-    workflow: [
-      ["01", "Create the first draft", "Describe the screen, begin from a template, or assemble it visually from Flutter widgets."],
-      ["02", "Refine on the canvas", "Adjust layout, styling, content, and responsive behavior while the preview stays in view."],
-      ["03", "Connect and continue", "Add actions and data, test the experience, then deploy or export the Flutter project."],
-    ],
-    features: [
-      ["design", "Visual widget editing", "Work directly with the structure, properties, spacing, and styling of your Flutter interface."],
-      ["ai", "AI-assisted iteration", "Ask for a screen, component, or focused change without rebuilding the entire layout by hand."],
-      ["device", "Responsive preview", "Check the same screen at mobile, tablet, and desktop dimensions as you refine it."],
-      ["layers", "Reusable building blocks", "Turn repeated UI patterns into components that stay easier to update and maintain."],
-      ["flow", "Actions and navigation", "Connect taps, conditions, state updates, dialogs, and screen transitions visually."],
-      ["code", "Exportable Flutter source", "Keep a path back to a standard Flutter project for custom code and your existing workflow."],
-    ],
-    fitTitle: "Built for the point where design meets development",
-    fitText:
-      "Use FlutterPilot when you want the speed of a visual builder but still care about widget structure, custom behavior, and source ownership.",
-    fitItems: ["Production Flutter teams", "Fast-moving MVPs", "Design-to-development handoff", "Developers exploring visual workflows"],
-    faq: [
-      ["Does FlutterPilot generate real Flutter code?", "Yes. FlutterPilot works with Flutter projects and supports exporting the source so you can continue in your own development environment."],
-      ["Can I use it without AI?", "Yes. AI is one way to create and edit. You can also work visually, start from a template, and make focused changes yourself."],
-      ["Can I connect data and actions?", "Yes. The Studio includes actions, state, REST and Postman workflows, and connected data options for building beyond static screens."],
-    ],
-  },
-  "ai-flutter-ui-generator": {
-    eyebrow: "Prompt-to-Flutter workflow",
-    title: "Turn a plain-English brief into a working Flutter screen.",
-    intro:
-      "Describe the interface you need. FlutterPilot creates a structured first draft that you can preview, edit visually, connect to data, and export as Flutter source.",
-    heroNote: "Generate the starting point, then stay in control of every detail.",
-    mediaLabel: "AI generation + visual editing",
-    mediaCaption: "Move from a prompt to an editable project—not a disposable mockup.",
-    problemTitle: "The useful output is not a screenshot. It is a project you can keep shaping.",
-    problemText:
-      "Generic code generation can leave you cleaning up disconnected snippets. FlutterPilot brings generation into the same workspace where you edit widgets, preview layouts, define behavior, and manage the rest of the app.",
-    outcomes: [
-      "Generate screens and components from a concise brief",
-      "Iterate with follow-up instructions instead of restarting",
-      "Inspect and refine the result on a visual canvas",
-      "Add navigation, actions, and connected data in context",
-    ],
-    workflow: [
-      ["01", "Describe the result", "Include the screen purpose, visual direction, key content, and important interactions in your prompt."],
-      ["02", "Review the generated UI", "Open the result in the visual Studio, check the hierarchy, and make targeted edits."],
-      ["03", "Build past the mockup", "Connect data and actions, test responsive views, and export or deploy the working project."],
-    ],
-    features: [
-      ["ai", "Project-aware copilot", "Create screens, components, variables, and endpoints with the surrounding project in view."],
-      ["layers", "Structured output", "Generate editable interface structure that can be refined instead of a flattened image."],
-      ["tune", "Targeted revisions", "Ask for focused changes to layout, content, styling, or behavior as the product evolves."],
-      ["design", "Visual refinement", "Use direct controls for the details that are faster to tune by eye than describe in a prompt."],
-      ["device", "Live responsive checks", "See how generated interfaces adapt across common viewport sizes before you move on."],
-      ["code", "Source-code handoff", "Export the Flutter project when you want to continue with local tooling and custom code."],
-    ],
-    fitTitle: "A faster first draft for people who still care about the final implementation",
-    fitText:
-      "FlutterPilot is most useful when prompt speed, visual control, and a real Flutter handoff all matter in the same workflow.",
-    fitItems: ["New screen exploration", "MVP interface generation", "Rapid product iteration", "AI-assisted Flutter development"],
-    faq: [
-      ["What should I include in a Flutter UI prompt?", "Describe the screen goal, key sections, content, interaction states, and visual tone. Concrete constraints usually produce a more useful first draft."],
-      ["Can I edit the generated result?", "Yes. Generated screens remain editable in the visual Studio, so you can adjust widget properties, layout, actions, and data."],
-      ["Is the result limited to a prototype?", "No. You can continue into navigation, state, integrations, deployment, and Flutter source export from the same project."],
-    ],
-  },
-  "flutter-app-builder": {
-    eyebrow: "From idea to working Flutter app",
-    title: "Build the screens, logic, and data flow in one Flutter workspace.",
-    intro:
-      "FlutterPilot brings AI generation, visual editing, actions, connected data, previews, deployment, and source export into a single app-building workflow.",
-    heroNote: "Useful for a quick MVP—and designed to keep working as the app grows.",
-    mediaLabel: "Full app workflow",
-    mediaCaption: "Design the interface, wire behavior, connect data, and test the result.",
-    problemTitle: "An app builder needs to handle what happens after the first screen.",
-    problemText:
-      "A convincing interface is only the beginning. Real products need navigation, state, API calls, reusable components, responsive layouts, and a clean path to delivery. FlutterPilot keeps those parts in the same project instead of turning them into separate handoffs.",
-    outcomes: [
-      "Create multi-screen project structure with AI or templates",
-      "Build and edit interfaces on a visual Flutter canvas",
-      "Define actions, state changes, and navigation flows",
-      "Connect REST APIs, Postman collections, and data sources",
-    ],
-    workflow: [
-      ["01", "Shape the project", "Start with a prompt, template, or blank project and establish the screens and navigation."],
-      ["02", "Add real behavior", "Connect UI events to actions, state, conditions, dialogs, endpoints, and project data."],
-      ["03", "Test and deliver", "Preview across form factors, share a web deployment, create a build, or export the source."],
-    ],
-    features: [
-      ["ai", "AI project creation", "Bootstrap screens, navigation, components, variables, and supporting project structure."],
-      ["design", "Visual Flutter builder", "Compose and refine the app with Flutter-aware controls and a live visual hierarchy."],
-      ["flow", "Actions and state", "Model navigation, conditions, updates, dialogs, and device behavior with visual flows."],
-      ["data", "Connected data", "Use REST APIs, Postman collections, Firebase, Supabase, Google Sheets, or local data."],
-      ["device", "Cross-platform preview", "Review mobile, tablet, and desktop layouts without splitting the work into separate projects."],
-      ["code", "Deployment and export", "Share a hosted web build, request supported app builds, or export the Flutter source."],
-    ],
-    fitTitle: "One workspace for prototyping and product work",
-    fitText:
-      "Choose FlutterPilot when the team needs to move quickly through UI, behavior, data, and handoff without giving up the underlying Flutter project.",
-    fitItems: ["Startup MVPs", "Internal tools", "Client app prototypes", "Production Flutter projects"],
-    faq: [
-      ["Can FlutterPilot build more than a single screen?", "Yes. It supports multi-screen projects, navigation, actions, state, data connections, and reusable components."],
-      ["Which data sources can I use?", "FlutterPilot supports REST and Postman workflows alongside connected data options such as Firebase, Supabase, Google Sheets, and local collections."],
-      ["How can I deliver the finished app?", "Depending on your workflow, you can deploy Flutter web, request supported platform builds, or export the complete Flutter source project."],
-    ],
-  },
-  "flutterflow-alternative": {
-    eyebrow: "A developer-controlled alternative",
-    title: "A FlutterFlow alternative built around AI and source ownership.",
-    intro:
-      "FlutterPilot is for teams that want visual speed while staying close to Flutter: generate with AI, refine on a canvas, connect app behavior, and export the project.",
-    heroNote: "Compare workflows based on what your team needs to own and extend.",
-    mediaLabel: "FlutterPilot Studio",
-    mediaCaption: "A visual workflow with a direct path to the Flutter project underneath.",
-    problemTitle: "The right builder is the one that fits how your team will ship and maintain the app.",
-    problemText:
-      "Visual editors can look similar in a feature checklist. The more important questions are how quickly you can reach a useful first draft, how deeply you can customize it, how data and behavior fit together, and what happens when you need the source outside the platform.",
-    outcomes: [
-      "Use AI as a project-aware creation and editing partner",
-      "Combine visual controls with Flutter and Dart flexibility",
-      "Connect app data, actions, state, and navigation",
-      "Export the Flutter source and continue in your own workflow",
-    ],
-    workflow: [
-      ["01", "Test the core workflow", "Rebuild one representative screen, including its responsive states and a real interaction."],
-      ["02", "Test the hard parts", "Try custom behavior, data binding, API calls, reusable components, and the team handoff."],
-      ["03", "Inspect the exit path", "Export the project and confirm that it fits the way your developers build, review, and maintain Flutter code."],
-    ],
-    features: [
-      ["ai", "AI-first creation", "Generate and revise project elements through a copilot that works with the surrounding app context."],
-      ["design", "Visual editing", "Adjust Flutter widget structure and properties while keeping a live preview close at hand."],
-      ["code", "Source ownership", "Export the project when you want local control, custom implementation, or your established toolchain."],
-      ["data", "Integrated data work", "Create and test endpoints, import Postman collections, and bind results into the interface."],
-      ["flow", "Behavior in context", "Keep navigation, state changes, conditions, and dialogs alongside the screens they support."],
-      ["device", "Multiple delivery paths", "Preview form factors, deploy a Flutter web build, or continue from exported source."],
-    ],
-    fitTitle: "A good fit when ownership matters as much as speed",
-    fitText:
-      "FlutterPilot is worth evaluating if your team wants an AI-assisted visual workflow, expects custom Flutter work, or wants a clear source-code handoff.",
-    fitItems: ["Flutter-focused teams", "Code-owning startups", "Custom product workflows", "Teams evaluating visual builders"],
-    faq: [
-      ["Is FlutterPilot a direct copy of FlutterFlow?", "No. FlutterPilot takes its own approach, centered on project-aware AI, visual Flutter editing, connected workflows, and source export."],
-      ["What should I compare before switching tools?", "Test a real screen, a real interaction, one data flow, responsive behavior, reusable components, collaboration needs, and the exported project—not only the demo experience."],
-      ["Can I keep working outside FlutterPilot?", "Yes. Source export gives you a path to continue the Flutter project in your own development environment."],
-    ],
-  },
-};
-
 const relatedPages = [
-  ["flutter-ui-builder", "Flutter UI Builder", "Design and refine interfaces visually."],
-  ["ai-flutter-ui-generator", "AI UI Generator", "Generate editable Flutter screens from prompts."],
-  ["flutter-app-builder", "Flutter App Builder", "Build screens, behavior, and data together."],
-  ["flutterflow-alternative", "FlutterFlow Alternative", "Explore a code-owning visual workflow."],
+  ["flutter-ui-builder", "Flutter UI builder", "Design and refine Flutter interfaces visually."],
+  ["ai-flutter-ui-generator", "AI Flutter UI generator", "Generate editable Flutter screens from prompts."],
+  ["flutter-app-builder", "Flutter app builder", "Build screens, behavior, and data together."],
+  ["flutterflow-alternative", "FlutterFlow alternative", "Compare FlutterPilot with FlutterFlow."],
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -247,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   browser: { overflow: "hidden", borderRadius: 18, border: "1px solid rgba(255,255,255,.18)", background: "#e2e8f0", boxShadow: "0 28px 70px rgba(0,0,0,.38)", transform: "rotate(1deg)" },
   browserBar: { height: 34, display: "flex", gap: 6, alignItems: "center", padding: "0 13px", background: "#f8fafc" },
   dot: { width: 8, height: 8, borderRadius: "50%", background: "#cbd5e1", "&:first-child": { background: "#fb7185" }, "&:nth-child(2)": { background: "#fbbf24" }, "&:nth-child(3)": { background: "#4ade80" } },
-  screenshot: { width: "100%", aspectRatio: "1927 / 953", objectFit: "cover" },
+  screenshot: { width: "100%", height: "auto", display: "block" },
   visualCard: { position: "absolute", right: -12, bottom: -34, width: "min(300px, 72%)", padding: theme.spacing(2), borderRadius: 16, color: "#0f172a", background: "rgba(255,255,255,.94)", border: "1px solid rgba(255,255,255,.8)", boxShadow: "0 18px 40px rgba(0,0,0,.25)", backdropFilter: "blur(12px)", [theme.breakpoints.down("sm")]: { right: 8, bottom: -24 } },
   visualLabel: { display: "block", marginBottom: 5, color: "#2563eb", fontSize: ".76rem", fontWeight: 850, textTransform: "uppercase", letterSpacing: ".9px" },
   visualCaption: { margin: 0, fontSize: ".9rem", lineHeight: 1.5, fontWeight: 650 },
@@ -283,10 +121,47 @@ const useStyles = makeStyles((theme) => ({
   relatedCard: { display: "block", padding: theme.spacing(2.4), borderRadius: 17, color: "#0f172a", textDecoration: "none", background: "rgba(255,255,255,.66)", border: "1px solid rgba(148,163,184,.22)", transition: "transform .2s ease,border-color .2s ease", "&:hover": { transform: "translateY(-3px)", borderColor: "#93c5fd" } },
   relatedTitle: { display: "block", marginBottom: 6, color: "#1d4ed8", fontWeight: 800 },
   relatedText: { color: "#64748b", lineHeight: 1.55 },
+  workflowGridWide: { gridTemplateColumns: "repeat(3, 1fr)", [theme.breakpoints.down("md")]: { gridTemplateColumns: "repeat(2, 1fr)" }, [theme.breakpoints.down("sm")]: { gridTemplateColumns: "1fr" } },
+  showcaseGrid: { display: "grid", gridTemplateColumns: ".9fr 1.1fr", gap: theme.spacing(6), alignItems: "start", [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr", gap: theme.spacing(4) } },
+  pointList: { display: "grid", gap: 12, margin: theme.spacing(3, 0, 0), padding: 0, listStyle: "none" },
+  point: { padding: theme.spacing(1.8, 2), borderRadius: 14, background: "rgba(255,255,255,.72)", border: "1px solid rgba(148,163,184,.2)", color: "#475569", lineHeight: 1.6, "& strong": { display: "block", color: "#0f172a", marginBottom: 2 } },
+  figure: { margin: 0, "& img": { width: "100%", height: "auto", display: "block", borderRadius: 18, border: "1px solid rgba(148,163,184,.3)", boxShadow: "0 18px 44px rgba(15,23,42,.1)" } },
+  figcaption: { marginTop: theme.spacing(1.2), color: "#64748b", fontSize: ".92rem", lineHeight: 1.55 },
+  promptGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 18, [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr" } },
+  promptCard: { display: "flex", flexDirection: "column", gap: theme.spacing(1.5), padding: theme.spacing(3), borderRadius: 20, background: "rgba(255,255,255,.78)", border: "1px solid rgba(148,163,184,.22)", boxShadow: "0 12px 32px rgba(15,23,42,.05)" },
+  promptScope: { color: "#2563eb", fontSize: ".76rem", fontWeight: 850, textTransform: "uppercase", letterSpacing: "1.2px" },
+  promptText: { margin: 0, padding: theme.spacing(1.6, 1.8), borderRadius: 14, color: "#e2e8f0", background: "linear-gradient(150deg,#0f172a,#172554)", fontSize: ".98rem", lineHeight: 1.6, fontWeight: 600 },
+  promptLabel: { margin: 0, color: "#0f172a", fontSize: ".9rem", fontWeight: 800 },
+  smallList: { margin: 0, paddingLeft: theme.spacing(2.4), color: "#475569", lineHeight: 1.6, "& li": { marginBottom: 4 } },
+  tableWrap: { overflowX: "auto", borderRadius: 20, border: "1px solid rgba(148,163,184,.25)", background: "rgba(255,255,255,.8)" },
+  table: { width: "100%", minWidth: 680, borderCollapse: "collapse", textAlign: "left", "& th, & td": { padding: theme.spacing(2, 2.2), verticalAlign: "top", borderBottom: "1px solid rgba(148,163,184,.2)", lineHeight: 1.6 }, "& thead th": { color: "#0f172a", background: "rgba(219,234,254,.55)", fontSize: ".9rem", fontWeight: 850 }, "& tbody th": { color: "#0f172a", fontWeight: 800, width: "18%" }, "& td": { color: "#475569" }, "& tbody tr:last-child th, & tbody tr:last-child td": { borderBottom: 0 } },
+  sources: { margin: theme.spacing(2, 0, 0), color: "#64748b", fontSize: ".9rem", lineHeight: 1.7, "& a": { color: "#1d4ed8", fontWeight: 650 } },
+  tradeoffs: { marginTop: theme.spacing(5), padding: theme.spacing(4), borderRadius: 24, background: "rgba(255,247,237,.8)", border: "1px solid rgba(251,146,60,.25)", [theme.breakpoints.down("sm")]: { padding: theme.spacing(3) } },
+  tradeoffTitle: { margin: 0, fontSize: "1.35rem", fontWeight: 850 },
+  docsGrid: { display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginBottom: theme.spacing(5), [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr" } },
+  inlineLink: { color: "#1d4ed8", fontWeight: 700 },
   cta: { display: "grid", gridTemplateColumns: "1fr auto", gap: theme.spacing(4), alignItems: "center", padding: theme.spacing(6), borderRadius: 28, color: "#fff", background: "linear-gradient(135deg,#1d4ed8,#3730a3)", boxShadow: "0 24px 60px rgba(37,99,235,.2)", [theme.breakpoints.down("md")]: { gridTemplateColumns: "1fr", padding: theme.spacing(4, 3) } },
   ctaTitle: { margin: 0, fontSize: "clamp(1.75rem,3vw,2.5rem)", lineHeight: 1.15, letterSpacing: "-.03em", fontWeight: 850 },
   ctaText: { margin: theme.spacing(1.2, 0, 0), color: "#dbeafe", lineHeight: 1.65 },
 }));
+
+const sectionLinks = [
+  ["overview", "Overview", () => true],
+  ["comparison", "Comparison", (page) => page.comparison],
+  ["workflow", "Workflow", () => true],
+  ["prompts", "Prompt examples", (page) => page.promptExamples],
+  ["features", "Capabilities", () => true],
+  ["questions", "Questions", () => true],
+];
+
+function Figure({ figure, classes }) {
+  return (
+    <figure className={classes.figure}>
+      <img src={figure.src} alt={figure.alt} width={figure.width} height={figure.height} loading="lazy" decoding="async" />
+      <figcaption className={classes.figcaption}>{figure.caption}</figcaption>
+    </figure>
+  );
+}
 
 export default function ProductGuidePage({ pageKey }) {
   const classes = useStyles();
@@ -313,7 +188,7 @@ export default function ProductGuidePage({ pageKey }) {
           <div className={classes.productVisual}>
             <div className={classes.browser}>
               <div className={classes.browserBar}><span className={classes.dot} /><span className={classes.dot} /><span className={classes.dot} /></div>
-              <img className={classes.screenshot} src="/flutterpilot_ss.webp" alt="FlutterPilot Studio visual Flutter app builder" width="1927" height="953" />
+              <img className={classes.screenshot} src={page.media.src} alt={page.media.alt} width={page.media.width} height={page.media.height} />
             </div>
             <div className={classes.visualCard}>
               <span className={classes.visualLabel}>{page.mediaLabel}</span>
@@ -323,10 +198,9 @@ export default function ProductGuidePage({ pageKey }) {
         </section>
 
         <nav className={classes.anchorBar} aria-label="On this page">
-          <a className={classes.anchor} href="#overview">Overview</a>
-          <a className={classes.anchor} href="#workflow">Workflow</a>
-          <a className={classes.anchor} href="#features">Capabilities</a>
-          <a className={classes.anchor} href="#questions">Questions</a>
+          {sectionLinks.filter(([, , isShown]) => isShown(page)).map(([id, label]) => (
+            <a className={classes.anchor} href={`#${id}`} key={id}>{label}</a>
+          ))}
         </nav>
 
         <section id="overview" className={`${classes.section} ${classes.split}`}>
@@ -345,22 +219,136 @@ export default function ProductGuidePage({ pageKey }) {
           </ul>
         </section>
 
+        {page.comparison && (
+          <section id="comparison" className={classes.section} aria-labelledby="comparison-title">
+            <div className={classes.sectionHead}>
+              <span className={classes.kicker}>Side-by-side</span>
+              <h2 id="comparison-title" className={classes.sectionTitle}>{page.comparison.title}</h2>
+              <p className={classes.sectionText}>{page.comparison.text}</p>
+            </div>
+            <div className={classes.tableWrap}>
+              <table className={classes.table}>
+                <caption className="sr-only">FlutterPilot compared with FlutterFlow</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">What to compare</th>
+                    <th scope="col">FlutterPilot</th>
+                    <th scope="col">FlutterFlow (per its documentation)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {page.comparison.rows.map(([topic, flutterPilot, flutterFlow]) => (
+                    <tr key={topic}>
+                      <th scope="row">{topic}</th>
+                      <td>{flutterPilot}</td>
+                      <td>{flutterFlow}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className={classes.sources}>
+              FlutterFlow sources, checked {page.comparison.checkedOn}:{" "}
+              {page.comparison.sources.map(([label, href], index) => (
+                <React.Fragment key={href}>
+                  {index > 0 && " · "}
+                  <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+                </React.Fragment>
+              ))}
+              . FlutterFlow is a trademark of its owner; this page is not affiliated with or endorsed by FlutterFlow.
+            </p>
+            <div className={classes.tradeoffs}>
+              <h3 className={classes.tradeoffTitle}>{page.comparison.tradeoffsTitle}</h3>
+              <ul className={classes.smallList} style={{ marginTop: 12 }}>
+                {page.comparison.tradeoffs.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <section id="workflow" className={classes.tintedSection}>
           <div className={classes.sectionHead}>
             <span className={classes.kicker}>A practical workflow</span>
-            <h2 className={classes.sectionTitle}>From first idea to a Flutter project you can keep.</h2>
-            <p className={classes.sectionText}>FlutterPilot keeps generation, visual refinement, app behavior, and handoff in one continuous path.</p>
+            <h2 className={classes.sectionTitle}>{page.workflowTitle}</h2>
+            <p className={classes.sectionText}>{page.workflowIntro}</p>
           </div>
-          <div className={classes.workflowGrid}>
-            {page.workflow.map(([number, title, description]) => (
-              <article className={classes.workflowCard} key={number}>
-                <span className={classes.stepNumber}>{number}</span>
+          <ol className={`${classes.workflowGrid} ${classes.workflowGridWide}`} style={{ listStyle: "none", margin: 0, padding: 0 }}>
+            {page.workflow.map(([title, description], index) => (
+              <li className={classes.workflowCard} key={title}>
+                <span className={classes.stepNumber}>{String(index + 1).padStart(2, "0")}</span>
                 <h3 className={classes.cardTitle}>{title}</h3>
                 <p className={classes.cardText}>{description}</p>
-              </article>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
+
+        {page.showcase && (
+          <section className={`${classes.section} ${classes.showcaseGrid}`} aria-labelledby="showcase-title">
+            <div>
+              <span className={classes.kicker}>Inside the Studio</span>
+              <h2 id="showcase-title" className={classes.sectionTitle}>{page.showcase.title}</h2>
+              <p className={classes.sectionText}>{page.showcase.text}</p>
+              <ul className={classes.pointList}>
+                {page.showcase.points.map(([label, text]) => (
+                  <li className={classes.point} key={label}><strong>{label}</strong>{text}</li>
+                ))}
+              </ul>
+            </div>
+            <Figure figure={page.showcase.figure} classes={classes} />
+          </section>
+        )}
+
+        {page.example && (
+          <section className={classes.section} aria-labelledby="example-title" style={{ paddingTop: 0 }}>
+            <div className={classes.sectionHead}>
+              <span className={classes.kicker}>Worked example</span>
+              <h2 id="example-title" className={classes.sectionTitle}>{page.example.title}</h2>
+              <p className={classes.sectionText}>{page.example.text}</p>
+            </div>
+            <ul className={classes.pointList}>
+              {page.example.steps.map(([label, text]) => (
+                <li className={classes.point} key={label}><strong>{label}</strong>{text}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {page.promptExamples && (
+          <section id="prompts" className={classes.section} aria-labelledby="prompts-title">
+            <div className={classes.sectionHead}>
+              <span className={classes.kicker}>Prompt examples</span>
+              <h2 id="prompts-title" className={classes.sectionTitle}>{page.promptExamples.title}</h2>
+              <p className={classes.sectionText}>{page.promptExamples.text}</p>
+            </div>
+            <div className={classes.promptGrid}>
+              {page.promptExamples.items.map((item) => (
+                <article className={classes.promptCard} key={item.prompt}>
+                  <span className={classes.promptScope}>{item.scope}</span>
+                  <h3 className="sr-only">{item.scope} prompt</h3>
+                  <p className={classes.promptText}>“{item.prompt}”</p>
+                  <p className={classes.featureText} style={{ margin: 0 }}>{item.where}</p>
+                  <p className={classes.promptLabel}>Check the result</p>
+                  <ul className={classes.smallList}>{item.checks.map((check) => <li key={check}>{check}</li>)}</ul>
+                  <p className={classes.promptLabel}>Follow-up prompts</p>
+                  <ul className={classes.smallList}>{item.followUps.map((followUp) => <li key={followUp}>{followUp}</li>)}</ul>
+                </article>
+              ))}
+            </div>
+            <div className={classes.split} style={{ marginTop: 48 }}>
+              <div>
+                <h3 className={classes.tradeoffTitle}>{page.promptExamples.structureTitle}</h3>
+                <p className={classes.sectionText}>{page.promptExamples.structureText}</p>
+              </div>
+              <div>
+                <h3 className={classes.tradeoffTitle}>{page.promptExamples.tipsTitle}</h3>
+                <ul className={classes.smallList} style={{ marginTop: 16 }}>
+                  {page.promptExamples.tips.map((tip) => <li key={tip}>{tip}</li>)}
+                </ul>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section id="features" className={classes.section}>
           <div className={classes.sectionHead}>
@@ -407,10 +395,27 @@ export default function ProductGuidePage({ pageKey }) {
           </div>
         </section>
 
-        <section className={classes.section} aria-labelledby="related-pages-title">
+        <section className={classes.section} aria-labelledby="related-pages-title" style={{ paddingTop: 0 }}>
           <div className={classes.sectionHead}>
-            <span className={classes.kicker}>Explore FlutterPilot</span>
-            <h2 id="related-pages-title" className={classes.sectionTitle}>Choose the view that matches your goal.</h2>
+            <span className={classes.kicker}>Go deeper</span>
+            <h2 id="related-pages-title" className={classes.sectionTitle}>Related guides and documentation</h2>
+          </div>
+          <div className={classes.docsGrid}>
+            {page.docs.map((key) => {
+              const [to, title, text] = docsLinks[key];
+              return (
+                <RouterLink className={classes.relatedCard} to={to} key={key}>
+                  <span className={classes.relatedTitle}>{title} docs →</span>
+                  <span className={classes.relatedText}>{text}</span>
+                </RouterLink>
+              );
+            })}
+            {page.changelog && (
+              <a className={classes.relatedCard} href={CHANGELOG_PATH}>
+                <span className={classes.relatedTitle}>FlutterPilot 2.0.0 changelog →</span>
+                <span className={classes.relatedText}>What changed in AI generation, actions, data, and export.</span>
+              </a>
+            )}
           </div>
           <div className={classes.related}>
             {relatedPages.filter(([key]) => key !== pageKey).map(([key, title, text]) => (
@@ -425,7 +430,10 @@ export default function ProductGuidePage({ pageKey }) {
         <section className={classes.cta}>
           <div>
             <h2 className={classes.ctaTitle}>Build the first version in FlutterPilot Studio.</h2>
-            <p className={classes.ctaText}>Start in the browser, refine the project visually, and export Flutter source when it is ready for your workflow.</p>
+            <p className={classes.ctaText}>
+              Start in the browser, refine the project visually, and export Flutter source when it is ready for your
+              workflow. Prefer a head start? <RouterLink to="/template/" style={{ color: "#fff", fontWeight: 800 }}>Browse Flutter app templates</RouterLink>.
+            </p>
           </div>
           <Button component="a" href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className={classes.primaryButton} endIcon={<RocketLaunchRoundedIcon />}>
             Open Studio

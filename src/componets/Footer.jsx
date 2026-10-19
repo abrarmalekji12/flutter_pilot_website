@@ -14,6 +14,7 @@ import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded
 
 import { footerStyles } from "../styles/commonStyles";
 import { SCREENSHOT_STUDIO_URL } from "./FlutterPilotFamily";
+import { CHANGELOG_PATH } from "../seo/seo";
 
 const Footer = () => {
   const footerClasses = footerStyles();
@@ -84,6 +85,9 @@ const Footer = () => {
             </Link>
             <Link className={footerClasses.footerLink} href="https://flutterpilot.medium.com" underline="none" target="_blank" rel="noopener noreferrer">
               Blog
+            </Link>
+            <Link className={footerClasses.footerLink} href={CHANGELOG_PATH} underline="none">
+              Changelog
             </Link>
             <Link component={RouterLink} className={footerClasses.footerLink} to="/contact/" underline="none">
               Support

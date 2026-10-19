@@ -2,13 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { Grid, Typography, Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { commonStyles } from "../styles/commonStyles";
 
 const FeatureShowcase = (props) => {
   const classes = commonStyles();
   const videoRef = useRef(null);
-  const navigate = useNavigate();
   const isDark = props.tone === "dark";
 
   useEffect(() => {
@@ -270,7 +269,8 @@ const FeatureShowcase = (props) => {
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardRoundedIcon fontSize="small" />}
-                onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/docs"); }}
+                component={Link}
+                to="/docs/"
                 sx={{
                   borderRadius: "14px",
                   fontWeight: 700,
