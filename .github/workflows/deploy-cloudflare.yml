@@ -71,3 +71,19 @@ jobs:
       # by hand to include protocol and www redirects on the custom domain.
       - name: Check the deployment
         run: npm run test:seo:deployed -- "${{ steps.deploy.outputs.deployment-url }}"
+
+      # The pages.dev deployment can succeed while the custom domain still
+      # serves an older SPA fallback or an incorrect sitemap. Validate both.
+      - name: Verify public-domain sitemap
+        run: |
+          for attempt in 1 2 3 4 5 6; do
+            if npm run test:seo:deployed -- https://flutterpilot.com --sitemap-only; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 6 ]; then
+              echo "::error::flutterpilot.com/sitemap.xml is not a valid sitemap. Inspect Cloudflare custom-domain routing and cached responses."
+              exit 1
+            fi
+            echo "::warning::Public-domain sitemap check failed (attempt $attempt of 6); retrying after 10 seconds."
+            sleep 10
+          done
