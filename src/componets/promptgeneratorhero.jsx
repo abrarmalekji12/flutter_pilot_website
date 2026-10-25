@@ -461,59 +461,18 @@ export default function PromptGeneratorHero() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [prompt, setPrompt] = React.useState("");
-  const [isTyping, setIsTyping] = React.useState(false);
-  const [hasInteracted, setHasInteracted] = React.useState(false);
-  const [targetPrompt, setTargetPrompt] = React.useState("");
-
-  React.useEffect(() => {
-    // Keep the prerendered HTML deterministic: no random prompt, no typing.
-    if (hasInteracted || isPrerendering()) return;
-
-    const randomPrompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)];
-    setTargetPrompt(randomPrompt);
-    let index = 0;
-    let timeoutId;
-    setIsTyping(true);
-
-    const type = () => {
-      if (index <= randomPrompt.length) {
-        const currentText = randomPrompt.slice(0, index);
-        setPrompt(currentText);
-        
-        const lastChar = randomPrompt[index - 1];
-        let delay = Math.random() * 15 + 15; // Natural pace (15-30ms)
-
-        if (lastChar === ".") delay = 450; 
-        if (lastChar === ",") delay = 200; 
-
-        index++;
-        timeoutId = setTimeout(type, delay);
-      } else {
-        setIsTyping(false);
-      }
-    };
-
-    const startDelayId = setTimeout(type, 700);
-
-    return () => {
-      clearTimeout(startDelayId);
-      clearTimeout(timeoutId);
-    };
-  }, [hasInteracted]);
 
   const openStudio = () => {
-    const finalPrompt = (!hasInteracted && targetPrompt) ? targetPrompt : prompt;
-    const encodedPrompt = encodeURIComponent(finalPrompt.trim());
+    const finalPrompt = prompt.trim() || examplePrompts[0];
+    const encodedPrompt = encodeURIComponent(finalPrompt);
     window.location.href = `https://studio.flutterpilot.com?prompt=${encodedPrompt}`;
   };
 
   const handleInputChange = (event) => {
-    setHasInteracted(true);
     setPrompt(clampPrompt(event.target.value));
   };
 
   const handleExampleSelection = (samplePrompt) => {
-    setHasInteracted(true);
     setPrompt(clampPrompt(samplePrompt));
   };
 
@@ -580,7 +539,7 @@ export default function PromptGeneratorHero() {
               fullWidth
               variant="outlined"
               placeholder="Create a finance app with dashboard, transactions list, spending charts, and onboarding flow..."
-              value={isTyping ? `${prompt}|` : prompt}
+              value={prompt}
               onChange={handleInputChange}
               spellCheck={false}
               className={classes.promptInput}
