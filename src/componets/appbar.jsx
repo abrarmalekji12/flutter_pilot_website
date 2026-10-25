@@ -93,7 +93,7 @@ function CustomAppBar({ children, type }) {
           <RouterLink className={classes.brandLockup} to="/" aria-label="FlutterPilot home">
             <span className={classes.logoFrame}>
               <img
-                src="/flutterpilot_logo_round.svg"
+                src="/favicon-96x96.png"
                 className={classes.logo}
                 alt="FlutterPilot"
                 width="32"
@@ -201,7 +201,7 @@ function CustomAppBar({ children, type }) {
               }}
             >
               <img
-                src="/flutterpilot_logo_round.svg"
+                src="/favicon-96x96.png"
                 alt="FlutterPilot"
                 width="22"
                 height="22"
