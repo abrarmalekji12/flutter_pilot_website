@@ -8,23 +8,48 @@ function App() {
   const [showBackgroundAnimation, setShowBackgroundAnimation] = useState(false);
 
   useEffect(() => {
-    if (
-      isPrerendering() ||
-      (typeof window.matchMedia === "function" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-    ) {
+    if (isPrerendering() || typeof window.matchMedia !== "function") {
       return undefined;
     }
 
-    const revealBackground = () => setShowBackgroundAnimation(true);
-
-    if ("requestIdleCallback" in window) {
-      const idleId = window.requestIdleCallback(revealBackground, { timeout: 1200 });
-      return () => window.cancelIdleCallback(idleId);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const constrainedDevice = window.matchMedia("(max-width: 767px), (pointer: coarse)");
+    if (reduceMotion.matches || constrainedDevice.matches) {
+      return undefined;
     }
 
-    const timeoutId = window.setTimeout(revealBackground, 500);
-    return () => window.clearTimeout(timeoutId);
+    let delayId;
+    let idleId;
+    let cancelled = false;
+
+    const revealBackground = () => {
+      if (!cancelled) setShowBackgroundAnimation(true);
+    };
+
+    const scheduleBackground = () => {
+      delayId = window.setTimeout(() => {
+        if ("requestIdleCallback" in window) {
+          idleId = window.requestIdleCallback(revealBackground, { timeout: 1500 });
+        } else {
+          revealBackground();
+        }
+      }, 3000);
+    };
+
+    if (document.readyState === "complete") {
+      scheduleBackground();
+    } else {
+      window.addEventListener("load", scheduleBackground, { once: true });
+    }
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", scheduleBackground);
+      if (delayId) window.clearTimeout(delayId);
+      if (idleId && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
   }, []);
 
   return (

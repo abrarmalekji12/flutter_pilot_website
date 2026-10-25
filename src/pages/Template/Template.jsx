@@ -213,36 +213,63 @@ export default function Template() {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const prerendering = isPrerendering();
   const [templates, setTemplates] = useState([]);
-  const [status, setStatus] = useState(prerendering ? "static" : "loading");
+  const [status, setStatus] = useState("static");
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
-    // The prerendered page ships the editorial content only; the live gallery
-    // (Firebase) loads in the visitor's browser and never ends up in static HTML.
+    // Keep Firebase and the gallery chunk off the critical rendering path.
+    // The prerendered editorial content stays useful immediately; the live
+    // gallery starts after the page has had time to paint and settle.
     if (prerendering) return undefined;
 
     let active = true;
-    setStatus("loading");
-    const timeoutId = window.setTimeout(() => {
-      if (active) setStatus((current) => (current === "loading" ? "error" : current));
-    }, LOAD_TIMEOUT_MS);
+    let startDelayId;
+    let idleId;
+    let loadTimeoutId;
 
-    import("../../utils/loadTemplates")
-      .then(({ default: loadTemplates }) => loadTemplates())
-      .then((data) => {
-        if (!active) return;
-        setTemplates(data);
-        setStatus(data.length ? "ready" : "empty");
-      })
-      .catch((error) => {
-        console.error("Error fetching templates:", error);
-        if (active) setStatus("error");
-      })
-      .finally(() => window.clearTimeout(timeoutId));
+    const loadGallery = () => {
+      if (!active) return;
+      setStatus("loading");
+      loadTimeoutId = window.setTimeout(() => {
+        if (active) setStatus((current) => (current === "loading" ? "error" : current));
+      }, LOAD_TIMEOUT_MS);
+
+      import("../../utils/loadTemplates")
+        .then(({ default: loadTemplates }) => loadTemplates())
+        .then((data) => {
+          if (!active) return;
+          setTemplates(data);
+          setStatus(data.length ? "ready" : "empty");
+        })
+        .catch((error) => {
+          console.error("Error fetching templates:", error);
+          if (active) setStatus("error");
+        })
+        .finally(() => {
+          if (loadTimeoutId) window.clearTimeout(loadTimeoutId);
+        });
+    };
+
+    const scheduleLoad = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(loadGallery, { timeout: 1500 });
+      } else {
+        loadGallery();
+      }
+    };
+
+    // Retries are user initiated, so run them promptly. The first automatic
+    // load waits long enough to stay clear of the initial LCP window.
+    const initialDelay = process.env.NODE_ENV === "test" || attempt > 0 ? 0 : 3000;
+    startDelayId = window.setTimeout(scheduleLoad, initialDelay);
 
     return () => {
       active = false;
-      window.clearTimeout(timeoutId);
+      if (startDelayId) window.clearTimeout(startDelayId);
+      if (loadTimeoutId) window.clearTimeout(loadTimeoutId);
+      if (idleId && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
     };
   }, [prerendering, attempt]);
 
