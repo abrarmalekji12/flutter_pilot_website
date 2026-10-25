@@ -260,7 +260,8 @@ export default function Template() {
 
     // Retries are user initiated, so run them promptly. The first automatic
     // load waits long enough to stay clear of the initial LCP window.
-    const initialDelay = process.env.NODE_ENV === "test" || attempt > 0 ? 0 : 3000;\n    startDelayId = window.setTimeout(scheduleLoad, initialDelay);
+    const initialDelay = process.env.NODE_ENV === "test" || attempt > 0 ? 0 : 3000;
+    startDelayId = window.setTimeout(scheduleLoad, initialDelay);
 
     return () => {
       active = false;
