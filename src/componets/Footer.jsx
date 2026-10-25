@@ -26,7 +26,7 @@ const Footer = () => {
           <div>
             <RouterLink className={footerClasses.brandWrap} to="/" aria-label="FlutterPilot home">
               <img
-                src="/flutterpilot_logo_round.svg"
+                src="/favicon-96x96.png"
                 className={footerClasses.logo}
                 alt="FlutterPilot"
                 loading="lazy"
