@@ -196,6 +196,9 @@ const referenceSections = [
 ];
 
 const relatedGuides = [
+  ["/docs/rest-api/", "Connect a REST API", "Add endpoints, import Postman collections, mock responses, and show API data."],
+  ["/docs/publish-web-app/", "Publish a web app", "Put your app online at a shareable flutterpilot.com address."],
+  ["/docs/android-apk/", "Build an Android APK", "Build an installable APK in the cloud and share it with testers."],
   ["/ai-flutter-ui-generator/", "AI Flutter UI generator", "Example prompts and how to refine generated screens."],
   ["/flutter-ui-builder/", "Flutter UI builder", "Build screens visually with real Flutter widgets."],
   ["/flutter-app-builder/", "Flutter app builder", "Six steps from idea to an exported Flutter project."],

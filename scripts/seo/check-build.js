@@ -24,6 +24,8 @@ const MIN_MAIN_WORDS = {
   "/contact/": 80,
 };
 const DEFAULT_MIN_MAIN_WORDS = 60;
+// Documentation articles answer one task completely.
+const MIN_DOC_ARTICLE_WORDS = 500;
 
 const failures = [];
 let checks = 0;
@@ -113,7 +115,7 @@ function checkRoutes() {
 
     if (route.render === "react") {
       const words = page.mainText.split(/\s+/).filter(Boolean).length;
-      const minimum = MIN_MAIN_WORDS[route.path] || DEFAULT_MIN_MAIN_WORDS;
+      const minimum = MIN_MAIN_WORDS[route.path] || (route.parent === "/docs/" ? MIN_DOC_ARTICLE_WORDS : DEFAULT_MIN_MAIN_WORDS);
       check(words >= minimum, `${route.path}: <main> has ${words} words in initial HTML, expected at least ${minimum}`);
       check(html.includes('id="root" data-prerendered'), `${route.path}: #root is not marked as prerendered`);
       check(page.ogUrl === canonical, `${route.path}: og:url "${page.ogUrl}" should equal the canonical URL`);
@@ -158,10 +160,16 @@ function checkStructuredData(route, page) {
   if (route.breadcrumb) {
     const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
     const items = breadcrumb ? breadcrumb.itemListElement : [];
+    const last = items[items.length - 1];
+    const expectedLength = route.parent ? 3 : 2;
     check(
-      items.length === 2 && items[1].item === absoluteUrl(route.path) && items[1].position === 2,
-      `${route.path}: BreadcrumbList should end at the canonical URL`
+      items.length === expectedLength && last && last.item === absoluteUrl(route.path) && last.position === expectedLength,
+      `${route.path}: BreadcrumbList should have ${expectedLength} items and end at the canonical URL`
     );
+    if (route.parent) {
+      check(items[1].item === absoluteUrl(route.parent), `${route.path}: BreadcrumbList should pass through ${route.parent}`);
+      check(page.links.includes(route.parent), `${route.path}: page should link to its parent ${route.parent}`);
+    }
   }
 }
 

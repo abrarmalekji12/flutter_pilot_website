@@ -114,7 +114,7 @@
       "h1": "FlutterPilot documentation, mapped clearly.",
       "breadcrumb": "Docs",
       "intent": "Product documentation",
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/docs/changelogs/",
@@ -125,6 +125,48 @@
       "h1": "FlutterPilot 2.0.0",
       "intent": "Release notes",
       "lastmod": "2026-10-05"
+    },
+    {
+      "path": "/docs/rest-api/",
+      "render": "react",
+      "indexable": true,
+      "title": "Connect a REST API to a Flutter App (Postman Import) | FlutterPilot",
+      "description": "Add REST endpoints to a FlutterPilot project, import a Postman collection, preview with mock responses, and show loading, success, and error states in your Flutter UI.",
+      "h1": "Connect a REST API to your Flutter app",
+      "breadcrumb": "Connect a REST API",
+      "parent": "/docs/",
+      "intent": "How to connect a REST API to a Flutter app in FlutterPilot",
+      "image": {
+        "url": "/endpoint_preview.webp",
+        "width": 1181,
+        "height": 880,
+        "alt": "FlutterPilot Endpoint Connectors panel with Postman upload, arguments, request method, URL, headers, body, and mock response"
+      },
+      "lastmod": "2026-10-27"
+    },
+    {
+      "path": "/docs/publish-web-app/",
+      "render": "react",
+      "indexable": true,
+      "title": "Publish a Flutter Web App to a Live URL | FlutterPilot",
+      "description": "Deploy a FlutterPilot project as a hosted Flutter web app at a shareable flutterpilot.com address: steps, cost, build time, updates, and taking a site offline.",
+      "h1": "Publish your Flutter app to the web",
+      "breadcrumb": "Publish a web app",
+      "parent": "/docs/",
+      "intent": "How to publish and host a Flutter web app from FlutterPilot",
+      "lastmod": "2026-10-27"
+    },
+    {
+      "path": "/docs/android-apk/",
+      "render": "react",
+      "indexable": true,
+      "title": "Build an Android APK Online from a Flutter Project | FlutterPilot",
+      "description": "Build an installable Android APK from your FlutterPilot project in the cloud, without Android Studio: steps, cost, installing and sharing, and how to get to Google Play.",
+      "h1": "Build an Android APK in the cloud",
+      "breadcrumb": "Build an Android APK",
+      "parent": "/docs/",
+      "intent": "How to build an Android APK from a Flutter project online",
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/about-us/",

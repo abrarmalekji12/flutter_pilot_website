@@ -39,6 +39,9 @@ export const docsLinks = {
   apis: ["/docs/#api-endpoints", "API endpoints", "REST endpoints, Postman import, and loading or error states."],
   export: ["/docs/#export", "Export & Publish", "Flutter project ZIP, Android APK, and build history."],
   deploy: ["/docs/#deploy", "Deploy & host", "Web hosting, Android builds, and iOS and desktop release guides."],
+  restApi: ["/docs/rest-api/", "Connect a REST API", "Endpoints, Postman import, mock responses, and DataLoaderWidget states, step by step."],
+  publishWeb: ["/docs/publish-web-app/", "Publish a web app", "Put your app online at a shareable flutterpilot.com address."],
+  androidApk: ["/docs/android-apk/", "Build an Android APK", "Build an installable APK in the cloud and share it with testers."],
 };
 
 export { CHANGELOG_PATH } from "../seo/seo";
@@ -278,7 +281,7 @@ const pages = {
       ["Which platforms can I deliver to?", "From the Studio you can publish a hosted web app (5 credits) and build an installable Android APK for testing (3 credits). Google Play and App Store publishing aren't built in yet: export the Flutter project and build store releases with your own Flutter toolchain. The in-app deploy guide covers iOS/TestFlight and desktop releases."],
       ["How do I continue outside FlutterPilot?", "Export the complete Flutter project as a ZIP and open it in your usual editor and Flutter toolchain."],
     ],
-    docs: ["actions", "state", "apis", "export", "deploy"],
+    docs: ["restApi", "publishWeb", "androidApk", "actions", "state", "export"],
   },
 
   "flutterflow-alternative": {
@@ -388,7 +391,7 @@ const pages = {
       ["How do the pricing models differ?", "FlutterPilot has no subscription: you buy credits for AI generation and cloud builds, and exporting the Flutter project doesn't use credits. FlutterFlow sells subscription plans, and its documentation lists code download as a paid-plan feature. Check both products' current prices before you decide."],
       ["What should I compare before switching tools?", "Test a real screen, a real interaction, one data flow, responsive behavior, reusable components, collaboration needs, and the exported project—not only the demo experience."],
     ],
-    docs: ["ai", "apis", "export"],
+    docs: ["ai", "restApi", "export"],
     changelog: true,
   },
 };

@@ -48,14 +48,18 @@ const webPageTypes = {
   contact: "ContactPage",
 };
 
+// Home › [parent] › page. Documentation articles name /docs/ as their parent.
 function breadcrumbs(route, canonical) {
+  const parent = route.parent && getRoute(route.parent);
+  const trail = [
+    { name: "Home", item: `${SITE_URL}/` },
+    ...(parent ? [{ name: parent.breadcrumb, item: absoluteUrl(parent.path) }] : []),
+    { name: route.breadcrumb, item: canonical },
+  ];
   return {
     "@type": "BreadcrumbList",
     "@id": `${canonical}#breadcrumb`,
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-      { "@type": "ListItem", position: 2, name: route.breadcrumb, item: canonical },
-    ],
+    itemListElement: trail.map((crumb, index) => ({ "@type": "ListItem", position: index + 1, ...crumb })),
   };
 }
 

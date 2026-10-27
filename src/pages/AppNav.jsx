@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation, matchPath } from '
 import RouteSeo from '../componets/RouteSeo';
 import lazyWithPreload from '../utils/lazyWithPreload';
 import { isPrerendering } from '../utils/prerender';
+import { routes } from '../seo/seo';
 
 const Landing = lazyWithPreload(() => import('./Landing'));
 const PrivacyPolicy = lazyWithPreload(() => import('./PrivacyPolicy/PrivacyPolicy'));
@@ -15,6 +16,7 @@ const FlutterFlowAlternative = lazyWithPreload(() => import('./FlutterFlowAltern
 const AIFlutterUIGenerator = lazyWithPreload(() => import('./AIFlutterUIGenerator/AIFlutterUIGenerator'));
 const FlutterAppBuilder = lazyWithPreload(() => import('./FlutterAppBuilder/FlutterAppBuilder'));
 const NotFound = lazyWithPreload(() => import('./NotFound/NotFound'));
+const DocArticle = lazyWithPreload(() => import('./DocArticle/DocArticle'));
 
 const pageRoutes = [
   { path: '/', Component: Landing },
@@ -27,6 +29,10 @@ const pageRoutes = [
   { path: '/about-us', Component: AboutUs },
   { path: '/template', Component: Template },
   { path: '/docs', Component: Docs },
+  // Documentation articles: registry routes under /docs/ (src/content/docArticles.js).
+  ...routes
+    .filter((route) => route.parent === '/docs/')
+    .map(({ path }) => ({ path: path.replace(/\/$/, ''), Component: DocArticle })),
 ];
 
 // Load the page component for the current URL before the first render, so
