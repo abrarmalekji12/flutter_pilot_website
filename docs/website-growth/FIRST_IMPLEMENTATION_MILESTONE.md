@@ -1,6 +1,6 @@
 # First implementation milestone: cost, delivery and a measurable next step
 
-_Prepared 2026-10-27 · Roadmap items R1.1 + R1.2 ([WEBSITE_IMPROVEMENT_ROADMAP.md](./WEBSITE_IMPROVEMENT_ROADMAP.md)) · One pull request · Not implemented_
+_Prepared 2026-10-27 · Roadmap items R1.1 + R1.2 ([WEBSITE_IMPROVEMENT_ROADMAP.md](./WEBSITE_IMPROVEMENT_ROADMAP.md)) · **Implemented in PR #16** (commit "Show costs and delivery limits; make Studio links measurable"). F1, F4, F5 and F6 are source-verified; F2 and F3 are shipped from the product's config and in-app copy and still need the owner's confirmation; F7 is omitted._
 
 ## 1. What this milestone does
 
@@ -138,7 +138,7 @@ export const campaignForPath = (pathname) => /* "/" → "home", "/flutter-ui-bui
 | Footer, Docs, changelog | `<a href=studio>` | helper (or a hand-edited URL in the static changelog) |
 | "See costs" (new, `productshowcase.jsx` CTA subtext) | n/a | `<a href="#pricing-and-delivery">See costs</a>` appended to "Build in your browser • No install required" |
 
-**`rel` attribute:** use `rel="noopener"` (not `noreferrer`) on links to the same owner's Studio so GA4 also receives the referrer. This is a security-neutral change, because `noopener` already prevents `window.opener` access.
+**`rel` attribute:** the original plan was `rel="noopener"` so GA4 would also see the referrer. Create React App's lint rule (`react/jsx-no-target-blank`) fails the CI build without `noreferrer`, so the implementation keeps `rel="noopener noreferrer"`. Attribution comes from the UTM tags instead.
 
 ### 5.3 Regression guard (`scripts/seo/check-build.js`)
 

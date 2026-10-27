@@ -1,6 +1,6 @@
 # Website growth investigation (2026-10-27)
 
-An evidence-based investigation into how flutterpilot.com can become more discoverable, credible and conversion-effective without a redesign. Documentation only: no site, product or configuration code was changed.
+An evidence-based investigation into how flutterpilot.com can become more discoverable, credible and conversion-effective without a redesign. PR #16 also implements the first roadmap items; see the implementation status at the top of [WEBSITE_IMPROVEMENT_ROADMAP.md](./WEBSITE_IMPROVEMENT_ROADMAP.md).
 
 | Document | Contents |
 |---|---|

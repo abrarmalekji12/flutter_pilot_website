@@ -1,6 +1,22 @@
 # FlutterPilot.com improvement roadmap
 
-_Prepared 2026-10-27 · Based on [PLATFORM_CAPABILITY_AUDIT.md](./PLATFORM_CAPABILITY_AUDIT.md), [WEBSITE_GROWTH_AUDIT.md](./WEBSITE_GROWTH_AUDIT.md) and [COMPETITOR_AND_KEYWORD_RESEARCH.md](./COMPETITOR_AND_KEYWORD_RESEARCH.md) · Not implemented_
+_Prepared 2026-10-27 · Based on [PLATFORM_CAPABILITY_AUDIT.md](./PLATFORM_CAPABILITY_AUDIT.md), [WEBSITE_GROWTH_AUDIT.md](./WEBSITE_GROWTH_AUDIT.md) and [COMPETITOR_AND_KEYWORD_RESEARCH.md](./COMPETITOR_AND_KEYWORD_RESEARCH.md)_
+
+## Implementation status (2026-10-27, PR #16)
+
+| Item | Status | Notes |
+|---|---|---|
+| R1.1 cost and delivery section | ✅ Done | Facts in `src/content/pricing.js`. 🔒 The owner should confirm F2 (pack price) and F3 (AI cost per screen) from the milestone doc; F7 (free allowances) is deliberately left out. |
+| R1.2 measured, crawlable Studio links | ✅ Done | `src/utils/studioLinks.js`; `check-build.js` guards UTM tags and untagged template links. Links use `rel="noopener noreferrer"` (CRA lint requires it), so attribution relies on UTM tags. |
+| R1.3 copy accuracy and naming | ✅ Done | |
+| R2.5 FlutterFlow page | 🟡 Partly done | Pricing-model row, export cost, "moving from FlutterFlow" and pricing FAQs. FlutterFlow facts were not re-checked (network-blocked); `checkedOn` stays October 19. |
+| R1.7 About and Contact | ✅ Done | The owner can add founding year and team facts; none were invented. |
+| R2.6 structured data | ✅ Done | Offer price 0 with "no subscription; credits optional"; App Store in `sameAs`. |
+| R0.2 production check in CI | ✅ Done (non-blocking) | Remove `continue-on-error` after the first green production run. |
+| R2.1 docs batch 1 | 🟡 3 of 4 pages | `/docs/rest-api/`, `/docs/publish-web-app/`, `/docs/android-apk/`. `/docs/export-flutter-code/` waits for a real export to describe. |
+| R2.2 Google Sheets tutorial | ✅ Done | `/docs/google-sheets/` (Beta). |
+| R0.1, R0.3, R0.4 | ⏳ Owner | Search Console, Cloudflare dashboard and download-link checks. |
+| R1.4, R1.5, R1.6, R1.8, R2.3, R2.4, R2.7, R2.8, R2.9, R3.x | ⏳ Not started | Need measurement data, owner facts or assets, other repositories, or field CWV data (see each item). |
 
 **Ground rules for every item:**
 
