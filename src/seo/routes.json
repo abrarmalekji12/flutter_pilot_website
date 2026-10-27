@@ -11,7 +11,8 @@
     "logo": "/logo.png",
     "sameAs": [
       "https://flutterpilot.medium.com",
-      "https://play.google.com/store/apps/details?id=com.builder.flutterpilot"
+      "https://play.google.com/store/apps/details?id=com.builder.flutterpilot",
+      "https://apps.apple.com/in/app/ai-app-builder-flutterpilot/id6759552936"
     ]
   },
   "notFound": {
@@ -131,11 +132,11 @@
       "indexable": true,
       "title": "About FlutterPilot",
       "description": "Learn how FlutterPilot combines AI-assisted generation, visual editing, connected data, and Flutter source export for modern app teams.",
-      "h1": "About Us",
+      "h1": "About FlutterPilot",
       "breadcrumb": "About",
       "intent": "Company information",
       "schema": "about",
-      "lastmod": "2026-03-20"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/contact/",
@@ -143,11 +144,11 @@
       "indexable": true,
       "title": "Contact FlutterPilot Support",
       "description": "Contact the FlutterPilot team for product questions, feedback, support, or suggestions.",
-      "h1": "Contact Us",
+      "h1": "Contact FlutterPilot",
       "breadcrumb": "Contact",
       "intent": "Support contact",
       "schema": "contact",
-      "lastmod": "2026-03-14"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/privacy-policy/",

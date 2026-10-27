@@ -19,8 +19,9 @@ const MIN_MAIN_WORDS = {
   "/flutterflow-alternative/": 700,
   "/template/": 300,
   "/docs/": 400,
-  // The contact page's <main> is the form itself.
-  "/contact/": 5,
+  "/about-us/": 250,
+  // The contact form plus the other ways to get help.
+  "/contact/": 80,
 };
 const DEFAULT_MIN_MAIN_WORDS = 60;
 
@@ -143,7 +144,12 @@ function checkStructuredData(route, page) {
   graph.forEach((node) => check(typeof node["@type"] === "string", `${route.path}: JSON-LD node without @type`));
 
   if (route.path === "/") {
-    check(types.includes("SoftwareApplication"), "/: JSON-LD should describe the SoftwareApplication");
+    const app = graph.find((node) => node["@type"] === "SoftwareApplication");
+    check(Boolean(app), "/: JSON-LD should describe the SoftwareApplication");
+    if (app && app.offers) {
+      check(/^\d+(\.\d+)?$/.test(app.offers.price), "/: SoftwareApplication offers.price must be a number string");
+      check(/^[A-Z]{3}$/.test(app.offers.priceCurrency), "/: SoftwareApplication offers.priceCurrency must be an ISO 4217 code");
+    }
     return;
   }
   const webPage = graph.find((node) => node.url === absoluteUrl(route.path));

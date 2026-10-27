@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import { CHANGELOG_PATH } from "../../seo/seo";
+import { studioUrl } from "../../utils/studioLinks";
 
 const useStyles = makeStyles((theme) => ({
   pageWrap: {
@@ -76,39 +78,57 @@ export default function AboutUs() {
       <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
           <p className={localClasses.eyebrow}><GroupsRoundedIcon fontSize="small" aria-hidden="true" /> Company</p>
-          <h1 className={localClasses.title}>About Us</h1>
+          <h1 className={localClasses.title}>About FlutterPilot</h1>
           <p className={localClasses.subtitle}>
-            FlutterPilot helps teams move from idea to Flutter app faster with AI generation and visual editing.
+            FlutterPilot is an AI-assisted visual builder for Flutter apps. Describe an app to generate an editable
+            starter project, refine it with real Flutter widgets, actions, and data connections, then export the Flutter
+            source, build an Android APK, or publish a web app.
           </p>
         </Container>
 
         <main className={localClasses.sectionGap}>
           <div className={localClasses.aboutCard}>
             <section className={classes.contentSection}>
-              <h2 className={classes.contentHeading}>Our Mission</h2>
+              <h2 className={classes.contentHeading}>Our approach</h2>
               <p className={classes.contentText}>
-                FlutterPilot is on a mission to simplify app development by combining Generative AI with a powerful visual editor.
-                We empower developers to bridge the gap between idea and code, enabling rapid UI scaffolding and screen generation for Flutter apps.
+                AI should give you a fast first draft, not a black box. FlutterPilot generates real Flutter widget trees that
+                you keep editing visually, so every screen stays understandable and changeable. When you are ready, the
+                Flutter project is yours to export and continue in your own tools.
+              </p>
+              <p className={classes.contentText}>
+                We label features that are still in Beta and publish what changed in each release in the{" "}
+                <a href={CHANGELOG_PATH} className={classes.contentLink}>changelog</a>.
               </p>
             </section>
 
             <section className={classes.contentSection}>
-              <h2 className={classes.contentHeading}>What We Offer</h2>
+              <h2 className={classes.contentHeading}>What FlutterPilot does</h2>
               <ul className={classes.contentList}>
-                <li className={classes.contentListItem}><strong>AI UI Generation:</strong> Generate basic screens, layouts, and structures with text prompts.</li>
-                <li className={classes.contentListItem}><strong>Visual Designer:</strong> Refine and customize your generated UI with a drag-and-drop editor.</li>
-                <li className={classes.contentListItem}><strong>Figma Integration:</strong> Convert Figma designs into functional Flutter UI code.</li>
-                <li className={classes.contentListItem}><strong>API Tools:</strong> Import Postman collections and test endpoints directly.</li>
-                <li className={classes.contentListItem}><strong>Real-time Editing:</strong> Collaborate with your team and track changes with built-in commits.</li>
-                <li className={classes.contentListItem}><strong>Code Export:</strong> Export clean Flutter code and integrate it into your project.</li>
+                <li className={classes.contentListItem}><strong>AI generation:</strong> Generate a multi-screen Starter App from a prompt, then ask the AI Agent (Beta) to create or edit screens, components, state, and API endpoints.</li>
+                <li className={classes.contentListItem}><strong>Visual Flutter editor:</strong> Build with more than 130 Flutter widgets using a widget tree, device canvas, and property panel, with Dart expressions in any property.</li>
+                <li className={classes.contentListItem}><strong>Behavior and data:</strong> Add navigation, conditions, sign-in, API calls, and data writes with 40+ action types; connect REST APIs (including Postman import), local collections, and Google Sheets, Firebase, or Supabase (Beta).</li>
+                <li className={classes.contentListItem}><strong>Figma import (Beta):</strong> Bring a Figma design into the Studio as editable Flutter widgets.</li>
+                <li className={classes.contentListItem}><strong>Version history and sharing:</strong> Save commits, restore earlier versions, and add collaborators to a project.</li>
+                <li className={classes.contentListItem}><strong>Delivery:</strong> Export the complete Flutter project as a ZIP, build an installable Android APK in the cloud, or publish a hosted web app.</li>
               </ul>
             </section>
 
             <section className={classes.contentSection}>
-              <h2 className={classes.contentHeading}>Why Choose FlutterPilot?</h2>
+              <h2 className={classes.contentHeading}>Where you can use it</h2>
               <p className={classes.contentText}>
-                We believe developers should spend more time on creativity and logic, and less on repetitive UI boilerplate.
-                Our platform gives you speed, flexibility, and control in one visually intuitive interface.
+                FlutterPilot Studio runs in the browser at{" "}
+                <a href={studioUrl({ campaign: "about-us", content: "about-text" })} target="_blank" rel="noopener noreferrer" className={classes.contentLink}>studio.flutterpilot.com</a>,
+                and as apps for Windows, macOS, Android, and iOS. Your projects are saved to your account, so you can switch
+                between devices.
+              </p>
+            </section>
+
+            <section className={classes.contentSection}>
+              <h2 className={classes.contentHeading}>How it is priced</h2>
+              <p className={classes.contentText}>
+                FlutterPilot has no subscription. AI generation and cloud builds use pay-as-you-go credits, and exporting your
+                Flutter project doesn't use credits. See{" "}
+                <a href="/#pricing-and-delivery" className={classes.contentLink}>what it costs and what you can ship</a>.
               </p>
             </section>
 

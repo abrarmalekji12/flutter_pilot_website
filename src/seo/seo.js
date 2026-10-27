@@ -72,10 +72,20 @@ export function buildStructuredData(route) {
           "@type": "SoftwareApplication",
           name: registry.siteName,
           applicationCategory: "DeveloperApplication",
+          applicationSubCategory: "Flutter app builder",
           operatingSystem: "Web, Android, iOS, macOS, Windows",
           url: `${SITE_URL}/`,
           description:
-            "An AI-assisted visual development environment for building and exporting Flutter applications.",
+            "FlutterPilot is an AI-assisted visual builder for Flutter apps. Describe an app to generate an editable starter project, refine it with real Flutter widgets, actions, and data connections, then export the Flutter source, build an Android APK, or publish a web app.",
+          // Matches the homepage "What it costs" section: no subscription;
+          // credits are optional purchases.
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+            description:
+              "No subscription. The editor and Flutter source export don't use credits; AI generation and cloud builds use pay-as-you-go credits.",
+          },
           screenshot: absoluteUrl(registry.defaultImage.url),
           author: { "@id": `${SITE_URL}/#organization` },
         },
