@@ -53,12 +53,12 @@ const featurelist = [
     items: [
       {
         icon: <ChatRoundedIcon fontSize="small" />,
-        title: "Project-Aware AI Copilot",
+        title: "Project-Aware AI Agent (Beta)",
         description: "Create screens, components, variables, and endpoints through a conversation grounded in your project.",
       },
       {
         icon: <DashboardCustomizeRoundedIcon fontSize="small" />,
-        title: "Figma Import",
+        title: "Figma Import (Beta)",
         description: "Bring design structure into the Studio, then continue with visual editing and Flutter-aware controls.",
       },
       {
@@ -107,7 +107,7 @@ const featurelist = [
         icon: <TableChartRoundedIcon fontSize="small" />,
         title: "Connected Data",
         description:
-          "Work with Google Sheets, REST APIs, Firebase, Supabase, or local collections from one Studio.",
+          "Work with REST APIs and local collections, plus Google Sheets, Firebase, and Supabase (Beta), from one Studio.",
       },
       {
         icon: <StorageRoundedIcon fontSize="small" />,

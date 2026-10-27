@@ -194,7 +194,7 @@ const LOAD_TIMEOUT_MS = 12000;
 const steps = [
   ["Pick a starting point", "Choose a template from this gallery, or from the New Project dialog in FlutterPilot Studio, where templates sit next to a blank project and the AI prompt."],
   ["Open it in the Studio", "Get Started opens the template in FlutterPilot Studio in your browser, ready to edit."],
-  ["Make it yours", "Change widgets, text, images, colors, and layout in the property panel, or describe the change to the AI copilot."],
+  ["Make it yours", "Change widgets, text, images, colors, and layout in the property panel, or describe the change to the AI Agent."],
   ["Connect and ship", "Add actions, state, and data, preview on different device sizes, then deploy to the web or export the Flutter source."],
 ];
 
@@ -203,7 +203,7 @@ const editableAreas = [
   "Content and styling: text, images, fonts, colors, and spacing",
   "Screens and navigation between them",
   "Actions and state: taps, conditions, dialogs, and app or page variables",
-  "Data: local collections, Google Sheets, REST endpoints, Firebase, or Supabase",
+  "Data: local collections and REST endpoints, plus Google Sheets, Firebase, or Supabase (Beta)",
 ];
 
 export default function Template() {

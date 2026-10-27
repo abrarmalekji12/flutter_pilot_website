@@ -511,8 +511,9 @@ export default function PromptGeneratorHero() {
           {" "}app from a prompt—<span className={classes.titleAccent}>then make every detail yours</span>
         </Typography>
         <Typography component="p" className={classes.sectionSubtitle}>
-          Generate a multi-screen project, refine every widget visually, add real logic and data,
-          preview across devices, then export the Flutter source or deploy to the web in one click.
+          Generate a multi-screen project, refine every widget visually, add real logic and data, and
+          preview across devices. Then deploy to the web in one click, or export the Flutter source and build
+          it for any platform with your own Flutter tools.
         </Typography>
 
         <Box className={classes.signalGrid} aria-label="FlutterPilot platform capabilities">

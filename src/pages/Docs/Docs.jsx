@@ -76,7 +76,7 @@ const docGroups = [
         icon: AutoAwesomeRoundedIcon,
         summary:
           "Generate full projects, screens, and component trees, then refine them through revision-aware AI editing.",
-        features: ["AI Project Creator", "UI & component generation", "Revision-based refinement", "Project-aware AI Copilot"],
+        features: ["AI Project Creator", "UI & component generation", "Revision-based refinement", "Project-aware AI Agent (Beta)"],
         code: '“Profile page with avatar, stats, and recent activity”',
       },
       {
@@ -121,7 +121,7 @@ const docGroups = [
         title: "Sheet Integration",
         icon: TableChartRoundedIcon,
         summary:
-          "Connect Google Sheets, infer a typed schema, insert mapped UI templates, and bind forms or lists to live rows.",
+          "Connect Google Sheets (Beta), infer a typed schema, insert mapped UI templates, and bind forms or lists to live rows.",
         features: ["Google sign-in and picker", "Schema inference", "Mapped UI templates", "Add / edit / save / delete"],
         code: "bindWith: products · bind: products.title",
       },
