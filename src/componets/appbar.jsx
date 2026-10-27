@@ -25,19 +25,17 @@ import ContactSupportRoundedIcon from "@mui/icons-material/ContactSupportRounded
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import { Link as RouterLink } from "react-router-dom";
 import { commonStyles } from "../styles/commonStyles";
+import { isAndroidBrowser, openStudioUrl } from "../utils/studioLinks";
+import useStudioCampaign from "../utils/useStudioCampaign";
 import Footer from "./Footer";
-
-const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=com.builder.flutterpilot";
-const WEB_APP_URL = "https://studio.flutterpilot.com";
-
-function getBuildNowUrl() {
-  return /Android/i.test(navigator.userAgent) ? PLAY_STORE_URL : WEB_APP_URL;
-}
 
 function CustomAppBar({ children, type }) {
   const classes = commonStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const campaign = useStudioCampaign();
+  // Android visitors go to the Play Store app in the same tab; everyone else
+  // gets the web Studio in a new tab.
+  const studioLinkTarget = isAndroidBrowser() ? undefined : "_blank";
 
   const handleDrawerToggle = () => {
     setDrawerOpen((value) => !value);
@@ -129,14 +127,10 @@ function CustomAppBar({ children, type }) {
               variant="contained"
               startIcon={<RocketLaunchRoundedIcon fontSize="small" />}
               className={classes.navActionBtn}
-              onClick={() => {
-                const url = getBuildNowUrl();
-                if (/Android/i.test(navigator.userAgent)) {
-                  window.location.href = url;
-                } else {
-                  window.open(url, "_blank", "noopener,noreferrer");
-                }
-              }}
+              component="a"
+              href={openStudioUrl({ campaign, content: "header" })}
+              target={studioLinkTarget}
+              rel="noopener noreferrer"
             >
               Open Studio
             </Button>
@@ -313,15 +307,11 @@ function CustomAppBar({ children, type }) {
             fullWidth
             variant="contained"
             endIcon={<RocketLaunchRoundedIcon />}
-            onClick={() => {
-              const url = getBuildNowUrl();
-              setDrawerOpen(false);
-              if (/Android/i.test(navigator.userAgent)) {
-                window.location.href = url;
-              } else {
-                window.open(url, "_blank", "noopener,noreferrer");
-              }
-            }}
+            component="a"
+            href={openStudioUrl({ campaign, content: "drawer" })}
+            target={studioLinkTarget}
+            rel="noopener noreferrer"
+            onClick={() => setDrawerOpen(false)}
             sx={{
               borderRadius: "16px",
               fontWeight: 700,

@@ -24,8 +24,14 @@ import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import { studioUrl } from "../../utils/studioLinks";
 
-const STUDIO_URL = "https://studio.flutterpilot.com";
+const studioLink = (content) => ({
+  component: "a",
+  href: studioUrl({ campaign: "docs", content }),
+  target: "_blank",
+  rel: "noopener noreferrer",
+});
 
 const docGroups = [
   {
@@ -70,7 +76,7 @@ const docGroups = [
         icon: AutoAwesomeRoundedIcon,
         summary:
           "Generate full projects, screens, and component trees, then refine them through revision-aware AI editing.",
-        features: ["AI Project Creator", "UI & component generation", "Revision-based refinement", "Project-aware AI Copilot"],
+        features: ["AI Project Creator", "UI & component generation", "Revision-based refinement", "Project-aware AI Agent (Beta)"],
         code: '“Profile page with avatar, stats, and recent activity”',
       },
       {
@@ -115,7 +121,7 @@ const docGroups = [
         title: "Sheet Integration",
         icon: TableChartRoundedIcon,
         summary:
-          "Connect Google Sheets, infer a typed schema, insert mapped UI templates, and bind forms or lists to live rows.",
+          "Connect Google Sheets (Beta), infer a typed schema, insert mapped UI templates, and bind forms or lists to live rows.",
         features: ["Google sign-in and picker", "Schema inference", "Mapped UI templates", "Add / edit / save / delete"],
         code: "bindWith: products · bind: products.title",
       },
@@ -190,6 +196,10 @@ const referenceSections = [
 ];
 
 const relatedGuides = [
+  ["/docs/rest-api/", "Connect a REST API", "Add endpoints, import Postman collections, mock responses, and show API data."],
+  ["/docs/google-sheets/", "Use Google Sheets as a database", "Connect a sheet, insert bound screens, and choose how exports reach it (Beta)."],
+  ["/docs/publish-web-app/", "Publish a web app", "Put your app online at a shareable flutterpilot.com address."],
+  ["/docs/android-apk/", "Build an Android APK", "Build an installable APK in the cloud and share it with testers."],
   ["/ai-flutter-ui-generator/", "AI Flutter UI generator", "Example prompts and how to refine generated screens."],
   ["/flutter-ui-builder/", "Flutter UI builder", "Build screens visually with real Flutter widgets."],
   ["/flutter-app-builder/", "Flutter app builder", "Six steps from idea to an exported Flutter project."],
@@ -697,7 +707,7 @@ export default function Docs() {
               <Button
                 className={local.primaryButton}
                 endIcon={<ArrowOutwardRoundedIcon />}
-                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+                {...studioLink("docs-hero")}
               >
                 Open FlutterPilot Studio
               </Button>
@@ -774,7 +784,7 @@ export default function Docs() {
             <Button
               className={local.sidebarCta}
               endIcon={<ArrowOutwardRoundedIcon fontSize="small" />}
-              onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+              {...studioLink("docs-sidebar")}
             >
               Open Studio
             </Button>
@@ -884,7 +894,7 @@ export default function Docs() {
               <Button
                 className={local.primaryButton}
                 endIcon={<ArrowOutwardRoundedIcon />}
-                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+                {...studioLink("docs-footer")}
               >
                 Continue in Studio
               </Button>

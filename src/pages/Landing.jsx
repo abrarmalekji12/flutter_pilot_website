@@ -11,6 +11,7 @@ import PartnerSolutionSpotlight from "../componets/PartnerSolutionSpotlight";
 import FlutterPilotFamily from "../componets/FlutterPilotFamily";
 import ExploreGuides from "../componets/ExploreGuides";
 import { commonStyles } from "../styles/commonStyles";
+import { studioUrl } from "../utils/studioLinks";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
 import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
@@ -27,6 +28,9 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
 import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
+import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { costAndDelivery } from "../content/pricing";
 
 const featurelist = [
   {
@@ -49,12 +53,12 @@ const featurelist = [
     items: [
       {
         icon: <ChatRoundedIcon fontSize="small" />,
-        title: "Project-Aware AI Copilot",
+        title: "Project-Aware AI Agent (Beta)",
         description: "Create screens, components, variables, and endpoints through a conversation grounded in your project.",
       },
       {
         icon: <DashboardCustomizeRoundedIcon fontSize="small" />,
-        title: "Figma Import",
+        title: "Figma Import (Beta)",
         description: "Bring design structure into the Studio, then continue with visual editing and Flutter-aware controls.",
       },
       {
@@ -103,7 +107,7 @@ const featurelist = [
         icon: <TableChartRoundedIcon fontSize="small" />,
         title: "Connected Data",
         description:
-          "Work with Google Sheets, REST APIs, Firebase, Supabase, or local collections from one Studio.",
+          "Work with REST APIs and local collections, plus Google Sheets, Firebase, and Supabase (Beta), from one Studio.",
       },
       {
         icon: <StorageRoundedIcon fontSize="small" />,
@@ -130,6 +134,32 @@ const featurelist = [
           "Use commit-based version control, cloud sync, and project sharing to coordinate changes.",
       },
     ],
+    isVideo: false,
+  },
+  {
+    id: costAndDelivery.id,
+    title: costAndDelivery.title,
+    subtitle: costAndDelivery.subtitle,
+    badge: costAndDelivery.badge,
+    badgeIcon: <AccountBalanceWalletRoundedIcon fontSize="small" />,
+    featureGrid: true,
+    items: costAndDelivery.items.map(({ key, title, description }) => ({
+      icon: {
+        export: <CodeRoundedIcon fontSize="small" />,
+        credits: <AccountBalanceWalletRoundedIcon fontSize="small" />,
+        ai: <AutoAwesomeRoundedIcon fontSize="small" />,
+        android: <AndroidRoundedIcon fontSize="small" />,
+        web: <LanguageRoundedIcon fontSize="small" />,
+        notYet: <InfoOutlinedIcon fontSize="small" />,
+      }[key],
+      title,
+      description,
+    })),
+    note: costAndDelivery.note,
+    cta: {
+      label: "Open FlutterPilot Studio",
+      href: studioUrl({ campaign: "home", content: "cost-delivery" }),
+    },
     isVideo: false,
   },
 ];
@@ -201,6 +231,9 @@ export default function Landing() {
               badge={e.badge}
               badgeIcon={e.badgeIcon}
               tone={e.tone}
+              id={e.id}
+              note={e.note}
+              cta={e.cta}
             />
           </section>
         ))}
@@ -264,7 +297,10 @@ export default function Landing() {
               <Button
                 className={common.studioCtaPrimary}
                 endIcon={<ArrowForwardRoundedIcon />}
-                onClick={() => window.open("https://studio.flutterpilot.com", "_blank", "noopener,noreferrer")}
+                component="a"
+                href={studioUrl({ campaign: "home", content: "final-cta" })}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Open FlutterPilot Studio
               </Button>

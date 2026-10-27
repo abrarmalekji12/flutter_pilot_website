@@ -66,9 +66,8 @@ jobs:
           command: pages deploy build --project-name=${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      # Checks this deployment's own *.pages.dev URL; run
-      # `npm run test:seo:deployed -- https://flutterpilot.com --production`
-      # by hand to include protocol and www redirects on the custom domain.
+      # Checks this deployment's own *.pages.dev URL. The custom domain,
+      # including protocol and www redirects, is checked after the sitemap.
       - name: Check the deployment
         run: npm run test:seo:deployed -- "${{ steps.deploy.outputs.deployment-url }}"
 
@@ -86,4 +85,23 @@ jobs:
             fi
             echo "::warning::Public-domain sitemap check failed (attempt $attempt of 6); retrying after 10 seconds."
             sleep 10
+          done
+
+      # Every route, canonical, 404 and legacy redirect on the custom domain,
+      # plus the http→https and www→apex hops (Cloudflare zone settings, not
+      # this repository). Reported as a warning until it has passed once in
+      # production; then drop continue-on-error to make it blocking.
+      - name: Verify production routes and redirects
+        continue-on-error: true
+        run: |
+          for attempt in 1 2 3; do
+            if npm run test:seo:deployed -- https://flutterpilot.com --production; then
+              exit 0
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "::warning::Production SEO checks failed on flutterpilot.com. Check the Cloudflare zone's Always Use HTTPS and www redirect settings, and the log above."
+              exit 1
+            fi
+            echo "::warning::Production SEO checks failed (attempt $attempt of 3); retrying after 15 seconds."
+            sleep 15
           done

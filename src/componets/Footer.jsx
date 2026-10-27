@@ -15,9 +15,12 @@ import TipsAndUpdatesRoundedIcon from "@mui/icons-material/TipsAndUpdatesRounded
 import { footerStyles } from "../styles/commonStyles";
 import { SCREENSHOT_STUDIO_URL } from "./FlutterPilotFamily";
 import { CHANGELOG_PATH } from "../seo/seo";
+import { studioUrl } from "../utils/studioLinks";
+import useStudioCampaign from "../utils/useStudioCampaign";
 
 const Footer = () => {
   const footerClasses = footerStyles();
+  const campaign = useStudioCampaign();
 
   return (
     <Box component="footer" className={footerClasses.container}>
@@ -68,7 +71,7 @@ const Footer = () => {
             <Link component={RouterLink} className={footerClasses.footerLink} to="/flutter-app-builder/" underline="none">
               Flutter app builder
             </Link>
-            <Link className={footerClasses.footerLink} href="https://studio.flutterpilot.com" underline="none" target="_blank" rel="noopener noreferrer">
+            <Link className={footerClasses.footerLink} href={studioUrl({ campaign, content: "footer" })} underline="none" target="_blank" rel="noopener noreferrer">
               Web App
             </Link>
             <Link className={footerClasses.footerLink} href={SCREENSHOT_STUDIO_URL} underline="none" target="_blank" rel="noopener noreferrer">

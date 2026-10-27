@@ -39,6 +39,10 @@ export const docsLinks = {
   apis: ["/docs/#api-endpoints", "API endpoints", "REST endpoints, Postman import, and loading or error states."],
   export: ["/docs/#export", "Export & Publish", "Flutter project ZIP, Android APK, and build history."],
   deploy: ["/docs/#deploy", "Deploy & host", "Web hosting, Android builds, and iOS and desktop release guides."],
+  restApi: ["/docs/rest-api/", "Connect a REST API", "Endpoints, Postman import, mock responses, and DataLoaderWidget states, step by step."],
+  sheets: ["/docs/google-sheets/", "Use Google Sheets as a database", "Connect a sheet, insert bound screens, and choose how exports reach it (Beta)."],
+  publishWeb: ["/docs/publish-web-app/", "Publish a web app", "Put your app online at a shareable flutterpilot.com address."],
+  androidApk: ["/docs/android-apk/", "Build an Android APK", "Build an installable APK in the cloud and share it with testers."],
 };
 
 export { CHANGELOG_PATH } from "../seo/seo";
@@ -83,7 +87,7 @@ const pages = {
       ["Start the screen", "Add a screen, then begin from a template, an AI prompt, or an empty Scaffold."],
       ["Compose the layout", "Drag Rows, Columns, Stacks, and lists from the palette, nest them in the widget tree, and set spacing and alignment."],
       ["Style the details", "Set text styles, fonts, colors, padding, and visibility in the property panel while the canvas updates."],
-      ["Refine with AI", "Ask the copilot for a focused change, such as adding a search field above a list, instead of rebuilding by hand."],
+      ["Refine with AI", "Ask the AI Agent for a focused change, such as adding a search field above a list, instead of rebuilding by hand."],
       ["Check responsive sizes", "Switch between mobile, tablet, and desktop viewports to see how the layout adapts."],
       ["Export or keep building", "Add actions and data in the same project, or export the Flutter project as a ZIP for your own tooling."],
     ],
@@ -91,7 +95,7 @@ const pages = {
       ["design", "Visual widget editing", "Work directly with the structure, properties, spacing, and styling of your Flutter interface."],
       ["ai", "AI-assisted iteration", "Ask for a screen, component, or focused change without rebuilding the entire layout by hand."],
       ["device", "Responsive preview", "Check the same screen at mobile, tablet, and desktop dimensions as you refine it."],
-      ["layers", "Reusable building blocks", "Turn repeated UI patterns into components, or import custom widgets."],
+      ["layers", "Reusable building blocks", "Turn repeated UI patterns into reusable custom components with their own parameters."],
       ["flow", "Actions and navigation", "Connect taps, conditions, state updates, dialogs, and screen transitions visually."],
       ["code", "Exportable Flutter source", "Keep a path back to a standard Flutter project for custom code and your existing workflow."],
     ],
@@ -101,7 +105,7 @@ const pages = {
     fitItems: ["Production Flutter teams", "Fast-moving MVPs", "Design-to-development handoff", "Developers exploring visual workflows"],
     faq: [
       ["Does FlutterPilot generate real Flutter code?", "Yes. Screens are built from Flutter widgets, and Export & Publish produces the complete Flutter project as a ZIP so you can continue in your own development environment."],
-      ["Which Flutter widgets can I use?", "The component reference covers layout widgets (Column, Row, Container, Stack, ListView, GridView, Wrap, SafeArea), UI elements, inputs, and navigation widgets such as app bars, tabs, and drawers. You can also import custom widgets."],
+      ["Which Flutter widgets can I use?", "The component reference covers layout widgets (Column, Row, Container, Stack, ListView, GridView, Wrap, SafeArea), UI elements, inputs, and navigation widgets such as app bars, tabs, and drawers—more than 130 Flutter widgets in all. You can also save your own reusable custom components."],
       ["Can I use it without AI?", "Yes. AI is one way to create and edit. You can also work visually, start from a template, and make focused changes yourself."],
       ["How is this different from the AI UI generator?", "This page covers building and editing screens by hand on the canvas. The AI Flutter UI generator guide covers producing the first draft from a prompt; both end up in the same editor."],
       ["Can I connect data and actions?", "Yes. The Studio includes actions, state, REST and Postman workflows, and connected data options for building beyond static screens."],
@@ -134,7 +138,7 @@ const pages = {
         {
           scope: "Single screen",
           prompt: "Profile page with avatar, stats, and recent activity",
-          where: "Ask the AI copilot inside an open project.",
+          where: "Ask the AI Agent inside an open project.",
           checks: [
             "Is the header, the stats row, and the activity list each a separate widget you can select?",
             "Is the activity list built from one repeatable item you can later bind to data?",
@@ -179,14 +183,14 @@ const pages = {
     workflowIntro: "Generation is the first step. The rest of the workflow happens in the same project.",
     workflow: [
       ["Write the prompt", "Include the purpose, sections, content, interactions, and visual tone."],
-      ["Generate", "Use the copilot for a screen or component, or the AI project creator for a multi-screen project."],
+      ["Generate", "Use the AI Agent for a screen or component, or the AI project creator for a multi-screen project."],
       ["Inspect the widget tree", "Open the result in the visual editor and check the hierarchy before changing details."],
       ["Refine", "Send focused follow-up prompts, or adjust properties directly where that is faster."],
       ["Connect logic and data", "Add actions, app or page state, collections, Google Sheets, or REST endpoints."],
       ["Export or deploy", "Download the Flutter project as a ZIP, build an Android APK, or publish to the web."],
     ],
     features: [
-      ["ai", "Project-aware copilot", "Create screens, components, variables, and endpoints with the surrounding project in view."],
+      ["ai", "Project-aware AI Agent", "Create screens, components, variables, and endpoints with the surrounding project in view. The AI Agent is labelled Beta."],
       ["layers", "Structured output", "Generate editable interface structure that can be refined instead of a flattened image."],
       ["tune", "Targeted revisions", "Ask for focused changes to layout, content, styling, or behavior as the product evolves."],
       ["design", "Visual refinement", "Use direct controls for the details that are faster to tune by eye than describe in a prompt."],
@@ -200,7 +204,7 @@ const pages = {
     faq: [
       ["What should I include in a Flutter UI prompt?", "Describe the screen goal, key sections, content, interaction states, and visual tone. Concrete constraints usually produce a more useful first draft."],
       ["Can I edit the generated result?", "Yes. Generated screens remain editable in the visual Studio, so you can adjust widget properties, layout, actions, and data."],
-      ["Can it generate a whole app?", "The AI project creator (labelled Beta in the Studio) generates multi-screen projects. FlutterPilot 2.0 focuses on dependable starter apps with list, details, add, edit, and delete flows; broader functional app generation is still limited, as the 2.0.0 changelog explains."],
+      ["Can it generate a whole app?", "It generates a starting point. The AI project creator builds multi-screen Starter Apps with list, details, add, edit, and delete flows on local collections. Sign-in, API calls, and custom logic aren't generated for you yet; you add them in the editor, where the AI Agent (labelled Beta) can help. The 2.0.0 changelog explains the current scope."],
       ["Is the result limited to a prototype?", "No. You can continue into navigation, state, integrations, deployment, and Flutter source export from the same project."],
     ],
     docs: ["ai", "actions", "data"],
@@ -231,7 +235,7 @@ const pages = {
       ["Describe the app idea", "Write a sentence or two about who the app is for and what it does. Use the AI project creator, start from a template, or open a blank project and choose Mobile, Tablet, Desktop, or Web."],
       ["Generate or assemble the first screens", "Let AI create the initial screens and navigation, or build them on the canvas from Flutter widgets. Either way, edit the result in the widget tree and property panel."],
       ["Add navigation and actions", "Attach actions to taps and other events: navigate between screens, open dialogs and bottom sheets, check conditions, update app or page state, or run custom Dart code."],
-      ["Connect data and APIs", "Define collections in the Data Panel, connect Google Sheets, Firebase, or Supabase, or add REST endpoints manually or from a Postman collection. Bind results to lists and forms."],
+      ["Connect data and APIs", "Define collections in the Data Panel, connect Google Sheets, Firebase, or Supabase (Beta), or add REST endpoints manually or from a Postman collection. Bind results to lists and forms."],
       ["Preview behavior", "Run the app in the Studio and switch device sizes. Endpoints can return mock responses, so previews don't call your real API."],
       ["Export the Flutter project", "Download the complete Flutter project as a ZIP, request an Android APK, or publish a hosted web app. Type-aware export validation reduces invalid generated Dart."],
     ],
@@ -264,7 +268,7 @@ const pages = {
       ["ai", "AI project creation", "Bootstrap screens, navigation, components, variables, and supporting project structure."],
       ["design", "Visual Flutter builder", "Compose and refine the app with Flutter-aware controls and a live visual hierarchy."],
       ["flow", "Actions and state", "Model navigation, conditions, updates, dialogs, and device behavior with visual flows."],
-      ["data", "Connected data", "Use REST APIs, Postman collections, Firebase, Supabase, Google Sheets, or local data."],
+      ["data", "Connected data", "Use REST APIs, Postman collections, or local data, plus Google Sheets, Firebase, and Supabase (Beta)."],
       ["device", "Cross-platform preview", "Review mobile, tablet, and desktop layouts without splitting the work into separate projects."],
       ["code", "Deployment and export", "Share a hosted web build, request an Android APK, or export the Flutter source."],
     ],
@@ -274,11 +278,11 @@ const pages = {
     fitItems: ["Startup MVPs", "Internal tools", "Client app prototypes", "Production Flutter projects"],
     faq: [
       ["Can FlutterPilot build more than a single screen?", "Yes. It supports multi-screen projects, navigation, actions, state, data connections, and reusable components."],
-      ["Which data sources can I use?", "REST endpoints (manual or imported from Postman), Google Sheets, Firebase, Supabase, and local collections stored on the device."],
-      ["Which platforms can I deliver to?", "You can publish a hosted web app and request Android APK builds from the Studio. The deploy guide also covers iOS/TestFlight and desktop releases."],
+      ["Which data sources can I use?", "REST endpoints (manual or imported from Postman) and local collections stored on the device, plus Google Sheets, Firebase, and Supabase, which are in Beta."],
+      ["Which platforms can I deliver to?", "From the Studio you can publish a hosted web app (5 credits) and build an installable Android APK for testing (3 credits). Google Play and App Store publishing aren't built in yet: export the Flutter project and build store releases with your own Flutter toolchain. The in-app deploy guide covers iOS/TestFlight and desktop releases."],
       ["How do I continue outside FlutterPilot?", "Export the complete Flutter project as a ZIP and open it in your usual editor and Flutter toolchain."],
     ],
-    docs: ["actions", "state", "apis", "export", "deploy"],
+    docs: ["restApi", "sheets", "publishWeb", "androidApk", "actions", "export"],
   },
 
   "flutterflow-alternative": {
@@ -306,7 +310,7 @@ const pages = {
       rows: [
         [
           "AI generation",
-          "AI project creator for multi-screen projects (labelled Beta), plus a project-aware copilot that creates and revises screens, components, variables, and endpoints.",
+          "AI project creator for multi-screen Starter Apps, plus a project-aware AI Agent (labelled Beta) that creates and revises screens, components, variables, and endpoints.",
           "Generates pages and components from natural-language prompts and can import a Figma frame; AI coding agents are available from its desktop app.",
         ],
         [
@@ -316,18 +320,23 @@ const pages = {
         ],
         [
           "Custom code",
-          "Custom Dart code inside action flows, and imported custom widgets.",
+          "Custom Dart code in action flows, Dart expressions in any property, and reusable custom components.",
           "Custom functions, custom actions, and custom widgets in Dart, with pub.dev package dependencies.",
         ],
         [
           "Data and APIs",
-          "REST endpoints (manual or Postman import) with mock responses, Google Sheets with schema inference, local collections, Firebase, and Supabase.",
+          "REST endpoints (manual or Postman import) with mock responses and local collections, plus Google Sheets with schema inference, Firebase, and Supabase (Beta).",
           "Firebase and Supabase integrations, including built-in Supabase database and authentication actions.",
         ],
         [
           "Code export",
-          "Complete Flutter project ZIP from Export & Publish, with export validation.",
+          "Complete Flutter project ZIP from Export & Publish, with export validation. Exporting doesn't use credits.",
           "Code download through the FlutterFlow CLI or the Developer Menu; its documentation lists code download as a paid-plan feature.",
+        ],
+        [
+          "Pricing model",
+          "Pay-as-you-go credits with no subscription: AI generation from 1 credit per screen, Android APK builds 3 credits, web publishing 5 credits.",
+          "Subscription plans; see its plans and pricing page for current tiers and what each includes.",
         ],
         [
           "Maturity and ecosystem",
@@ -347,10 +356,10 @@ const pages = {
       tradeoffsTitle: "Trade-offs to weigh",
       tradeoffs: [
         "FlutterPilot is the newer, smaller product. Expect fewer community answers, tutorials, and third-party examples than FlutterFlow has.",
-        "AI project generation in FlutterPilot is labelled Beta. Version 2.0 focuses on dependable starter apps (list, details, add, edit, and delete flows); broader functional app generation is still limited.",
+        "FlutterPilot's AI is still maturing. The AI Agent is labelled Beta, and project generation produces Starter Apps (list, details, add, edit, and delete flows); broader functional app generation is still limited.",
         "This site doesn't document a way to import FlutterFlow projects, so plan to rebuild screens. Figma import or AI generation can speed that up.",
         "Neither tool removes the need to understand Flutter once you customize beyond the editor; both produce Flutter code you will maintain.",
-        "Pricing isn't compared here. Check both products' current plans, especially for code export and team features.",
+        "FlutterPilot doesn't publish to Google Play or the App Store for you yet. Android builds are installable test APKs, and store releases are built from the exported project with your own Flutter tools. If built-in store publishing is a must, compare that directly.",
       ],
     },
     workflowTitle: "A practical way to compare both tools",
@@ -364,7 +373,7 @@ const pages = {
       ["Export and inspect the code", "Open each exported project locally, run it with your Flutter toolchain, and review the structure with your team."],
     ],
     features: [
-      ["ai", "AI-first creation", "Generate and revise project elements through a copilot that works with the surrounding app context."],
+      ["ai", "AI-first creation", "Generate and revise project elements with an AI Agent that works with the surrounding app context."],
       ["design", "Visual editing", "Adjust Flutter widget structure and properties while keeping a live preview close at hand."],
       ["code", "Source ownership", "Export the project when you want local control, custom implementation, or your established toolchain."],
       ["data", "Integrated data work", "Create and test endpoints, import Postman collections, and bind results into the interface."],
@@ -378,10 +387,12 @@ const pages = {
     faq: [
       ["Is FlutterPilot a copy of FlutterFlow?", "No. FlutterPilot takes its own approach, centered on project-aware AI, visual Flutter editing, connected workflows, and source export."],
       ["Can I export my code from FlutterPilot?", "Yes. Export & Publish produces the complete Flutter project as a ZIP that you can open and run with your own Flutter toolchain."],
-      ["Can I move a FlutterFlow project into FlutterPilot?", "There is no documented importer for FlutterFlow projects. Rebuild the screens you need, using Figma import or AI generation to speed up the first draft."],
+      ["Can I move a FlutterFlow project into FlutterPilot?", "There is no importer for FlutterFlow projects. Rebuild the screens you need, using Figma import (Beta) or AI generation to speed up the first draft."],
+      ["What does moving from FlutterFlow involve?", "Plan it screen by screen: recreate each screen from a prompt, a Figma frame, or a template; reconnect data through REST endpoints, local collections, or Firebase and Supabase (Beta); rebuild actions and navigation in action flows; move custom code into custom Dart actions; then export the project and compare it with your FlutterFlow export before switching."],
+      ["How do the pricing models differ?", "FlutterPilot has no subscription: you buy credits for AI generation and cloud builds, and exporting the Flutter project doesn't use credits. FlutterFlow sells subscription plans, and its documentation lists code download as a paid-plan feature. Check both products' current prices before you decide."],
       ["What should I compare before switching tools?", "Test a real screen, a real interaction, one data flow, responsive behavior, reusable components, collaboration needs, and the exported project—not only the demo experience."],
     ],
-    docs: ["ai", "apis", "export"],
+    docs: ["ai", "restApi", "export"],
     changelog: true,
   },
 };

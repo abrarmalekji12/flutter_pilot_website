@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Button } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { templateCardStyles } from "../styles/commonStyles";
 import TemplateCardStack from "./TemplateCardStack";
+import { studioTemplateUrl } from "../utils/studioLinks";
 
 export default function TemplateCard({ name, description, imageURLs, templateId }) {
   const templateClasses = templateCardStyles();
@@ -19,7 +20,7 @@ export default function TemplateCard({ name, description, imageURLs, templateId 
         <Typography className={templateClasses.description}>{summary}</Typography>
         <Button
           component="a"
-          href={`https://studio.flutterpilot.com/template/${encodeURIComponent(templateId)}`}
+          href={studioTemplateUrl(templateId)}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Get started with the ${name} template`}

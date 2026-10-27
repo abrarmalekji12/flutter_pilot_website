@@ -11,7 +11,8 @@
     "logo": "/logo.png",
     "sameAs": [
       "https://flutterpilot.medium.com",
-      "https://play.google.com/store/apps/details?id=com.builder.flutterpilot"
+      "https://play.google.com/store/apps/details?id=com.builder.flutterpilot",
+      "https://apps.apple.com/in/app/ai-app-builder-flutterpilot/id6759552936"
     ]
   },
   "notFound": {
@@ -28,7 +29,7 @@
       "h1": "Build a real Flutter mobile, desktop, or web app from a prompt—then make every detail yours",
       "intent": "Brand + AI Flutter app building",
       "schema": "home",
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/flutter-ui-builder/",
@@ -45,7 +46,7 @@
         "height": 953,
         "alt": "FlutterPilot Studio editor with a widget tree, widget palette, phone canvas, and property panel"
       },
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/ai-flutter-ui-generator/",
@@ -62,7 +63,7 @@
         "height": 698,
         "alt": "FlutterPilot new project dialog with templates and an AI prompt for generating a Flutter project"
       },
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/flutter-app-builder/",
@@ -79,7 +80,7 @@
         "height": 748,
         "alt": "Four screens of a student attendance Flutter app arranged on the FlutterPilot canvas"
       },
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/flutterflow-alternative/",
@@ -90,7 +91,7 @@
       "h1": "Looking for a FlutterFlow alternative? See how FlutterPilot compares",
       "breadcrumb": "FlutterFlow Alternative",
       "intent": "Evaluating alternatives to FlutterFlow",
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/template/",
@@ -113,7 +114,7 @@
       "h1": "FlutterPilot documentation, mapped clearly.",
       "breadcrumb": "Docs",
       "intent": "Product documentation",
-      "lastmod": "2026-10-19"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/docs/changelogs/",
@@ -126,16 +127,70 @@
       "lastmod": "2026-10-05"
     },
     {
+      "path": "/docs/rest-api/",
+      "render": "react",
+      "indexable": true,
+      "title": "Connect a REST API to a Flutter App (Postman Import) | FlutterPilot",
+      "description": "Add REST endpoints to a FlutterPilot project, import a Postman collection, preview with mock responses, and show loading, success, and error states in your Flutter UI.",
+      "h1": "Connect a REST API to your Flutter app",
+      "breadcrumb": "Connect a REST API",
+      "parent": "/docs/",
+      "intent": "How to connect a REST API to a Flutter app in FlutterPilot",
+      "image": {
+        "url": "/endpoint_preview.webp",
+        "width": 1181,
+        "height": 880,
+        "alt": "FlutterPilot Endpoint Connectors panel with Postman upload, arguments, request method, URL, headers, body, and mock response"
+      },
+      "lastmod": "2026-10-27"
+    },
+    {
+      "path": "/docs/google-sheets/",
+      "render": "react",
+      "indexable": true,
+      "title": "Build a Flutter App with Google Sheets as the Database | FlutterPilot",
+      "description": "Connect a Google Sheet to a FlutterPilot project, review its typed schema, insert list, detail, and form screens bound to live rows, and choose how exported apps reach the sheet.",
+      "h1": "Use Google Sheets as your Flutter app's database",
+      "breadcrumb": "Google Sheets",
+      "parent": "/docs/",
+      "intent": "How to build a Flutter app on Google Sheets data with FlutterPilot",
+      "lastmod": "2026-10-27"
+    },
+    {
+      "path": "/docs/publish-web-app/",
+      "render": "react",
+      "indexable": true,
+      "title": "Publish a Flutter Web App to a Live URL | FlutterPilot",
+      "description": "Deploy a FlutterPilot project as a hosted Flutter web app at a shareable flutterpilot.com address: steps, cost, build time, updates, and taking a site offline.",
+      "h1": "Publish your Flutter app to the web",
+      "breadcrumb": "Publish a web app",
+      "parent": "/docs/",
+      "intent": "How to publish and host a Flutter web app from FlutterPilot",
+      "lastmod": "2026-10-27"
+    },
+    {
+      "path": "/docs/android-apk/",
+      "render": "react",
+      "indexable": true,
+      "title": "Build an Android APK Online from a Flutter Project | FlutterPilot",
+      "description": "Build an installable Android APK from your FlutterPilot project in the cloud, without Android Studio: steps, cost, installing and sharing, and how to get to Google Play.",
+      "h1": "Build an Android APK in the cloud",
+      "breadcrumb": "Build an Android APK",
+      "parent": "/docs/",
+      "intent": "How to build an Android APK from a Flutter project online",
+      "lastmod": "2026-10-27"
+    },
+    {
       "path": "/about-us/",
       "render": "react",
       "indexable": true,
       "title": "About FlutterPilot",
       "description": "Learn how FlutterPilot combines AI-assisted generation, visual editing, connected data, and Flutter source export for modern app teams.",
-      "h1": "About Us",
+      "h1": "About FlutterPilot",
       "breadcrumb": "About",
       "intent": "Company information",
       "schema": "about",
-      "lastmod": "2026-03-20"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/contact/",
@@ -143,11 +198,11 @@
       "indexable": true,
       "title": "Contact FlutterPilot Support",
       "description": "Contact the FlutterPilot team for product questions, feedback, support, or suggestions.",
-      "h1": "Contact Us",
+      "h1": "Contact FlutterPilot",
       "breadcrumb": "Contact",
       "intent": "Support contact",
       "schema": "contact",
-      "lastmod": "2026-03-14"
+      "lastmod": "2026-10-27"
     },
     {
       "path": "/privacy-policy/",

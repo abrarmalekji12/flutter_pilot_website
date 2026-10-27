@@ -19,10 +19,13 @@ const MIN_MAIN_WORDS = {
   "/flutterflow-alternative/": 700,
   "/template/": 300,
   "/docs/": 400,
-  // The contact page's <main> is the form itself.
-  "/contact/": 5,
+  "/about-us/": 250,
+  // The contact form plus the other ways to get help.
+  "/contact/": 80,
 };
 const DEFAULT_MIN_MAIN_WORDS = 60;
+// Documentation articles answer one task completely.
+const MIN_DOC_ARTICLE_WORDS = 500;
 
 const failures = [];
 let checks = 0;
@@ -112,7 +115,7 @@ function checkRoutes() {
 
     if (route.render === "react") {
       const words = page.mainText.split(/\s+/).filter(Boolean).length;
-      const minimum = MIN_MAIN_WORDS[route.path] || DEFAULT_MIN_MAIN_WORDS;
+      const minimum = MIN_MAIN_WORDS[route.path] || (route.parent === "/docs/" ? MIN_DOC_ARTICLE_WORDS : DEFAULT_MIN_MAIN_WORDS);
       check(words >= minimum, `${route.path}: <main> has ${words} words in initial HTML, expected at least ${minimum}`);
       check(html.includes('id="root" data-prerendered'), `${route.path}: #root is not marked as prerendered`);
       check(page.ogUrl === canonical, `${route.path}: og:url "${page.ogUrl}" should equal the canonical URL`);
@@ -143,7 +146,12 @@ function checkStructuredData(route, page) {
   graph.forEach((node) => check(typeof node["@type"] === "string", `${route.path}: JSON-LD node without @type`));
 
   if (route.path === "/") {
-    check(types.includes("SoftwareApplication"), "/: JSON-LD should describe the SoftwareApplication");
+    const app = graph.find((node) => node["@type"] === "SoftwareApplication");
+    check(Boolean(app), "/: JSON-LD should describe the SoftwareApplication");
+    if (app && app.offers) {
+      check(/^\d+(\.\d+)?$/.test(app.offers.price), "/: SoftwareApplication offers.price must be a number string");
+      check(/^[A-Z]{3}$/.test(app.offers.priceCurrency), "/: SoftwareApplication offers.priceCurrency must be an ISO 4217 code");
+    }
     return;
   }
   const webPage = graph.find((node) => node.url === absoluteUrl(route.path));
@@ -152,10 +160,16 @@ function checkStructuredData(route, page) {
   if (route.breadcrumb) {
     const breadcrumb = graph.find((node) => node["@type"] === "BreadcrumbList");
     const items = breadcrumb ? breadcrumb.itemListElement : [];
+    const last = items[items.length - 1];
+    const expectedLength = route.parent ? 3 : 2;
     check(
-      items.length === 2 && items[1].item === absoluteUrl(route.path) && items[1].position === 2,
-      `${route.path}: BreadcrumbList should end at the canonical URL`
+      items.length === expectedLength && last && last.item === absoluteUrl(route.path) && last.position === expectedLength,
+      `${route.path}: BreadcrumbList should have ${expectedLength} items and end at the canonical URL`
     );
+    if (route.parent) {
+      check(items[1].item === absoluteUrl(route.parent), `${route.path}: BreadcrumbList should pass through ${route.parent}`);
+      check(page.links.includes(route.parent), `${route.path}: page should link to its parent ${route.parent}`);
+    }
   }
 }
 
@@ -214,6 +228,39 @@ function checkTemplateFallback() {
   check(!/firestore\.googleapis|AIza[0-9A-Za-z_-]{20,}/.test(html), "/template/: static HTML contains Firebase data or keys");
 }
 
+// Studio links must be measurable (UTM tags let Studio's GA4 attribute the
+// visit) except template deep links, which Studio only opens without a query
+// string. The homepage prompt must still reach Studio without JavaScript.
+const STUDIO_ORIGIN = "https://studio.flutterpilot.com";
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+
+function checkStudioLinks() {
+  const pages = [...routes.map((route) => routeFile(route.path)), path.join(buildDirectory, "404.html")].filter((file) =>
+    fs.existsSync(file)
+  );
+  pages.forEach((file) => {
+    const from = path.relative(buildDirectory, file);
+    parsePage(read(file))
+      .links.filter((href) => href.startsWith(STUDIO_ORIGIN))
+      .forEach((href) => {
+        const url = new URL(href);
+        if (url.pathname.startsWith("/template/")) {
+          check(!url.search, `${from}: Studio template link ${href} must not have a query string`);
+          return;
+        }
+        check(url.searchParams.get("utm_source") === "flutterpilot.com", `${from}: Studio link ${href} needs utm_source=flutterpilot.com`);
+        check(url.searchParams.get("utm_medium") === "website", `${from}: Studio link ${href} needs utm_medium=website`);
+        UTM_KEYS.slice(2).forEach((key) => check(Boolean(url.searchParams.get(key)), `${from}: Studio link ${href} needs ${key}`));
+      });
+  });
+
+  const home = read(routeFile("/"));
+  const form = (home.match(/<form\b[^>]*>/i) || [""])[0];
+  check(/\saction="https:\/\/studio\.flutterpilot\.com\/"/.test(form) && /\smethod="get"/i.test(form), "/: hero prompt form should GET https://studio.flutterpilot.com/");
+  check(/<textarea\b[^>]*\sname="prompt"/.test(home), "/: hero prompt textarea should be named \"prompt\"");
+  UTM_KEYS.forEach((key) => check(new RegExp(`<input[^>]*type="hidden"[^>]*name="${key}"`).test(home), `/: hero form is missing the ${key} field`));
+}
+
 function checkRedirects() {
   const rules = readRedirects(path.join(buildDirectory, "_redirects"));
   check(rules.length > 0, "_redirects has no rules");
@@ -235,6 +282,7 @@ checkRoutes();
 checkInternalLinks();
 checkNotFoundPage();
 checkTemplateFallback();
+checkStudioLinks();
 checkRedirects();
 
 if (failures.length) {

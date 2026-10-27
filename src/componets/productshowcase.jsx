@@ -7,6 +7,15 @@ import PhoneIphoneRoundedIcon from "@mui/icons-material/PhoneIphoneRounded";
 import WindowRoundedIcon from "@mui/icons-material/WindowRounded";
 import DesktopMacRoundedIcon from "@mui/icons-material/DesktopMacRounded";
 import { commonStyles } from "../styles/commonStyles";
+import {
+  APP_STORE_URL,
+  MAC_DOWNLOAD_URL,
+  WINDOWS_DOWNLOAD_URL,
+  playStoreUrl,
+  studioUrl,
+} from "../utils/studioLinks";
+
+const PLACEMENT = { campaign: "home", content: "studio-showcase" };
 
 const ProductShowcase = () => {
   const classes = commonStyles();
@@ -49,25 +58,11 @@ const ProductShowcase = () => {
     };
   }, []);
 
-  // Links and handlers
-  const openOnlineEditor = () => {
-    window.open("https://studio.flutterpilot.com", "_blank", "noopener,noreferrer");
-  };
-  const openMacDownload = () => {
-    window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/macos/latest/flutterpilot-macos-latest.dmg";
-  };
-  const openWindowsDownload = () => {
-    window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/windows/latest/flutterpilot-windows-latest.exe";
-  };
-  // const openLinuxDownload = () => {
-  //   window.location.href = "https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/linux/latest/flutterpilot-linux-latest.tar";
-  // };
-  const openPlayStore = () => {
-    window.open("https://play.google.com/store/apps/details?id=com.builder.flutterpilot", "_blank", "noopener,noreferrer");
-  };
-  const openAppStore = () => {
-    window.open("https://apps.apple.com/in/app/ai-app-builder-flutterpilot/id6759552936", "_blank", "noopener,noreferrer");
-  };
+  // Real links: crawlable, and they open the way the visitor expects.
+  // Downloads start in place; stores open in a new tab.
+  const download = (href) => ({ component: "a", href });
+  const newTab = (href) => ({ component: "a", href, target: "_blank", rel: "noopener noreferrer" });
+  // Linux: https://storage.googleapis.com/flutter-visual-builder-staging.appspot.com/releases/linux/latest/flutterpilot-linux-latest.tar
 
   // Platform Detection
   const getPlatform = () => {
@@ -83,11 +78,11 @@ const ProductShowcase = () => {
   const currentPlatform = getPlatform();
 
   const platforms = [
-    { name: "Android", icon: <AndroidRoundedIcon />, action: openPlayStore },
-    { name: "iOS", icon: <PhoneIphoneRoundedIcon />, action: openAppStore },
-    { name: "macOS", icon: <DesktopMacRoundedIcon />, action: openMacDownload },
-    { name: "Windows", icon: <WindowRoundedIcon />, action: openWindowsDownload },
-    // { name: "Linux", icon: <ComputerRoundedIcon />, action: openLinuxDownload },
+    { name: "Android", icon: <AndroidRoundedIcon />, link: newTab(playStoreUrl(PLACEMENT)) },
+    { name: "iOS", icon: <PhoneIphoneRoundedIcon />, link: newTab(APP_STORE_URL) },
+    { name: "macOS", icon: <DesktopMacRoundedIcon />, link: download(MAC_DOWNLOAD_URL) },
+    { name: "Windows", icon: <WindowRoundedIcon />, link: download(WINDOWS_DOWNLOAD_URL) },
+    // { name: "Linux", icon: <ComputerRoundedIcon /> },
   ];
 
   const detectedPlatformData = platforms.find(p => p.name === currentPlatform);
@@ -121,14 +116,15 @@ const ProductShowcase = () => {
           {/* Primary CTA */}
           <div className={classes.primaryCtaWrapper}>
             <Button
-              onClick={openOnlineEditor}
+              {...newTab(studioUrl(PLACEMENT))}
               className={classes.primaryCtaBtn}
               startIcon={<LanguageRoundedIcon />}
             >
               Open Web Studio
             </Button>
             <Typography className={classes.ctaSubtext}>
-              Build in your browser • No install required
+              Build in your browser • No install required •{" "}
+              <a href="/#pricing-and-delivery">See costs</a>
             </Typography>
           </div>
 
@@ -136,7 +132,7 @@ const ProductShowcase = () => {
           {detectedPlatformData && (
             <div className={classes.secondaryCtaWrapper}>
               <Button
-                onClick={detectedPlatformData.action}
+                {...detectedPlatformData.link}
                 className={classes.secondaryCtaBtn}
                 startIcon={detectedPlatformData.icon}
               >
@@ -152,7 +148,7 @@ const ProductShowcase = () => {
               {otherPlatforms.map((p) => (
                 <Button
                   key={p.name}
-                  onClick={p.action}
+                  {...p.link}
                   className={isMobile ? classes.platformCircleBtn : classes.ghostBtn}
                   startIcon={p.icon}
                   aria-label={`Available on ${p.name}`}

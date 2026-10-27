@@ -22,6 +22,8 @@ import CloudUploadRoundedIcon from "@mui/icons-material/CloudUploadRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { makeStyles } from "@mui/styles";
 import { isPrerendering } from "../utils/prerender";
+import { STUDIO_ORIGIN, studioUrl, utmParams } from "../utils/studioLinks";
+import useStudioCampaign from "../utils/useStudioCampaign";
 
 const MAX_PROMPT_LENGTH = 2000;
 const platformTargets = [
@@ -461,11 +463,14 @@ export default function PromptGeneratorHero() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [prompt, setPrompt] = React.useState("");
+  const placement = { campaign: useStudioCampaign(), content: "hero-generate" };
 
-  const openStudio = () => {
+  // The form also submits without JavaScript (GET to Studio with the prompt
+  // and UTM fields); with JavaScript an empty prompt falls back to an example.
+  const openStudio = (event) => {
+    event.preventDefault();
     const finalPrompt = prompt.trim() || examplePrompts[0];
-    const encodedPrompt = encodeURIComponent(finalPrompt);
-    window.location.href = `https://studio.flutterpilot.com?prompt=${encodedPrompt}`;
+    window.location.href = studioUrl({ ...placement, prompt: finalPrompt });
   };
 
   const handleInputChange = (event) => {
@@ -506,8 +511,9 @@ export default function PromptGeneratorHero() {
           {" "}app from a prompt—<span className={classes.titleAccent}>then make every detail yours</span>
         </Typography>
         <Typography component="p" className={classes.sectionSubtitle}>
-          Generate a multi-screen project, refine every widget visually, add real logic and data,
-          preview across devices, then export the Flutter source or deploy to the web in one click.
+          Generate a multi-screen project, refine every widget visually, add real logic and data, and
+          preview across devices. Then deploy to the web in one click, or export the Flutter source and build
+          it for any platform with your own Flutter tools.
         </Typography>
 
         <Box className={classes.signalGrid} aria-label="FlutterPilot platform capabilities">
@@ -522,7 +528,17 @@ export default function PromptGeneratorHero() {
           ))}
         </Box>
 
-        <Paper elevation={0} className={classes.promptPanel}>
+        <Paper
+          elevation={0}
+          className={classes.promptPanel}
+          component="form"
+          method="get"
+          action={`${STUDIO_ORIGIN}/`}
+          onSubmit={openStudio}
+        >
+          {Object.entries(utmParams(placement)).map(([name, value]) => (
+            <input type="hidden" name={name} value={value} key={name} />
+          ))}
           <Box className={classes.panelHeader}>
             <p className={classes.panelLabel}>Prompt</p>
             <span className={classes.statusPill}>
@@ -539,6 +555,7 @@ export default function PromptGeneratorHero() {
               fullWidth
               variant="outlined"
               placeholder="Create a finance app with dashboard, transactions list, spending charts, and onboarding flow..."
+              name="prompt"
               value={prompt}
               onChange={handleInputChange}
               spellCheck={false}
@@ -554,7 +571,7 @@ export default function PromptGeneratorHero() {
               </span>
               <Button
                 className={classes.generateBtn}
-                onClick={openStudio}
+                type="submit"
                 endIcon={<RocketLaunchRoundedIcon />}
               >
                 Generate

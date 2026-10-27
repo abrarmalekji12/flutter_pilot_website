@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Box, Container } from "@mui/material";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import { CHANGELOG_PATH } from "../../seo/seo";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(2.5),
       borderRadius: "16px",
     },
+  },
+  helpCard: {
+    marginTop: theme.spacing(3),
   },
   formGroup: {
     marginBottom: theme.spacing(2.1),
@@ -175,9 +180,10 @@ export default function ContactUs() {
       <div className={classes.responsiveContainer}>
         <Container className={localClasses.headerCard} maxWidth={false} disableGutters>
           <p className={localClasses.eyebrow}><MailOutlineRoundedIcon fontSize="small" aria-hidden="true" /> Contact</p>
-          <h1 className={localClasses.title}>Contact Us</h1>
+          <h1 className={localClasses.title}>Contact FlutterPilot</h1>
           <p className={localClasses.subtitle}>
-            We’d love to hear from you. Reach out with questions, feedback, or suggestions.
+            Questions about FlutterPilot, feedback, or a problem with your account? Send us a message below or email{" "}
+            <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a>.
           </p>
         </Container>
 
@@ -227,6 +233,33 @@ export default function ContactUs() {
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </Box>
+          </div>
+
+          <div className={`${localClasses.formCard} ${localClasses.helpCard}`}>
+            <section className={classes.contentSection}>
+              <h2 className={classes.contentHeading}>Other ways to get help</h2>
+              <ul className={classes.contentList}>
+                <li className={classes.contentListItem}>
+                  <strong>Email:</strong>{" "}
+                  <a href="mailto:support@flutterpilot.com" className={classes.contentLink}>support@flutterpilot.com</a>{" "}
+                  for support, account, and billing questions.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Inside the Studio:</strong> use Feedback in the toolbar to report a problem with the project you
+                  have open, or ask the AI Agent how a feature works.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Documentation:</strong> the <Link to="/docs/" className={classes.contentLink}>product guide</Link>{" "}
+                  covers AI generation, actions, data, and export, and the{" "}
+                  <a href={CHANGELOG_PATH} className={classes.contentLink}>changelog</a> lists recent changes.
+                </li>
+                <li className={classes.contentListItem}>
+                  <strong>Privacy and account deletion:</strong> see the{" "}
+                  <Link to="/privacy-policy/" className={classes.contentLink}>privacy policy</Link> for how to delete your
+                  account or request your data.
+                </li>
+              </ul>
+            </section>
           </div>
         </main>
       </div>
