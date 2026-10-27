@@ -11,6 +11,7 @@ import PartnerSolutionSpotlight from "../componets/PartnerSolutionSpotlight";
 import FlutterPilotFamily from "../componets/FlutterPilotFamily";
 import ExploreGuides from "../componets/ExploreGuides";
 import { commonStyles } from "../styles/commonStyles";
+import { studioUrl } from "../utils/studioLinks";
 import ChatRoundedIcon from "@mui/icons-material/ChatRounded";
 import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
 import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
@@ -27,6 +28,9 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import DesignServicesRoundedIcon from "@mui/icons-material/DesignServicesRounded";
 import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
+import AccountBalanceWalletRoundedIcon from "@mui/icons-material/AccountBalanceWalletRounded";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import { costAndDelivery } from "../content/pricing";
 
 const featurelist = [
   {
@@ -132,6 +136,32 @@ const featurelist = [
     ],
     isVideo: false,
   },
+  {
+    id: costAndDelivery.id,
+    title: costAndDelivery.title,
+    subtitle: costAndDelivery.subtitle,
+    badge: costAndDelivery.badge,
+    badgeIcon: <AccountBalanceWalletRoundedIcon fontSize="small" />,
+    featureGrid: true,
+    items: costAndDelivery.items.map(({ key, title, description }) => ({
+      icon: {
+        export: <CodeRoundedIcon fontSize="small" />,
+        credits: <AccountBalanceWalletRoundedIcon fontSize="small" />,
+        ai: <AutoAwesomeRoundedIcon fontSize="small" />,
+        android: <AndroidRoundedIcon fontSize="small" />,
+        web: <LanguageRoundedIcon fontSize="small" />,
+        notYet: <InfoOutlinedIcon fontSize="small" />,
+      }[key],
+      title,
+      description,
+    })),
+    note: costAndDelivery.note,
+    cta: {
+      label: "Open FlutterPilot Studio",
+      href: studioUrl({ campaign: "home", content: "cost-delivery" }),
+    },
+    isVideo: false,
+  },
 ];
 
 export default function Landing() {
@@ -201,6 +231,9 @@ export default function Landing() {
               badge={e.badge}
               badgeIcon={e.badgeIcon}
               tone={e.tone}
+              id={e.id}
+              note={e.note}
+              cta={e.cta}
             />
           </section>
         ))}
@@ -264,7 +297,10 @@ export default function Landing() {
               <Button
                 className={common.studioCtaPrimary}
                 endIcon={<ArrowForwardRoundedIcon />}
-                onClick={() => window.open("https://studio.flutterpilot.com", "_blank", "noopener,noreferrer")}
+                component="a"
+                href={studioUrl({ campaign: "home", content: "final-cta" })}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Open FlutterPilot Studio
               </Button>

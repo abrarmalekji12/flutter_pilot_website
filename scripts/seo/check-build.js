@@ -214,6 +214,39 @@ function checkTemplateFallback() {
   check(!/firestore\.googleapis|AIza[0-9A-Za-z_-]{20,}/.test(html), "/template/: static HTML contains Firebase data or keys");
 }
 
+// Studio links must be measurable (UTM tags let Studio's GA4 attribute the
+// visit) except template deep links, which Studio only opens without a query
+// string. The homepage prompt must still reach Studio without JavaScript.
+const STUDIO_ORIGIN = "https://studio.flutterpilot.com";
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+
+function checkStudioLinks() {
+  const pages = [...routes.map((route) => routeFile(route.path)), path.join(buildDirectory, "404.html")].filter((file) =>
+    fs.existsSync(file)
+  );
+  pages.forEach((file) => {
+    const from = path.relative(buildDirectory, file);
+    parsePage(read(file))
+      .links.filter((href) => href.startsWith(STUDIO_ORIGIN))
+      .forEach((href) => {
+        const url = new URL(href);
+        if (url.pathname.startsWith("/template/")) {
+          check(!url.search, `${from}: Studio template link ${href} must not have a query string`);
+          return;
+        }
+        check(url.searchParams.get("utm_source") === "flutterpilot.com", `${from}: Studio link ${href} needs utm_source=flutterpilot.com`);
+        check(url.searchParams.get("utm_medium") === "website", `${from}: Studio link ${href} needs utm_medium=website`);
+        UTM_KEYS.slice(2).forEach((key) => check(Boolean(url.searchParams.get(key)), `${from}: Studio link ${href} needs ${key}`));
+      });
+  });
+
+  const home = read(routeFile("/"));
+  const form = (home.match(/<form\b[^>]*>/i) || [""])[0];
+  check(/\saction="https:\/\/studio\.flutterpilot\.com\/"/.test(form) && /\smethod="get"/i.test(form), "/: hero prompt form should GET https://studio.flutterpilot.com/");
+  check(/<textarea\b[^>]*\sname="prompt"/.test(home), "/: hero prompt textarea should be named \"prompt\"");
+  UTM_KEYS.forEach((key) => check(new RegExp(`<input[^>]*type="hidden"[^>]*name="${key}"`).test(home), `/: hero form is missing the ${key} field`));
+}
+
 function checkRedirects() {
   const rules = readRedirects(path.join(buildDirectory, "_redirects"));
   check(rules.length > 0, "_redirects has no rules");
@@ -235,6 +268,7 @@ checkRoutes();
 checkInternalLinks();
 checkNotFoundPage();
 checkTemplateFallback();
+checkStudioLinks();
 checkRedirects();
 
 if (failures.length) {

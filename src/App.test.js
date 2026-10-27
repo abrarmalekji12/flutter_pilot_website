@@ -52,6 +52,30 @@ test('homepage shows FlutterPilot Family before the partner spotlight and keeps 
   // eslint-disable-next-line no-bitwise
   expect(familyCta.compareDocumentPosition(partnerCta) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
-  expect(screen.getByRole('button', { name: /open flutterpilot studio/i })).toBeInTheDocument();
+  const studioCtas = screen
+    .getAllByRole('link', { name: /open flutterpilot studio/i })
+    .map((link) => link.getAttribute('href'));
+  expect(studioCtas).toEqual(expect.arrayContaining([
+    expect.stringMatching(/^https:\/\/studio\.flutterpilot\.com\/\?.*utm_content=final-cta/),
+  ]));
   expect(screen.getByRole('link', { name: 'Screenshot Studio' })).toHaveAttribute('href', 'https://screenshot-studio.web.app');
+});
+
+test('homepage states costs and delivery limits, linked from the Studio showcase', async () => {
+  render(
+    <ThemeProvider theme={theme}>
+      <LegacyThemeProvider theme={theme}>
+        <App />
+      </LegacyThemeProvider>
+    </ThemeProvider>
+  );
+  const section = await screen.findByRole(
+    'article',
+    { name: /what it costs and what you can ship/i },
+    { timeout: 5000 }
+  );
+  expect(section).toHaveAttribute('id', 'pricing-and-delivery');
+  expect(section).toHaveTextContent(/doesn't use credits/i);
+  expect(section).toHaveTextContent(/not built in yet/i);
+  expect(screen.getByRole('link', { name: /see costs/i })).toHaveAttribute('href', '/#pricing-and-delivery');
 });

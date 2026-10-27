@@ -3,6 +3,7 @@ import { Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import { studioUrl } from "../../utils/studioLinks";
 import ShieldOutlinedIcon from "@mui/icons-material/ShieldOutlined";
 
 const useStyles = makeStyles((theme) => ({
@@ -272,7 +273,7 @@ export default function PrivacyPolicy() {
                 You can delete your account and associated data yourself at any time using the <strong>Delete Account</strong>{" "}
                 option in account settings, available in the FlutterPilot web app at{" "}
                 <a
-                  href="https://studio.flutterpilot.com"
+                  href={studioUrl({ campaign: "privacy-policy", content: "policy-text" })}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={classes.contentLink}

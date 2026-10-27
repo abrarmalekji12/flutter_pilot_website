@@ -24,8 +24,14 @@ import DevicesRoundedIcon from "@mui/icons-material/DevicesRounded";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import CustomAppBar from "../../componets/appbar";
 import { commonStyles } from "../../styles/commonStyles";
+import { studioUrl } from "../../utils/studioLinks";
 
-const STUDIO_URL = "https://studio.flutterpilot.com";
+const studioLink = (content) => ({
+  component: "a",
+  href: studioUrl({ campaign: "docs", content }),
+  target: "_blank",
+  rel: "noopener noreferrer",
+});
 
 const docGroups = [
   {
@@ -697,7 +703,7 @@ export default function Docs() {
               <Button
                 className={local.primaryButton}
                 endIcon={<ArrowOutwardRoundedIcon />}
-                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+                {...studioLink("docs-hero")}
               >
                 Open FlutterPilot Studio
               </Button>
@@ -774,7 +780,7 @@ export default function Docs() {
             <Button
               className={local.sidebarCta}
               endIcon={<ArrowOutwardRoundedIcon fontSize="small" />}
-              onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+              {...studioLink("docs-sidebar")}
             >
               Open Studio
             </Button>
@@ -884,7 +890,7 @@ export default function Docs() {
               <Button
                 className={local.primaryButton}
                 endIcon={<ArrowOutwardRoundedIcon />}
-                onClick={() => window.open(STUDIO_URL, "_blank", "noopener,noreferrer")}
+                {...studioLink("docs-footer")}
               >
                 Continue in Studio
               </Button>

@@ -10,6 +10,7 @@ import { isPrerendering } from "../../utils/prerender";
 import ViewQuiltRoundedIcon from "@mui/icons-material/ViewQuiltRounded";
 import SmartphoneRoundedIcon from "@mui/icons-material/SmartphoneRounded";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
+import { studioUrl } from "../../utils/studioLinks";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -188,7 +189,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const STUDIO_URL = "https://studio.flutterpilot.com";
 const LOAD_TIMEOUT_MS = 12000;
 
 const steps = [
@@ -331,7 +331,7 @@ export default function Template() {
                 <div className={classes.statusCard} role={status === "error" ? "status" : undefined}>
                   {statusMessage}
                   <div className={classes.inlineAction}>
-                    <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">Open FlutterPilot Studio</a>
+                    <a href={studioUrl({ campaign: "template", content: "template-gallery" })} target="_blank" rel="noopener noreferrer">Open FlutterPilot Studio</a>
                     {status === "error" && (
                       <button type="button" onClick={() => setAttempt((value) => value + 1)}>Try again</button>
                     )}

@@ -15,8 +15,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import CustomAppBar from "./appbar";
 import pages, { docsLinks, CHANGELOG_PATH } from "./productGuideContent";
-
-const STUDIO_URL = "https://studio.flutterpilot.com";
+import { studioUrl } from "../utils/studioLinks";
 
 const iconMap = {
   ai: AutoAwesomeRoundedIcon,
@@ -178,7 +177,7 @@ export default function ProductGuidePage({ pageKey }) {
             <h1 id="product-page-title" className={classes.title}>{page.title}</h1>
             <p className={classes.intro}>{page.intro}</p>
             <div className={classes.heroActions}>
-              <Button component="a" href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className={classes.primaryButton} endIcon={<ArrowForwardRoundedIcon />}>
+              <Button component="a" href={studioUrl({ campaign: pageKey, content: "guide-hero" })} target="_blank" rel="noopener noreferrer" className={classes.primaryButton} endIcon={<ArrowForwardRoundedIcon />}>
                 Open FlutterPilot Studio
               </Button>
               <Button component={RouterLink} to="/docs/" className={classes.secondaryButton}>Explore the product guide</Button>
@@ -435,7 +434,7 @@ export default function ProductGuidePage({ pageKey }) {
               workflow. Prefer a head start? <RouterLink to="/template/" style={{ color: "#fff", fontWeight: 800 }}>Browse Flutter app templates</RouterLink>.
             </p>
           </div>
-          <Button component="a" href={STUDIO_URL} target="_blank" rel="noopener noreferrer" className={classes.primaryButton} endIcon={<RocketLaunchRoundedIcon />}>
+          <Button component="a" href={studioUrl({ campaign: pageKey, content: "guide-footer" })} target="_blank" rel="noopener noreferrer" className={classes.primaryButton} endIcon={<RocketLaunchRoundedIcon />}>
             Open Studio
           </Button>
         </section>

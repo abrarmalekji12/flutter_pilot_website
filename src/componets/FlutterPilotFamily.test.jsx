@@ -64,7 +64,9 @@ describe("Footer", () => {
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
 
-    expect(screen.getByRole("link", { name: "Web App" })).toHaveAttribute("href", "https://studio.flutterpilot.com");
+    expect(screen.getByRole("link", { name: "Web App" }).getAttribute("href")).toMatch(
+      /^https:\/\/studio\.flutterpilot\.com\/\?utm_source=flutterpilot\.com&utm_medium=website&utm_campaign=[a-z-]+&utm_content=footer$/
+    );
     expect(screen.getByRole("link", { name: "Templates" })).toHaveAttribute("href", "/template/");
   });
 });

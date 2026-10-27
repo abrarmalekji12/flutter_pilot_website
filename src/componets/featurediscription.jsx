@@ -154,9 +154,21 @@ const FeatureShowcase = (props) => {
   }
 
   // ── Feature-grid layout: header + icon cards grid + "Learn more" CTA ──
+  // Optional: `id` makes the section linkable (clear of the sticky app bar),
+  // `note` adds a line under the cards, and `cta` ({ label, href }) replaces
+  // the product-guide button with an outbound link.
   if (props.featureGrid) {
+    const cta = props.cta
+      ? { component: "a", href: props.cta.href, target: "_blank", rel: "noopener noreferrer", label: props.cta.label }
+      : { component: Link, to: "/docs/", label: "Read the product guide" };
+    const { label: ctaLabel, ...ctaLink } = cta;
     return (
-      <article className={classes.root} style={{ marginBottom: 0 }}>
+      <article
+        className={classes.root}
+        id={props.id}
+        aria-labelledby={props.id ? `${props.id}-title` : undefined}
+        style={{ marginBottom: 0, scrollMarginTop: "96px" }}
+      >
         <motion.div
           initial={{ y: 16 }}
           whileInView={{ y: 0 }}
@@ -178,6 +190,7 @@ const FeatureShowcase = (props) => {
               </span>
               <Typography
                 variant="h2"
+                id={props.id ? `${props.id}-title` : undefined}
                 className={`${classes.title} ${isDark ? classes.featureDarkTitle : ""}`}
                 style={{
                   marginBottom: "10px",
@@ -258,6 +271,20 @@ const FeatureShowcase = (props) => {
               ))}
             </Grid>
 
+            {props.note && (
+              <Typography
+                component="p"
+                style={{
+                  fontSize: "0.85rem",
+                  color: isDark ? "#94a3b8" : "#64748b",
+                  lineHeight: 1.6,
+                  margin: "20px 0 0",
+                }}
+              >
+                {props.note}
+              </Typography>
+            )}
+
             {/* Learn more CTA */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
@@ -269,8 +296,7 @@ const FeatureShowcase = (props) => {
               <Button
                 variant="contained"
                 endIcon={<ArrowForwardRoundedIcon fontSize="small" />}
-                component={Link}
-                to="/docs/"
+                {...ctaLink}
                 sx={{
                   borderRadius: "14px",
                   fontWeight: 700,
@@ -288,7 +314,7 @@ const FeatureShowcase = (props) => {
                   transition: "all 0.25s ease",
                 }}
               >
-                Read the product guide
+                {ctaLabel}
               </Button>
             </motion.div>
           </div>
