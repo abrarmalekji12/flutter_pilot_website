@@ -329,7 +329,112 @@ const androidApk = {
   ],
 };
 
-const docArticles = [restApi, publishWebApp, androidApk];
+const googleSheets = {
+  path: "/docs/google-sheets/",
+  // Re-check: lib/ai/doc_sections.dart (_sheetIntegration), lib/ui/home/top_menu_bar.dart,
+  // sheet* and sheetsExport* strings in lib/l10n/app_localizations_en.dart, web/index.html (Picker, drive.file).
+  eyebrow: "Docs · Connect data (Beta)",
+  intro:
+    "The Google Sheets integration (Beta) turns a spreadsheet into a data source for your FlutterPilot project. Rows become records your Flutter UI can list, show, add, edit, and delete, and the preview reads real rows from the sheet while you design.",
+  facts: [
+    ["Open it", "Integration menu → Sheet Integrations"],
+    ["Access", "Only the spreadsheets you pick"],
+    ["Templates", "List, detail card, and form"],
+    ["Status", "Beta"],
+  ],
+  sections: [
+    {
+      id: "before",
+      heading: "Before you start",
+      blocks: [
+        {
+          list: [
+            "Put column names in the first row of the sheet. FlutterPilot reads them as field names, and data that has no header row won't appear.",
+            "Use a Google account that can open the spreadsheet.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "connect",
+      heading: "Connect a sheet",
+      blocks: [
+        {
+          steps: [
+            ["Open Sheet Integrations", "Choose Sheet Integrations from the Integration menu."],
+            ["Connect your Google account", "Select Connect Google and finish signing in. FlutterPilot uses Google's file picker, so it can only open the spreadsheets you choose."],
+            ["Connect New Sheet", "Pick the spreadsheet and the tab, then review the schema FlutterPilot generates from your columns: each column's name and type."],
+            ["Enable it for the project", "Connected sheets are saved to your account, so other projects can reuse them. Turn a sheet on in each project that should use it."],
+          ],
+        },
+      ],
+    },
+    {
+      id: "templates",
+      heading: "Insert ready-made screens",
+      blocks: [
+        {
+          p: "Choose Template offers list, detail-card, and form layouts that are already bound to the sheet's columns. Review how the columns map to the template, insert it on the canvas, and then style it like any other screen.",
+        },
+        {
+          p: "While you design, the preview loads real rows from the sheet, so you see your actual data instead of placeholders.",
+        },
+      ],
+    },
+    {
+      id: "bind",
+      heading: "Bind your own widgets",
+      blocks: [
+        { p: "Templates are optional. You can wire any widget to the sheet with three binding properties:" },
+        {
+          list: [
+            "bindWith on a ListView.builder, Column, or Form names the collection, such as students. A list repeats its item for each row; a form edits one row.",
+            "bind on a Text, TextField, or Switch names a field, such as students.name, to show the value or edit it in a form.",
+            "action on a button runs a data operation, such as students.save. The available operations are add, edit, save, delete, search, and refresh.",
+          ],
+        },
+        { code: "bindWith: students    bind: students.name    action: students.save" },
+      ],
+    },
+    {
+      id: "export",
+      heading: "Choose how the exported app reaches the sheet",
+      blocks: [
+        { p: "When you export a project that uses Google Sheets, you choose how the app talks to the sheet:" },
+        {
+          list: [
+            "FlutterPilot Cloud: recommended. It works straight away with no extra setup.",
+            "Standalone (Direct API): the app talks to Google directly, which requires your own Google Cloud project.",
+            "No Sheets: leaves the Google Sheets code out of the export.",
+          ],
+        },
+      ],
+    },
+    {
+      id: "manage",
+      heading: "Disable, remove, or disconnect",
+      blocks: [
+        {
+          list: [
+            "Disable for this project hides the sheet in one project and keeps it connected elsewhere. You can enable it again at any time.",
+            "Delete permanently removes the saved sheet connection.",
+            "Disconnect Account revokes FlutterPilot's access to your Google Sheets until you reconnect. Your saved sheet integrations and project bindings are kept.",
+          ],
+        },
+        {
+          note: "Google Sheets support is in Beta. Sheets suit small datasets and simple apps; for larger or private multi-user data, consider Firebase or Supabase. The privacy policy explains how FlutterPilot handles Google user data.",
+        },
+      ],
+    },
+  ],
+  related: [
+    ["/docs/#sheet-integration", "Sheet integration overview", "Where Google Sheets fits among FlutterPilot's data sources."],
+    ["/docs/rest-api/", "Connect a REST API", "Load and send data from your own API with Endpoint Connectors."],
+    ["/privacy-policy/", "Privacy policy", "How FlutterPilot handles authorized Google user data."],
+  ],
+};
+
+const docArticles = [restApi, googleSheets, publishWebApp, androidApk];
 
 export const getDocArticle = (path) => docArticles.find((article) => article.path === path) || null;
 

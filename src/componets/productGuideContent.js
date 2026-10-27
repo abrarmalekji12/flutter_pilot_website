@@ -40,6 +40,7 @@ export const docsLinks = {
   export: ["/docs/#export", "Export & Publish", "Flutter project ZIP, Android APK, and build history."],
   deploy: ["/docs/#deploy", "Deploy & host", "Web hosting, Android builds, and iOS and desktop release guides."],
   restApi: ["/docs/rest-api/", "Connect a REST API", "Endpoints, Postman import, mock responses, and DataLoaderWidget states, step by step."],
+  sheets: ["/docs/google-sheets/", "Use Google Sheets as a database", "Connect a sheet, insert bound screens, and choose how exports reach it (Beta)."],
   publishWeb: ["/docs/publish-web-app/", "Publish a web app", "Put your app online at a shareable flutterpilot.com address."],
   androidApk: ["/docs/android-apk/", "Build an Android APK", "Build an installable APK in the cloud and share it with testers."],
 };
@@ -281,7 +282,7 @@ const pages = {
       ["Which platforms can I deliver to?", "From the Studio you can publish a hosted web app (5 credits) and build an installable Android APK for testing (3 credits). Google Play and App Store publishing aren't built in yet: export the Flutter project and build store releases with your own Flutter toolchain. The in-app deploy guide covers iOS/TestFlight and desktop releases."],
       ["How do I continue outside FlutterPilot?", "Export the complete Flutter project as a ZIP and open it in your usual editor and Flutter toolchain."],
     ],
-    docs: ["restApi", "publishWeb", "androidApk", "actions", "state", "export"],
+    docs: ["restApi", "sheets", "publishWeb", "androidApk", "actions", "export"],
   },
 
   "flutterflow-alternative": {

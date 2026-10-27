@@ -145,6 +145,18 @@
       "lastmod": "2026-10-27"
     },
     {
+      "path": "/docs/google-sheets/",
+      "render": "react",
+      "indexable": true,
+      "title": "Build a Flutter App with Google Sheets as the Database | FlutterPilot",
+      "description": "Connect a Google Sheet to a FlutterPilot project, review its typed schema, insert list, detail, and form screens bound to live rows, and choose how exported apps reach the sheet.",
+      "h1": "Use Google Sheets as your Flutter app's database",
+      "breadcrumb": "Google Sheets",
+      "parent": "/docs/",
+      "intent": "How to build a Flutter app on Google Sheets data with FlutterPilot",
+      "lastmod": "2026-10-27"
+    },
+    {
       "path": "/docs/publish-web-app/",
       "render": "react",
       "indexable": true,
