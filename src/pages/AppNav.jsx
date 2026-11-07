@@ -7,6 +7,7 @@ import { routes } from '../seo/seo';
 
 const Landing = lazyWithPreload(() => import('./Landing'));
 const PrivacyPolicy = lazyWithPreload(() => import('./PrivacyPolicy/PrivacyPolicy'));
+const TermsOfService = lazyWithPreload(() => import('./TermsOfService/TermsOfService'));
 const ContactUs = lazyWithPreload(() => import('./ContactUs/ContactUs'));
 const AboutUs = lazyWithPreload(() => import('./AboutUs/AboutUs'));
 const Template = lazyWithPreload(() => import('./Template/Template'));
@@ -25,6 +26,7 @@ const pageRoutes = [
   { path: '/ai-flutter-ui-generator', Component: AIFlutterUIGenerator },
   { path: '/flutter-app-builder', Component: FlutterAppBuilder },
   { path: '/privacy-policy', Component: PrivacyPolicy },
+  { path: '/terms-of-service', Component: TermsOfService },
   { path: '/contact', Component: ContactUs },
   { path: '/about-us', Component: AboutUs },
   { path: '/template', Component: Template },
@@ -96,6 +98,7 @@ export default function AppNav() {
             <Route key={path} path={path} element={<Component />} />
           ))}
           <Route path="/privacyPolicy" element={<Navigate to="/privacy-policy/" replace />} />
+          <Route path="/terms" element={<Navigate to="/terms-of-service/" replace />} />
           <Route path="/contactUs" element={<Navigate to="/contact/" replace />} />
           <Route path="/aboutUs" element={<Navigate to="/about-us/" replace />} />
           <Route path="/download" element={<Navigate to="/" replace state={{ scrollTo: "download" }} />} />

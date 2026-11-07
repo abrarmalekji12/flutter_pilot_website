@@ -214,6 +214,17 @@
       "breadcrumb": "Privacy Policy",
       "intent": "Legal",
       "lastmod": "2026-07-03"
+    },
+    {
+      "path": "/terms-of-service/",
+      "render": "react",
+      "indexable": true,
+      "title": "Terms of Service | FlutterPilot",
+      "description": "Terms of Service for FlutterPilot, including the AI App Builder – FlutterPilot Android app: accounts, AI output, credits and refunds, exported code, and your apps.",
+      "h1": "Terms of Service",
+      "breadcrumb": "Terms of Service",
+      "intent": "Legal",
+      "lastmod": "2026-11-07"
     }
   ]
 }

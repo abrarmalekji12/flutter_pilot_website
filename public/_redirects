@@ -22,3 +22,7 @@
 # The old download page now lives in the homepage download section.
 /download /#download 301
 /download/ /#download 301
+
+# Short legal URLs.
+/terms /terms-of-service/ 301
+/terms/ /terms-of-service/ 301
