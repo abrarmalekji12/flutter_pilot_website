@@ -110,6 +110,9 @@ const Footer = () => {
             <Link component={RouterLink} className={footerClasses.footerLink} to="/privacy-policy/" underline="none">
               Privacy Policy
             </Link>
+            <Link component={RouterLink} className={footerClasses.footerLink} to="/terms-of-service/" underline="none">
+              Terms of Service
+            </Link>
           </Grid>
 
           <Grid item xs={12} md={3}>
