@@ -304,7 +304,7 @@ export default function Template() {
         <section className={`${common.responsiveContainer} ${classes.section}`} aria-labelledby="template-gallery-title">
           <h2 id="template-gallery-title" className={classes.sectionTitle}>Browse the template gallery</h2>
           <p className={classes.sectionText}>
-            Each card shows the template's screens. Choose Get Started to open it in FlutterPilot Studio.
+            Browse and clone ready-made app templates. Select a card to open it in FlutterPilot Studio.
           </p>
           <Grid container spacing={isSmall ? 1.5 : 2.4} className={classes.gridWrap}>
             {status === "loading" &&
@@ -322,6 +322,8 @@ export default function Template() {
                     name={template.name}
                     description={template.description}
                     imageURLs={template.imageURLs}
+                    presentation={template.presentation}
+                    platforms={template.platforms}
                   />
                 </Grid>
               ))}
